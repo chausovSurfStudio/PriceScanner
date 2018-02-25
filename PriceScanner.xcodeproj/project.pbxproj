@@ -6,6 +6,20 @@
 	objectVersion = 48;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		185816D22042CB0F003C2FA9 /* OCLint */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 185816D52042CB0F003C2FA9 /* Build configuration list for PBXAggregateTarget "OCLint" */;
+			buildPhases = (
+				185816D62042CB40003C2FA9 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = OCLint;
+			productName = OCLint;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		185816662042AE82003C2FA9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 185816652042AE82003C2FA9 /* AppDelegate.m */; };
 		1858166C2042AE82003C2FA9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1858166A2042AE82003C2FA9 /* Main.storyboard */; };
@@ -460,6 +474,10 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 185816602042AE82003C2FA9;
 					};
+					185816D22042CB0F003C2FA9 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 1858165C2042AE82003C2FA9 /* Build configuration list for PBXProject "PriceScanner" */;
@@ -478,6 +496,7 @@
 				185816602042AE82003C2FA9 /* PriceScanner */,
 				1858167B2042AE82003C2FA9 /* PriceScannerTests */,
 				185816862042AE82003C2FA9 /* PriceScannerUITests */,
+				185816D22042CB0F003C2FA9 /* OCLint */,
 			);
 		};
 /* End PBXProject section */
@@ -526,6 +545,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PriceScannerTests/Pods-PriceScannerTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		185816D62042CB40003C2FA9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "source ~/.bash_profile\n\n\nhash oclint &> /dev/null\nif [ $? -eq 1 ]; then\necho >&2 \"oclint not found, analyzing stopped\"\nexit 1\nfi\n\ncd ${TARGET_TEMP_DIR}\n\nif [ ! -f compile_commands.json ]; then\necho \"[*] compile_commands.json not found, possibly clean was performed\"\necho \"[*] starting xcodebuild to rebuild the project..\"\n# clean previous output\nif [ -f xcodebuild.log ]; then\nrm xcodebuild.log\nfi\n\ncd ${SRCROOT}\n\nxcodebuild clean\n\n#build xcodebuild.log\nxcodebuild | tee ${TARGET_TEMP_DIR}/xcodebuild.log\n\necho \"[*] transforming xcodebuild.log into compile_commands.json...\"\ncd ${TARGET_TEMP_DIR}\n#transform it into compile_commands.json\noclint-xcodebuild\n\nfi\n\n#if [-d report.html]; then\n#rm report.html\n#fi\n\n\n#run static analyzer\n#oclint-json-compilation-database -- -o=./report.html -html\n\necho \"[*] starting analyzing\"\ncd ${TARGET_TEMP_DIR}\noclint-json-compilation-database | sed 's/\\(.*\\.\\m\\{1,2\\}:[0-9]*:[0-9]*:\\)/\\1 warning:/'";
 		};
 		2804AF192F5B203E9CF1F352 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -926,6 +958,24 @@
 			};
 			name = Release;
 		};
+		185816D32042CB0F003C2FA9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B9639RHZFT;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		185816D42042CB0F003C2FA9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B9639RHZFT;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -961,6 +1011,15 @@
 			buildConfigurations = (
 				185816972042AE82003C2FA9 /* Debug */,
 				185816982042AE82003C2FA9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		185816D52042CB0F003C2FA9 /* Build configuration list for PBXAggregateTarget "OCLint" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				185816D32042CB0F003C2FA9 /* Debug */,
+				185816D42042CB0F003C2FA9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
