@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainTabBarController : UITabBarController
+@interface PRSMainTabBarController : UITabBarController
 
 @end

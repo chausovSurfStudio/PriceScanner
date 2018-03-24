@@ -6,16 +6,18 @@
 //  Copyright © 2018 Surf. All rights reserved.
 //
 
-#import "MainTabBarController.h"
+#import "PRSMainTabBarController.h"
 
-#import "CameraFlowCoordinator.h"
-#import "InfoFlowCoordinator.h"
+#import "PRSCameraFlowCoordinator.h"
+#import "PRSInfoFlowCoordinator.h"
 
-@interface MainTabBarController ()
+
+@interface PRSMainTabBarController ()
 
 @end
 
-@implementation MainTabBarController
+
+@implementation PRSMainTabBarController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -23,8 +25,8 @@
 }
 
 - (void)setupInitialTabs {
-    UINavigationController *cameraNavigation = [[CameraFlowCoordinator new] initialScreen];
-    UINavigationController *infoNavigation = [[InfoFlowCoordinator new] initialScreen];
+    UINavigationController *cameraNavigation = [[PRSCameraFlowCoordinator new] initialScreen];
+    UINavigationController *infoNavigation = [[PRSInfoFlowCoordinator new] initialScreen];
     
     UITabBarItem *cameraItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0];
     UITabBarItem *infoItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostRecent tag:1];

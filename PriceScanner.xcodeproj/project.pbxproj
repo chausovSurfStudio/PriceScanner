@@ -21,8 +21,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		18267C3B206684C000616282 /* CameraFlowCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 18267C3A206684C000616282 /* CameraFlowCoordinator.m */; };
-		18267C3E206685C000616282 /* InfoFlowCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 18267C3D206685C000616282 /* InfoFlowCoordinator.m */; };
 		185816662042AE82003C2FA9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 185816652042AE82003C2FA9 /* AppDelegate.m */; };
 		1858166C2042AE82003C2FA9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1858166A2042AE82003C2FA9 /* Main.storyboard */; };
 		1858166F2042AE82003C2FA9 /* PriceScanner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1858166D2042AE82003C2FA9 /* PriceScanner.xcdatamodeld */; };
@@ -31,11 +29,13 @@
 		185816772042AE82003C2FA9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 185816762042AE82003C2FA9 /* main.m */; };
 		185816812042AE82003C2FA9 /* PriceScannerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 185816802042AE82003C2FA9 /* PriceScannerTests.m */; };
 		1858168C2042AE82003C2FA9 /* PriceScannerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1858168B2042AE82003C2FA9 /* PriceScannerUITests.m */; };
-		185816A92042B146003C2FA9 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185816A82042B146003C2FA9 /* MainTabBarController.m */; };
 		185816B82042B3A2003C2FA9 /* PRSBasePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 185816B72042B3A2003C2FA9 /* PRSBasePresenter.m */; };
 		79BB5F88CB71A20A71D9F32D /* libPods-PriceScanner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 875B6E9D6EA7B1D0438759ED /* libPods-PriceScanner.a */; };
 		843572902066D09000AC6E74 /* PRSInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8435728F2066D09000AC6E74 /* PRSInfoViewController.xib */; };
 		843572922066D1B800AC6E74 /* PRSStartDetectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843572912066D1B800AC6E74 /* PRSStartDetectionViewController.xib */; };
+		843572972066D3C700AC6E74 /* PRSMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843572952066D3C700AC6E74 /* PRSMainTabBarController.m */; };
+		8435729A2066D41D00AC6E74 /* PRSCameraFlowCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 843572992066D41D00AC6E74 /* PRSCameraFlowCoordinator.m */; };
+		8435729D2066D45D00AC6E74 /* PRSInfoFlowCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8435729B2066D45D00AC6E74 /* PRSInfoFlowCoordinator.m */; };
 		A447014755E19CEF68A97807 /* PRSInfoPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6500D729E329E18B1C68CBD2 /* PRSInfoPresenter.m */; };
 		C0A4D36A30BB96587190240D /* PRSStartDetectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C980225067C2B0F58F4C31 /* PRSStartDetectionViewController.m */; };
 		D906502DDC84BE046F35B51F /* PRSInfoConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 253524486FD07EC57453588A /* PRSInfoConfigurator.m */; };
@@ -65,10 +65,6 @@
 
 /* Begin PBXFileReference section */
 		0F9CD1054C9E7529C14BC8E9 /* libPods-PriceScannerUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PriceScannerUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		18267C39206684C000616282 /* CameraFlowCoordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraFlowCoordinator.h; sourceTree = "<group>"; };
-		18267C3A206684C000616282 /* CameraFlowCoordinator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraFlowCoordinator.m; sourceTree = "<group>"; };
-		18267C3C206685C000616282 /* InfoFlowCoordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoFlowCoordinator.h; sourceTree = "<group>"; };
-		18267C3D206685C000616282 /* InfoFlowCoordinator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoFlowCoordinator.m; sourceTree = "<group>"; };
 		182C175AF8ADB02459937AED /* Pods-PriceScanner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceScanner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PriceScanner/Pods-PriceScanner.debug.xcconfig"; sourceTree = "<group>"; };
 		185816612042AE82003C2FA9 /* PriceScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PriceScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		185816642042AE82003C2FA9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -85,8 +81,6 @@
 		185816872042AE82003C2FA9 /* PriceScannerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PriceScannerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1858168B2042AE82003C2FA9 /* PriceScannerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceScannerUITests.m; sourceTree = "<group>"; };
 		1858168D2042AE82003C2FA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		185816A72042B146003C2FA9 /* MainTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
-		185816A82042B146003C2FA9 /* MainTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		185816B62042B3A2003C2FA9 /* PRSBasePresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSBasePresenter.h; sourceTree = "<group>"; };
 		185816B72042B3A2003C2FA9 /* PRSBasePresenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSBasePresenter.m; sourceTree = "<group>"; };
 		19C980225067C2B0F58F4C31 /* PRSStartDetectionViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PRSStartDetectionViewController.m; sourceTree = "<group>"; };
@@ -106,6 +100,12 @@
 		83EC718DF2C4C63B80E6347F /* PRSStartDetectionConfigurator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSStartDetectionConfigurator.h; sourceTree = "<group>"; };
 		8435728F2066D09000AC6E74 /* PRSInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PRSInfoViewController.xib; sourceTree = "<group>"; };
 		843572912066D1B800AC6E74 /* PRSStartDetectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PRSStartDetectionViewController.xib; sourceTree = "<group>"; };
+		843572952066D3C700AC6E74 /* PRSMainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRSMainTabBarController.m; sourceTree = "<group>"; };
+		843572962066D3C700AC6E74 /* PRSMainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRSMainTabBarController.h; sourceTree = "<group>"; };
+		843572982066D41D00AC6E74 /* PRSCameraFlowCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRSCameraFlowCoordinator.h; sourceTree = "<group>"; };
+		843572992066D41D00AC6E74 /* PRSCameraFlowCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRSCameraFlowCoordinator.m; sourceTree = "<group>"; };
+		8435729B2066D45D00AC6E74 /* PRSInfoFlowCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRSInfoFlowCoordinator.m; sourceTree = "<group>"; };
+		8435729C2066D45D00AC6E74 /* PRSInfoFlowCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRSInfoFlowCoordinator.h; sourceTree = "<group>"; };
 		875B6E9D6EA7B1D0438759ED /* libPods-PriceScanner.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PriceScanner.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E28806266FFFD6F01B70CDD /* Pods-PriceScanner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceScanner.release.xcconfig"; path = "Pods/Target Support Files/Pods-PriceScanner/Pods-PriceScanner.release.xcconfig"; sourceTree = "<group>"; };
 		92A37F70A21AB094FE628658 /* PRSStartDetectionConfigurator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PRSStartDetectionConfigurator.m; sourceTree = "<group>"; };
@@ -167,8 +167,8 @@
 		18267C362066840400616282 /* CameraFlowCoordinator */ = {
 			isa = PBXGroup;
 			children = (
-				18267C39206684C000616282 /* CameraFlowCoordinator.h */,
-				18267C3A206684C000616282 /* CameraFlowCoordinator.m */,
+				843572982066D41D00AC6E74 /* PRSCameraFlowCoordinator.h */,
+				843572992066D41D00AC6E74 /* PRSCameraFlowCoordinator.m */,
 			);
 			path = CameraFlowCoordinator;
 			sourceTree = "<group>";
@@ -176,8 +176,8 @@
 		18267C372066841F00616282 /* InfoFlowCoordinator */ = {
 			isa = PBXGroup;
 			children = (
-				18267C3C206685C000616282 /* InfoFlowCoordinator.h */,
-				18267C3D206685C000616282 /* InfoFlowCoordinator.m */,
+				8435729C2066D45D00AC6E74 /* PRSInfoFlowCoordinator.h */,
+				8435729B2066D45D00AC6E74 /* PRSInfoFlowCoordinator.m */,
 			);
 			path = InfoFlowCoordinator;
 			sourceTree = "<group>";
@@ -296,8 +296,8 @@
 				1858166A2042AE82003C2FA9 /* Main.storyboard */,
 				185816722042AE82003C2FA9 /* LaunchScreen.storyboard */,
 				185816762042AE82003C2FA9 /* main.m */,
-				185816A72042B146003C2FA9 /* MainTabBarController.h */,
-				185816A82042B146003C2FA9 /* MainTabBarController.m */,
+				843572962066D3C700AC6E74 /* PRSMainTabBarController.h */,
+				843572952066D3C700AC6E74 /* PRSMainTabBarController.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -737,9 +737,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18267C3E206685C000616282 /* InfoFlowCoordinator.m in Sources */,
-				185816A92042B146003C2FA9 /* MainTabBarController.m in Sources */,
-				18267C3B206684C000616282 /* CameraFlowCoordinator.m in Sources */,
+				8435729D2066D45D00AC6E74 /* PRSInfoFlowCoordinator.m in Sources */,
 				185816662042AE82003C2FA9 /* AppDelegate.m in Sources */,
 				185816B82042B3A2003C2FA9 /* PRSBasePresenter.m in Sources */,
 				185816772042AE82003C2FA9 /* main.m in Sources */,
@@ -748,8 +746,10 @@
 				A447014755E19CEF68A97807 /* PRSInfoPresenter.m in Sources */,
 				FE44329CC7BBA104C8702FDB /* PRSInfoViewController.m in Sources */,
 				EA360519A8BE385080D446CB /* PRSStartDetectionConfigurator.m in Sources */,
+				8435729A2066D41D00AC6E74 /* PRSCameraFlowCoordinator.m in Sources */,
 				FBC15EFEF6309AFCB73218E3 /* PRSStartDetectionPresenter.m in Sources */,
 				C0A4D36A30BB96587190240D /* PRSStartDetectionViewController.m in Sources */,
+				843572972066D3C700AC6E74 /* PRSMainTabBarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

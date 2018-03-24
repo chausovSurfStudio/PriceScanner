@@ -6,10 +6,10 @@
 //  Copyright © 2018 Surf. All rights reserved.
 //
 
-#import "InfoFlowCoordinator.h"
+#import "PRSInfoFlowCoordinator.h"
 #import "PRSInfoConfigurator.h"
 
-@implementation InfoFlowCoordinator
+@implementation PRSInfoFlowCoordinator
 
 - (UINavigationController *)initialScreen {
     UIViewController *infoView = [PRSInfoConfigurator configureModule:nil];

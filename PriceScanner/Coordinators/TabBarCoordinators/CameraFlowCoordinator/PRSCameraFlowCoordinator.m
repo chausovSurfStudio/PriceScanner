@@ -6,10 +6,10 @@
 //  Copyright © 2018 Surf. All rights reserved.
 //
 
-#import "CameraFlowCoordinator.h"
+#import "PRSCameraFlowCoordinator.h"
 #import "PRSStartDetectionConfigurator.h"
 
-@implementation CameraFlowCoordinator
+@implementation PRSCameraFlowCoordinator
 
 - (UINavigationController *)initialScreen {
     UIViewController *startDetectionView = [PRSStartDetectionConfigurator configureModule:nil];
