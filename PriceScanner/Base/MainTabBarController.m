@@ -8,8 +8,8 @@
 
 #import "MainTabBarController.h"
 
-#import "InfoConfigurator.h"
-#import "StartDetectionConfigurator.h"
+#import "CameraFlowCoordinator.h"
+#import "InfoFlowCoordinator.h"
 
 @interface MainTabBarController ()
 
@@ -23,19 +23,16 @@
 }
 
 - (void)setupInitialTabs {
-    UIViewController *startDetectionView = [StartDetectionConfigurator configureModule:nil];
-    UIViewController *infoView = [InfoConfigurator configureModule:nil];
+    UINavigationController *cameraNavigation = [[CameraFlowCoordinator new] initialScreen];
+    UINavigationController *infoNavigation = [[InfoFlowCoordinator new] initialScreen];
     
-    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:startDetectionView];
-    UINavigationController *navVC2 = [[UINavigationController alloc] initWithRootViewController:infoView];
+    UITabBarItem *cameraItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0];
+    UITabBarItem *infoItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostRecent tag:1];
     
-    UITabBarItem *firstItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0];
-    UITabBarItem *secondItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostRecent tag:1];
+    cameraNavigation.tabBarItem = cameraItem;
+    infoNavigation.tabBarItem = infoItem;
     
-    navVC.tabBarItem = firstItem;
-    navVC2.tabBarItem = secondItem;
-    
-    [self setViewControllers:@[navVC, navVC2] animated:NO];
+    [self setViewControllers:@[cameraNavigation, infoNavigation] animated:NO];
 }
 
 @end

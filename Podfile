@@ -10,7 +10,7 @@ target 'PriceScanner' do
 
   pod 'FrameAccessor', '2.0'
   pod 'MagicalRecord', '2.3.2'
-  pod 'SDWebImage', '4.2.3'
+  pod 'SDWebImage', '4.0.0'
   pod 'libextobjc', '0.4.1'
 
   target 'PriceScannerTests' do
