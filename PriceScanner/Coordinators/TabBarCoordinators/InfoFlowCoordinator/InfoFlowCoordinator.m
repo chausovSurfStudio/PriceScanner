@@ -7,12 +7,12 @@
 //
 
 #import "InfoFlowCoordinator.h"
-#import "InfoConfigurator.h"
+#import "PRSInfoConfigurator.h"
 
 @implementation InfoFlowCoordinator
 
 - (UINavigationController *)initialScreen {
-    UIViewController *infoView = [InfoConfigurator configureModule:nil];
+    UIViewController *infoView = [PRSInfoConfigurator configureModule:nil];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:infoView];
     return navigationController;
 }

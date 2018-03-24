@@ -7,12 +7,12 @@
 //
 
 #import "CameraFlowCoordinator.h"
-#import "StartDetectionConfigurator.h"
+#import "PRSStartDetectionConfigurator.h"
 
 @implementation CameraFlowCoordinator
 
 - (UINavigationController *)initialScreen {
-    UIViewController *startDetectionView = [StartDetectionConfigurator configureModule:nil];
+    UIViewController *startDetectionView = [PRSStartDetectionConfigurator configureModule:nil];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:startDetectionView];
     return navigationController;
 }

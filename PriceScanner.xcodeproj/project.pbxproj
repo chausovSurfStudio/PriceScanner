@@ -32,17 +32,17 @@
 		185816812042AE82003C2FA9 /* PriceScannerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 185816802042AE82003C2FA9 /* PriceScannerTests.m */; };
 		1858168C2042AE82003C2FA9 /* PriceScannerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1858168B2042AE82003C2FA9 /* PriceScannerUITests.m */; };
 		185816A92042B146003C2FA9 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185816A82042B146003C2FA9 /* MainTabBarController.m */; };
-		185816B12042B1B7003C2FA9 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185816AF2042B1B7003C2FA9 /* InfoViewController.m */; };
-		185816B22042B1B7003C2FA9 /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 185816B02042B1B7003C2FA9 /* InfoViewController.xib */; };
 		185816B82042B3A2003C2FA9 /* PRSBasePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 185816B72042B3A2003C2FA9 /* PRSBasePresenter.m */; };
-		185816BC2042B406003C2FA9 /* InfoPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 185816BB2042B406003C2FA9 /* InfoPresenter.m */; };
-		185816C02042B46D003C2FA9 /* InfoConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 185816BF2042B46D003C2FA9 /* InfoConfigurator.m */; };
-		185816C62042B8E9003C2FA9 /* StartDetectionPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 185816C52042B8E9003C2FA9 /* StartDetectionPresenter.m */; };
-		185816C92042B902003C2FA9 /* StartDetectionConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 185816C82042B902003C2FA9 /* StartDetectionConfigurator.m */; };
-		185816CD2042B917003C2FA9 /* StartDetectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185816CB2042B917003C2FA9 /* StartDetectionViewController.m */; };
-		185816CE2042B917003C2FA9 /* StartDetectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 185816CC2042B917003C2FA9 /* StartDetectionViewController.xib */; };
 		79BB5F88CB71A20A71D9F32D /* libPods-PriceScanner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 875B6E9D6EA7B1D0438759ED /* libPods-PriceScanner.a */; };
+		843572902066D09000AC6E74 /* PRSInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8435728F2066D09000AC6E74 /* PRSInfoViewController.xib */; };
+		843572922066D1B800AC6E74 /* PRSStartDetectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843572912066D1B800AC6E74 /* PRSStartDetectionViewController.xib */; };
+		A447014755E19CEF68A97807 /* PRSInfoPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6500D729E329E18B1C68CBD2 /* PRSInfoPresenter.m */; };
+		C0A4D36A30BB96587190240D /* PRSStartDetectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C980225067C2B0F58F4C31 /* PRSStartDetectionViewController.m */; };
+		D906502DDC84BE046F35B51F /* PRSInfoConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 253524486FD07EC57453588A /* PRSInfoConfigurator.m */; };
 		E93E5C7850D4D88F31C3B7A6 /* libPods-PriceScannerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51B00C513929A27C7BD16E12 /* libPods-PriceScannerTests.a */; };
+		EA360519A8BE385080D446CB /* PRSStartDetectionConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A37F70A21AB094FE628658 /* PRSStartDetectionConfigurator.m */; };
+		FBC15EFEF6309AFCB73218E3 /* PRSStartDetectionPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA567B9A4B7FFD4C354C655 /* PRSStartDetectionPresenter.m */; };
+		FE44329CC7BBA104C8702FDB /* PRSInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 605E565FC47A71A0BEF372FD /* PRSInfoViewController.m */; };
 		FF08CFFD7765DAF4B995D246 /* libPods-PriceScannerUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9CD1054C9E7529C14BC8E9 /* libPods-PriceScannerUITests.a */; };
 /* End PBXBuildFile section */
 
@@ -87,35 +87,35 @@
 		1858168D2042AE82003C2FA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		185816A72042B146003C2FA9 /* MainTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		185816A82042B146003C2FA9 /* MainTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
-		185816AE2042B1B7003C2FA9 /* InfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
-		185816AF2042B1B7003C2FA9 /* InfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
-		185816B02042B1B7003C2FA9 /* InfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoViewController.xib; sourceTree = "<group>"; };
-		185816B32042B2DD003C2FA9 /* InfoViewInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoViewInput.h; sourceTree = "<group>"; };
-		185816B42042B30E003C2FA9 /* InfoViewOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoViewOutput.h; sourceTree = "<group>"; };
 		185816B62042B3A2003C2FA9 /* PRSBasePresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSBasePresenter.h; sourceTree = "<group>"; };
 		185816B72042B3A2003C2FA9 /* PRSBasePresenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSBasePresenter.m; sourceTree = "<group>"; };
-		185816BA2042B406003C2FA9 /* InfoPresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoPresenter.h; sourceTree = "<group>"; };
-		185816BB2042B406003C2FA9 /* InfoPresenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoPresenter.m; sourceTree = "<group>"; };
-		185816BD2042B43C003C2FA9 /* InfoModuleInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoModuleInput.h; sourceTree = "<group>"; };
-		185816BE2042B46D003C2FA9 /* InfoConfigurator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoConfigurator.h; sourceTree = "<group>"; };
-		185816BF2042B46D003C2FA9 /* InfoConfigurator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoConfigurator.m; sourceTree = "<group>"; };
-		185816C42042B8E9003C2FA9 /* StartDetectionPresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartDetectionPresenter.h; sourceTree = "<group>"; };
-		185816C52042B8E9003C2FA9 /* StartDetectionPresenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartDetectionPresenter.m; sourceTree = "<group>"; };
-		185816C72042B902003C2FA9 /* StartDetectionConfigurator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartDetectionConfigurator.h; sourceTree = "<group>"; };
-		185816C82042B902003C2FA9 /* StartDetectionConfigurator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartDetectionConfigurator.m; sourceTree = "<group>"; };
-		185816CA2042B917003C2FA9 /* StartDetectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartDetectionViewController.h; sourceTree = "<group>"; };
-		185816CB2042B917003C2FA9 /* StartDetectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartDetectionViewController.m; sourceTree = "<group>"; };
-		185816CC2042B917003C2FA9 /* StartDetectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartDetectionViewController.xib; sourceTree = "<group>"; };
-		185816CF2042B92C003C2FA9 /* StartDetectionViewInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartDetectionViewInput.h; sourceTree = "<group>"; };
-		185816D02042B938003C2FA9 /* StartDetectionViewOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartDetectionViewOutput.h; sourceTree = "<group>"; };
-		185816D12042B948003C2FA9 /* StartDetectionModuleInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartDetectionModuleInput.h; sourceTree = "<group>"; };
+		19C980225067C2B0F58F4C31 /* PRSStartDetectionViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PRSStartDetectionViewController.m; sourceTree = "<group>"; };
+		1BE51A706B47D092ED472FC9 /* PRSInfoPresenter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSInfoPresenter.h; sourceTree = "<group>"; };
+		253524486FD07EC57453588A /* PRSInfoConfigurator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PRSInfoConfigurator.m; sourceTree = "<group>"; };
 		2536271139138DA8F075C7E5 /* Pods-PriceScannerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceScannerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PriceScannerUITests/Pods-PriceScannerUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		2755F772C1D8FA73AC7334D8 /* PRSStartDetectionPresenter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSStartDetectionPresenter.h; sourceTree = "<group>"; };
+		2F022592E06330314E681CC4 /* PRSInfoViewOutput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSInfoViewOutput.h; sourceTree = "<group>"; };
+		368DE1B4C0E614E6060AA7C9 /* PRSStartDetectionViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSStartDetectionViewController.h; sourceTree = "<group>"; };
+		3F79F75664F75B0DFAF9E99B /* PRSInfoViewInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSInfoViewInput.h; sourceTree = "<group>"; };
 		4434A98012A64CE893BFAB3F /* Pods-PriceScannerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceScannerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PriceScannerTests/Pods-PriceScannerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		482BFA44B83A8C2FD9CBB97D /* PRSStartDetectionViewOutput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSStartDetectionViewOutput.h; sourceTree = "<group>"; };
 		51B00C513929A27C7BD16E12 /* libPods-PriceScannerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PriceScannerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		605E565FC47A71A0BEF372FD /* PRSInfoViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PRSInfoViewController.m; sourceTree = "<group>"; };
+		64212FDCFCC88B7E82337266 /* PRSStartDetectionModuleInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSStartDetectionModuleInput.h; sourceTree = "<group>"; };
+		6500D729E329E18B1C68CBD2 /* PRSInfoPresenter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PRSInfoPresenter.m; sourceTree = "<group>"; };
+		83EC718DF2C4C63B80E6347F /* PRSStartDetectionConfigurator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSStartDetectionConfigurator.h; sourceTree = "<group>"; };
+		8435728F2066D09000AC6E74 /* PRSInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PRSInfoViewController.xib; sourceTree = "<group>"; };
+		843572912066D1B800AC6E74 /* PRSStartDetectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PRSStartDetectionViewController.xib; sourceTree = "<group>"; };
 		875B6E9D6EA7B1D0438759ED /* libPods-PriceScanner.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PriceScanner.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E28806266FFFD6F01B70CDD /* Pods-PriceScanner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceScanner.release.xcconfig"; path = "Pods/Target Support Files/Pods-PriceScanner/Pods-PriceScanner.release.xcconfig"; sourceTree = "<group>"; };
+		92A37F70A21AB094FE628658 /* PRSStartDetectionConfigurator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PRSStartDetectionConfigurator.m; sourceTree = "<group>"; };
+		BD5126C5CE80F1B5DB4B3F72 /* PRSStartDetectionViewInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSStartDetectionViewInput.h; sourceTree = "<group>"; };
+		BFA567B9A4B7FFD4C354C655 /* PRSStartDetectionPresenter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PRSStartDetectionPresenter.m; sourceTree = "<group>"; };
+		CE7625A12D5D4DA8351A317C /* PRSInfoConfigurator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSInfoConfigurator.h; sourceTree = "<group>"; };
+		D175AB9CB5EE18E66A9A950D /* PRSInfoModuleInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSInfoModuleInput.h; sourceTree = "<group>"; };
 		E398CD4E3A06DE6F78D91A4B /* Pods-PriceScannerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceScannerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PriceScannerTests/Pods-PriceScannerTests.release.xcconfig"; sourceTree = "<group>"; };
 		E8E5D8474A0A485C140DC0AE /* Pods-PriceScannerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceScannerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PriceScannerUITests/Pods-PriceScannerUITests.release.xcconfig"; sourceTree = "<group>"; };
+		F920D59E850BF9E26897D8A4 /* PRSInfoViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSInfoViewController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +146,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F3A50739E961944E13EE548 /* StartDetection */ = {
+			isa = PBXGroup;
+			children = (
+				64995347C660B9EB17F484F3 /* Configurator */,
+				9385BA674DFE29465D2C85FF /* Presenter */,
+				96877FB9493987B2A81B147C /* View */,
+			);
+			path = StartDetection;
+			sourceTree = "<group>";
+		};
 		18267C35206683C400616282 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,8 +247,8 @@
 		1858169A2042AF43003C2FA9 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				185816AA2042B16E003C2FA9 /* Info */,
-				1858169F2042AFB9003C2FA9 /* StartDetection */,
+				D4B879F12AAAB6543825B20B /* Info */,
+				0F3A50739E961944E13EE548 /* StartDetection */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -247,17 +257,10 @@
 			isa = PBXGroup;
 			children = (
 				1858169D2042AFA3003C2FA9 /* BaseClass */,
-				1858169C2042AF98003C2FA9 /* Extentions */,
-				1858169E2042AFAF003C2FA9 /* Reuse */,
+				843572932066D26D00AC6E74 /* Extentions */,
+				843572942066D27B00AC6E74 /* Reuse */,
 			);
 			path = Library;
-			sourceTree = "<group>";
-		};
-		1858169C2042AF98003C2FA9 /* Extentions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extentions;
 			sourceTree = "<group>";
 		};
 		1858169D2042AFA3003C2FA9 /* BaseClass */ = {
@@ -266,54 +269,6 @@
 				185816B92042B3AF003C2FA9 /* ModuleStructure */,
 			);
 			path = BaseClass;
-			sourceTree = "<group>";
-		};
-		1858169E2042AFAF003C2FA9 /* Reuse */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Reuse;
-			sourceTree = "<group>";
-		};
-		1858169F2042AFB9003C2FA9 /* StartDetection */ = {
-			isa = PBXGroup;
-			children = (
-				185816A32042AFEC003C2FA9 /* Configurator */,
-				185816A22042AFDF003C2FA9 /* Presenter */,
-				185816A02042AFC4003C2FA9 /* View */,
-			);
-			path = StartDetection;
-			sourceTree = "<group>";
-		};
-		185816A02042AFC4003C2FA9 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				185816CA2042B917003C2FA9 /* StartDetectionViewController.h */,
-				185816CB2042B917003C2FA9 /* StartDetectionViewController.m */,
-				185816CC2042B917003C2FA9 /* StartDetectionViewController.xib */,
-				185816CF2042B92C003C2FA9 /* StartDetectionViewInput.h */,
-				185816D02042B938003C2FA9 /* StartDetectionViewOutput.h */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		185816A22042AFDF003C2FA9 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				185816C42042B8E9003C2FA9 /* StartDetectionPresenter.h */,
-				185816C52042B8E9003C2FA9 /* StartDetectionPresenter.m */,
-				185816D12042B948003C2FA9 /* StartDetectionModuleInput.h */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		185816A32042AFEC003C2FA9 /* Configurator */ = {
-			isa = PBXGroup;
-			children = (
-				185816C72042B902003C2FA9 /* StartDetectionConfigurator.h */,
-				185816C82042B902003C2FA9 /* StartDetectionConfigurator.m */,
-			);
-			path = Configurator;
 			sourceTree = "<group>";
 		};
 		185816A42042B002003C2FA9 /* Resourses */ = {
@@ -347,47 +302,6 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		185816AA2042B16E003C2FA9 /* Info */ = {
-			isa = PBXGroup;
-			children = (
-				185816AB2042B176003C2FA9 /* Configurator */,
-				185816AC2042B17E003C2FA9 /* Presenter */,
-				185816AD2042B184003C2FA9 /* View */,
-			);
-			path = Info;
-			sourceTree = "<group>";
-		};
-		185816AB2042B176003C2FA9 /* Configurator */ = {
-			isa = PBXGroup;
-			children = (
-				185816BE2042B46D003C2FA9 /* InfoConfigurator.h */,
-				185816BF2042B46D003C2FA9 /* InfoConfigurator.m */,
-			);
-			path = Configurator;
-			sourceTree = "<group>";
-		};
-		185816AC2042B17E003C2FA9 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				185816BA2042B406003C2FA9 /* InfoPresenter.h */,
-				185816BB2042B406003C2FA9 /* InfoPresenter.m */,
-				185816BD2042B43C003C2FA9 /* InfoModuleInput.h */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		185816AD2042B184003C2FA9 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				185816AE2042B1B7003C2FA9 /* InfoViewController.h */,
-				185816AF2042B1B7003C2FA9 /* InfoViewController.m */,
-				185816B02042B1B7003C2FA9 /* InfoViewController.xib */,
-				185816B32042B2DD003C2FA9 /* InfoViewInput.h */,
-				185816B42042B30E003C2FA9 /* InfoViewOutput.h */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		185816B52042B370003C2FA9 /* BasePresenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -403,6 +317,15 @@
 				185816B52042B370003C2FA9 /* BasePresenter */,
 			);
 			path = ModuleStructure;
+			sourceTree = "<group>";
+		};
+		64995347C660B9EB17F484F3 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				83EC718DF2C4C63B80E6347F /* PRSStartDetectionConfigurator.h */,
+				92A37F70A21AB094FE628658 /* PRSStartDetectionConfigurator.m */,
+			);
+			path = Configurator;
 			sourceTree = "<group>";
 		};
 		6610BAEF23CCBA529F2426D8 /* Pods */ = {
@@ -426,6 +349,83 @@
 				0F9CD1054C9E7529C14BC8E9 /* libPods-PriceScannerUITests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		843572932066D26D00AC6E74 /* Extentions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extentions;
+			sourceTree = "<group>";
+		};
+		843572942066D27B00AC6E74 /* Reuse */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Reuse;
+			sourceTree = "<group>";
+		};
+		9385BA674DFE29465D2C85FF /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				2755F772C1D8FA73AC7334D8 /* PRSStartDetectionPresenter.h */,
+				BFA567B9A4B7FFD4C354C655 /* PRSStartDetectionPresenter.m */,
+				64212FDCFCC88B7E82337266 /* PRSStartDetectionModuleInput.h */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		96877FB9493987B2A81B147C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				368DE1B4C0E614E6060AA7C9 /* PRSStartDetectionViewController.h */,
+				19C980225067C2B0F58F4C31 /* PRSStartDetectionViewController.m */,
+				843572912066D1B800AC6E74 /* PRSStartDetectionViewController.xib */,
+				BD5126C5CE80F1B5DB4B3F72 /* PRSStartDetectionViewInput.h */,
+				482BFA44B83A8C2FD9CBB97D /* PRSStartDetectionViewOutput.h */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CF1D613A3715084E59599BE1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F920D59E850BF9E26897D8A4 /* PRSInfoViewController.h */,
+				605E565FC47A71A0BEF372FD /* PRSInfoViewController.m */,
+				8435728F2066D09000AC6E74 /* PRSInfoViewController.xib */,
+				3F79F75664F75B0DFAF9E99B /* PRSInfoViewInput.h */,
+				2F022592E06330314E681CC4 /* PRSInfoViewOutput.h */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D4B879F12AAAB6543825B20B /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				E58046C06A03421A689130A7 /* Configurator */,
+				F72188298FEB4B34C6456A53 /* Presenter */,
+				CF1D613A3715084E59599BE1 /* View */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
+		E58046C06A03421A689130A7 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				CE7625A12D5D4DA8351A317C /* PRSInfoConfigurator.h */,
+				253524486FD07EC57453588A /* PRSInfoConfigurator.m */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		F72188298FEB4B34C6456A53 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				1BE51A706B47D092ED472FC9 /* PRSInfoPresenter.h */,
+				6500D729E329E18B1C68CBD2 /* PRSInfoPresenter.m */,
+				D175AB9CB5EE18E66A9A950D /* PRSInfoModuleInput.h */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -548,10 +548,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				185816CE2042B917003C2FA9 /* StartDetectionViewController.xib in Resources */,
+				843572922066D1B800AC6E74 /* PRSStartDetectionViewController.xib in Resources */,
 				185816742042AE82003C2FA9 /* LaunchScreen.storyboard in Resources */,
 				185816712042AE82003C2FA9 /* Assets.xcassets in Resources */,
-				185816B22042B1B7003C2FA9 /* InfoViewController.xib in Resources */,
+				843572902066D09000AC6E74 /* PRSInfoViewController.xib in Resources */,
 				1858166C2042AE82003C2FA9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -738,18 +738,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				18267C3E206685C000616282 /* InfoFlowCoordinator.m in Sources */,
-				185816CD2042B917003C2FA9 /* StartDetectionViewController.m in Sources */,
 				185816A92042B146003C2FA9 /* MainTabBarController.m in Sources */,
-				185816B12042B1B7003C2FA9 /* InfoViewController.m in Sources */,
 				18267C3B206684C000616282 /* CameraFlowCoordinator.m in Sources */,
 				185816662042AE82003C2FA9 /* AppDelegate.m in Sources */,
-				185816C92042B902003C2FA9 /* StartDetectionConfigurator.m in Sources */,
 				185816B82042B3A2003C2FA9 /* PRSBasePresenter.m in Sources */,
-				185816C62042B8E9003C2FA9 /* StartDetectionPresenter.m in Sources */,
-				185816C02042B46D003C2FA9 /* InfoConfigurator.m in Sources */,
 				185816772042AE82003C2FA9 /* main.m in Sources */,
 				1858166F2042AE82003C2FA9 /* PriceScanner.xcdatamodeld in Sources */,
-				185816BC2042B406003C2FA9 /* InfoPresenter.m in Sources */,
+				D906502DDC84BE046F35B51F /* PRSInfoConfigurator.m in Sources */,
+				A447014755E19CEF68A97807 /* PRSInfoPresenter.m in Sources */,
+				FE44329CC7BBA104C8702FDB /* PRSInfoViewController.m in Sources */,
+				EA360519A8BE385080D446CB /* PRSStartDetectionConfigurator.m in Sources */,
+				FBC15EFEF6309AFCB73218E3 /* PRSStartDetectionPresenter.m in Sources */,
+				C0A4D36A30BB96587190240D /* PRSStartDetectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
