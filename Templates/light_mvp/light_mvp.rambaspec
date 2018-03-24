@@ -1,0 +1,29 @@
+# Template information section
+name: light_mvp
+summary: Версия архитектуры MVP, включающая в себя View, Presenter и Configurator для их конфигурации и линковки.
+author: Chausov Alexander
+version: 1.0.0
+license: none
+
+# The declarations for code files
+code_files:
+# Configurator layer
+- {name: Configurator/Configurator.h, path: Code/Configurator/configurator.h.liquid}
+- {name: Configurator/Configurator.m, path: Code/Configurator/configurator.m.liquid}
+
+# Presenter layer
+- {name: Presenter/Presenter.h, path: Code/Presenter/presenter.h.liquid}
+- {name: Presenter/Presenter.m, path: Code/Presenter/presenter.m.liquid}
+- {name: Presenter/ModuleInput.h, path: Code/Presenter/module_input.h.liquid}
+
+# View layer
+- {name: View/ViewController.h, path: Code/View/viewcontroller.h.liquid}
+- {name: View/ViewController.m, path: Code/View/viewcontroller.m.liquid}
+- {name: View/ViewInput.h, path: Code/View/view_input.h.liquid}
+- {name: View/ViewOutput.h, path: Code/View/view_output.h.liquid}
+
+# The declarations for test files
+#test_files:
+
+# Template dependencies
+#dependencies:
