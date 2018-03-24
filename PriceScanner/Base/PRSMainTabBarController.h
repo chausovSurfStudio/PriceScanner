@@ -1,13 +1,13 @@
 //
-//  InfoViewOuput.h
+//  MainTabBarController.h
 //  PriceScanner
 //
 //  Created by Chausov Alexander on 25.02.18.
 //  Copyright © 2018 Surf. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@protocol InfoViewOutput <NSObject>
+@interface PRSMainTabBarController : UITabBarController
 
 @end

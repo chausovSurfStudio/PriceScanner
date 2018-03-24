@@ -12,7 +12,7 @@
         <!--Main Tab Bar Controller-->
         <scene sceneID="D5A-TV-Ens">
             <objects>
-                <tabBarController id="ecT-cR-e7w" customClass="MainTabBarController" sceneMemberID="viewController">
+                <tabBarController id="ecT-cR-e7w" customClass="PRSMainTabBarController" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rcG-ca-lld">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
