@@ -21,6 +21,6 @@ podfile_path: Podfile
 
 ### Templates
 templates:
-- {name: light_mvp, local: '/Users/chausovalexander/Documents/SurfStudio_project/PriceScanner/Templates/light_mvp'}
+- {name: light_mvp}
 #- {name: remote_template_name, git: 'https://github.com/igrekde/remote_template'}
 #- {name: catalog_template_name}
