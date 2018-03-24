@@ -1,5 +1,5 @@
 //
-//  InfoFlowCoordinator.h
+//  CameraFlowCoordinator.h
 //  PriceScanner
 //
 //  Created by Chausov Alexander on 24.03.18.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface InfoFlowCoordinator : NSObject
+@interface PRSCameraFlowCoordinator : NSObject
 
 - (UINavigationController *)initialScreen;
 
