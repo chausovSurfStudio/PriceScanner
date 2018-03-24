@@ -1,0 +1,14 @@
+{% include 'header' %}
+
+#import "PRSBasePresenter.h"
+#import "{{ prefix }}{{ module_info.name }}ModuleInput.h"
+#import "{{ prefix }}{{ module_info.name }}ViewOutput.h"
+
+@protocol {{ prefix }}{{ module_info.name }}ViewInput;
+
+
+@interface {{ prefix }}{{ module_info.name }}Presenter : PRSBasePresenter <{{ prefix }}{{ module_info.name }}ModuleInput, {{ prefix }}{{ module_info.name }}ViewOutput>
+
+@property (nonatomic, weak) id<{{ prefix }}{{ module_info.name }}ViewInput> view;
+
+@end

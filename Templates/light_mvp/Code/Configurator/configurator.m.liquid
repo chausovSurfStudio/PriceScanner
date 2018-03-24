@@ -1,0 +1,22 @@
+{% include 'header' %}
+
+#import "{{ prefix }}{{ module_info.name }}Configurator.h"
+
+#import "{{ prefix }}{{ module_info.name }}ViewController.h"
+#import "{{ prefix }}{{ module_info.name }}Presenter.h"
+
+
+@implementation {{ prefix }}{{ module_info.name }}Configurator
+
++ (UIViewController *)configureModule:(void(^)(id<{{ prefix }}{{ module_info.name }}ModuleInput> presenter))completion {
+    {{ prefix }}{{ module_info.name }}Presenter *presenter = [{{ prefix }}{{ module_info.name }}Presenter new];
+    {{ prefix }}{{ module_info.name }}ViewController *view = [{{ prefix }}{{ module_info.name }}ViewController new];
+    view.output = presenter;
+    presenter.view = view;
+    if (completion) {
+        completion(presenter);
+    }
+    return view;
+}
+
+@end

@@ -1,0 +1,14 @@
+{% include 'header' %}
+
+#import "{{ prefix }}{{ module_info.name }}Presenter.h"
+#import "{{ prefix }}{{ module_info.name }}ViewInput.h"
+
+
+@implementation {{ prefix }}{{ module_info.name }}Presenter
+
+#pragma mark - {{ prefix }}{{ module_info.name }}ViewOutput
+- (void)viewReadyEvent {
+	// установка начального состояния presenter'а
+}
+
+@end

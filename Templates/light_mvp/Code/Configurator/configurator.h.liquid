@@ -1,0 +1,13 @@
+{% include 'header' %}
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+@protocol {{ prefix }}{{ module_info.name }}ModuleInput;
+
+
+@interface {{ prefix }}{{ module_info.name }}Configurator : NSObject
+
++ (UIViewController *)configureModule:(void(^)(id<{{ prefix }}{{ module_info.name }}ModuleInput> presenter))completion;
+
+@end
