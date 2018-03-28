@@ -12,6 +12,6 @@
 @protocol PRSInfoViewOutput <NSObject>
 
 /** Метод информирует презентера о том, что view загрузилась и готова к работе */
-- (void)viewReadyEvent;
+- (void)viewLoaded;
 
 @end
