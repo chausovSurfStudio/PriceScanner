@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.output viewReadyEvent];
+    [self.output viewLoaded];
 }
 
 #pragma mark - PRSStartDetectionViewInput

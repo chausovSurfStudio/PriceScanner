@@ -13,7 +13,7 @@
 @implementation PRSInfoPresenter
 
 #pragma mark - PRSInfoViewOutput
-- (void)viewReadyEvent {
+- (void)viewLoaded {
     // установка начального состояния presenter'а
 }
 
