@@ -11,4 +11,6 @@
 
 @protocol PRSStartDetectionModuleInput <NSObject>
 
+- (void)setOpenCameraModuleHandler:(void(^)(void))openCameraModuleHandler;
+
 @end

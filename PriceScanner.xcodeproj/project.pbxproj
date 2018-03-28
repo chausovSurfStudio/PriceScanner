@@ -31,6 +31,7 @@
 		1858168C2042AE82003C2FA9 /* PriceScannerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1858168B2042AE82003C2FA9 /* PriceScannerUITests.m */; };
 		185816B82042B3A2003C2FA9 /* PRSBasePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 185816B72042B3A2003C2FA9 /* PRSBasePresenter.m */; };
 		18A40784206B8C6000DB9D11 /* PRSCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A40783206B8C6000DB9D11 /* PRSCameraViewController.xib */; };
+		18DC5466206BFD4D009E1D2A /* PRSTabBarCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DC5465206BFD4D009E1D2A /* PRSTabBarCoordinator.m */; };
 		4D8F92E7E93420611E4E5184 /* PRSCameraPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D034414F967F52CFEA19C94 /* PRSCameraPresenter.m */; };
 		79BB5F88CB71A20A71D9F32D /* libPods-PriceScanner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 875B6E9D6EA7B1D0438759ED /* libPods-PriceScanner.a */; };
 		843572902066D09000AC6E74 /* PRSInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8435728F2066D09000AC6E74 /* PRSInfoViewController.xib */; };
@@ -88,6 +89,8 @@
 		185816B62042B3A2003C2FA9 /* PRSBasePresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSBasePresenter.h; sourceTree = "<group>"; };
 		185816B72042B3A2003C2FA9 /* PRSBasePresenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSBasePresenter.m; sourceTree = "<group>"; };
 		18A40783206B8C6000DB9D11 /* PRSCameraViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PRSCameraViewController.xib; sourceTree = "<group>"; };
+		18DC5464206BFD4D009E1D2A /* PRSTabBarCoordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSTabBarCoordinator.h; sourceTree = "<group>"; };
+		18DC5465206BFD4D009E1D2A /* PRSTabBarCoordinator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSTabBarCoordinator.m; sourceTree = "<group>"; };
 		191FEEA623892A0812D13682 /* PRSCameraPresenter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSCameraPresenter.h; sourceTree = "<group>"; };
 		19C980225067C2B0F58F4C31 /* PRSStartDetectionViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PRSStartDetectionViewController.m; sourceTree = "<group>"; };
 		1BE51A706B47D092ED472FC9 /* PRSInfoPresenter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSInfoPresenter.h; sourceTree = "<group>"; };
@@ -199,6 +202,7 @@
 		18267C382066848200616282 /* TabBarCoordinators */ = {
 			isa = PBXGroup;
 			children = (
+				18DC5463206BFD2C009E1D2A /* TabBarCoordinator */,
 				18267C362066840400616282 /* CameraFlowCoordinator */,
 				18267C372066841F00616282 /* InfoFlowCoordinator */,
 			);
@@ -332,6 +336,15 @@
 				185816B52042B370003C2FA9 /* BasePresenter */,
 			);
 			path = ModuleStructure;
+			sourceTree = "<group>";
+		};
+		18DC5463206BFD2C009E1D2A /* TabBarCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				18DC5464206BFD4D009E1D2A /* PRSTabBarCoordinator.h */,
+				18DC5465206BFD4D009E1D2A /* PRSTabBarCoordinator.m */,
+			);
+			path = TabBarCoordinator;
 			sourceTree = "<group>";
 		};
 		64995347C660B9EB17F484F3 /* Configurator */ = {
@@ -801,6 +814,7 @@
 				1858166F2042AE82003C2FA9 /* PriceScanner.xcdatamodeld in Sources */,
 				D906502DDC84BE046F35B51F /* PRSInfoConfigurator.m in Sources */,
 				A447014755E19CEF68A97807 /* PRSInfoPresenter.m in Sources */,
+				18DC5466206BFD4D009E1D2A /* PRSTabBarCoordinator.m in Sources */,
 				FE44329CC7BBA104C8702FDB /* PRSInfoViewController.m in Sources */,
 				EA360519A8BE385080D446CB /* PRSStartDetectionConfigurator.m in Sources */,
 				8435729A2066D41D00AC6E74 /* PRSCameraFlowCoordinator.m in Sources */,
