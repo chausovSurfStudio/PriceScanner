@@ -8,13 +8,36 @@
 
 #import "PRSCameraFlowCoordinator.h"
 #import "PRSStartDetectionConfigurator.h"
+#import "PRSCameraConfigurator.h"
+
+#import "PRSStartDetectionModuleInput.h"
+
+
+@interface PRSCameraFlowCoordinator()
+
+@property (nonatomic, strong) UINavigationController *navigationController;
+
+@end
+
 
 @implementation PRSCameraFlowCoordinator
 
-- (UINavigationController *)initialScreen {
-    UIViewController *startDetectionView = [PRSStartDetectionConfigurator configureModule:nil];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:startDetectionView];
-    return navigationController;
+- (UINavigationController *)initialView {
+    UIViewController *startDetectionView = [PRSStartDetectionConfigurator configureModule:^(id<PRSStartDetectionModuleInput> presenter) {
+        @weakify(self);
+        [presenter setOpenCameraHandler:^{
+            @strongify(self);
+            [self openCameraModule];
+        }];
+    }];
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:startDetectionView];
+    return self.navigationController;
+}
+
+- (void)openCameraModule {
+    UIViewController *cameraView = [PRSCameraConfigurator configureModule:nil];
+    [self.navigationController pushViewController:cameraView animated:YES];
+    
 }
 
 @end

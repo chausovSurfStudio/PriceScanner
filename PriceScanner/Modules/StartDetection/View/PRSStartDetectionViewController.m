@@ -22,7 +22,11 @@
     [self.output viewLoaded];
 }
 
-#pragma mark - PRSStartDetectionViewInput
+#pragma mark - Actions
+- (IBAction)tapOnStartRecognizeButton:(UIButton *)sender {
+    [self.output openCamera];
+}
 
+#pragma mark - PRSStartDetectionViewInput
 
 @end

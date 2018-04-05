@@ -8,11 +8,12 @@
 
 #import "PRSMainTabBarController.h"
 
-#import "PRSCameraFlowCoordinator.h"
-#import "PRSInfoFlowCoordinator.h"
+#import "PRSTabBarCoordinator.h"
 
 
 @interface PRSMainTabBarController ()
+
+@property (nonatomic, strong) PRSTabBarCoordinator *mainCoordinator;
 
 @end
 
@@ -25,8 +26,10 @@
 }
 
 - (void)setupInitialTabs {
-    UINavigationController *cameraNavigation = [[PRSCameraFlowCoordinator new] initialScreen];
-    UINavigationController *infoNavigation = [[PRSInfoFlowCoordinator new] initialScreen];
+    self.mainCoordinator = [PRSTabBarCoordinator new];
+    
+    UINavigationController *cameraNavigation = [self.mainCoordinator cameraInitialView];
+    UINavigationController *infoNavigation = [self.mainCoordinator infoInitialView];
     
     UITabBarItem *cameraItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0];
     UITabBarItem *infoItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostRecent tag:1];

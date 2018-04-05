@@ -9,12 +9,20 @@
 #import "PRSInfoFlowCoordinator.h"
 #import "PRSInfoConfigurator.h"
 
+
+@interface PRSInfoFlowCoordinator()
+
+@property (nonatomic, strong) UINavigationController *navigationController;
+
+@end
+
+
 @implementation PRSInfoFlowCoordinator
 
-- (UINavigationController *)initialScreen {
+- (UINavigationController *)initialView {
     UIViewController *infoView = [PRSInfoConfigurator configureModule:nil];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:infoView];
-    return navigationController;
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:infoView];
+    return self.navigationController;
 }
 
 @end

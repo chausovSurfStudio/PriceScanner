@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface PRSCameraFlowCoordinator : NSObject
 
-- (UINavigationController *)initialScreen;
+- (UINavigationController *)initialView;
 
 @end
