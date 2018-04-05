@@ -11,4 +11,6 @@
 
 @protocol PRSCameraViewInput <NSObject>
 
+- (void)setupInitialState;
+
 @end
