@@ -12,7 +12,7 @@
 
 @interface PRSStartDetectionPresenter()
 
-@property (nonatomic, copy) void (^openCameraModuleHandler)(void);
+@property (nonatomic, copy) void (^openCameraHandler)(void);
 
 @end
 
@@ -20,8 +20,8 @@
 @implementation PRSStartDetectionPresenter
 
 #pragma mark - PRSStartDetectionModuleInput
-- (void)setOpenCameraModuleHandler:(void(^)(void))openCameraModuleHandler {
-    _openCameraModuleHandler = openCameraModuleHandler;
+- (void)setOpenCameraHandler:(void(^)(void))openCameraHandler {
+    _openCameraHandler = openCameraHandler;
 }
 
 #pragma mark - PRSStartDetectionViewOutput
@@ -29,9 +29,9 @@
     // установка начального состояния presenter'а
 }
 
-- (void)openCameraModule {
-    if (self.openCameraModuleHandler) {
-        self.openCameraModuleHandler();
+- (void)openCamera {
+    if (self.openCameraHandler) {
+        self.openCameraHandler();
     }
 }
 

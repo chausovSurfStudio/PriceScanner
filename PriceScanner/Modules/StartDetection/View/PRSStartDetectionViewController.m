@@ -24,7 +24,7 @@
 
 #pragma mark - Actions
 - (IBAction)tapOnStartRecognizeButton:(UIButton *)sender {
-    [self.output openCameraModule];
+    [self.output openCamera];
 }
 
 #pragma mark - PRSStartDetectionViewInput

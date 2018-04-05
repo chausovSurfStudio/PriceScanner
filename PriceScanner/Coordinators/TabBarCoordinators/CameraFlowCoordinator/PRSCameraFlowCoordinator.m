@@ -25,7 +25,7 @@
 - (UINavigationController *)initialView {
     UIViewController *startDetectionView = [PRSStartDetectionConfigurator configureModule:^(id<PRSStartDetectionModuleInput> presenter) {
         @weakify(self);
-        [presenter setOpenCameraModuleHandler:^{
+        [presenter setOpenCameraHandler:^{
             @strongify(self);
             [self openCameraModule];
         }];
