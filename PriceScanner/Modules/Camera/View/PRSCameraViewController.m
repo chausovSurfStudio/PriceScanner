@@ -10,6 +10,7 @@
 #import "PRSCameraViewOutput.h"
 
 #import <AVFoundation/AVFoundation.h>
+#import <Vision/Vision.h>
 
 
 @interface PRSCameraViewController () <AVCaptureVideoDataOutputSampleBufferDelegate>
@@ -17,6 +18,7 @@
 @property (nonatomic, strong) IBOutlet UIImageView *scene;
 
 @property (nonatomic, strong) AVCaptureSession *session;
+@property (nonatomic, strong) NSArray<VNRequest *> *requests;
 
 @end
 
@@ -26,6 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.output viewLoaded];
+    [self createTextDetectRequest];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -85,7 +88,54 @@
 
 #pragma mark - AVCaptureVideoDataOutputSampleBufferDelegate
 - (void)captureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
-    // TODO: здесь надо будет что-то сделать
+    CVImageBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+    CFTypeRef camData = CMGetAttachment(sampleBuffer, kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix, nil);
+    NSDictionary *requestOptions;
+    if ((__bridge id)camData) {
+        requestOptions = @{VNImageOptionCameraIntrinsics:(__bridge id)camData};
+    }
+    VNImageRequestHandler *handler = [[VNImageRequestHandler alloc] initWithCVPixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationRightMirrored options:requestOptions];
+    [handler performRequests:self.requests error:nil];
+}
+
+#pragma mark - Private logic
+- (void)createTextDetectRequest {
+    VNDetectTextRectanglesRequest *textRequest = [[VNDetectTextRectanglesRequest alloc] initWithCompletionHandler:^(VNRequest * _Nonnull request, NSError * _Nullable error) {
+        NSLog(@"request = %@", request);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self clearSceneSublayers];
+            for (VNTextObservation *region in request.results) {
+                for (VNRectangleObservation *characterBox in region.characterBoxes) {
+                    [self highlightLetters:characterBox];
+                }
+            }
+        });
+    }];
+    textRequest.reportCharacterBoxes = YES;
+    self.requests = @[textRequest];
+}
+
+- (void)highlightLetters:(VNRectangleObservation *)box {
+    CGFloat originX = box.topLeft.x * self.scene.frame.size.width;
+    CGFloat originY = (1 - box.topLeft.y) * self.scene.frame.size.height;
+    CGFloat width = (box.topRight.x - box.bottomLeft.x) * self.scene.frame.size.width;
+    CGFloat height = (box.topLeft.y - box.bottomLeft.y) * self.scene.frame.size.height;
+    
+    CALayer *border = [[CALayer alloc] init];
+    border.frame = CGRectMake(originX, originY, width, height);
+    border.borderWidth = 1.f;
+    border.borderColor = [UIColor blueColor].CGColor;
+    
+    [self.scene.layer addSublayer:border];
+}
+
+- (void)clearSceneSublayers {
+    CALayer *videoLayer = self.scene.layer.sublayers.firstObject;
+    if (videoLayer) {
+        self.scene.layer.sublayers = @[videoLayer];
+    } else {
+        self.scene.layer.sublayers = @[];
+    }
 }
 
 @end
