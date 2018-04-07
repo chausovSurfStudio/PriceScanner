@@ -94,7 +94,7 @@
     if ((__bridge id)camData) {
         requestOptions = @{VNImageOptionCameraIntrinsics:(__bridge id)camData};
     }
-    VNImageRequestHandler *handler = [[VNImageRequestHandler alloc] initWithCVPixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationRightMirrored options:requestOptions];
+    VNImageRequestHandler *handler = [[VNImageRequestHandler alloc] initWithCVPixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationRight options:requestOptions];
     [handler performRequests:self.requests error:nil];
 }
 
