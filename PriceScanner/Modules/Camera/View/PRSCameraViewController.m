@@ -101,11 +101,11 @@
 #pragma mark - Private logic
 - (void)createTextDetectRequest {
     VNDetectTextRectanglesRequest *textRequest = [[VNDetectTextRectanglesRequest alloc] initWithCompletionHandler:^(VNRequest * _Nonnull request, NSError * _Nullable error) {
-        NSLog(@"request = %@", request);
         dispatch_async(dispatch_get_main_queue(), ^{
             [self clearSceneSublayers];
-            for (VNTextObservation *region in request.results) {
-                for (VNRectangleObservation *characterBox in region.characterBoxes) {
+            for (VNTextObservation *word in request.results) {
+                [self highlightWord:word];
+                for (VNRectangleObservation *characterBox in word.characterBoxes) {
                     [self highlightLetters:characterBox];
                 }
             }
@@ -115,6 +115,44 @@
     self.requests = @[textRequest];
 }
 
+/** Метод выделяет в текущем видеопотоке границу распознанного слова */
+- (void)highlightWord:(VNTextObservation *)box {
+    NSArray<VNRectangleObservation *> *boxes = box.characterBoxes;
+    
+    CGFloat minX = 9999.f;
+    CGFloat maxX = 0.f;
+    CGFloat minY = 9999.f;
+    CGFloat maxY = 0.f;
+    
+    for (VNRectangleObservation *charBox in boxes) {
+        if (charBox.bottomLeft.x < minX) {
+            minX = charBox.bottomLeft.x;
+        }
+        if (charBox.bottomRight.x > maxX) {
+            maxX = charBox.bottomRight.x;
+        }
+        if (charBox.bottomRight.y < minY) {
+            minY = charBox.bottomRight.y;
+        }
+        if (charBox.topRight.y > maxY) {
+            maxY = charBox.topRight.y;
+        }
+    }
+    
+    CGFloat originX = minX * self.scene.frame.size.width;
+    CGFloat originY = (1 - maxY) * self.scene.frame.size.height;
+    CGFloat width = (maxX - minX) * self.scene.frame.size.width;
+    CGFloat height = (maxY - minY) * self.scene.frame.size.height;
+    
+    CALayer *border = [[CALayer alloc] init];
+    border.frame = CGRectMake(originX, originY, width, height);
+    border.borderWidth = 2.f;
+    border.borderColor = [UIColor redColor].CGColor;
+    
+    [self.scene.layer addSublayer:border];
+}
+
+/** Метод выделяет в текущем видеопотоке границу распознанного символа */
 - (void)highlightLetters:(VNRectangleObservation *)box {
     CGFloat originX = box.topLeft.x * self.scene.frame.size.width;
     CGFloat originY = (1 - box.topLeft.y) * self.scene.frame.size.height;
@@ -129,6 +167,7 @@
     [self.scene.layer addSublayer:border];
 }
 
+/** Метод удаляет все sublayers на scene, кроме первого, в котором расположен видеопоток */
 - (void)clearSceneSublayers {
     CALayer *videoLayer = self.scene.layer.sublayers.firstObject;
     if (videoLayer) {
