@@ -106,7 +106,7 @@
             for (VNTextObservation *word in request.results) {
                 [self highlightWord:word];
                 for (VNRectangleObservation *characterBox in word.characterBoxes) {
-                    [self highlightLetters:characterBox];
+                    [self highlightLetter:characterBox];
                 }
             }
         });
@@ -153,7 +153,7 @@
 }
 
 /** Метод выделяет в текущем видеопотоке границу распознанного символа */
-- (void)highlightLetters:(VNRectangleObservation *)box {
+- (void)highlightLetter:(VNRectangleObservation *)box {
     CGFloat originX = box.topLeft.x * self.scene.frame.size.width;
     CGFloat originY = (1 - box.topLeft.y) * self.scene.frame.size.height;
     CGFloat width = (box.topRight.x - box.bottomLeft.x) * self.scene.frame.size.width;
