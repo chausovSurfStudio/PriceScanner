@@ -13,13 +13,25 @@
 #import <Vision/Vision.h>
 
 
+/** Состояние снимка */
+typedef NS_ENUM(NSUInteger, SnapshotStatus) {
+    SnapshotStatusNone,
+    SnapshotStatusMake,
+    SnapshotStatusProcessing
+};
+
+
 @interface PRSCameraViewController () <AVCaptureVideoDataOutputSampleBufferDelegate>
 
 @property (nonatomic, strong) IBOutlet UIImageView *scene;
+@property (nonatomic, strong) IBOutlet UIImageView *testImageView;
 @property (nonatomic, strong) IBOutlet UIButton *snapshotButton;
 
 @property (nonatomic, strong) AVCaptureSession *session;
 @property (nonatomic, strong) NSArray<VNRequest *> *requests;
+
+@property (nonatomic, assign) SnapshotStatus makeSnapshot;
+@property (nonatomic, strong) UIImage *snapshot;
 
 @end
 
@@ -35,6 +47,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self startLiveVideo];
+    
+    self.makeSnapshot = SnapshotStatusNone;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -54,7 +68,14 @@
 
 #pragma mark - Actions
 - (IBAction)tapOnSnapshotButton:(UIButton *)sender {
-    NSLog(@"tapOnSnapshotButton");
+    self.makeSnapshot = SnapshotStatusMake;
+    
+    [self pauseLiveVideo];
+    @weakify(self);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        @strongify(self);
+        [self startLiveVideo];
+    });
 }
 
 #pragma mark - PRSCameraViewInput
@@ -92,6 +113,7 @@
     
     AVCaptureVideoPreviewLayer *imageLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.session];
     imageLayer.frame = self.scene.bounds;
+    self.scene.layer.sublayers = nil;
     [self.scene.layer addSublayer:imageLayer];
     
     [self.session startRunning];
@@ -103,8 +125,21 @@
     self.session = [[AVCaptureSession alloc] init];
 }
 
+- (void)pauseLiveVideo {
+    [self.session stopRunning];
+    self.session = [[AVCaptureSession alloc] init];
+}
+
 #pragma mark - AVCaptureVideoDataOutputSampleBufferDelegate
 - (void)captureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
+    if (self.makeSnapshot == SnapshotStatusMake) {
+        self.snapshot = [self imageFromSampleBuffer:sampleBuffer];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.testImageView.image = self.snapshot;
+        });
+        self.makeSnapshot = SnapshotStatusProcessing;
+    }
+    
     CVImageBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     CFTypeRef camData = CMGetAttachment(sampleBuffer, kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix, nil);
     NSDictionary *requestOptions;
@@ -113,6 +148,46 @@
     }
     VNImageRequestHandler *handler = [[VNImageRequestHandler alloc] initWithCVPixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationRight options:requestOptions];
     [handler performRequests:self.requests error:nil];
+}
+
+#pragma mark - Image Builder
+- (UIImage *)imageFromSampleBuffer:(CMSampleBufferRef) sampleBuffer {
+    // Get a CMSampleBuffer's Core Video image buffer for the media data
+    CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+    // Lock the base address of the pixel buffer
+    CVPixelBufferLockBaseAddress(imageBuffer, 0);
+    
+    // Get the number of bytes per row for the pixel buffer
+    void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
+    
+    // Get the number of bytes per row for the pixel buffer
+    size_t bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer);
+    // Get the pixel buffer width and height
+    size_t width = CVPixelBufferGetWidth(imageBuffer);
+    size_t height = CVPixelBufferGetHeight(imageBuffer);
+    
+    // Create a device-dependent RGB color space
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    
+    // Create a bitmap graphics context with the sample buffer data
+    CGContextRef context = CGBitmapContextCreate(baseAddress, width, height, 8,
+                                                 bytesPerRow, colorSpace, kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst);
+    // Create a Quartz image from the pixel data in the bitmap graphics context
+    CGImageRef quartzImage = CGBitmapContextCreateImage(context);
+    // Unlock the pixel buffer
+    CVPixelBufferUnlockBaseAddress(imageBuffer,0);
+    
+    // Free up the context and color space
+    CGContextRelease(context);
+    CGColorSpaceRelease(colorSpace);
+    
+    // Create an image object from the Quartz image
+    UIImage *image = [UIImage imageWithCGImage:quartzImage scale:1.0 orientation:UIImageOrientationRight];
+    
+    // Release the Quartz image
+    CGImageRelease(quartzImage);
+    
+    return (image);
 }
 
 #pragma mark - Private logic
@@ -126,6 +201,15 @@
                     [self highlightLetter:characterBox];
                 }
             }
+            
+            if (self.makeSnapshot == SnapshotStatusProcessing) {
+                for (VNTextObservation *word in request.results) {
+                    for (VNRectangleObservation *characterBox in word.characterBoxes) {
+                        [self cropAndSaveLetter:characterBox];
+                    }
+                }
+                self.makeSnapshot = SnapshotStatusNone;
+            }
         });
     }];
     textRequest.reportCharacterBoxes = YES;
@@ -133,8 +217,27 @@
 }
 
 /** Метод выделяет в текущем видеопотоке границу распознанного слова */
-- (void)highlightWord:(VNTextObservation *)box {
-    NSArray<VNRectangleObservation *> *boxes = box.characterBoxes;
+- (void)highlightWord:(VNTextObservation *)word {
+    CALayer *border = [[CALayer alloc] init];
+    border.frame = [self frameForWord:word];
+    border.borderWidth = 2.f;
+    border.borderColor = [UIColor redColor].CGColor;
+    
+    [self.scene.layer addSublayer:border];
+}
+
+/** Метод выделяет в текущем видеопотоке границу распознанного символа */
+- (void)highlightLetter:(VNRectangleObservation *)letter {
+    CALayer *border = [[CALayer alloc] init];
+    border.frame = [self frameForLetter:letter parentSize:self.scene.frame.size];
+    border.borderWidth = 1.f;
+    border.borderColor = [UIColor blueColor].CGColor;
+    
+    [self.scene.layer addSublayer:border];
+}
+
+- (CGRect)frameForWord:(VNTextObservation *)word {
+    NSArray<VNRectangleObservation *> *boxes = word.characterBoxes;
     
     CGFloat minX = 9999.f;
     CGFloat maxX = 0.f;
@@ -161,27 +264,36 @@
     CGFloat width = (maxX - minX) * self.scene.frame.size.width;
     CGFloat height = (maxY - minY) * self.scene.frame.size.height;
     
-    CALayer *border = [[CALayer alloc] init];
-    border.frame = CGRectMake(originX, originY, width, height);
-    border.borderWidth = 2.f;
-    border.borderColor = [UIColor redColor].CGColor;
-    
-    [self.scene.layer addSublayer:border];
+    return CGRectMake(originX, originY, width, height);
 }
 
-/** Метод выделяет в текущем видеопотоке границу распознанного символа */
-- (void)highlightLetter:(VNRectangleObservation *)box {
-    CGFloat originX = box.topLeft.x * self.scene.frame.size.width;
-    CGFloat originY = (1 - box.topLeft.y) * self.scene.frame.size.height;
-    CGFloat width = (box.topRight.x - box.bottomLeft.x) * self.scene.frame.size.width;
-    CGFloat height = (box.topLeft.y - box.bottomLeft.y) * self.scene.frame.size.height;
+- (CGRect)frameForLetter:(VNRectangleObservation *)letter parentSize:(CGSize)parentSize {
+    CGFloat originX = letter.topLeft.x * parentSize.width;
+    CGFloat originY = (1 - letter.topLeft.y) * parentSize.height;
+    CGFloat width = (letter.topRight.x - letter.bottomLeft.x) * parentSize.width;
+    CGFloat height = (letter.topLeft.y - letter.bottomLeft.y) * parentSize.height;
     
-    CALayer *border = [[CALayer alloc] init];
-    border.frame = CGRectMake(originX, originY, width, height);
-    border.borderWidth = 1.f;
-    border.borderColor = [UIColor blueColor].CGColor;
+    return CGRectMake(originX, originY, width, height);
+}
+
+- (CGRect)anotherFrameForLetter:(VNRectangleObservation *)letter parentSize:(CGSize)parentSize {
+//    CGFloat originX = letter.topLeft.x * parentSize.width;
+//    CGFloat originY = (1 - letter.topLeft.y) * parentSize.height;
+//    CGFloat width = (letter.topRight.x - letter.bottomLeft.x) * parentSize.width;
+//    CGFloat height = (letter.topLeft.y - letter.bottomLeft.y) * parentSize.height;
     
-    [self.scene.layer addSublayer:border];
+    CGFloat originX = letter.topRight.y * parentSize.width;
+    CGFloat originY = (1 - letter.topRight.x) * parentSize.height;
+    CGFloat width = (letter.bottomRight.y - letter.topRight.y) * parentSize.width;
+    CGFloat height = (letter.topRight.x - letter.topLeft.x) * parentSize.height;
+    
+    return CGRectMake(originX, originY, width, height);
+}
+
+- (void)cropAndSaveLetter:(VNRectangleObservation *)letter {
+    CGRect letterFrame = [self anotherFrameForLetter:letter parentSize:self.snapshot.size];
+    UIImage *letterImage = [self cutRect:letterFrame fromImage:self.snapshot];
+    NSLog(@"image = %@", letterImage);
 }
 
 /** Метод удаляет все sublayers на scene, кроме первого, в котором расположен видеопоток */
@@ -192,6 +304,15 @@
     } else {
         self.scene.layer.sublayers = @[];
     }
+}
+
+//- (UIImage *)cropImage:(UIImage *)image toSize:(CGSize)size {
+- (UIImage *)cutRect:(CGRect)rect fromImage:(UIImage *)image {
+    CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage, rect);
+    UIImage *resultImage = [UIImage imageWithCGImage:imageRef scale:1.0 orientation:image.imageOrientation];
+    CGImageRelease(imageRef);
+
+    return resultImage;
 }
 
 @end

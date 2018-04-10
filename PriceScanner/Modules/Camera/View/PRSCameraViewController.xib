@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="scene" destination="YJx-l5-vLP" id="CAt-rQ-VUe"/>
                 <outlet property="snapshotButton" destination="Fmk-c6-e9V" id="FoO-qo-Gui"/>
+                <outlet property="testImageView" destination="Vsv-x9-oKW" id="wGz-nd-Srp"/>
                 <outlet property="view" destination="iN0-l3-epB" id="uyz-aF-Pcg"/>
             </connections>
         </placeholder>
@@ -35,6 +36,13 @@
                         <action selector="tapOnSnapshotButton:" destination="-1" eventType="touchUpInside" id="t57-Ac-im7"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vsv-x9-oKW">
+                    <rect key="frame" x="186" y="30" width="124" height="168"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="168" id="0gv-44-HgK"/>
+                        <constraint firstAttribute="width" constant="124" id="tCb-t3-f2b"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -42,7 +50,9 @@
                 <constraint firstItem="Fmk-c6-e9V" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="8FB-qD-cYJ"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Fmk-c6-e9V" secondAttribute="bottom" constant="20" id="G2H-jU-mtL"/>
                 <constraint firstItem="YJx-l5-vLP" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="Nul-7C-5aU"/>
+                <constraint firstItem="Vsv-x9-oKW" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="Qpf-HK-ZZu"/>
                 <constraint firstItem="YJx-l5-vLP" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="RwM-dW-3In"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Vsv-x9-oKW" secondAttribute="trailing" constant="10" id="dA5-mb-RFu"/>
                 <constraint firstItem="YJx-l5-vLP" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="hvF-oj-qnh"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
