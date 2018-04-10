@@ -26,7 +26,7 @@
 
 #pragma mark - PRSStartDetectionViewOutput
 - (void)viewLoaded {
-    // установка начального состояния presenter'а
+    [self.view setupInitialState];
 }
 
 - (void)openCamera {

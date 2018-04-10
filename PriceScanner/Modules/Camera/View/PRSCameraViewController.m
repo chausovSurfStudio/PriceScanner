@@ -16,6 +16,7 @@
 @interface PRSCameraViewController () <AVCaptureVideoDataOutputSampleBufferDelegate>
 
 @property (nonatomic, strong) IBOutlet UIImageView *scene;
+@property (nonatomic, strong) IBOutlet UIButton *snapshotButton;
 
 @property (nonatomic, strong) AVCaptureSession *session;
 @property (nonatomic, strong) NSArray<VNRequest *> *requests;
@@ -41,9 +42,25 @@
     [self stopLiveVideo];
 }
 
+#pragma mark - Configure
+- (void)configureStyle {
+    [self configureSnapshotButton];
+}
+
+- (void)configureSnapshotButton {
+    [self.snapshotButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.snapshotButton setTitle:@"Сделать снимок" forState:UIControlStateNormal];
+}
+
+#pragma mark - Actions
+- (IBAction)tapOnSnapshotButton:(UIButton *)sender {
+    NSLog(@"tapOnSnapshotButton");
+}
+
 #pragma mark - PRSCameraViewInput
 - (void)setupInitialState {
     [self initVideoSession];
+    [self configureStyle];
 }
 
 #pragma mark - AVCaptureSession
