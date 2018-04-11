@@ -12,6 +12,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import <Vision/Vision.h>
 
+#import "UIImage+Resize.h"
+
 
 /** Состояние снимка */
 typedef NS_ENUM(NSUInteger, SnapshotStatus) {
@@ -133,7 +135,8 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
 #pragma mark - AVCaptureVideoDataOutputSampleBufferDelegate
 - (void)captureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
     if (self.makeSnapshot == SnapshotStatusMake) {
-        self.snapshot = [self imageFromSampleBuffer:sampleBuffer];
+        UIImage *rawSnapshot = [self imageFromSampleBuffer:sampleBuffer];
+        self.snapshot = [rawSnapshot resizedImage:rawSnapshot.size interpolationQuality:kCGInterpolationHigh];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.testImageView.image = self.snapshot;
         });
@@ -276,22 +279,8 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
     return CGRectMake(originX, originY, width, height);
 }
 
-- (CGRect)anotherFrameForLetter:(VNRectangleObservation *)letter parentSize:(CGSize)parentSize {
-//    CGFloat originX = letter.topLeft.x * parentSize.width;
-//    CGFloat originY = (1 - letter.topLeft.y) * parentSize.height;
-//    CGFloat width = (letter.topRight.x - letter.bottomLeft.x) * parentSize.width;
-//    CGFloat height = (letter.topLeft.y - letter.bottomLeft.y) * parentSize.height;
-    
-    CGFloat originX = letter.topRight.y * parentSize.width;
-    CGFloat originY = (1 - letter.topRight.x) * parentSize.height;
-    CGFloat width = (letter.bottomRight.y - letter.topRight.y) * parentSize.width;
-    CGFloat height = (letter.topRight.x - letter.topLeft.x) * parentSize.height;
-    
-    return CGRectMake(originX, originY, width, height);
-}
-
 - (void)cropAndSaveLetter:(VNRectangleObservation *)letter {
-    CGRect letterFrame = [self anotherFrameForLetter:letter parentSize:self.snapshot.size];
+    CGRect letterFrame = [self frameForLetter:letter parentSize:self.snapshot.size];
     UIImage *letterImage = [self cutRect:letterFrame fromImage:self.snapshot];
     NSLog(@"image = %@", letterImage);
 }
@@ -306,7 +295,6 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
     }
 }
 
-//- (UIImage *)cropImage:(UIImage *)image toSize:(CGSize)size {
 - (UIImage *)cutRect:(CGRect)rect fromImage:(UIImage *)image {
     CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage, rect);
     UIImage *resultImage = [UIImage imageWithCGImage:imageRef scale:1.0 orientation:image.imageOrientation];
