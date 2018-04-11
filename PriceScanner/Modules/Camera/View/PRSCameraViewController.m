@@ -299,6 +299,7 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
     CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage, rect);
     UIImage *resultImage = [UIImage imageWithCGImage:imageRef scale:1.0 orientation:image.imageOrientation];
     CGImageRelease(imageRef);
+    UIImageWriteToSavedPhotosAlbum(resultImage, nil, nil, nil);
 
     return resultImage;
 }
