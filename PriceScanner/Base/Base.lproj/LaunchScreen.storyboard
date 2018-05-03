@@ -17,29 +17,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchScreenBackground" translatesAutoresizingMaskIntoConstraints="NO" id="B10-hL-cnF">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchScreenBackground" translatesAutoresizingMaskIntoConstraints="NO" id="B10-hL-cnF">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icBigIcon" translatesAutoresizingMaskIntoConstraints="NO" id="yzz-78-w8r">
-                                <rect key="frame" x="58" y="173.5" width="205" height="222"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icLaunchLogo" translatesAutoresizingMaskIntoConstraints="NO" id="cIg-ep-Aqh">
+                                <rect key="frame" x="90" y="202" width="140" height="165"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="0Db-Xp-Jd8"/>
+                                    <constraint firstAttribute="height" constant="165" id="Qu1-Hi-3k6"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="priceScanner" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b89-Jy-t3c">
-                                <rect key="frame" x="77.5" y="416.5" width="165.5" height="33.5"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="28"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="yzz-78-w8r" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="0Mw-Iq-Opb"/>
                             <constraint firstItem="B10-hL-cnF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="40Z-ST-QDD"/>
-                            <constraint firstItem="yzz-78-w8r" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="5et-GS-ygJ"/>
-                            <constraint firstItem="b89-Jy-t3c" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="DeY-j7-wFO"/>
+                            <constraint firstItem="cIg-ep-Aqh" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="6ma-iJ-t4z"/>
                             <constraint firstItem="B10-hL-cnF" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="S1T-rp-dps"/>
-                            <constraint firstItem="b89-Jy-t3c" firstAttribute="top" secondItem="yzz-78-w8r" secondAttribute="bottom" constant="21" id="e8d-QV-ryr"/>
                             <constraint firstItem="B10-hL-cnF" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="f4d-Vv-7Rb"/>
                             <constraint firstItem="B10-hL-cnF" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="jYg-ol-QoQ"/>
+                            <constraint firstItem="cIg-ep-Aqh" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="zen-or-roh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -50,7 +46,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icBigIcon" width="205" height="222"/>
-        <image name="launchScreenBackground" width="456" height="812"/>
+        <image name="icLaunchLogo" width="152" height="165"/>
+        <image name="launchScreenBackground" width="414" height="816"/>
     </resources>
 </document>
