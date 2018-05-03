@@ -11,4 +11,7 @@
 
 @protocol PRSStartDetectionViewInput <NSObject>
 
+/** Установка начального состояния view */
+- (void)setupInitialState;
+
 @end
