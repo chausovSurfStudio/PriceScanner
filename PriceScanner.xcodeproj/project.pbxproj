@@ -40,6 +40,7 @@
 		8435729A2066D41D00AC6E74 /* PRSCameraFlowCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 843572992066D41D00AC6E74 /* PRSCameraFlowCoordinator.m */; };
 		8435729D2066D45D00AC6E74 /* PRSInfoFlowCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8435729B2066D45D00AC6E74 /* PRSInfoFlowCoordinator.m */; };
 		84665556209BADD500810A16 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84665554209BADD500810A16 /* Localizable.strings */; };
+		8466555C209BB0D900810A16 /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8466555B209BB0D900810A16 /* NSString+Additions.m */; };
 		846C2158207E97D100FFB499 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 846C2156207E97D100FFB499 /* UIImage+Resize.m */; };
 		84E22044206D85B4001B22AD /* PRSDesignableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E22043206D85B4001B22AD /* PRSDesignableView.m */; };
 		84E22048206D87F6001B22AD /* PRSCameraOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E22047206D87F6001B22AD /* PRSCameraOverlay.m */; };
@@ -128,6 +129,8 @@
 		84665551209BAD2B00810A16 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		84665555209BADD500810A16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		84665557209BADFB00810A16 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8466555A209BB0D900810A16 /* NSString+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Additions.h"; sourceTree = "<group>"; };
+		8466555B209BB0D900810A16 /* NSString+Additions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Additions.m"; sourceTree = "<group>"; };
 		846C2156207E97D100FFB499 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		846C2157207E97D100FFB499 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
 		84E22042206D85B4001B22AD /* PRSDesignableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSDesignableView.h; sourceTree = "<group>"; };
@@ -409,6 +412,7 @@
 		843572932066D26D00AC6E74 /* Extentions */ = {
 			isa = PBXGroup;
 			children = (
+				84665559209BB0B000810A16 /* NSString */,
 				846C2155207E97BF00FFB499 /* UIImage */,
 			);
 			path = Extentions;
@@ -420,6 +424,15 @@
 				84E22041206D858E001B22AD /* DesignableView */,
 			);
 			path = Reuse;
+			sourceTree = "<group>";
+		};
+		84665559209BB0B000810A16 /* NSString */ = {
+			isa = PBXGroup;
+			children = (
+				8466555A209BB0D900810A16 /* NSString+Additions.h */,
+				8466555B209BB0D900810A16 /* NSString+Additions.m */,
+			);
+			path = NSString;
 			sourceTree = "<group>";
 		};
 		846C2155207E97BF00FFB499 /* UIImage */ = {
@@ -878,6 +891,7 @@
 				84E22048206D87F6001B22AD /* PRSCameraOverlay.m in Sources */,
 				EA360519A8BE385080D446CB /* PRSStartDetectionConfigurator.m in Sources */,
 				8435729A2066D41D00AC6E74 /* PRSCameraFlowCoordinator.m in Sources */,
+				8466555C209BB0D900810A16 /* NSString+Additions.m in Sources */,
 				FBC15EFEF6309AFCB73218E3 /* PRSStartDetectionPresenter.m in Sources */,
 				C0A4D36A30BB96587190240D /* PRSStartDetectionViewController.m in Sources */,
 				843572972066D3C700AC6E74 /* PRSMainTabBarController.m in Sources */,

@@ -23,7 +23,7 @@
     [super viewDidLoad];
     [self.output viewLoaded];
     
-    self.someLabel.text = NSLocalizedString(@"Welcome", nil);
+    self.someLabel.text = @"Welcome".localized;
 }
 
 #pragma mark - PRSInfoViewInput

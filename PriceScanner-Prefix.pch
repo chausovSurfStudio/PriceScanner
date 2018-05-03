@@ -10,5 +10,6 @@
 #define PriceScanner_Prefix_pch
 
 #import "EXTScope.h"
+#import "NSString+Additions.h"
 
 #endif /* PriceScanner_Prefix_pch */
