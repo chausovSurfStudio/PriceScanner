@@ -41,6 +41,9 @@
 		79BB5F88CB71A20A71D9F32D /* libPods-PriceScanner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 875B6E9D6EA7B1D0438759ED /* libPods-PriceScanner.a */; };
 		841F4643209CEBD300535A4A /* PRSHistoryFlowCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 841F4642209CEBD300535A4A /* PRSHistoryFlowCoordinator.m */; };
 		841F4646209CEBE700535A4A /* PRSMainFlowCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 841F4645209CEBE700535A4A /* PRSMainFlowCoordinator.m */; };
+		841F4648209CED9A00535A4A /* PRSHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 841F4647209CED9A00535A4A /* PRSHistoryViewController.xib */; };
+		841F464A209CEDD200535A4A /* PRSMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 841F4649209CEDD200535A4A /* PRSMainViewController.xib */; };
+		841F464C209CEDF600535A4A /* PRSScanResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 841F464B209CEDF600535A4A /* PRSScanResultViewController.xib */; };
 		843572902066D09000AC6E74 /* PRSInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8435728F2066D09000AC6E74 /* PRSInfoViewController.xib */; };
 		843572922066D1B800AC6E74 /* PRSStartDetectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843572912066D1B800AC6E74 /* PRSStartDetectionViewController.xib */; };
 		843572972066D3C700AC6E74 /* PRSMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843572952066D3C700AC6E74 /* PRSMainTabBarController.m */; };
@@ -147,6 +150,9 @@
 		841F4642209CEBD300535A4A /* PRSHistoryFlowCoordinator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSHistoryFlowCoordinator.m; sourceTree = "<group>"; };
 		841F4644209CEBE700535A4A /* PRSMainFlowCoordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSMainFlowCoordinator.h; sourceTree = "<group>"; };
 		841F4645209CEBE700535A4A /* PRSMainFlowCoordinator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSMainFlowCoordinator.m; sourceTree = "<group>"; };
+		841F4647209CED9A00535A4A /* PRSHistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PRSHistoryViewController.xib; sourceTree = "<group>"; };
+		841F4649209CEDD200535A4A /* PRSMainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PRSMainViewController.xib; sourceTree = "<group>"; };
+		841F464B209CEDF600535A4A /* PRSScanResultViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PRSScanResultViewController.xib; sourceTree = "<group>"; };
 		8435728F2066D09000AC6E74 /* PRSInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PRSInfoViewController.xib; sourceTree = "<group>"; };
 		843572912066D1B800AC6E74 /* PRSStartDetectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PRSStartDetectionViewController.xib; sourceTree = "<group>"; };
 		843572952066D3C700AC6E74 /* PRSMainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRSMainTabBarController.m; sourceTree = "<group>"; };
@@ -601,6 +607,7 @@
 			children = (
 				D796EE7DD38506112C146C29 /* PRSHistoryViewController.h */,
 				ACDFEC9652506136E10FD935 /* PRSHistoryViewController.m */,
+				841F4647209CED9A00535A4A /* PRSHistoryViewController.xib */,
 				F2BA39339E3E75ADF5ABB15E /* PRSHistoryViewInput.h */,
 				034BA357DCC27FA6D827740E /* PRSHistoryViewOutput.h */,
 			);
@@ -625,6 +632,7 @@
 			children = (
 				899BB5AB6E0196356C110809 /* PRSMainViewController.h */,
 				1A61D5454D44588EE9554191 /* PRSMainViewController.m */,
+				841F4649209CEDD200535A4A /* PRSMainViewController.xib */,
 				1C4D2071A7D58CF4459ABF63 /* PRSMainViewInput.h */,
 				52B856BE3037A76CDFAAC75A /* PRSMainViewOutput.h */,
 			);
@@ -744,6 +752,7 @@
 			children = (
 				15B55794FF17A82AC45F80FC /* PRSScanResultViewController.h */,
 				AC760ED7516DE8B8CD03AA05 /* PRSScanResultViewController.m */,
+				841F464B209CEDF600535A4A /* PRSScanResultViewController.xib */,
 				D0E7A1C0FA63B4D4C18D1DC5 /* PRSScanResultViewInput.h */,
 				7D705F622BA4ACB9BBEB03AA /* PRSScanResultViewOutput.h */,
 			);
@@ -871,9 +880,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				841F464C209CEDF600535A4A /* PRSScanResultViewController.xib in Resources */,
+				841F464A209CEDD200535A4A /* PRSMainViewController.xib in Resources */,
 				843572922066D1B800AC6E74 /* PRSStartDetectionViewController.xib in Resources */,
 				185816742042AE82003C2FA9 /* LaunchScreen.storyboard in Resources */,
 				185816712042AE82003C2FA9 /* Assets.xcassets in Resources */,
+				841F4648209CED9A00535A4A /* PRSHistoryViewController.xib in Resources */,
 				84665556209BADD500810A16 /* Localizable.strings in Resources */,
 				843572902066D09000AC6E74 /* PRSInfoViewController.xib in Resources */,
 				1858166C2042AE82003C2FA9 /* Main.storyboard in Resources */,
