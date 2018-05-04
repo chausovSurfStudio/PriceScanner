@@ -32,13 +32,16 @@
     UINavigationController *cameraNavigation = [self.mainCoordinator cameraInitialView];
     UINavigationController *historyNavigation = [self.mainCoordinator historyInitialView];
     
-    UITabBarItem *mainItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostRecent tag:0];
-    UITabBarItem *cameraItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:1];
-    UITabBarItem *historyItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostRecent tag:2];
+    UITabBarItem *mainItem = [[UITabBarItem alloc] initWithTitle:@"Главная".localized image:[UIImage imageNamed:@"icTabBarMain"] tag:0];
+    UITabBarItem *cameraItem = [[UITabBarItem alloc] initWithTitle:@"Сканировать".localized image:[UIImage imageNamed:@"icTabBarCamera"] tag:1];
+    UITabBarItem *historyItem = [[UITabBarItem alloc] initWithTitle:@"История".localized image:[UIImage imageNamed:@"icTabBarHistory"] tag:2];
     
     mainNavigation.tabBarItem = mainItem;
     cameraNavigation.tabBarItem = cameraItem;
     historyNavigation.tabBarItem = historyItem;
+    
+    self.tabBar.unselectedItemTintColor = [UIColor prsTabBarInactiveItemColor];
+    self.tabBar.tintColor = [UIColor prsMainThemeColor];
     
     [self setViewControllers:@[mainNavigation, cameraNavigation, historyNavigation] animated:NO];
 }

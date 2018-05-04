@@ -44,6 +44,7 @@
 		841F4648209CED9A00535A4A /* PRSHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 841F4647209CED9A00535A4A /* PRSHistoryViewController.xib */; };
 		841F464A209CEDD200535A4A /* PRSMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 841F4649209CEDD200535A4A /* PRSMainViewController.xib */; };
 		841F464C209CEDF600535A4A /* PRSScanResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 841F464B209CEDF600535A4A /* PRSScanResultViewController.xib */; };
+		841F4650209D080D00535A4A /* UIColor+Style.m in Sources */ = {isa = PBXBuildFile; fileRef = 841F464F209D080D00535A4A /* UIColor+Style.m */; };
 		843572902066D09000AC6E74 /* PRSInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8435728F2066D09000AC6E74 /* PRSInfoViewController.xib */; };
 		843572922066D1B800AC6E74 /* PRSStartDetectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843572912066D1B800AC6E74 /* PRSStartDetectionViewController.xib */; };
 		843572972066D3C700AC6E74 /* PRSMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843572952066D3C700AC6E74 /* PRSMainTabBarController.m */; };
@@ -153,6 +154,8 @@
 		841F4647209CED9A00535A4A /* PRSHistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PRSHistoryViewController.xib; sourceTree = "<group>"; };
 		841F4649209CEDD200535A4A /* PRSMainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PRSMainViewController.xib; sourceTree = "<group>"; };
 		841F464B209CEDF600535A4A /* PRSScanResultViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PRSScanResultViewController.xib; sourceTree = "<group>"; };
+		841F464E209D080D00535A4A /* UIColor+Style.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Style.h"; sourceTree = "<group>"; };
+		841F464F209D080D00535A4A /* UIColor+Style.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Style.m"; sourceTree = "<group>"; };
 		8435728F2066D09000AC6E74 /* PRSInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PRSInfoViewController.xib; sourceTree = "<group>"; };
 		843572912066D1B800AC6E74 /* PRSStartDetectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PRSStartDetectionViewController.xib; sourceTree = "<group>"; };
 		843572952066D3C700AC6E74 /* PRSMainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRSMainTabBarController.m; sourceTree = "<group>"; };
@@ -364,6 +367,7 @@
 		185816A42042B002003C2FA9 /* Resourses */ = {
 			isa = PBXGroup;
 			children = (
+				841F464D209D07E500535A4A /* Colors */,
 				185816702042AE82003C2FA9 /* Assets.xcassets */,
 				185816752042AE82003C2FA9 /* Info.plist */,
 				84665554209BADD500810A16 /* Localizable.strings */,
@@ -507,6 +511,15 @@
 				841F4642209CEBD300535A4A /* PRSHistoryFlowCoordinator.m */,
 			);
 			path = HistoryFlowCoordinator;
+			sourceTree = "<group>";
+		};
+		841F464D209D07E500535A4A /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				841F464E209D080D00535A4A /* UIColor+Style.h */,
+				841F464F209D080D00535A4A /* UIColor+Style.m */,
+			);
+			path = Colors;
 			sourceTree = "<group>";
 		};
 		843572932066D26D00AC6E74 /* Extentions */ = {
@@ -1076,6 +1089,7 @@
 			files = (
 				8435729D2066D45D00AC6E74 /* PRSInfoFlowCoordinator.m in Sources */,
 				185816662042AE82003C2FA9 /* AppDelegate.m in Sources */,
+				841F4650209D080D00535A4A /* UIColor+Style.m in Sources */,
 				185816B82042B3A2003C2FA9 /* PRSBasePresenter.m in Sources */,
 				185816772042AE82003C2FA9 /* main.m in Sources */,
 				1858166F2042AE82003C2FA9 /* PriceScanner.xcdatamodeld in Sources */,
