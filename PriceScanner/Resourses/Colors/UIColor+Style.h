@@ -17,4 +17,10 @@
 /** Цвет неактивного элемента таббара */
 + (UIColor *)prsTabBarInactiveItemColor;
 
+/** Более светлый цвет градиента в навбаре/таббаре */
++ (UIColor *)prsBarsGradientLightColor;
+
+/** Более темный цвет градиента в навбаре/таббаре */
++ (UIColor *)prsBarsGradientDarkColor;
+
 @end

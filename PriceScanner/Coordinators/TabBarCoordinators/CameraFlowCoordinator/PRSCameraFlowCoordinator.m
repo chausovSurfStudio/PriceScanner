@@ -9,6 +9,8 @@
 #import "PRSCameraFlowCoordinator.h"
 #import "PRSCameraConfigurator.h"
 
+#import "PRSNavigationController.h"
+
 
 @interface PRSCameraFlowCoordinator()
 
@@ -21,7 +23,7 @@
 
 - (UINavigationController *)initialView {
     UIViewController *cameraView = [PRSCameraConfigurator configureModule:nil];
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:cameraView];
+    self.navigationController = [[PRSNavigationController alloc] initWithRootViewController:cameraView];
     return self.navigationController;
 }
 

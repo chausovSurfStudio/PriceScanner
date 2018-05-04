@@ -19,4 +19,12 @@
     return [UIColor colorWithRed: 67 / 255.0 green: 67 / 255.0 blue: 67 / 255.0 alpha: 1.0];
 }
 
++ (UIColor *)prsBarsGradientLightColor {
+    return [UIColor colorWithRed: 200 / 255.0 green: 0 / 255.0 blue: 141 / 255.0 alpha: 1.0];
+}
+
++ (UIColor *)prsBarsGradientDarkColor {
+    return [UIColor colorWithRed: 223 / 255.0 green: 37 / 255.0 blue: 87 / 255.0 alpha: 1.0];
+}
+
 @end

@@ -9,6 +9,8 @@
 #import "PRSMainFlowCoordinator.h"
 #import "PRSMainConfigurator.h"
 
+#import "PRSNavigationController.h"
+
 
 @interface PRSMainFlowCoordinator()
 
@@ -21,7 +23,7 @@
 
 - (UINavigationController *)initialView {
     UIViewController *mainView = [PRSMainConfigurator configureModule:nil];
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:mainView];
+    self.navigationController = [[PRSNavigationController alloc] initWithRootViewController:mainView];
     return self.navigationController;
 }
 

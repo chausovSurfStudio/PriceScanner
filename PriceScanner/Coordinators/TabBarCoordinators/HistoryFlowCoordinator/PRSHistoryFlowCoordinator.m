@@ -9,6 +9,7 @@
 #import "PRSHistoryFlowCoordinator.h"
 #import "PRSHistoryConfigurator.h"
 
+#import "PRSNavigationController.h"
 
 @interface PRSHistoryFlowCoordinator()
 
@@ -21,7 +22,7 @@
 
 - (UINavigationController *)initialView {
     UIViewController *historyView = [PRSHistoryConfigurator configureModule:nil];
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:historyView];
+    self.navigationController = [[PRSNavigationController alloc] initWithRootViewController:historyView];
     return self.navigationController;
 }
 
