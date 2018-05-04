@@ -39,6 +39,8 @@
 		5499D3D2FA460A205FB60491 /* PRSMainPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F497962A6B97299094B00A1 /* PRSMainPresenter.m */; };
 		5BA7F8FC2B2358AE6D9829EB /* PRSScanResultPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = DA60A244BD704285E5B11298 /* PRSScanResultPresenter.m */; };
 		79BB5F88CB71A20A71D9F32D /* libPods-PriceScanner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 875B6E9D6EA7B1D0438759ED /* libPods-PriceScanner.a */; };
+		841F4643209CEBD300535A4A /* PRSHistoryFlowCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 841F4642209CEBD300535A4A /* PRSHistoryFlowCoordinator.m */; };
+		841F4646209CEBE700535A4A /* PRSMainFlowCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 841F4645209CEBE700535A4A /* PRSMainFlowCoordinator.m */; };
 		843572902066D09000AC6E74 /* PRSInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8435728F2066D09000AC6E74 /* PRSInfoViewController.xib */; };
 		843572922066D1B800AC6E74 /* PRSStartDetectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843572912066D1B800AC6E74 /* PRSStartDetectionViewController.xib */; };
 		843572972066D3C700AC6E74 /* PRSMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843572952066D3C700AC6E74 /* PRSMainTabBarController.m */; };
@@ -141,6 +143,10 @@
 		80965DB5692CCB6F849A76C5 /* PRSHistoryModuleInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSHistoryModuleInput.h; sourceTree = "<group>"; };
 		82FFD31AD19027F5618F5B88 /* PRSCameraConfigurator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSCameraConfigurator.h; sourceTree = "<group>"; };
 		83EC718DF2C4C63B80E6347F /* PRSStartDetectionConfigurator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSStartDetectionConfigurator.h; sourceTree = "<group>"; };
+		841F4641209CEBD300535A4A /* PRSHistoryFlowCoordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSHistoryFlowCoordinator.h; sourceTree = "<group>"; };
+		841F4642209CEBD300535A4A /* PRSHistoryFlowCoordinator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSHistoryFlowCoordinator.m; sourceTree = "<group>"; };
+		841F4644209CEBE700535A4A /* PRSMainFlowCoordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSMainFlowCoordinator.h; sourceTree = "<group>"; };
+		841F4645209CEBE700535A4A /* PRSMainFlowCoordinator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSMainFlowCoordinator.m; sourceTree = "<group>"; };
 		8435728F2066D09000AC6E74 /* PRSInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PRSInfoViewController.xib; sourceTree = "<group>"; };
 		843572912066D1B800AC6E74 /* PRSStartDetectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PRSStartDetectionViewController.xib; sourceTree = "<group>"; };
 		843572952066D3C700AC6E74 /* PRSMainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRSMainTabBarController.m; sourceTree = "<group>"; };
@@ -258,6 +264,8 @@
 			children = (
 				18DC5463206BFD2C009E1D2A /* TabBarCoordinator */,
 				18267C362066840400616282 /* CameraFlowCoordinator */,
+				841F4640209CEB7600535A4A /* HistoryFlowCoordinator */,
+				841F463F209CEB3700535A4A /* MainFlowCoordinator */,
 				18267C372066841F00616282 /* InfoFlowCoordinator */,
 			);
 			path = TabBarCoordinators;
@@ -475,6 +483,24 @@
 				4036BF649E77FA7C40CF9549 /* PRSCameraModuleInput.h */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		841F463F209CEB3700535A4A /* MainFlowCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				841F4644209CEBE700535A4A /* PRSMainFlowCoordinator.h */,
+				841F4645209CEBE700535A4A /* PRSMainFlowCoordinator.m */,
+			);
+			path = MainFlowCoordinator;
+			sourceTree = "<group>";
+		};
+		841F4640209CEB7600535A4A /* HistoryFlowCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				841F4641209CEBD300535A4A /* PRSHistoryFlowCoordinator.h */,
+				841F4642209CEBD300535A4A /* PRSHistoryFlowCoordinator.m */,
+			);
+			path = HistoryFlowCoordinator;
 			sourceTree = "<group>";
 		};
 		843572932066D26D00AC6E74 /* Extentions */ = {
@@ -1045,9 +1071,11 @@
 				A447014755E19CEF68A97807 /* PRSInfoPresenter.m in Sources */,
 				18DC5466206BFD4D009E1D2A /* PRSTabBarCoordinator.m in Sources */,
 				84E22044206D85B4001B22AD /* PRSDesignableView.m in Sources */,
+				841F4646209CEBE700535A4A /* PRSMainFlowCoordinator.m in Sources */,
 				846C2158207E97D100FFB499 /* UIImage+Resize.m in Sources */,
 				FE44329CC7BBA104C8702FDB /* PRSInfoViewController.m in Sources */,
 				84E22048206D87F6001B22AD /* PRSCameraOverlay.m in Sources */,
+				841F4643209CEBD300535A4A /* PRSHistoryFlowCoordinator.m in Sources */,
 				EA360519A8BE385080D446CB /* PRSStartDetectionConfigurator.m in Sources */,
 				8435729A2066D41D00AC6E74 /* PRSCameraFlowCoordinator.m in Sources */,
 				8466555C209BB0D900810A16 /* NSString+Additions.m in Sources */,
