@@ -28,16 +28,19 @@
 - (void)setupInitialTabs {
     self.mainCoordinator = [PRSTabBarCoordinator new];
     
+    UINavigationController *mainNavigation = [self.mainCoordinator mainInitialView];
     UINavigationController *cameraNavigation = [self.mainCoordinator cameraInitialView];
-    UINavigationController *infoNavigation = [self.mainCoordinator infoInitialView];
+    UINavigationController *historyNavigation = [self.mainCoordinator historyInitialView];
     
-    UITabBarItem *cameraItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0];
-    UITabBarItem *infoItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostRecent tag:1];
+    UITabBarItem *mainItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostRecent tag:0];
+    UITabBarItem *cameraItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:1];
+    UITabBarItem *historyItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostRecent tag:2];
     
+    mainNavigation.tabBarItem = mainItem;
     cameraNavigation.tabBarItem = cameraItem;
-    infoNavigation.tabBarItem = infoItem;
+    historyNavigation.tabBarItem = historyItem;
     
-    [self setViewControllers:@[cameraNavigation, infoNavigation] animated:NO];
+    [self setViewControllers:@[mainNavigation, cameraNavigation, historyNavigation] animated:NO];
 }
 
 @end

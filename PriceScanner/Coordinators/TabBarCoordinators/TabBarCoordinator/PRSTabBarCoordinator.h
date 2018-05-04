@@ -12,10 +12,13 @@
 /** Класс, инкапсулирующий в себе логику создания главных координаторов приложения. Держит сильные ссылки на эти координаторы */
 @interface PRSTabBarCoordinator : NSObject
 
-/** Возвращает View для начального экрана во flow камеры */
+/** Возвращает View для начального экрана во flow распознавания ценника */
 - (UINavigationController *)cameraInitialView;
 
-/** Возвращает View для начального экрана во flow информации о приложении */
-- (UINavigationController *)infoInitialView;
+/** Возвращает View для начального экрана во flow истории */
+- (UINavigationController *)historyInitialView;
+
+/** Возвращает View для начального экрана во flow главной страницы */
+- (UINavigationController *)mainInitialView;
 
 @end
