@@ -24,13 +24,18 @@
 
 #pragma mark - PRSHistoryViewInput
 - (void)setupInitialState {
-    self.title = @"История".localized;
-    // установка начального состояния view
+    [self configureNavigationBar];
 }
 
 #pragma mark - Actions
 - (IBAction)tapOnOpenResultButton:(UIButton *)sender {
     [self.output openScanResultModule];
+}
+
+#pragma mark - Configure
+- (void)configureNavigationBar {
+    self.title = @"История".localized;
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
 @end

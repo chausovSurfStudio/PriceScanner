@@ -11,7 +11,7 @@
 
 @protocol PRSScanResultViewInput <NSObject>
 
-/** Установка начального состояния view */
-- (void)setupInitialState;
+/** Установка начального состояния view, isModalState == YES, если модуль отображается в качетстве модального экрана */
+- (void)setupInitialState:(BOOL)isModalState;
 
 @end

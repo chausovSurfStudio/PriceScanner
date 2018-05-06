@@ -48,6 +48,7 @@
 		841F4654209D0BC700535A4A /* PRSNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 841F4653209D0BC700535A4A /* PRSNavigationController.m */; };
 		843572972066D3C700AC6E74 /* PRSMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843572952066D3C700AC6E74 /* PRSMainTabBarController.m */; };
 		8435729A2066D41D00AC6E74 /* PRSCameraFlowCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 843572992066D41D00AC6E74 /* PRSCameraFlowCoordinator.m */; };
+		84555754209F265A00B01D91 /* PRSModalNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555753209F265A00B01D91 /* PRSModalNavigationController.m */; };
 		84665556209BADD500810A16 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84665554209BADD500810A16 /* Localizable.strings */; };
 		8466555C209BB0D900810A16 /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8466555B209BB0D900810A16 /* NSString+Additions.m */; };
 		846C2158207E97D100FFB499 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 846C2156207E97D100FFB499 /* UIImage+Resize.m */; };
@@ -142,6 +143,8 @@
 		843572962066D3C700AC6E74 /* PRSMainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRSMainTabBarController.h; sourceTree = "<group>"; };
 		843572982066D41D00AC6E74 /* PRSCameraFlowCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRSCameraFlowCoordinator.h; sourceTree = "<group>"; };
 		843572992066D41D00AC6E74 /* PRSCameraFlowCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRSCameraFlowCoordinator.m; sourceTree = "<group>"; };
+		84555752209F265A00B01D91 /* PRSModalNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSModalNavigationController.h; sourceTree = "<group>"; };
+		84555753209F265A00B01D91 /* PRSModalNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSModalNavigationController.m; sourceTree = "<group>"; };
 		84665550209BAD2B00810A16 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		84665551209BAD2B00810A16 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		84665555209BADD500810A16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -309,7 +312,7 @@
 		1858169D2042AFA3003C2FA9 /* BaseClass */ = {
 			isa = PBXGroup;
 			children = (
-				841F4651209D0BA200535A4A /* NavigationController */,
+				841F4651209D0BA200535A4A /* NavigationControllers */,
 				185816B92042B3AF003C2FA9 /* ModuleStructure */,
 			);
 			path = BaseClass;
@@ -464,13 +467,15 @@
 			path = Colors;
 			sourceTree = "<group>";
 		};
-		841F4651209D0BA200535A4A /* NavigationController */ = {
+		841F4651209D0BA200535A4A /* NavigationControllers */ = {
 			isa = PBXGroup;
 			children = (
 				841F4652209D0BC700535A4A /* PRSNavigationController.h */,
 				841F4653209D0BC700535A4A /* PRSNavigationController.m */,
+				84555752209F265A00B01D91 /* PRSModalNavigationController.h */,
+				84555753209F265A00B01D91 /* PRSModalNavigationController.m */,
 			);
-			path = NavigationController;
+			path = NavigationControllers;
 			sourceTree = "<group>";
 		};
 		843572932066D26D00AC6E74 /* Extentions */ = {
@@ -996,6 +1001,7 @@
 				A93BD095355CF798DCAAB54C /* PRSMainViewController.m in Sources */,
 				0830ECE53B12B3AC6219215B /* PRSHistoryConfigurator.m in Sources */,
 				E800211210310427880E30F8 /* PRSHistoryPresenter.m in Sources */,
+				84555754209F265A00B01D91 /* PRSModalNavigationController.m in Sources */,
 				FA0407BE2816CAB3809DAAE3 /* PRSHistoryViewController.m in Sources */,
 				356B1226450061451026127C /* PRSScanResultConfigurator.m in Sources */,
 				5BA7F8FC2B2358AE6D9829EB /* PRSScanResultPresenter.m in Sources */,

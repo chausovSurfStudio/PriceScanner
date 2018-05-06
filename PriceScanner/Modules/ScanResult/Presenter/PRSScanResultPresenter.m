@@ -28,8 +28,13 @@
 
 #pragma mark - PRSScanResultViewOutput
 - (void)viewLoaded {
-    // установка начального состояния presenter'а
-    [self.view setupInitialState];
+    [self.view setupInitialState:self.showAsModal];
+}
+
+- (void)closeModule {
+    if (self.closeAction) {
+        self.closeAction();
+    }
 }
 
 @end

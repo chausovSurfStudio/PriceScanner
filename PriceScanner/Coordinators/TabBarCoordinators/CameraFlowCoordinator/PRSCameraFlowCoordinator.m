@@ -14,6 +14,7 @@
 #import "PRSScanResultModuleInput.h"
 
 #import "PRSNavigationController.h"
+#import "PRSModalNavigationController.h"
 
 
 @interface PRSCameraFlowCoordinator()
@@ -45,7 +46,7 @@
             [view dismissViewControllerAnimated:YES completion:nil];
         }];
     }];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:resultView];
+    UINavigationController *navigationController = [[PRSModalNavigationController alloc] initWithRootViewController:resultView];
     [self.navigationController.topViewController presentViewController:navigationController animated:YES completion:nil];
 }
 

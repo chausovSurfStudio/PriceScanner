@@ -23,9 +23,33 @@
 }
 
 #pragma mark - PRSScanResultViewInput
-- (void)setupInitialState {
+- (void)setupInitialState:(BOOL)isModalState {
+    [self configureNavigationBar];
+    if (isModalState) {
+        [self configureCloseModuleButton];
+    }
+}
+
+#pragma mark - Actions
+- (void)tapOnCloseButton {
+    [self.output closeModule];
+}
+
+#pragma mark - Configure
+- (void)configureNavigationBar {
     self.title = @"Результаты сканирования".localized;
-    // установка начального состояния view
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
+}
+
+- (void)configureCloseModuleButton {
+    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    closeButton.tintColor = [UIColor prsMainThemeColor];
+    closeButton.frame = CGRectMake(0, 0, 44, 44);
+    [closeButton setImage:[UIImage imageNamed:@"icClose"] forState:UIControlStateNormal];
+    [closeButton addTarget:self action:@selector(tapOnCloseButton) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *closeItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
+    self.navigationItem.rightBarButtonItem = closeItem;
 }
 
 @end

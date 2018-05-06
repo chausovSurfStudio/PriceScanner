@@ -24,6 +24,7 @@
     [super viewWillAppear:animated];
     
     [self configureGradientNavigationBar];
+    self.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationBar.barStyle = UIBarStyleBlack;
 }
 
