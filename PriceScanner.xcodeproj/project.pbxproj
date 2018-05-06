@@ -50,6 +50,9 @@
 		8435729A2066D41D00AC6E74 /* PRSCameraFlowCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 843572992066D41D00AC6E74 /* PRSCameraFlowCoordinator.m */; };
 		84555754209F265A00B01D91 /* PRSModalNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555753209F265A00B01D91 /* PRSModalNavigationController.m */; };
 		84555759209F3C6A00B01D91 /* PRSMainCarouselAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555758209F3C6A00B01D91 /* PRSMainCarouselAdapter.m */; };
+		8455575D209F41BD00B01D91 /* PRSMainCarouselCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455575B209F41BD00B01D91 /* PRSMainCarouselCell.m */; };
+		8455575E209F41BD00B01D91 /* PRSMainCarouselCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8455575C209F41BD00B01D91 /* PRSMainCarouselCell.xib */; };
+		84555761209F421600B01D91 /* PRSMainCarouselPageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555760209F421600B01D91 /* PRSMainCarouselPageModel.m */; };
 		84665556209BADD500810A16 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84665554209BADD500810A16 /* Localizable.strings */; };
 		8466555C209BB0D900810A16 /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8466555B209BB0D900810A16 /* NSString+Additions.m */; };
 		846C2158207E97D100FFB499 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 846C2156207E97D100FFB499 /* UIImage+Resize.m */; };
@@ -148,6 +151,11 @@
 		84555753209F265A00B01D91 /* PRSModalNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSModalNavigationController.m; sourceTree = "<group>"; };
 		84555757209F3C6A00B01D91 /* PRSMainCarouselAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSMainCarouselAdapter.h; sourceTree = "<group>"; };
 		84555758209F3C6A00B01D91 /* PRSMainCarouselAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSMainCarouselAdapter.m; sourceTree = "<group>"; };
+		8455575A209F41BD00B01D91 /* PRSMainCarouselCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSMainCarouselCell.h; sourceTree = "<group>"; };
+		8455575B209F41BD00B01D91 /* PRSMainCarouselCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSMainCarouselCell.m; sourceTree = "<group>"; };
+		8455575C209F41BD00B01D91 /* PRSMainCarouselCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PRSMainCarouselCell.xib; sourceTree = "<group>"; };
+		8455575F209F421600B01D91 /* PRSMainCarouselPageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSMainCarouselPageModel.h; sourceTree = "<group>"; };
+		84555760209F421600B01D91 /* PRSMainCarouselPageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSMainCarouselPageModel.m; sourceTree = "<group>"; };
 		84665550209BAD2B00810A16 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		84665551209BAD2B00810A16 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		84665555209BADD500810A16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -502,6 +510,7 @@
 			isa = PBXGroup;
 			children = (
 				84555756209F3B9F00B01D91 /* Cell */,
+				84555762209F422100B01D91 /* Model */,
 				84555757209F3C6A00B01D91 /* PRSMainCarouselAdapter.h */,
 				84555758209F3C6A00B01D91 /* PRSMainCarouselAdapter.m */,
 			);
@@ -511,8 +520,20 @@
 		84555756209F3B9F00B01D91 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				8455575A209F41BD00B01D91 /* PRSMainCarouselCell.h */,
+				8455575B209F41BD00B01D91 /* PRSMainCarouselCell.m */,
+				8455575C209F41BD00B01D91 /* PRSMainCarouselCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		84555762209F422100B01D91 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8455575F209F421600B01D91 /* PRSMainCarouselPageModel.h */,
+				84555760209F421600B01D91 /* PRSMainCarouselPageModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		84665559209BB0B000810A16 /* NSString */ = {
@@ -810,6 +831,7 @@
 				841F464C209CEDF600535A4A /* PRSScanResultViewController.xib in Resources */,
 				841F464A209CEDD200535A4A /* PRSMainViewController.xib in Resources */,
 				185816742042AE82003C2FA9 /* LaunchScreen.storyboard in Resources */,
+				8455575E209F41BD00B01D91 /* PRSMainCarouselCell.xib in Resources */,
 				185816712042AE82003C2FA9 /* Assets.xcassets in Resources */,
 				841F4648209CED9A00535A4A /* PRSHistoryViewController.xib in Resources */,
 				84665556209BADD500810A16 /* Localizable.strings in Resources */,
@@ -1005,10 +1027,12 @@
 				185816772042AE82003C2FA9 /* main.m in Sources */,
 				1858166F2042AE82003C2FA9 /* PriceScanner.xcdatamodeld in Sources */,
 				18DC5466206BFD4D009E1D2A /* PRSTabBarCoordinator.m in Sources */,
+				8455575D209F41BD00B01D91 /* PRSMainCarouselCell.m in Sources */,
 				841F4654209D0BC700535A4A /* PRSNavigationController.m in Sources */,
 				84E22044206D85B4001B22AD /* PRSDesignableView.m in Sources */,
 				841F4646209CEBE700535A4A /* PRSMainFlowCoordinator.m in Sources */,
 				846C2158207E97D100FFB499 /* UIImage+Resize.m in Sources */,
+				84555761209F421600B01D91 /* PRSMainCarouselPageModel.m in Sources */,
 				84E22048206D87F6001B22AD /* PRSCameraOverlay.m in Sources */,
 				841F4643209CEBD300535A4A /* PRSHistoryFlowCoordinator.m in Sources */,
 				8435729A2066D41D00AC6E74 /* PRSCameraFlowCoordinator.m in Sources */,

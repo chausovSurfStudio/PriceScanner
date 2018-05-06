@@ -10,6 +10,7 @@
 #import "PRSMainViewOutput.h"
 
 #import "PRSMainCarouselAdapter.h"
+#import "PRSMainCarouselPageModel.h"
 
 
 @interface PRSMainViewController ()
@@ -48,6 +49,28 @@
 
 - (void)configureAdapter {
     self.carouselAdapter = [[PRSMainCarouselAdapter alloc] initWithCollectionView:self.collectionView];
+    [self.carouselAdapter configureWithModels:[self buildPageModels]];
+}
+
+#pragma mark - Private Methods
+- (NSArray<PRSMainCarouselPageModel *> *)buildPageModels {
+    PRSMainCarouselPageModel *firstPageModel = [[PRSMainCarouselPageModel alloc] initWithTitle:@"Главная_первая_страница_заголовок".localized
+                                                                                      subtitle:@"Главная_первая_страница_подзаголовок".localized
+                                                                                         image:[UIImage imageNamed:@"icMainModuleFirstPage"]
+                                                                             actionButtonTitle:nil];
+    PRSMainCarouselPageModel *secondPageModel = [[PRSMainCarouselPageModel alloc] initWithTitle:@"Главная_вторая_страница_заголовок".localized
+                                                                                       subtitle:@"Главная_вторая_страница_подзаголовок".localized
+                                                                                          image:[UIImage imageNamed:@"icMainModuleSecondPage"]
+                                                                              actionButtonTitle:nil];
+    PRSMainCarouselPageModel *thirdPageModel = [[PRSMainCarouselPageModel alloc] initWithTitle:@"Главная_третья_страница_заголовок".localized
+                                                                                      subtitle:@"Главная_третья_страница_подзаголовок".localized
+                                                                                         image:[UIImage imageNamed:@"icMainModuleThirdPage"]
+                                                                             actionButtonTitle:nil];
+    PRSMainCarouselPageModel *fourthPageModel = [[PRSMainCarouselPageModel alloc] initWithTitle:@"Главная_четвертая_страница_заголовок".localized
+                                                                                      subtitle:nil
+                                                                                         image:[UIImage imageNamed:@"icMainModuleFourthPage"]
+                                                                              actionButtonTitle:@"Главная_четвертая_страница_кнопка".localized];
+    return @[firstPageModel, secondPageModel, thirdPageModel, fourthPageModel];
 }
 
 @end

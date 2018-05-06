@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class PRSMainCarouselPageModel;
+
 
 @interface PRSMainCarouselAdapter : NSObject
 
 - (instancetype)initWithCollectionView:(UICollectionView *)collectionView;
+
+- (void)configureWithModels:(NSArray<PRSMainCarouselPageModel *> *)models;
 
 @end
