@@ -12,6 +12,7 @@ target 'PriceScanner' do
   pod 'MagicalRecord', '2.3.2'
   pod 'SDWebImage', '4.0.0'
   pod 'libextobjc', '0.4.1'
+  pod 'Realm'
 
   target 'PriceScannerTests' do
     inherit! :search_paths

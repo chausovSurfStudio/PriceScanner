@@ -54,6 +54,9 @@
 		8455575E209F41BD00B01D91 /* PRSMainCarouselCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8455575C209F41BD00B01D91 /* PRSMainCarouselCell.xib */; };
 		84555761209F421600B01D91 /* PRSMainCarouselPageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555760209F421600B01D91 /* PRSMainCarouselPageModel.m */; };
 		84555766209F56EF00B01D91 /* UIButton+Style.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555765209F56EF00B01D91 /* UIButton+Style.m */; };
+		8455576E209F9F5800B01D91 /* PRSStorageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455576D209F9F5800B01D91 /* PRSStorageService.m */; };
+		84555771209F9F8000B01D91 /* PRSScanResultEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555770209F9F8000B01D91 /* PRSScanResultEntry.m */; };
+		84555777209FA6D700B01D91 /* PRSScanResultEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555776209FA6D700B01D91 /* PRSScanResultEntity.m */; };
 		84665556209BADD500810A16 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84665554209BADD500810A16 /* Localizable.strings */; };
 		8466555C209BB0D900810A16 /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8466555B209BB0D900810A16 /* NSString+Additions.m */; };
 		846C2158207E97D100FFB499 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 846C2156207E97D100FFB499 /* UIImage+Resize.m */; };
@@ -160,6 +163,12 @@
 		84555764209F56EF00B01D91 /* UIButton+Style.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+Style.h"; sourceTree = "<group>"; };
 		84555765209F56EF00B01D91 /* UIButton+Style.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Style.m"; sourceTree = "<group>"; };
 		84555768209F8AF000B01D91 /* PRSTabbarIndex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSTabbarIndex.h; sourceTree = "<group>"; };
+		8455576C209F9F5800B01D91 /* PRSStorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSStorageService.h; sourceTree = "<group>"; };
+		8455576D209F9F5800B01D91 /* PRSStorageService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSStorageService.m; sourceTree = "<group>"; };
+		8455576F209F9F8000B01D91 /* PRSScanResultEntry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSScanResultEntry.h; sourceTree = "<group>"; };
+		84555770209F9F8000B01D91 /* PRSScanResultEntry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSScanResultEntry.m; sourceTree = "<group>"; };
+		84555775209FA6D700B01D91 /* PRSScanResultEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSScanResultEntity.h; sourceTree = "<group>"; };
+		84555776209FA6D700B01D91 /* PRSScanResultEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSScanResultEntity.m; sourceTree = "<group>"; };
 		84665550209BAD2B00810A16 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		84665551209BAD2B00810A16 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		84665555209BADD500810A16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -280,6 +289,7 @@
 				1858169A2042AF43003C2FA9 /* Modules */,
 				18267C35206683C400616282 /* Coordinators */,
 				185816A52042B020003C2FA9 /* Models */,
+				84555769209F9ECD00B01D91 /* Services */,
 				185816A42042B002003C2FA9 /* Resourses */,
 			);
 			path = PriceScanner;
@@ -348,6 +358,8 @@
 		185816A52042B020003C2FA9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				84555773209FA6B900B01D91 /* Entity */,
+				8455576B209F9EE900B01D91 /* Entry */,
 				1858166D2042AE82003C2FA9 /* PriceScanner.xcdatamodeld */,
 			);
 			path = Models;
@@ -559,6 +571,57 @@
 			path = MainTabBar;
 			sourceTree = "<group>";
 		};
+		84555769209F9ECD00B01D91 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				8455576A209F9ED900B01D91 /* StorageService */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		8455576A209F9ED900B01D91 /* StorageService */ = {
+			isa = PBXGroup;
+			children = (
+				8455576C209F9F5800B01D91 /* PRSStorageService.h */,
+				8455576D209F9F5800B01D91 /* PRSStorageService.m */,
+			);
+			path = StorageService;
+			sourceTree = "<group>";
+		};
+		8455576B209F9EE900B01D91 /* Entry */ = {
+			isa = PBXGroup;
+			children = (
+				84555772209F9F8300B01D91 /* ScanResult */,
+			);
+			path = Entry;
+			sourceTree = "<group>";
+		};
+		84555772209F9F8300B01D91 /* ScanResult */ = {
+			isa = PBXGroup;
+			children = (
+				8455576F209F9F8000B01D91 /* PRSScanResultEntry.h */,
+				84555770209F9F8000B01D91 /* PRSScanResultEntry.m */,
+			);
+			path = ScanResult;
+			sourceTree = "<group>";
+		};
+		84555773209FA6B900B01D91 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				84555774209FA6C100B01D91 /* ScanResult */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		84555774209FA6C100B01D91 /* ScanResult */ = {
+			isa = PBXGroup;
+			children = (
+				84555775209FA6D700B01D91 /* PRSScanResultEntity.h */,
+				84555776209FA6D700B01D91 /* PRSScanResultEntity.m */,
+			);
+			path = ScanResult;
+			sourceTree = "<group>";
+		};
 		84665559209BB0B000810A16 /* NSString */ = {
 			isa = PBXGroup;
 			children = (
@@ -741,8 +804,6 @@
 				1858165D2042AE82003C2FA9 /* Sources */,
 				1858165E2042AE82003C2FA9 /* Frameworks */,
 				1858165F2042AE82003C2FA9 /* Resources */,
-				536A570ED6D54607A9236162 /* [CP] Embed Pods Frameworks */,
-				7723F28078B1F69217E06650 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -761,8 +822,6 @@
 				185816782042AE82003C2FA9 /* Sources */,
 				185816792042AE82003C2FA9 /* Frameworks */,
 				1858167A2042AE82003C2FA9 /* Resources */,
-				CD56022EA470CDB3EE993D7C /* [CP] Embed Pods Frameworks */,
-				0490B1A79FDF6CBD9857AAF1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -782,8 +841,6 @@
 				185816832042AE82003C2FA9 /* Sources */,
 				185816842042AE82003C2FA9 /* Frameworks */,
 				185816852042AE82003C2FA9 /* Resources */,
-				4A6BF974B361B861F0E13ED1 /* [CP] Embed Pods Frameworks */,
-				6166B1EF6A3D045F3276BAFA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -880,21 +937,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0490B1A79FDF6CBD9857AAF1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PriceScannerTests/Pods-PriceScannerTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		185816D62042CB40003C2FA9 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -924,66 +966,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4A6BF974B361B861F0E13ED1 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PriceScannerUITests/Pods-PriceScannerUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		536A570ED6D54607A9236162 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PriceScanner/Pods-PriceScanner-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6166B1EF6A3D045F3276BAFA /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PriceScannerUITests/Pods-PriceScannerUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7723F28078B1F69217E06650 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PriceScanner/Pods-PriceScanner-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B7A85FACAD2649B94C40B41B /* [CP] Check Pods Manifest.lock */ = {
@@ -1022,21 +1004,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CD56022EA470CDB3EE993D7C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PriceScannerTests/Pods-PriceScannerTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1049,6 +1016,7 @@
 				841F4650209D080D00535A4A /* UIColor+Style.m in Sources */,
 				185816B82042B3A2003C2FA9 /* PRSBasePresenter.m in Sources */,
 				185816772042AE82003C2FA9 /* main.m in Sources */,
+				84555777209FA6D700B01D91 /* PRSScanResultEntity.m in Sources */,
 				1858166F2042AE82003C2FA9 /* PriceScanner.xcdatamodeld in Sources */,
 				18DC5466206BFD4D009E1D2A /* PRSTabBarCoordinator.m in Sources */,
 				8455575D209F41BD00B01D91 /* PRSMainCarouselCell.m in Sources */,
@@ -1058,6 +1026,7 @@
 				846C2158207E97D100FFB499 /* UIImage+Resize.m in Sources */,
 				84555761209F421600B01D91 /* PRSMainCarouselPageModel.m in Sources */,
 				84E22048206D87F6001B22AD /* PRSCameraOverlay.m in Sources */,
+				8455576E209F9F5800B01D91 /* PRSStorageService.m in Sources */,
 				841F4643209CEBD300535A4A /* PRSHistoryFlowCoordinator.m in Sources */,
 				8435729A2066D41D00AC6E74 /* PRSCameraFlowCoordinator.m in Sources */,
 				8466555C209BB0D900810A16 /* NSString+Additions.m in Sources */,
@@ -1069,6 +1038,7 @@
 				5499D3D2FA460A205FB60491 /* PRSMainPresenter.m in Sources */,
 				A93BD095355CF798DCAAB54C /* PRSMainViewController.m in Sources */,
 				0830ECE53B12B3AC6219215B /* PRSHistoryConfigurator.m in Sources */,
+				84555771209F9F8000B01D91 /* PRSScanResultEntry.m in Sources */,
 				84555759209F3C6A00B01D91 /* PRSMainCarouselAdapter.m in Sources */,
 				E800211210310427880E30F8 /* PRSHistoryPresenter.m in Sources */,
 				84555754209F265A00B01D91 /* PRSModalNavigationController.m in Sources */,
