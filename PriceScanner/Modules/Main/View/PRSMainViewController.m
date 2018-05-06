@@ -36,6 +36,7 @@
     [self configureNavigationBar];
     [self configureBottomImage];
     [self configureAdapter];
+    [self configurePageControl];
 }
 
 #pragma mark - Configure
@@ -52,9 +53,18 @@
     [self.carouselAdapter configureWithModels:[self buildPageModels]];
 }
 
+- (void)configurePageControl {
+    self.pageControl.numberOfPages = [self.carouselAdapter pagesCount];
+    self.pageControl.currentPage = 0;
+}
+
 #pragma mark - PRSMainCarouselAdapterDelegate
 - (void)actionButtonDidTap {
     [self.output openCameraModule];
+}
+
+- (void)scrollCarouselToPage:(NSInteger)page {
+    self.pageControl.currentPage = page;
 }
 
 #pragma mark - Private Methods

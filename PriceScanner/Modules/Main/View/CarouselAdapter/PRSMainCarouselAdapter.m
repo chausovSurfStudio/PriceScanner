@@ -45,6 +45,10 @@ static NSString * const cellIdentifier = @"mainCarouselCell";
     [self.collectionView reloadData];
 }
 
+- (NSInteger)pagesCount {
+    return self.models.count;
+}
+
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.models.count;
@@ -67,11 +71,34 @@ static NSString * const cellIdentifier = @"mainCarouselCell";
     return NO;
 }
 
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self sendCurrentPageToDelegate];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    [self sendCurrentPageToDelegate];
+}
+
 #pragma mark - PRSMainCarouselCellDelegate
 - (void)actionButtonDidTap {
     if ([self.delegate respondsToSelector:@selector(actionButtonDidTap)]) {
         [self.delegate actionButtonDidTap];
     }
+}
+
+#pragma mark - Private Methods
+- (void)sendCurrentPageToDelegate {
+    if ([self.delegate respondsToSelector:@selector(scrollCarouselToPage:)]) {
+        [self.delegate scrollCarouselToPage:[self currentCarouselPage]];
+    }
+}
+
+- (NSInteger)currentCarouselPage {
+    CGFloat pageWidth = self.collectionView.bounds.size.width;
+    NSInteger leftVisiblePage = self.collectionView.contentOffset.x / pageWidth;
+    CGFloat fractionalValue = ((NSInteger)self.collectionView.contentOffset.x % (NSInteger)pageWidth) / pageWidth;
+    return leftVisiblePage + roundf(fractionalValue);
 }
 
 @end

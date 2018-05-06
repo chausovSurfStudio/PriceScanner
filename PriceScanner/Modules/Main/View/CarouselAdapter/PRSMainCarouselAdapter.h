@@ -16,6 +16,9 @@
 /** Метод информирует делегата о том, что в ячейке карусели была нажата кнопка */
 - (void)actionButtonDidTap;
 
+/** Метод вызывается при скролле карусели, передается текущая отображаемая страница карусели */
+- (void)scrollCarouselToPage:(NSInteger)page;
+
 @end
 
 
@@ -24,5 +27,7 @@
 - (instancetype)initWithCollectionView:(UICollectionView *)collectionView delegate:(id<PRSMainCarouselAdapterDelegate>)delegate;
 
 - (void)configureWithModels:(NSArray<PRSMainCarouselPageModel *> *)models;
+
+- (NSInteger)pagesCount;
 
 @end
