@@ -49,6 +49,7 @@
 		843572972066D3C700AC6E74 /* PRSMainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843572952066D3C700AC6E74 /* PRSMainTabBarController.m */; };
 		8435729A2066D41D00AC6E74 /* PRSCameraFlowCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 843572992066D41D00AC6E74 /* PRSCameraFlowCoordinator.m */; };
 		84555754209F265A00B01D91 /* PRSModalNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555753209F265A00B01D91 /* PRSModalNavigationController.m */; };
+		84555759209F3C6A00B01D91 /* PRSMainCarouselAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555758209F3C6A00B01D91 /* PRSMainCarouselAdapter.m */; };
 		84665556209BADD500810A16 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84665554209BADD500810A16 /* Localizable.strings */; };
 		8466555C209BB0D900810A16 /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8466555B209BB0D900810A16 /* NSString+Additions.m */; };
 		846C2158207E97D100FFB499 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 846C2156207E97D100FFB499 /* UIImage+Resize.m */; };
@@ -145,6 +146,8 @@
 		843572992066D41D00AC6E74 /* PRSCameraFlowCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRSCameraFlowCoordinator.m; sourceTree = "<group>"; };
 		84555752209F265A00B01D91 /* PRSModalNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSModalNavigationController.h; sourceTree = "<group>"; };
 		84555753209F265A00B01D91 /* PRSModalNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSModalNavigationController.m; sourceTree = "<group>"; };
+		84555757209F3C6A00B01D91 /* PRSMainCarouselAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSMainCarouselAdapter.h; sourceTree = "<group>"; };
+		84555758209F3C6A00B01D91 /* PRSMainCarouselAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSMainCarouselAdapter.m; sourceTree = "<group>"; };
 		84665550209BAD2B00810A16 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		84665551209BAD2B00810A16 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		84665555209BADD500810A16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -495,6 +498,23 @@
 			path = Reuse;
 			sourceTree = "<group>";
 		};
+		84555755209F3B8F00B01D91 /* CarouselAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				84555756209F3B9F00B01D91 /* Cell */,
+				84555757209F3C6A00B01D91 /* PRSMainCarouselAdapter.h */,
+				84555758209F3C6A00B01D91 /* PRSMainCarouselAdapter.m */,
+			);
+			path = CarouselAdapter;
+			sourceTree = "<group>";
+		};
+		84555756209F3B9F00B01D91 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		84665559209BB0B000810A16 /* NSString */ = {
 			isa = PBXGroup;
 			children = (
@@ -577,6 +597,7 @@
 		B00A01257D76A6E8245F3F8B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				84555755209F3B8F00B01D91 /* CarouselAdapter */,
 				899BB5AB6E0196356C110809 /* PRSMainViewController.h */,
 				1A61D5454D44588EE9554191 /* PRSMainViewController.m */,
 				841F4649209CEDD200535A4A /* PRSMainViewController.xib */,
@@ -1000,6 +1021,7 @@
 				5499D3D2FA460A205FB60491 /* PRSMainPresenter.m in Sources */,
 				A93BD095355CF798DCAAB54C /* PRSMainViewController.m in Sources */,
 				0830ECE53B12B3AC6219215B /* PRSHistoryConfigurator.m in Sources */,
+				84555759209F3C6A00B01D91 /* PRSMainCarouselAdapter.m in Sources */,
 				E800211210310427880E30F8 /* PRSHistoryPresenter.m in Sources */,
 				84555754209F265A00B01D91 /* PRSModalNavigationController.m in Sources */,
 				FA0407BE2816CAB3809DAAE3 /* PRSHistoryViewController.m in Sources */,
