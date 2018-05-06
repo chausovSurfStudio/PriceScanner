@@ -70,6 +70,7 @@
 }
 
 #pragma mark - Private Methods
+/** Метод возвращает массив объектов, на основе которых будет выполнено построение ячеек карусели на главной */
 - (NSArray<PRSMainCarouselPageModel *> *)buildPageModels {
     PRSMainCarouselPageModel *firstPageModel = [[PRSMainCarouselPageModel alloc] initWithTitle:@"Главная_первая_страница_заголовок".localized
                                                                                       subtitle:@"Главная_первая_страница_подзаголовок".localized

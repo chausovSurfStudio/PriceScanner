@@ -19,10 +19,12 @@
 @end
 
 
+/** Ячейка для карусели на главном экране */
 @interface PRSMainCarouselCell : UICollectionViewCell
 
 @property (nonatomic, weak) id<PRSMainCarouselCellDelegate> cellDelegate;
 
+/** Метод конфигурации ячейки на основе объекта модели */
 - (void)configureWithModel:(PRSMainCarouselPageModel *)model;
 
 @end

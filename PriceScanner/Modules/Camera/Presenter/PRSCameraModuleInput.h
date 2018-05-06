@@ -11,6 +11,7 @@
 
 @protocol PRSCameraModuleInput <NSObject>
 
+/** Метод позволяет сконфигурировать модуль и указать блок перехода к модулю с результатами сканирования */
 - (void)configureWithOpenResultAction:(void(^)(void))openResultAction;
 
 @end

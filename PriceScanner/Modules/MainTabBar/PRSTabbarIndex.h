@@ -10,6 +10,7 @@
 #define PRSTabbarIndex_h
 
 
+/** В данном перечислении объявлены индексы модулей в таббаре */
 typedef NS_OPTIONS(NSUInteger, PRSTabbarIndex) {
     PRSTabbarIndexMain = 0,
     PRSTabbarIndexCamera,

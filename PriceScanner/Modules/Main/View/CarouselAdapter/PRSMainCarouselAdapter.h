@@ -22,12 +22,15 @@
 @end
 
 
+/** Адаптер для карусели на главном экране */
 @interface PRSMainCarouselAdapter : NSObject
 
+/** Конструктор позволяет передать UICollectionView, в котором будет отображена карусель, а также делегат для адаптера */
 - (instancetype)initWithCollectionView:(UICollectionView *)collectionView delegate:(id<PRSMainCarouselAdapterDelegate>)delegate;
 
+/** Метод для конфигурации карусели на главной с помощью массива объектов для конфигурации ячеек карусели */
 - (void)configureWithModels:(NSArray<PRSMainCarouselPageModel *> *)models;
-
+/** Метод возвращает количество страниц в каруселе */
 - (NSInteger)pagesCount;
 
 @end

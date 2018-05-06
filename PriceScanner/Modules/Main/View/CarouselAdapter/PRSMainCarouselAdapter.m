@@ -63,7 +63,7 @@ static NSString * const cellIdentifier = @"mainCarouselCell";
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(self.collectionView.bounds.size.width, self.collectionView.bounds.size.height);
+    return self.collectionView.bounds.size;
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -88,12 +88,14 @@ static NSString * const cellIdentifier = @"mainCarouselCell";
 }
 
 #pragma mark - Private Methods
+/** В результате вызова метода делегат адаптера будет проинформирован о смене страницы карусели */
 - (void)sendCurrentPageToDelegate {
     if ([self.delegate respondsToSelector:@selector(scrollCarouselToPage:)]) {
         [self.delegate scrollCarouselToPage:[self currentCarouselPage]];
     }
 }
 
+/** Метод возвращает номер текущей отображаемой страницы карусели */
 - (NSInteger)currentCarouselPage {
     CGFloat pageWidth = self.collectionView.bounds.size.width;
     NSInteger leftVisiblePage = self.collectionView.contentOffset.x / pageWidth;
