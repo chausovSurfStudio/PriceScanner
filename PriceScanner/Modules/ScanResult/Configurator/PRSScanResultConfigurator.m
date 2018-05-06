@@ -14,13 +14,13 @@
 
 @implementation PRSScanResultConfigurator
 
-+ (UIViewController *)configureModule:(void(^)(id<PRSScanResultModuleInput> presenter))completion {
++ (UIViewController *)configureModule:(void(^)(id<PRSScanResultModuleInput> presenter, UIViewController *view))completion {
     PRSScanResultPresenter *presenter = [PRSScanResultPresenter new];
     PRSScanResultViewController *view = [PRSScanResultViewController new];
     view.output = presenter;
     presenter.view = view;
     if (completion) {
-        completion(presenter);
+        completion(presenter, view);
     }
     return view;
 }

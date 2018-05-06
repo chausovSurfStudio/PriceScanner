@@ -14,6 +14,6 @@
 
 @interface PRSScanResultConfigurator : NSObject
 
-+ (UIViewController *)configureModule:(void(^)(id<PRSScanResultModuleInput> presenter))completion;
++ (UIViewController *)configureModule:(void(^)(id<PRSScanResultModuleInput> presenter, UIViewController *view))completion;
 
 @end

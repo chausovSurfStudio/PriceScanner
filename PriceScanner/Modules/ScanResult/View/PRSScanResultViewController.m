@@ -24,6 +24,7 @@
 
 #pragma mark - PRSScanResultViewInput
 - (void)setupInitialState {
+    self.title = @"Результаты сканирования".localized;
     // установка начального состояния view
 }
 

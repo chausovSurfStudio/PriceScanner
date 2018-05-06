@@ -28,4 +28,9 @@
     // установка начального состояния view
 }
 
+#pragma mark - Actions
+- (IBAction)tapOnOpenResultButton:(UIButton *)sender {
+    [self.output openScanResultModule];
+}
+
 @end

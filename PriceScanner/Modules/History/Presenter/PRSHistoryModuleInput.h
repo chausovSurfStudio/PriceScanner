@@ -11,4 +11,6 @@
 
 @protocol PRSHistoryModuleInput <NSObject>
 
+- (void)configureWithOpenResultAction:(void(^)(void))openResultAction;
+
 @end

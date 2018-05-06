@@ -10,12 +10,30 @@
 #import "PRSHistoryViewInput.h"
 
 
+@interface PRSHistoryPresenter()
+
+@property (nonatomic, copy) void (^openResultAction)(void);
+
+@end
+
+
 @implementation PRSHistoryPresenter
+
+#pragma mark - PRSHistoryModuleInput
+- (void)configureWithOpenResultAction:(void(^)(void))openResultAction {
+    self.openResultAction = openResultAction;
+}
 
 #pragma mark - PRSHistoryViewOutput
 - (void)viewLoaded {
     // установка начального состояния presenter'а
     [self.view setupInitialState];
+}
+
+- (void)openScanResultModule {
+    if (self.openResultAction) {
+        self.openResultAction();
+    }
 }
 
 @end

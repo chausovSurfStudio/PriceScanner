@@ -10,7 +10,21 @@
 #import "PRSScanResultViewInput.h"
 
 
+@interface PRSScanResultPresenter()
+
+@property (nonatomic, assign) BOOL showAsModal;
+@property (nonatomic, copy) void (^closeAction)(void);
+
+@end
+
+
 @implementation PRSScanResultPresenter
+
+#pragma mark - PRSScanResultViewInput
+- (void)configureAsModalWithCloseAction:(void(^)(void))closeAction {
+    self.showAsModal = YES;
+    self.closeAction = closeAction;
+}
 
 #pragma mark - PRSScanResultViewOutput
 - (void)viewLoaded {

@@ -11,4 +11,6 @@
 
 @protocol PRSScanResultModuleInput <NSObject>
 
+- (void)configureAsModalWithCloseAction:(void(^)(void))closeAction;
+
 @end

@@ -8,6 +8,9 @@
 
 #import "PRSHistoryFlowCoordinator.h"
 #import "PRSHistoryConfigurator.h"
+#import "PRSScanResultConfigurator.h"
+
+#import "PRSHistoryModuleInput.h"
 
 #import "PRSNavigationController.h"
 
@@ -21,9 +24,20 @@
 @implementation PRSHistoryFlowCoordinator
 
 - (UINavigationController *)initialView {
-    UIViewController *historyView = [PRSHistoryConfigurator configureModule:nil];
+    @weakify(self);
+    UIViewController *historyView = [PRSHistoryConfigurator configureModule:^(id<PRSHistoryModuleInput> presenter) {
+        [presenter configureWithOpenResultAction:^{
+            @strongify(self);
+            [self openResultModule];
+        }];
+    }];
     self.navigationController = [[PRSNavigationController alloc] initWithRootViewController:historyView];
     return self.navigationController;
+}
+
+- (void)openResultModule {
+    UIViewController *resultView = [PRSScanResultConfigurator configureModule:nil];
+    [self.navigationController pushViewController:resultView animated:YES];
 }
 
 @end
