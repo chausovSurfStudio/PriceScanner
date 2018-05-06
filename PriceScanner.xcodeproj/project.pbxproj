@@ -53,6 +53,7 @@
 		8455575D209F41BD00B01D91 /* PRSMainCarouselCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455575B209F41BD00B01D91 /* PRSMainCarouselCell.m */; };
 		8455575E209F41BD00B01D91 /* PRSMainCarouselCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8455575C209F41BD00B01D91 /* PRSMainCarouselCell.xib */; };
 		84555761209F421600B01D91 /* PRSMainCarouselPageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555760209F421600B01D91 /* PRSMainCarouselPageModel.m */; };
+		84555766209F56EF00B01D91 /* UIButton+Style.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555765209F56EF00B01D91 /* UIButton+Style.m */; };
 		84665556209BADD500810A16 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84665554209BADD500810A16 /* Localizable.strings */; };
 		8466555C209BB0D900810A16 /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8466555B209BB0D900810A16 /* NSString+Additions.m */; };
 		846C2158207E97D100FFB499 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 846C2156207E97D100FFB499 /* UIImage+Resize.m */; };
@@ -156,6 +157,8 @@
 		8455575C209F41BD00B01D91 /* PRSMainCarouselCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PRSMainCarouselCell.xib; sourceTree = "<group>"; };
 		8455575F209F421600B01D91 /* PRSMainCarouselPageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSMainCarouselPageModel.h; sourceTree = "<group>"; };
 		84555760209F421600B01D91 /* PRSMainCarouselPageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSMainCarouselPageModel.m; sourceTree = "<group>"; };
+		84555764209F56EF00B01D91 /* UIButton+Style.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+Style.h"; sourceTree = "<group>"; };
+		84555765209F56EF00B01D91 /* UIButton+Style.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Style.m"; sourceTree = "<group>"; };
 		84665550209BAD2B00810A16 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		84665551209BAD2B00810A16 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		84665555209BADD500810A16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -493,6 +496,7 @@
 			isa = PBXGroup;
 			children = (
 				84665559209BB0B000810A16 /* NSString */,
+				84555763209F56CF00B01D91 /* UIButton */,
 				846C2155207E97BF00FFB499 /* UIImage */,
 			);
 			path = Extentions;
@@ -534,6 +538,15 @@
 				84555760209F421600B01D91 /* PRSMainCarouselPageModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		84555763209F56CF00B01D91 /* UIButton */ = {
+			isa = PBXGroup;
+			children = (
+				84555764209F56EF00B01D91 /* UIButton+Style.h */,
+				84555765209F56EF00B01D91 /* UIButton+Style.m */,
+			);
+			path = UIButton;
 			sourceTree = "<group>";
 		};
 		84665559209BB0B000810A16 /* NSString */ = {
@@ -1022,6 +1035,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				185816662042AE82003C2FA9 /* AppDelegate.m in Sources */,
+				84555766209F56EF00B01D91 /* UIButton+Style.m in Sources */,
 				841F4650209D080D00535A4A /* UIColor+Style.m in Sources */,
 				185816B82042B3A2003C2FA9 /* PRSBasePresenter.m in Sources */,
 				185816772042AE82003C2FA9 /* main.m in Sources */,
