@@ -10,12 +10,29 @@
 #import "PRSMainViewInput.h"
 
 
+@interface PRSMainPresenter()
+
+@property (nonatomic, copy) void (^openCameraModuleAction)(void);
+
+@end
+
+
 @implementation PRSMainPresenter
+
+#pragma mark - PRSMainModuleInput
+- (void)configureWithOpenCameraModuleAction:(void(^)(void))openCameraModuleAction {
+    self.openCameraModuleAction = openCameraModuleAction;
+}
 
 #pragma mark - PRSMainViewOutput
 - (void)viewLoaded {
-    // установка начального состояния presenter'а
     [self.view setupInitialState];
+}
+
+- (void)openCameraModule {
+    if (self.openCameraModuleAction) {
+        self.openCameraModuleAction();
+    }
 }
 
 @end

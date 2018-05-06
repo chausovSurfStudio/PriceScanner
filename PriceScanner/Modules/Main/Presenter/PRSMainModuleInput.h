@@ -11,4 +11,7 @@
 
 @protocol PRSMainModuleInput <NSObject>
 
+/** Метод позволяет сконфигурировать модуль и указать блок перехода к модулю сканирования ценника */
+- (void)configureWithOpenCameraModuleAction:(void(^)(void))openCameraModuleAction;
+
 @end

@@ -11,6 +11,7 @@
 
 @protocol PRSScanResultModuleInput <NSObject>
 
+/** Метод позволяет сконфигурировать модуль под показ в качестве модального окна и указать блок закрытия модуля */
 - (void)configureAsModalWithCloseAction:(void(^)(void))closeAction;
 
 @end

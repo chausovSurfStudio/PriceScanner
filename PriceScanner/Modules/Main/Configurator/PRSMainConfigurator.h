@@ -14,6 +14,6 @@
 
 @interface PRSMainConfigurator : NSObject
 
-+ (UIViewController *)configureModule:(void(^)(id<PRSMainModuleInput> presenter))completion;
++ (UIViewController *)configureModule:(void(^)(id<PRSMainModuleInput> presenter, UIViewController *view))completion;
 
 @end
