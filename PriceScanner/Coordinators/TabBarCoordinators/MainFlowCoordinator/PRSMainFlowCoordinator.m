@@ -9,7 +9,10 @@
 #import "PRSMainFlowCoordinator.h"
 #import "PRSMainConfigurator.h"
 
+#import "PRSMainModuleInput.h"
+
 #import "PRSNavigationController.h"
+#import "PRSTabbarIndex.h"
 
 
 @interface PRSMainFlowCoordinator()
@@ -22,7 +25,15 @@
 @implementation PRSMainFlowCoordinator
 
 - (UINavigationController *)initialView {
-    UIViewController *mainView = [PRSMainConfigurator configureModule:nil];
+    UIViewController *mainView = [PRSMainConfigurator configureModule:^(id<PRSMainModuleInput> presenter, UIViewController *view) {
+        @weakify(view);
+        [presenter configureWithOpenCameraModuleAction:^{
+            @strongify(view);
+            if (view.tabBarController) {
+                view.tabBarController.selectedIndex = PRSTabbarIndexCamera;
+            }
+        }];
+    }];
     self.navigationController = [[PRSNavigationController alloc] initWithRootViewController:mainView];
     return self.navigationController;
 }

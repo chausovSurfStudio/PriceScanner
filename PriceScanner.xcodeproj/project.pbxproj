@@ -159,6 +159,7 @@
 		84555760209F421600B01D91 /* PRSMainCarouselPageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSMainCarouselPageModel.m; sourceTree = "<group>"; };
 		84555764209F56EF00B01D91 /* UIButton+Style.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+Style.h"; sourceTree = "<group>"; };
 		84555765209F56EF00B01D91 /* UIButton+Style.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Style.m"; sourceTree = "<group>"; };
+		84555768209F8AF000B01D91 /* PRSTabbarIndex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSTabbarIndex.h; sourceTree = "<group>"; };
 		84665550209BAD2B00810A16 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		84665551209BAD2B00810A16 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		84665555209BADD500810A16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -308,6 +309,7 @@
 				DF8963636A269702EF41BE36 /* Camera */,
 				DAD48F70A9404FA017A7DDF6 /* History */,
 				89C50554273C6221B8ADF2A5 /* Main */,
+				84555767209F8A9500B01D91 /* MainTabBar */,
 				2CB3FEEA6A0E2F3D0A54ABDB /* ScanResult */,
 			);
 			path = Modules;
@@ -359,8 +361,6 @@
 				1858166A2042AE82003C2FA9 /* Main.storyboard */,
 				185816722042AE82003C2FA9 /* LaunchScreen.storyboard */,
 				185816762042AE82003C2FA9 /* main.m */,
-				843572962066D3C700AC6E74 /* PRSMainTabBarController.h */,
-				843572952066D3C700AC6E74 /* PRSMainTabBarController.m */,
 				18DC5468206C0401009E1D2A /* PriceScanner-Prefix.pch */,
 			);
 			path = Base;
@@ -547,6 +547,16 @@
 				84555765209F56EF00B01D91 /* UIButton+Style.m */,
 			);
 			path = UIButton;
+			sourceTree = "<group>";
+		};
+		84555767209F8A9500B01D91 /* MainTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				843572962066D3C700AC6E74 /* PRSMainTabBarController.h */,
+				843572952066D3C700AC6E74 /* PRSMainTabBarController.m */,
+				84555768209F8AF000B01D91 /* PRSTabbarIndex.h */,
+			);
+			path = MainTabBar;
 			sourceTree = "<group>";
 		};
 		84665559209BB0B000810A16 /* NSString */ = {

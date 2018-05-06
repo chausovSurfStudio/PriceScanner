@@ -54,6 +54,8 @@
 }
 
 - (void)configurePageControl {
+    self.pageControl.pageIndicatorTintColor = [UIColor whiteColor];
+    self.pageControl.currentPageIndicatorTintColor = [UIColor prsMainThemeColor];
     self.pageControl.numberOfPages = [self.carouselAdapter pagesCount];
     self.pageControl.currentPage = 0;
 }

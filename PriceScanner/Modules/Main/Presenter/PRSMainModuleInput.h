@@ -11,4 +11,6 @@
 
 @protocol PRSMainModuleInput <NSObject>
 
+- (void)configureWithOpenCameraModuleAction:(void(^)(void))openCameraModuleAction;
+
 @end
