@@ -11,9 +11,17 @@
 @class PRSMainCarouselPageModel;
 
 
+@protocol PRSMainCarouselAdapterDelegate <NSObject>
+
+/** Метод информирует делегата о том, что в ячейке карусели была нажата кнопка */
+- (void)actionButtonDidTap;
+
+@end
+
+
 @interface PRSMainCarouselAdapter : NSObject
 
-- (instancetype)initWithCollectionView:(UICollectionView *)collectionView;
+- (instancetype)initWithCollectionView:(UICollectionView *)collectionView delegate:(id<PRSMainCarouselAdapterDelegate>)delegate;
 
 - (void)configureWithModels:(NSArray<PRSMainCarouselPageModel *> *)models;
 

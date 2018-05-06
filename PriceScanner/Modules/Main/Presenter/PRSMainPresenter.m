@@ -14,8 +14,11 @@
 
 #pragma mark - PRSMainViewOutput
 - (void)viewLoaded {
-    // установка начального состояния presenter'а
     [self.view setupInitialState];
+}
+
+- (void)openCameraModule {
+    NSLog(@"openCameraModule");
 }
 
 @end

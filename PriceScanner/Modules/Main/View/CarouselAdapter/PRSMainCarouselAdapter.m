@@ -14,21 +14,22 @@
 static NSString * const cellIdentifier = @"mainCarouselCell";
 
 
-@interface PRSMainCarouselAdapter() <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface PRSMainCarouselAdapter() <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, PRSMainCarouselCellDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray<PRSMainCarouselPageModel *> *models;
+@property (nonatomic, strong) id<PRSMainCarouselAdapterDelegate> delegate;
 
 @end
 
 
 @implementation PRSMainCarouselAdapter
 
-#pragma mark - Internal Methods
-- (instancetype)initWithCollectionView:(UICollectionView *)collectionView {
+- (instancetype)initWithCollectionView:(UICollectionView *)collectionView delegate:(id<PRSMainCarouselAdapterDelegate>)delegate {
     self = [super init];
     if (self) {
         self.collectionView = collectionView;
+        self.delegate = delegate;
         
         [self.collectionView registerNib:[UINib nibWithNibName:@"PRSMainCarouselCell" bundle:nil] forCellWithReuseIdentifier:cellIdentifier];
         self.collectionView.dataSource = self;
@@ -52,6 +53,7 @@ static NSString * const cellIdentifier = @"mainCarouselCell";
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PRSMainCarouselCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     [cell configureWithModel:self.models[indexPath.row]];
+    cell.cellDelegate = self;
     return cell;
 }
 
@@ -63,6 +65,13 @@ static NSString * const cellIdentifier = @"mainCarouselCell";
 #pragma mark - UICollectionViewDelegate
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
+}
+
+#pragma mark - PRSMainCarouselCellDelegate
+- (void)actionButtonDidTap {
+    if ([self.delegate respondsToSelector:@selector(actionButtonDidTap)]) {
+        [self.delegate actionButtonDidTap];
+    }
 }
 
 @end

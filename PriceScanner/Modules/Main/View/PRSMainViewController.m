@@ -13,7 +13,7 @@
 #import "PRSMainCarouselPageModel.h"
 
 
-@interface PRSMainViewController ()
+@interface PRSMainViewController () <PRSMainCarouselAdapterDelegate>
 
 @property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) IBOutlet UIPageControl *pageControl;
@@ -48,8 +48,13 @@
 }
 
 - (void)configureAdapter {
-    self.carouselAdapter = [[PRSMainCarouselAdapter alloc] initWithCollectionView:self.collectionView];
+    self.carouselAdapter = [[PRSMainCarouselAdapter alloc] initWithCollectionView:self.collectionView delegate:self];
     [self.carouselAdapter configureWithModels:[self buildPageModels]];
+}
+
+#pragma mark - PRSMainCarouselAdapterDelegate
+- (void)actionButtonDidTap {
+    [self.output openCameraModule];
 }
 
 #pragma mark - Private Methods

@@ -46,6 +46,9 @@
                                             <constraint firstAttribute="height" constant="40" id="ugh-tJ-sSF"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="tapOnActionButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Vep-UN-yXr"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

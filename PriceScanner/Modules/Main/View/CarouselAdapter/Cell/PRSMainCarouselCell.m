@@ -46,6 +46,13 @@ static CGFloat const buttonContainerDefaultHeight = 80.f;
     self.actionButton.hidden = !showActionButton;
 }
 
+#pragma mark - Actions
+- (IBAction)tapOnActionButton:(UIButton *)sender {
+    if ([self.cellDelegate respondsToSelector:@selector(actionButtonDidTap)]) {
+        [self.cellDelegate actionButtonDidTap];
+    }
+}
+
 #pragma mark - Configure
 - (void)configureStyle {
     self.titleLabel.font = [UIFont systemFontOfSize:20.f weight:UIFontWeightBlack];
