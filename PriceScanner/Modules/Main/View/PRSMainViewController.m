@@ -24,6 +24,7 @@
 
 #pragma mark - PRSMainViewInput
 - (void)setupInitialState {
+    self.title = @"Главная".localized;
     // установка начального состояния view
 }
 

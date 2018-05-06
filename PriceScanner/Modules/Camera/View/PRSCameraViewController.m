@@ -49,6 +49,7 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self startLiveVideo];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     
     self.makeSnapshot = SnapshotStatusNone;
 }
@@ -56,6 +57,7 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [self stopLiveVideo];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 #pragma mark - Configure
@@ -114,7 +116,7 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
     }
     
     AVCaptureVideoPreviewLayer *imageLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.session];
-    imageLayer.frame = self.scene.bounds;
+    imageLayer.frame = [UIScreen mainScreen].bounds;
     self.scene.layer.sublayers = nil;
     [self.scene.layer addSublayer:imageLayer];
     

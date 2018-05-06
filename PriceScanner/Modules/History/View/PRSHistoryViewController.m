@@ -24,6 +24,7 @@
 
 #pragma mark - PRSHistoryViewInput
 - (void)setupInitialState {
+    self.title = @"История".localized;
     // установка начального состояния view
 }
 
