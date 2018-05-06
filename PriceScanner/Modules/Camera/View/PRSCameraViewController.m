@@ -49,6 +49,7 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self startLiveVideo];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     
     self.makeSnapshot = SnapshotStatusNone;
 }
@@ -56,6 +57,7 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [self stopLiveVideo];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 #pragma mark - Configure
@@ -70,14 +72,16 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
 
 #pragma mark - Actions
 - (IBAction)tapOnSnapshotButton:(UIButton *)sender {
-    self.makeSnapshot = SnapshotStatusMake;
-    
-    [self pauseLiveVideo];
-    @weakify(self);
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        @strongify(self);
-        [self startLiveVideo];
-    });
+    // TODO: тестовый код, поправить позднее
+    [self.output openScanResultModule];
+//    self.makeSnapshot = SnapshotStatusMake;
+//
+//    [self pauseLiveVideo];
+//    @weakify(self);
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        @strongify(self);
+//        [self startLiveVideo];
+//    });
 }
 
 #pragma mark - PRSCameraViewInput
@@ -114,7 +118,7 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
     }
     
     AVCaptureVideoPreviewLayer *imageLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.session];
-    imageLayer.frame = self.scene.bounds;
+    imageLayer.frame = [UIScreen mainScreen].bounds;
     self.scene.layer.sublayers = nil;
     [self.scene.layer addSublayer:imageLayer];
     

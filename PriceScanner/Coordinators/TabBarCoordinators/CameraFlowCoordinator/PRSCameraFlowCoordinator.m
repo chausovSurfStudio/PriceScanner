@@ -7,10 +7,14 @@
 //
 
 #import "PRSCameraFlowCoordinator.h"
-#import "PRSStartDetectionConfigurator.h"
 #import "PRSCameraConfigurator.h"
+#import "PRSScanResultConfigurator.h"
 
-#import "PRSStartDetectionModuleInput.h"
+#import "PRSCameraModuleInput.h"
+#import "PRSScanResultModuleInput.h"
+
+#import "PRSNavigationController.h"
+#import "PRSModalNavigationController.h"
 
 
 @interface PRSCameraFlowCoordinator()
@@ -23,21 +27,27 @@
 @implementation PRSCameraFlowCoordinator
 
 - (UINavigationController *)initialView {
-    UIViewController *startDetectionView = [PRSStartDetectionConfigurator configureModule:^(id<PRSStartDetectionModuleInput> presenter) {
-        @weakify(self);
-        [presenter setOpenCameraHandler:^{
+    @weakify(self);
+    UIViewController *cameraView = [PRSCameraConfigurator configureModule:^(id<PRSCameraModuleInput> presenter) {
+        [presenter configureWithOpenResultAction:^{
             @strongify(self);
-            [self openCameraModule];
+            [self openResultModule];
         }];
     }];
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:startDetectionView];
+    self.navigationController = [[PRSNavigationController alloc] initWithRootViewController:cameraView];
     return self.navigationController;
 }
 
-- (void)openCameraModule {
-    UIViewController *cameraView = [PRSCameraConfigurator configureModule:nil];
-    [self.navigationController pushViewController:cameraView animated:YES];
-    
+- (void)openResultModule {
+    UIViewController *resultView = [PRSScanResultConfigurator configureModule:^(id<PRSScanResultModuleInput> presenter, UIViewController *view) {
+        @weakify(view);
+        [presenter configureAsModalWithCloseAction:^{
+            @strongify(view);
+            [view dismissViewControllerAnimated:YES completion:nil];
+        }];
+    }];
+    UINavigationController *navigationController = [[PRSModalNavigationController alloc] initWithRootViewController:resultView];
+    [self.navigationController.topViewController presentViewController:navigationController animated:YES completion:nil];
 }
 
 @end

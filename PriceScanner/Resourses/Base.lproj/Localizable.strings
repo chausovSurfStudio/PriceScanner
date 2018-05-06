@@ -6,4 +6,10 @@
   Copyright © 2018 Surf. All rights reserved.
 */
 
-"Welcome" = "Welcome";
+// Таббар
+"Главная" = "Main";
+"Сканировать" = "Scan";
+"История" = "History";
+
+// Результаты сканирования
+"Результаты сканирования" = "Scan result";

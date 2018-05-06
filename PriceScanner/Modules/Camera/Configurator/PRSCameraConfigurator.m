@@ -22,9 +22,6 @@
     if (completion) {
         completion(presenter);
     }
-    
-    view.hidesBottomBarWhenPushed = YES;
-    
     return view;
 }
 
