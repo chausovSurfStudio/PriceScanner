@@ -32,11 +32,10 @@
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     CGRect gradientFrame = self.navigationBar.bounds;
     
-    // TODO: исправить вот это +20 в дальнейшем
-    gradientFrame.size.height += 20;
+    gradientFrame.size.height += CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
     gradientLayer.frame = gradientFrame;
     gradientLayer.colors = @[(__bridge id)[UIColor prsBarsGradientLightColor].CGColor,
-                             (__bridge id)[UIColor prsBarsGradientDarkColor].CGColor ];
+                             (__bridge id)[UIColor prsBarsGradientDarkColor].CGColor];
     gradientLayer.startPoint = CGPointMake(0.0, 0.0);
     gradientLayer.endPoint = CGPointMake(0.0, 1.0);
     

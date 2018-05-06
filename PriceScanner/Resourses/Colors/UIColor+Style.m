@@ -16,7 +16,7 @@
 }
 
 + (UIColor *)prsTabBarInactiveItemColor {
-    return [UIColor colorWithRed: 67 / 255.0 green: 67 / 255.0 blue: 67 / 255.0 alpha: 1.0];
+    return [UIColor colorWithRed: 239 / 255.0 green: 183 / 255.0 blue: 248 / 255.0 alpha: 1.0];
 }
 
 + (UIColor *)prsBarsGradientLightColor {

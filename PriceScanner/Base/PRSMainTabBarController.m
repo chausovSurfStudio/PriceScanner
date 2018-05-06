@@ -25,6 +25,12 @@
     [self setupInitialTabs];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self configureGradientTabBar];
+}
+
+#pragma mark - Private Methods
 - (void)setupInitialTabs {
     self.mainCoordinator = [PRSTabBarCoordinator new];
     
@@ -41,9 +47,26 @@
     historyNavigation.tabBarItem = historyItem;
     
     self.tabBar.unselectedItemTintColor = [UIColor prsTabBarInactiveItemColor];
-    self.tabBar.tintColor = [UIColor prsMainThemeColor];
+    self.tabBar.tintColor = [UIColor whiteColor];
     
     [self setViewControllers:@[mainNavigation, cameraNavigation, historyNavigation] animated:NO];
+}
+
+- (void)configureGradientTabBar {
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    
+    gradient.frame = self.tabBar.bounds;
+    gradient.colors = @[(__bridge id)[UIColor prsBarsGradientDarkColor].CGColor,
+                        (__bridge id)[UIColor prsBarsGradientLightColor].CGColor];
+    gradient.startPoint = CGPointMake(0.0, 0.0);
+    gradient.endPoint = CGPointMake(0.0, 1.0);
+    
+    UIGraphicsBeginImageContext(gradient.bounds.size);
+    [gradient renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *gradientImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    [UITabBar appearance].backgroundImage = gradientImage;
 }
 
 @end
