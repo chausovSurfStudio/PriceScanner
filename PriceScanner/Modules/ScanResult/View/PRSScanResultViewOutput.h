@@ -1,0 +1,20 @@
+//
+//  PRSScanResultViewOutput.h
+//  PriceScanner
+//
+//  Created by Chausov Alexander on 04/05/2018.
+//  Copyright © 2018 ChausovCompany. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+
+@protocol PRSScanResultViewOutput <NSObject>
+
+/** Метод информирует презентера о том, что view загрузилась и готова к работе */
+- (void)viewLoaded;
+
+/** Метод информирует презентера о том, что необходимо закрыть модуль */
+- (void)closeModule;
+
+@end

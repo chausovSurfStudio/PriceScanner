@@ -1,0 +1,16 @@
+//
+//  PriceScanner-Prefix.pch
+//  PriceScanner
+//
+//  Created by Chausov Alexander on 28.03.18.
+//  Copyright © 2018 Surf. All rights reserved.
+//
+
+#ifndef PriceScanner_Prefix_pch
+#define PriceScanner_Prefix_pch
+
+#import "EXTScope.h"
+#import "NSString+Additions.h"
+#import "UIColor+Style.h"
+
+#endif /* PriceScanner_Prefix_pch */
