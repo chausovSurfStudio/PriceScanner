@@ -12,7 +12,7 @@
 
 
 static NSString * const cellIdentifier = @"historyTableCell";
-static CGFloat const cellEstimatedHeight = 85.f;
+static CGFloat const cellEstimatedHeight = 90.f;
 
 
 @interface PRSHistoryTableAdapter() <UITableViewDataSource, UITableViewDelegate>
