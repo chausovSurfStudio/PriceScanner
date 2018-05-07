@@ -29,7 +29,11 @@
     [self.view setupInitialState];
 }
 
-- (void)openScanResultModule {
+- (void)viewReadyToAppear {
+    [self.view updateWithModels:@[]];
+}
+
+- (void)openScanResultModuleForModelId:(NSNumber *)modelId {
     if (self.openResultAction) {
         self.openResultAction();
     }
