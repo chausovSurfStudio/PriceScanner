@@ -10,9 +10,13 @@
 #import "PRSHistoryTableCellModel.h"
 
 
+static CGFloat const shadowRadius = 4.f;
+static CGFloat const shadowOpacity = 0.15f;
+
 
 @interface PRSHistoryTableViewCell()
 
+@property (nonatomic, strong) IBOutlet UIView *shadowView;
 @property (nonatomic, strong) IBOutlet UIView *mainContainerView;
 @property (nonatomic, strong) IBOutlet UIImageView *photoImageView;
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
@@ -26,6 +30,15 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     [self configureStyle];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self configureShadow];
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
 }
 
 #pragma mark - Interface Methods
@@ -47,8 +60,10 @@
     self.priceLabel.textColor = [UIColor prsBlackTextColor];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+- (void)configureShadow {
+    self.shadowView.layer.shadowOffset = CGSizeMake(0.f, 0.f);
+    self.shadowView.layer.shadowRadius = shadowRadius;
+    self.shadowView.layer.shadowOpacity = shadowOpacity;
 }
 
 @end

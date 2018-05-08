@@ -13,6 +13,8 @@
 
 static NSString * const cellIdentifier = @"historyTableCell";
 static CGFloat const cellEstimatedHeight = 90.f;
+static CGFloat const tableContentTopOffset = 15.f;
+static CGFloat const tableContentBottomOffset = 22.f;
 
 
 @interface PRSHistoryTableAdapter() <UITableViewDataSource, UITableViewDelegate>
@@ -34,6 +36,7 @@ static CGFloat const cellEstimatedHeight = 90.f;
         
         [self.tableView registerNib:[UINib nibWithNibName:@"PRSHistoryTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
         self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.contentInset = UIEdgeInsetsMake(tableContentTopOffset, 0.f, tableContentBottomOffset, 0.f);
         self.tableView.dataSource = self;
         self.tableView.delegate = self;
     }
