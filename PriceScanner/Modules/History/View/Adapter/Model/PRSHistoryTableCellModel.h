@@ -11,6 +11,7 @@
 @class PRSScanResultEntity;
 
 
+/** Сущность для хранения данных, необходимых для работы модуля истории */
 @interface PRSHistoryTableCellModel : NSObject
 
 @property (nonatomic, strong, readonly) NSNumber *idx;

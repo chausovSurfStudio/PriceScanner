@@ -11,8 +11,10 @@
 @class PRSHistoryTableCellModel;
 
 
+/** Яячейка для таблицы на экране истории */
 @interface PRSHistoryTableViewCell : UITableViewCell
 
+/** Метод позволяет сконфигурировать ячейку на основе данных из переданной модели */
 - (void)configureWithModel:(PRSHistoryTableCellModel *)model;
 
 @end

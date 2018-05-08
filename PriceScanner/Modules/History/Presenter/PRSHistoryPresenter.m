@@ -13,6 +13,7 @@
 #import "PRSScanResultEntity.h"
 #import "PRSHistoryTableCellModel.h"
 
+
 @interface PRSHistoryPresenter()
 
 @property (nonatomic, copy) void (^openResultAction)(void);

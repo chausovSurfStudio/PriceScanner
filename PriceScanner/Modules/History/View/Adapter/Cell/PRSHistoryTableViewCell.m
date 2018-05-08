@@ -71,6 +71,7 @@ static CGFloat const shadowOpacity = 0.15f;
 }
 
 #pragma mark - Private Methods
+/** Метод конфигурирует строку для лейбла с ценой товара */
 - (NSAttributedString *)buildPriceStringWithPrice:(NSString *)price {
     NSString *priceString = [NSString stringWithFormat:@"Цена_шаблон".localized, price];
     UIFont *priceTitleFont = [UIFont systemFontOfSize:16.f weight:UIFontWeightLight];
