@@ -17,8 +17,9 @@
 @property (nonatomic, strong, readonly) NSNumber *idx;
 @property (nonatomic, strong, readonly) NSString *name;
 @property (nonatomic, strong, readonly) NSString *price;
+@property (nonatomic, strong, readonly) NSData *photoData;
 
-- (instancetype)initWithName:(NSString *)name price:(NSString *)price;
+- (instancetype)initWithName:(NSString *)name price:(NSString *)price photoData:(NSData *)photoData;
 - (instancetype)initWithEntry:(PRSScanResultEntry *)entry;
 
 @end

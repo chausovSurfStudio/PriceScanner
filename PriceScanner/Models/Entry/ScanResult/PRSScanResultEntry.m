@@ -12,11 +12,12 @@
 
 @implementation PRSScanResultEntry
 
-- (instancetype)initWithName:(NSString *)name price:(NSString *)price idx:(NSInteger)idx {
+- (instancetype)initWithName:(NSString *)name price:(NSString *)price photoData:(NSData *)photoData idx:(NSInteger)idx {
     self = [super init];
     if (self) {
         self.name = name;
         self.price = price;
+        self.photoData = photoData;
         self.idx = idx;
     }
     return self;
@@ -27,6 +28,7 @@
     if (self) {
         self.name = entity.name;
         self.price = entity.price;
+        self.photoData = entity.photoData;
         self.idx = entity.idx ? entity.idx.integerValue : 0;
     }
     return self;
@@ -42,7 +44,7 @@
 }
 
 + (NSArray *)requiredProperties {
-    return @[@"idx", @"name", @"price"];
+    return @[@"idx", @"name", @"price", @"photoData"];
 }
 
 @end

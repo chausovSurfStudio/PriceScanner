@@ -28,7 +28,7 @@
         self.idx = entity.idx;
         self.name = entity.name;
         self.price = entity.price;
-        self.photo = [UIImage imageNamed:@"launchScreenBackground"];
+        self.photo = [UIImage imageWithData:entity.photoData];
     }
     return self;
 }
