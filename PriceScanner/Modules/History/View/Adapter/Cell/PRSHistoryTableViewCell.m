@@ -49,7 +49,7 @@ static CGFloat const shadowOpacity = 0.15f;
 - (void)configureWithModel:(PRSHistoryTableCellModel *)model {
     self.photoImageView.image = model.photo;
     self.nameLabel.text = model.name;
-    self.priceLabel.text = model.price;
+    self.priceLabel.attributedText = [self buildPriceStringWithPrice:model.price];
 }
 
 #pragma mark - Configure
@@ -68,6 +68,26 @@ static CGFloat const shadowOpacity = 0.15f;
     self.shadowView.layer.shadowOffset = CGSizeMake(0.f, 0.f);
     self.shadowView.layer.shadowRadius = shadowRadius;
     self.shadowView.layer.shadowOpacity = shadowOpacity;
+}
+
+#pragma mark - Private Methods
+- (NSAttributedString *)buildPriceStringWithPrice:(NSString *)price {
+    NSString *priceString = [NSString stringWithFormat:@"Цена_шаблон".localized, price];
+    UIFont *priceTitleFont = [UIFont systemFontOfSize:16.f weight:UIFontWeightLight];
+    UIFont *priceValueFont = [UIFont systemFontOfSize:16.f weight:UIFontWeightBlack];
+    UIColor *textColor = [UIColor prsBlackTextColor];
+    
+    NSMutableAttributedString *attributedPrice = [[NSMutableAttributedString alloc] initWithString:priceString
+                                                                                        attributes:@{
+                                                                                                     NSForegroundColorAttributeName: textColor,
+                                                                                                     NSFontAttributeName: priceTitleFont
+                                                                                                     }];
+    [attributedPrice addAttributes:@{
+                                     NSForegroundColorAttributeName: textColor,
+                                     NSFontAttributeName: priceValueFont
+                                     }
+                             range:[priceString rangeOfString:price]];
+    return [attributedPrice copy];
 }
 
 @end
