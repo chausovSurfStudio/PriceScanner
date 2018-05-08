@@ -37,8 +37,12 @@ static CGFloat const shadowOpacity = 0.15f;
     [self configureShadow];
 }
 
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+    self.mainContainerView.backgroundColor = highlighted ? [[UIColor blackColor] colorWithAlphaComponent:shadowOpacity] : [UIColor whiteColor];
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+    self.mainContainerView.backgroundColor = selected ? [[UIColor blackColor] colorWithAlphaComponent:shadowOpacity] : [UIColor whiteColor];
 }
 
 #pragma mark - Interface Methods
