@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@class PRSScanResultEntity;
+
 
 @protocol PRSHistoryModuleInput <NSObject>
 
 /** Метод позволяет сконфигурировать модуль и указать блок перехода к модулю с результатами сканирования */
-- (void)configureWithOpenResultAction:(void(^)(void))openResultAction;
+- (void)configureWithOpenResultAction:(void(^)(PRSScanResultEntity *scanResultEntity))openResultAction;
 
 @end

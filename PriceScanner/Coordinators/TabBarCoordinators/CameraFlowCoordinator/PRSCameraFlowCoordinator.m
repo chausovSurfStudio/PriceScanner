@@ -29,18 +29,19 @@
 - (UINavigationController *)initialView {
     @weakify(self);
     UIViewController *cameraView = [PRSCameraConfigurator configureModule:^(id<PRSCameraModuleInput> presenter) {
-        [presenter configureWithOpenResultAction:^{
+        [presenter configureWithOpenResultAction:^(PRSScanResultEntity *scanResultEntity) {
             @strongify(self);
-            [self openResultModule];
+            [self openResultModuleWithEntity:scanResultEntity];
         }];
     }];
     self.navigationController = [[PRSNavigationController alloc] initWithRootViewController:cameraView];
     return self.navigationController;
 }
 
-- (void)openResultModule {
+- (void)openResultModuleWithEntity:(PRSScanResultEntity *)entity {
     UIViewController *resultView = [PRSScanResultConfigurator configureModule:^(id<PRSScanResultModuleInput> presenter, UIViewController *view) {
         @weakify(view);
+        [presenter configureWithScanResult:entity];
         [presenter configureAsModalWithCloseAction:^{
             @strongify(view);
             [view dismissViewControllerAnimated:YES completion:nil];

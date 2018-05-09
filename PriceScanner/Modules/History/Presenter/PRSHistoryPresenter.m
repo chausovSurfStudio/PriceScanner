@@ -16,7 +16,8 @@
 
 @interface PRSHistoryPresenter()
 
-@property (nonatomic, copy) void (^openResultAction)(void);
+@property (nonatomic, copy) void (^openResultAction)(PRSScanResultEntity *scanResultEntity);
+@property (nonatomic, strong) NSArray<PRSScanResultEntity *> *scanResults;
 
 @end
 
@@ -24,7 +25,7 @@
 @implementation PRSHistoryPresenter
 
 #pragma mark - PRSHistoryModuleInput
-- (void)configureWithOpenResultAction:(void(^)(void))openResultAction {
+- (void)configureWithOpenResultAction:(void(^)(PRSScanResultEntity *scanResultEntity))openResultAction {
     self.openResultAction = openResultAction;
 }
 
@@ -34,18 +35,32 @@
 }
 
 - (void)viewReadyToAppear {
-    NSArray<PRSScanResultEntity *> *scanResults = [PRSStorageService getAllScanResults];
+    self.scanResults = [PRSStorageService getAllScanResults];
     NSMutableArray<PRSHistoryTableCellModel *> *models = [@[] mutableCopy];
-    for (PRSScanResultEntity *entity in scanResults) {
+    for (PRSScanResultEntity *entity in self.scanResults) {
         [models addObject:[[PRSHistoryTableCellModel alloc] initWithScanResultEntity:entity]];
     }
     [self.view updateWithModels:[models copy]];
 }
 
 - (void)openScanResultModuleForModelId:(NSNumber *)modelId {
-    if (self.openResultAction) {
-        self.openResultAction();
+    PRSScanResultEntity *selectedEntity = [self findScanResultById:modelId];
+    if (selectedEntity && self.openResultAction) {
+        self.openResultAction(selectedEntity);
     }
+}
+
+#pragma mark - Private Methods
+/** Метод ищет и возвращает сущность результата сканирования по id, в случае неудачи - вернется nil */
+- (PRSScanResultEntity *)findScanResultById:(NSNumber *)modelId {
+    __block PRSScanResultEntity *selectedEntity;
+    [self.scanResults enumerateObjectsUsingBlock:^(PRSScanResultEntity * _Nonnull entity, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (entity.idx.integerValue == modelId.integerValue) {
+            selectedEntity = entity;
+            *stop = YES;
+        }
+    }];
+    return selectedEntity;
 }
 
 @end

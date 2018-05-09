@@ -10,6 +10,7 @@
 #import "PRSHistoryTableCellModel.h"
 
 
+static CGFloat const mainContainerCornerRadius = 4.f;
 static CGFloat const shadowRadius = 4.f;
 static CGFloat const shadowOpacity = 0.15f;
 
@@ -50,7 +51,7 @@ static CGFloat const shadowOpacity = 0.15f;
 
 #pragma mark - Configure
 - (void)configureStyle {
-    self.mainContainerView.layer.cornerRadius = 4.f;
+    self.mainContainerView.layer.cornerRadius = mainContainerCornerRadius;
     self.mainContainerView.layer.masksToBounds = YES;
     
     self.nameLabel.font = [UIFont systemFontOfSize:12.f weight:UIFontWeightMedium];
@@ -61,6 +62,7 @@ static CGFloat const shadowOpacity = 0.15f;
 }
 
 - (void)configureShadow {
+    self.shadowView.layer.cornerRadius = mainContainerCornerRadius;
     self.shadowView.layer.shadowOffset = CGSizeMake(0.f, 0.f);
     self.shadowView.layer.shadowRadius = shadowRadius;
     self.shadowView.layer.shadowOpacity = shadowOpacity;

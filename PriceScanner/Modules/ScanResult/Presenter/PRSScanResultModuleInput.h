@@ -8,8 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class PRSScanResultEntity;
+
 
 @protocol PRSScanResultModuleInput <NSObject>
+
+/** Метод позволяет передать в модуль сущность результата сканирования, которую необходимо отобразить на экране */
+- (void)configureWithScanResult:(PRSScanResultEntity *)scanResultEntity;
 
 /** Метод позволяет сконфигурировать модуль под показ в качестве модального окна и указать блок закрытия модуля */
 - (void)configureAsModalWithCloseAction:(void(^)(void))closeAction;
