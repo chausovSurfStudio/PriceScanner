@@ -26,9 +26,9 @@
 - (instancetype)initWithEntity:(PRSScanResultEntity *)entity {
     self = [super init];
     if (self) {
-        self.name = entity.name;
-        self.price = entity.price;
-        self.photoData = entity.photoData;
+        self.name = [entity.name copy];
+        self.price = [entity.price copy];
+        self.photoData = [entity.photoData copy];
         self.idx = entity.idx ? entity.idx.integerValue : 0;
     }
     return self;

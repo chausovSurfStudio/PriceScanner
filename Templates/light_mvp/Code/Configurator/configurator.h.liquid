@@ -8,6 +8,6 @@
 
 @interface {{ prefix }}{{ module_info.name }}Configurator : NSObject
 
-+ (UIViewController *)configureModule:(void(^)(id<{{ prefix }}{{ module_info.name }}ModuleInput> presenter))completion;
++ (UIViewController *)configureModule:(void(^)(id<{{ prefix }}{{ module_info.name }}ModuleInput> presenter, UIViewController *view))completion;
 
 @end

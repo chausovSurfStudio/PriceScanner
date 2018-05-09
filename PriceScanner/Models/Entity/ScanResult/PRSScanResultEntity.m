@@ -36,9 +36,9 @@
 - (instancetype)initWithEntry:(PRSScanResultEntry *)entry {
     self = [super init];
     if (self) {
-        self.name = entry.name;
-        self.price = entry.price;
-        self.photoData = entry.photoData;
+        self.name = [entry.name copy];
+        self.price = [entry.price copy];
+        self.photoData = [entry.photoData copy];
         self.idx = [NSNumber numberWithInteger:entry.idx];
     }
     return self;

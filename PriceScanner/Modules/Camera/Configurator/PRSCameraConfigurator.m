@@ -14,13 +14,13 @@
 
 @implementation PRSCameraConfigurator
 
-+ (UIViewController *)configureModule:(void(^)(id<PRSCameraModuleInput> presenter))completion {
++ (UIViewController *)configureModule:(void(^)(id<PRSCameraModuleInput> presenter, UIViewController *view))completion {
     PRSCameraPresenter *presenter = [PRSCameraPresenter new];
     PRSCameraViewController *view = [PRSCameraViewController new];
     view.output = presenter;
     presenter.view = view;
     if (completion) {
-        completion(presenter);
+        completion(presenter, view);
     }
     return view;
 }

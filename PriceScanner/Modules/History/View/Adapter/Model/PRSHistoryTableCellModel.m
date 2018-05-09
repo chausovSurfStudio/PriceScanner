@@ -25,9 +25,9 @@
 - (instancetype)initWithScanResultEntity:(PRSScanResultEntity *)entity {
     self = [super init];
     if (self) {
-        self.idx = entity.idx;
-        self.name = entity.name;
-        self.price = entity.price;
+        self.idx = [entity.idx copy];
+        self.name = [entity.name copy];
+        self.price = [entity.price copy];
         self.photo = [UIImage imageWithData:entity.photoData];
     }
     return self;
