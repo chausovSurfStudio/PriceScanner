@@ -23,6 +23,7 @@
         NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
         paragraphStyle.lineSpacing = [lineSpacing floatValue];
         paragraphStyle.lineBreakMode = self.lineBreakMode;
+        paragraphStyle.alignment = self.textAlignment;
         [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:textRange];
     }
     
