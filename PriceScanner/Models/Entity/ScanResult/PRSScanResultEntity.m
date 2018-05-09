@@ -15,17 +15,19 @@
 @property (nonatomic, strong) NSNumber *idx;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *price;
+@property (nonatomic, strong) NSData *photoData;
 
 @end
 
 
 @implementation PRSScanResultEntity
 
-- (instancetype)initWithName:(NSString *)name price:(NSString *)price {
+- (instancetype)initWithName:(NSString *)name price:(NSString *)price photoData:(NSData *)photoData {
     self = [super init];
     if (self) {
         self.name = name;
         self.price = price;
+        self.photoData = photoData;
         self.idx = nil;
     }
     return self;
@@ -36,6 +38,7 @@
     if (self) {
         self.name = entry.name;
         self.price = entry.price;
+        self.photoData = entry.photoData;
         self.idx = [NSNumber numberWithInteger:entry.idx];
     }
     return self;

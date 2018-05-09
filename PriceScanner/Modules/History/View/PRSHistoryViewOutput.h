@@ -14,7 +14,10 @@
 /** Метод информирует презентера о том, что view загрузилась и готова к работе */
 - (void)viewLoaded;
 
+/** Метод информирует презентера о том, что view готова появиться на экране */
+- (void)viewReadyToAppear;
+
 /** Метод информирует презентера о том, что необходимо открыть модуль с результатами сканирования */
-- (void)openScanResultModule;
+- (void)openScanResultModuleForModelId:(NSNumber *)modelId;
 
 @end

@@ -57,6 +57,10 @@
 		8455576E209F9F5800B01D91 /* PRSStorageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455576D209F9F5800B01D91 /* PRSStorageService.m */; };
 		84555771209F9F8000B01D91 /* PRSScanResultEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555770209F9F8000B01D91 /* PRSScanResultEntry.m */; };
 		84555777209FA6D700B01D91 /* PRSScanResultEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555776209FA6D700B01D91 /* PRSScanResultEntity.m */; };
+		8455577D20A0F5CD00B01D91 /* PRSHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455577B20A0F5CD00B01D91 /* PRSHistoryTableViewCell.m */; };
+		8455577E20A0F5CD00B01D91 /* PRSHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8455577C20A0F5CD00B01D91 /* PRSHistoryTableViewCell.xib */; };
+		8455578120A0F5E400B01D91 /* PRSHistoryTableAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455578020A0F5E400B01D91 /* PRSHistoryTableAdapter.m */; };
+		8455578520A0F7F100B01D91 /* PRSHistoryTableCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455578420A0F7F100B01D91 /* PRSHistoryTableCellModel.m */; };
 		84665556209BADD500810A16 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84665554209BADD500810A16 /* Localizable.strings */; };
 		8466555C209BB0D900810A16 /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8466555B209BB0D900810A16 /* NSString+Additions.m */; };
 		846C2158207E97D100FFB499 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 846C2156207E97D100FFB499 /* UIImage+Resize.m */; };
@@ -169,6 +173,13 @@
 		84555770209F9F8000B01D91 /* PRSScanResultEntry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSScanResultEntry.m; sourceTree = "<group>"; };
 		84555775209FA6D700B01D91 /* PRSScanResultEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSScanResultEntity.h; sourceTree = "<group>"; };
 		84555776209FA6D700B01D91 /* PRSScanResultEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSScanResultEntity.m; sourceTree = "<group>"; };
+		8455577A20A0F5CD00B01D91 /* PRSHistoryTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSHistoryTableViewCell.h; sourceTree = "<group>"; };
+		8455577B20A0F5CD00B01D91 /* PRSHistoryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSHistoryTableViewCell.m; sourceTree = "<group>"; };
+		8455577C20A0F5CD00B01D91 /* PRSHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PRSHistoryTableViewCell.xib; sourceTree = "<group>"; };
+		8455577F20A0F5E400B01D91 /* PRSHistoryTableAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSHistoryTableAdapter.h; sourceTree = "<group>"; };
+		8455578020A0F5E400B01D91 /* PRSHistoryTableAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSHistoryTableAdapter.m; sourceTree = "<group>"; };
+		8455578320A0F7F100B01D91 /* PRSHistoryTableCellModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSHistoryTableCellModel.h; sourceTree = "<group>"; };
+		8455578420A0F7F100B01D91 /* PRSHistoryTableCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSHistoryTableCellModel.m; sourceTree = "<group>"; };
 		84665550209BAD2B00810A16 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		84665551209BAD2B00810A16 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		84665555209BADD500810A16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -622,6 +633,36 @@
 			path = ScanResult;
 			sourceTree = "<group>";
 		};
+		8455577820A0F5A900B01D91 /* Adapter */ = {
+			isa = PBXGroup;
+			children = (
+				8455577920A0F5B300B01D91 /* Cell */,
+				8455578220A0F7D500B01D91 /* Model */,
+				8455577F20A0F5E400B01D91 /* PRSHistoryTableAdapter.h */,
+				8455578020A0F5E400B01D91 /* PRSHistoryTableAdapter.m */,
+			);
+			path = Adapter;
+			sourceTree = "<group>";
+		};
+		8455577920A0F5B300B01D91 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8455577A20A0F5CD00B01D91 /* PRSHistoryTableViewCell.h */,
+				8455577B20A0F5CD00B01D91 /* PRSHistoryTableViewCell.m */,
+				8455577C20A0F5CD00B01D91 /* PRSHistoryTableViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		8455578220A0F7D500B01D91 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8455578320A0F7F100B01D91 /* PRSHistoryTableCellModel.h */,
+				8455578420A0F7F100B01D91 /* PRSHistoryTableCellModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		84665559209BB0B000810A16 /* NSString */ = {
 			isa = PBXGroup;
 			children = (
@@ -679,6 +720,7 @@
 		A1FD372874CBB01E298BEE28 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8455577820A0F5A900B01D91 /* Adapter */,
 				D796EE7DD38506112C146C29 /* PRSHistoryViewController.h */,
 				ACDFEC9652506136E10FD935 /* PRSHistoryViewController.m */,
 				841F4647209CED9A00535A4A /* PRSHistoryViewController.xib */,
@@ -912,6 +954,7 @@
 				841F464A209CEDD200535A4A /* PRSMainViewController.xib in Resources */,
 				185816742042AE82003C2FA9 /* LaunchScreen.storyboard in Resources */,
 				8455575E209F41BD00B01D91 /* PRSMainCarouselCell.xib in Resources */,
+				8455577E20A0F5CD00B01D91 /* PRSHistoryTableViewCell.xib in Resources */,
 				185816712042AE82003C2FA9 /* Assets.xcassets in Resources */,
 				841F4648209CED9A00535A4A /* PRSHistoryViewController.xib in Resources */,
 				84665556209BADD500810A16 /* Localizable.strings in Resources */,
@@ -1015,6 +1058,8 @@
 				84555766209F56EF00B01D91 /* UIButton+Style.m in Sources */,
 				841F4650209D080D00535A4A /* UIColor+Style.m in Sources */,
 				185816B82042B3A2003C2FA9 /* PRSBasePresenter.m in Sources */,
+				8455578120A0F5E400B01D91 /* PRSHistoryTableAdapter.m in Sources */,
+				8455578520A0F7F100B01D91 /* PRSHistoryTableCellModel.m in Sources */,
 				185816772042AE82003C2FA9 /* main.m in Sources */,
 				84555777209FA6D700B01D91 /* PRSScanResultEntity.m in Sources */,
 				1858166F2042AE82003C2FA9 /* PriceScanner.xcdatamodeld in Sources */,
@@ -1029,6 +1074,7 @@
 				8455576E209F9F5800B01D91 /* PRSStorageService.m in Sources */,
 				841F4643209CEBD300535A4A /* PRSHistoryFlowCoordinator.m in Sources */,
 				8435729A2066D41D00AC6E74 /* PRSCameraFlowCoordinator.m in Sources */,
+				8455577D20A0F5CD00B01D91 /* PRSHistoryTableViewCell.m in Sources */,
 				8466555C209BB0D900810A16 /* NSString+Additions.m in Sources */,
 				843572972066D3C700AC6E74 /* PRSMainTabBarController.m in Sources */,
 				A415026E82ADDA03161A2748 /* PRSCameraConfigurator.m in Sources */,

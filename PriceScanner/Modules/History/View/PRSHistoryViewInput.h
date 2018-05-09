@@ -8,10 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@class PRSHistoryTableCellModel;
+
 
 @protocol PRSHistoryViewInput <NSObject>
 
 /** Установка начального состояния view */
 - (void)setupInitialState;
+
+/** Метод для обновления экрана истории переданным массивом моделей */
+- (void)updateWithModels:(NSArray<PRSHistoryTableCellModel *> *)models;
 
 @end

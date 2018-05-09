@@ -9,6 +9,10 @@
 #import "PRSHistoryPresenter.h"
 #import "PRSHistoryViewInput.h"
 
+#import "PRSStorageService.h"
+#import "PRSScanResultEntity.h"
+#import "PRSHistoryTableCellModel.h"
+
 
 @interface PRSHistoryPresenter()
 
@@ -29,7 +33,16 @@
     [self.view setupInitialState];
 }
 
-- (void)openScanResultModule {
+- (void)viewReadyToAppear {
+    NSArray<PRSScanResultEntity *> *scanResults = [PRSStorageService getAllScanResults];
+    NSMutableArray<PRSHistoryTableCellModel *> *models = [@[] mutableCopy];
+    for (PRSScanResultEntity *entity in scanResults) {
+        [models addObject:[[PRSHistoryTableCellModel alloc] initWithScanResultEntity:entity]];
+    }
+    [self.view updateWithModels:[models copy]];
+}
+
+- (void)openScanResultModuleForModelId:(NSNumber *)modelId {
     if (self.openResultAction) {
         self.openResultAction();
     }

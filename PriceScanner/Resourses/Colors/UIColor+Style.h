@@ -26,4 +26,7 @@
 /** Темно-синий цвет текста */
 + (UIColor *)prsDarkBlueTextColor;
 
+/** Черный цвет текста */
++ (UIColor *)prsBlackTextColor;
+
 @end

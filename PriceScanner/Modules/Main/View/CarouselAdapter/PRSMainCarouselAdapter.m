@@ -16,9 +16,9 @@ static NSString * const cellIdentifier = @"mainCarouselCell";
 
 @interface PRSMainCarouselAdapter() <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, PRSMainCarouselCellDelegate>
 
-@property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, weak) UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray<PRSMainCarouselPageModel *> *models;
-@property (nonatomic, strong) id<PRSMainCarouselAdapterDelegate> delegate;
+@property (nonatomic, weak) id<PRSMainCarouselAdapterDelegate> delegate;
 
 @end
 

@@ -17,8 +17,9 @@
 @property NSInteger idx;
 @property NSString *name;
 @property NSString *price;
+@property NSData *photoData;
 
-- (instancetype)initWithName:(NSString *)name price:(NSString *)price idx:(NSInteger)idx;
+- (instancetype)initWithName:(NSString *)name price:(NSString *)price photoData:(NSData *)photoData idx:(NSInteger)idx;
 - (instancetype)initWithEntity:(PRSScanResultEntity *)entity;
 
 @end

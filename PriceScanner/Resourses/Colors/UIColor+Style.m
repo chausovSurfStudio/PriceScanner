@@ -31,4 +31,8 @@
     return [UIColor colorWithRed: 57 / 255.0 green: 0 / 255.0 blue: 71 / 255.0 alpha: 1.0];
 }
 
++ (UIColor *)prsBlackTextColor {
+    return [UIColor colorWithRed: 32 / 255.0 green: 32 / 255.0 blue: 32 / 255.0 alpha: 1.0];
+}
+
 @end
