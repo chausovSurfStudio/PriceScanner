@@ -12,10 +12,17 @@
 #import "PRSScanResultViewModel.h"
 
 
+static CGFloat const photoCornerRadius = 4.f;
+static CGFloat const photoShadowRadius = 4.f;
+static CGFloat const photoShadowOpacity = 0.5f;
+
+
 @interface PRSScanResultViewController ()
 
-@property (nonatomic, strong) IBOutlet UILabel *photoTitleLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *photoImageView;
+@property (nonatomic, strong) IBOutlet UIView *photoShadowView;
+
+@property (nonatomic, strong) IBOutlet UILabel *photoTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *nameTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *nameValueLabel;
 @property (nonatomic, strong) IBOutlet UILabel *priceTitleLabel;
@@ -37,6 +44,7 @@
     if (isModalState) {
         [self configureCloseModuleButton];
     }
+    [self configurePhotoImageView];
     [self configureStyle];
     [self configureLocalizedTexts];
     [self configureContentWithScanResult:scanResult];
@@ -57,6 +65,16 @@
     
     UIBarButtonItem *closeItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
     self.navigationItem.rightBarButtonItem = closeItem;
+}
+
+- (void)configurePhotoImageView {
+    self.photoImageView.layer.cornerRadius = photoCornerRadius;
+    self.photoImageView.clipsToBounds = YES;
+    
+    self.photoShadowView.layer.cornerRadius = photoCornerRadius;
+    self.photoShadowView.layer.shadowOffset = CGSizeMake(0.f, 0.f);
+    self.photoShadowView.layer.shadowRadius = photoShadowRadius;
+    self.photoShadowView.layer.shadowOpacity = photoShadowOpacity;
 }
 
 - (void)configureStyle {
