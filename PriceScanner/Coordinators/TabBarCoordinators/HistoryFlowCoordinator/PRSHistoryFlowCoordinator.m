@@ -27,7 +27,7 @@
 
 - (UINavigationController *)initialView {
     @weakify(self);
-    UIViewController *historyView = [PRSHistoryConfigurator configureModule:^(id<PRSHistoryModuleInput> presenter) {
+    UIViewController *historyView = [PRSHistoryConfigurator configureModule:^(id<PRSHistoryModuleInput> presenter, UIViewController *view) {
         [presenter configureWithOpenResultAction:^(PRSScanResultEntity *scanResultEntity) {
             @strongify(self);
             [self openResultModuleWithEntity:scanResultEntity];

@@ -14,13 +14,13 @@
 
 @implementation PRSHistoryConfigurator
 
-+ (UIViewController *)configureModule:(void(^)(id<PRSHistoryModuleInput> presenter))completion {
++ (UIViewController *)configureModule:(void(^)(id<PRSHistoryModuleInput> presenter, UIViewController *view))completion {
     PRSHistoryPresenter *presenter = [PRSHistoryPresenter new];
     PRSHistoryViewController *view = [PRSHistoryViewController new];
     view.output = presenter;
     presenter.view = view;
     if (completion) {
-        completion(presenter);
+        completion(presenter, view);
     }
     return view;
 }

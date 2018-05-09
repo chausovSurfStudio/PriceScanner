@@ -28,7 +28,7 @@
 
 - (UINavigationController *)initialView {
     @weakify(self);
-    UIViewController *cameraView = [PRSCameraConfigurator configureModule:^(id<PRSCameraModuleInput> presenter) {
+    UIViewController *cameraView = [PRSCameraConfigurator configureModule:^(id<PRSCameraModuleInput> presenter, UIViewController *view) {
         [presenter configureWithOpenResultAction:^(PRSScanResultEntity *scanResultEntity) {
             @strongify(self);
             [self openResultModuleWithEntity:scanResultEntity];

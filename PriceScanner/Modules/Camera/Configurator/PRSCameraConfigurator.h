@@ -14,6 +14,6 @@
 
 @interface PRSCameraConfigurator : NSObject
 
-+ (UIViewController *)configureModule:(void(^)(id<PRSCameraModuleInput> presenter))completion;
++ (UIViewController *)configureModule:(void(^)(id<PRSCameraModuleInput> presenter, UIViewController *view))completion;
 
 @end
