@@ -33,7 +33,7 @@
     [self.view setupInitialState];
 }
 
-- (void)viewReadyToAppear {    
+- (void)viewReadyToAppear {
     NSArray<PRSScanResultEntity *> *scanResults = [PRSStorageService getAllScanResults];
     NSMutableArray<PRSHistoryTableCellModel *> *models = [@[] mutableCopy];
     for (PRSScanResultEntity *entity in scanResults) {

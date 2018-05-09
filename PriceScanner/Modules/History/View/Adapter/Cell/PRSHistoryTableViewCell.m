@@ -30,10 +30,6 @@ static CGFloat const shadowOpacity = 0.15f;
 - (void)awakeFromNib {
     [super awakeFromNib];
     [self configureStyle];
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
     [self configureShadow];
 }
 
