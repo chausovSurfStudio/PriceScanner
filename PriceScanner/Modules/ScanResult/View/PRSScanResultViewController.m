@@ -12,6 +12,8 @@
 
 @interface PRSScanResultViewController ()
 
+@property (nonatomic, strong) IBOutlet UILabel *nameValueLabel;
+
 @end
 
 
@@ -28,11 +30,7 @@
     if (isModalState) {
         [self configureCloseModuleButton];
     }
-}
-
-#pragma mark - Actions
-- (void)tapOnCloseButton {
-    [self.output closeModule];
+    self.nameValueLabel.text = @"Какой-то очень длинный текст, без всякого смысла, просто чтобы места побольше занимал и растягивал свой лейбл как можно больше";
 }
 
 #pragma mark - Configure
@@ -50,6 +48,11 @@
     
     UIBarButtonItem *closeItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
     self.navigationItem.rightBarButtonItem = closeItem;
+}
+
+#pragma mark - Actions
+- (void)tapOnCloseButton {
+    [self.output closeModule];
 }
 
 @end
