@@ -12,7 +12,7 @@
 
 @interface PRSCameraPresenter()
 
-@property (nonatomic, copy) void (^openResultAction)(void);
+@property (nonatomic, copy) void (^openResultAction)(PRSScanResultEntity *scanResultEntity);
 
 @end
 
@@ -20,7 +20,7 @@
 @implementation PRSCameraPresenter
 
 #pragma mark - PRSCameraModuleInput
-- (void)configureWithOpenResultAction:(void(^)(void))openResultAction {
+- (void)configureWithOpenResultAction:(void(^)(PRSScanResultEntity *scanResultEntity))openResultAction {
     self.openResultAction = openResultAction;
 }
 
@@ -31,7 +31,7 @@
 
 - (void)openScanResultModule {
     if (self.openResultAction) {
-        self.openResultAction();
+        self.openResultAction(nil);
     }
 }
 

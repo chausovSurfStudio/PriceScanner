@@ -12,7 +12,12 @@
 
 @interface PRSScanResultViewController ()
 
+@property (nonatomic, strong) IBOutlet UILabel *photoTitleLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *photoImageView;
+@property (nonatomic, strong) IBOutlet UILabel *nameTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *nameValueLabel;
+@property (nonatomic, strong) IBOutlet UILabel *priceTitleLabel;
+@property (nonatomic, strong) IBOutlet UILabel *priceValueLabel;
 
 @end
 
@@ -30,7 +35,8 @@
     if (isModalState) {
         [self configureCloseModuleButton];
     }
-    self.nameValueLabel.text = @"Какой-то очень длинный текст, без всякого смысла, просто чтобы места побольше занимал и растягивал свой лейбл как можно больше";
+    [self configureStyle];
+    [self configureLocalizedTexts];
 }
 
 #pragma mark - Configure
@@ -48,6 +54,26 @@
     
     UIBarButtonItem *closeItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
     self.navigationItem.rightBarButtonItem = closeItem;
+}
+
+- (void)configureStyle {
+    self.photoTitleLabel.font = [UIFont systemFontOfSize:16.f weight:UIFontWeightMedium];
+    self.nameTitleLabel.font = [UIFont systemFontOfSize:16.f weight:UIFontWeightMedium];
+    self.priceTitleLabel.font = [UIFont systemFontOfSize:16.f weight:UIFontWeightMedium];
+    self.nameValueLabel.font = [UIFont systemFontOfSize:16.f weight:UIFontWeightLight];
+    self.priceValueLabel.font = [UIFont systemFontOfSize:24.f weight:UIFontWeightBlack];
+    
+    self.photoTitleLabel.textColor = [UIColor prsDarkBlueTextColor];
+    self.nameTitleLabel.textColor = [UIColor prsDarkBlueTextColor];
+    self.priceTitleLabel.textColor = [UIColor prsDarkBlueTextColor];
+    self.nameValueLabel.textColor = [UIColor prsBlackTextColor];
+    self.priceValueLabel.textColor = [UIColor prsBlackTextColor];
+}
+
+- (void)configureLocalizedTexts {
+    self.photoTitleLabel.text = @"Фотография ценника".localized;
+    self.nameTitleLabel.text = @"Название товара".localized;
+    self.priceTitleLabel.text = @"Цена".localized;
 }
 
 #pragma mark - Actions

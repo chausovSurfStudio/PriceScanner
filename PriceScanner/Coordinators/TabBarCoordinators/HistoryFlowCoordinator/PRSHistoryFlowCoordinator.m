@@ -11,6 +11,7 @@
 #import "PRSScanResultConfigurator.h"
 
 #import "PRSHistoryModuleInput.h"
+#import "PRSScanResultModuleInput.h"
 
 #import "PRSNavigationController.h"
 
@@ -27,17 +28,19 @@
 - (UINavigationController *)initialView {
     @weakify(self);
     UIViewController *historyView = [PRSHistoryConfigurator configureModule:^(id<PRSHistoryModuleInput> presenter) {
-        [presenter configureWithOpenResultAction:^{
+        [presenter configureWithOpenResultAction:^(PRSScanResultEntity *scanResultEntity) {
             @strongify(self);
-            [self openResultModule];
+            [self openResultModuleWithEntity:scanResultEntity];
         }];
     }];
     self.navigationController = [[PRSNavigationController alloc] initWithRootViewController:historyView];
     return self.navigationController;
 }
 
-- (void)openResultModule {
-    UIViewController *resultView = [PRSScanResultConfigurator configureModule:nil];
+- (void)openResultModuleWithEntity:(PRSScanResultEntity *)entity {
+    UIViewController *resultView = [PRSScanResultConfigurator configureModule:^(id<PRSScanResultModuleInput> presenter, UIViewController *view) {
+        [presenter configureWithScanResult:entity];
+    }];
     [self.navigationController pushViewController:resultView animated:YES];
 }
 

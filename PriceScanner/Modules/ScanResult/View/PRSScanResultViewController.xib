@@ -12,7 +12,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PRSScanResultViewController">
             <connections>
+                <outlet property="nameTitleLabel" destination="5dV-sh-oBu" id="NSQ-LC-B5Y"/>
                 <outlet property="nameValueLabel" destination="uOe-YV-6Ya" id="eIY-SP-fCP"/>
+                <outlet property="photoImageView" destination="Z3A-fG-Kap" id="rqQ-bf-tSW"/>
+                <outlet property="photoTitleLabel" destination="1Fm-db-qxu" id="lL9-Mh-a8L"/>
+                <outlet property="priceTitleLabel" destination="3nn-Tg-QeR" id="MUG-G2-BPU"/>
+                <outlet property="priceValueLabel" destination="0dJ-vh-2Mg" id="7qR-Ly-LG5"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Zfx-O4-4V9"/>
             </connections>
         </placeholder>
