@@ -8,10 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+@class PRSScanResultViewModel;
+
 
 @protocol PRSScanResultViewInput <NSObject>
 
-/** Установка начального состояния view, isModalState == YES, если модуль отображается в качетстве модального экрана */
-- (void)setupInitialState:(BOOL)isModalState;
+/** Установка начального состояния view
+ *
+ * @param isModalState передается YES, если модуль отображается в качестве модального экрана, NO в противном случае
+ * @param scanResult сущность результата сканирования, которую необходимо отобразить на экране
+ *
+ */
+- (void)setupInitialState:(BOOL)isModalState scanResult:(PRSScanResultViewModel *)scanResult;
 
 @end

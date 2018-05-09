@@ -9,6 +9,8 @@
 #import "PRSScanResultViewController.h"
 #import "PRSScanResultViewOutput.h"
 
+#import "PRSScanResultViewModel.h"
+
 
 @interface PRSScanResultViewController ()
 
@@ -30,13 +32,14 @@
 }
 
 #pragma mark - PRSScanResultViewInput
-- (void)setupInitialState:(BOOL)isModalState {
+- (void)setupInitialState:(BOOL)isModalState scanResult:(PRSScanResultViewModel *)scanResult {
     [self configureNavigationBar];
     if (isModalState) {
         [self configureCloseModuleButton];
     }
     [self configureStyle];
     [self configureLocalizedTexts];
+    [self configureContentWithScanResult:scanResult];
 }
 
 #pragma mark - Configure
@@ -74,6 +77,12 @@
     self.photoTitleLabel.text = @"Фотография ценника".localized;
     self.nameTitleLabel.text = @"Название товара".localized;
     self.priceTitleLabel.text = @"Цена".localized;
+}
+
+- (void)configureContentWithScanResult:(PRSScanResultViewModel *)scanResult {
+    self.nameValueLabel.text = scanResult.name;
+    self.priceValueLabel.text = scanResult.price;
+    self.photoImageView.image = scanResult.photo;
 }
 
 #pragma mark - Actions

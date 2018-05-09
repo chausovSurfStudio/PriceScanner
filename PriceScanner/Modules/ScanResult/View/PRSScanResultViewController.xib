@@ -56,7 +56,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z3A-fG-Kap">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z3A-fG-Kap">
                                     <rect key="frame" x="16" y="51" width="288" height="146"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="Z3A-fG-Kap" secondAttribute="height" multiplier="144:73" id="de0-Ka-cb4"/>

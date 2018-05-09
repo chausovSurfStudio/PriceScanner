@@ -10,6 +10,7 @@
 #import "PRSScanResultViewInput.h"
 
 #import "PRSScanResultEntity.h"
+#import "PRSScanResultViewModel.h"
 
 
 @interface PRSScanResultPresenter()
@@ -35,7 +36,7 @@
 
 #pragma mark - PRSScanResultViewOutput
 - (void)viewLoaded {
-    [self.view setupInitialState:self.showAsModal];
+    [self.view setupInitialState:self.showAsModal scanResult:[[PRSScanResultViewModel alloc] initWithEntity:self.scanResult]];
 }
 
 - (void)closeModule {
