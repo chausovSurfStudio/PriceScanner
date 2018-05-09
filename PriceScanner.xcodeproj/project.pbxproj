@@ -62,6 +62,7 @@
 		8455578120A0F5E400B01D91 /* PRSHistoryTableAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455578020A0F5E400B01D91 /* PRSHistoryTableAdapter.m */; };
 		8455578520A0F7F100B01D91 /* PRSHistoryTableCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455578420A0F7F100B01D91 /* PRSHistoryTableCellModel.m */; };
 		8455578920A3147200B01D91 /* PRSScanResultViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455578820A3147200B01D91 /* PRSScanResultViewModel.m */; };
+		8455578D20A32DE700B01D91 /* UILabel+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455578C20A32DE700B01D91 /* UILabel+Additions.m */; };
 		84665556209BADD500810A16 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84665554209BADD500810A16 /* Localizable.strings */; };
 		8466555C209BB0D900810A16 /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8466555B209BB0D900810A16 /* NSString+Additions.m */; };
 		846C2158207E97D100FFB499 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 846C2156207E97D100FFB499 /* UIImage+Resize.m */; };
@@ -183,6 +184,8 @@
 		8455578420A0F7F100B01D91 /* PRSHistoryTableCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSHistoryTableCellModel.m; sourceTree = "<group>"; };
 		8455578720A3147200B01D91 /* PRSScanResultViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSScanResultViewModel.h; sourceTree = "<group>"; };
 		8455578820A3147200B01D91 /* PRSScanResultViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSScanResultViewModel.m; sourceTree = "<group>"; };
+		8455578B20A32DE700B01D91 /* UILabel+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+Additions.h"; sourceTree = "<group>"; };
+		8455578C20A32DE700B01D91 /* UILabel+Additions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Additions.m"; sourceTree = "<group>"; };
 		84665550209BAD2B00810A16 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		84665551209BAD2B00810A16 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		84665555209BADD500810A16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -524,6 +527,7 @@
 				84665559209BB0B000810A16 /* NSString */,
 				84555763209F56CF00B01D91 /* UIButton */,
 				846C2155207E97BF00FFB499 /* UIImage */,
+				8455578A20A32DB900B01D91 /* UILabel */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -673,6 +677,15 @@
 				8455578820A3147200B01D91 /* PRSScanResultViewModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		8455578A20A32DB900B01D91 /* UILabel */ = {
+			isa = PBXGroup;
+			children = (
+				8455578B20A32DE700B01D91 /* UILabel+Additions.h */,
+				8455578C20A32DE700B01D91 /* UILabel+Additions.m */,
+			);
+			path = UILabel;
 			sourceTree = "<group>";
 		};
 		84665559209BB0B000810A16 /* NSString */ = {
@@ -1097,6 +1110,7 @@
 				25326E0D0A2DDF2B032B5081 /* PRSMainConfigurator.m in Sources */,
 				5499D3D2FA460A205FB60491 /* PRSMainPresenter.m in Sources */,
 				A93BD095355CF798DCAAB54C /* PRSMainViewController.m in Sources */,
+				8455578D20A32DE700B01D91 /* UILabel+Additions.m in Sources */,
 				0830ECE53B12B3AC6219215B /* PRSHistoryConfigurator.m in Sources */,
 				84555771209F9F8000B01D91 /* PRSScanResultEntry.m in Sources */,
 				84555759209F3C6A00B01D91 /* PRSMainCarouselAdapter.m in Sources */,

@@ -11,6 +11,8 @@
 
 #import "PRSScanResultViewModel.h"
 
+#import "UILabel+Additions.h"
+
 
 static CGFloat const photoCornerRadius = 4.f;
 static CGFloat const photoShadowRadius = 4.f;
@@ -98,7 +100,7 @@ static CGFloat const photoShadowOpacity = 0.5f;
 }
 
 - (void)configureContentWithScanResult:(PRSScanResultViewModel *)scanResult {
-    self.nameValueLabel.text = scanResult.name;
+    [self.nameValueLabel setText:scanResult.name withLineSpacing:@(3.f) letterSpacing:nil];
     self.priceValueLabel.text = scanResult.price;
     self.photoImageView.image = scanResult.photo;
 }

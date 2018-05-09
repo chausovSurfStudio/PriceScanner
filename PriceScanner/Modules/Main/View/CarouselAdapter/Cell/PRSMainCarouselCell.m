@@ -10,6 +10,7 @@
 #import "PRSMainCarouselPageModel.h"
 
 #import "UIButton+Style.h"
+#import "UILabel+Additions.h"
 
 
 static CGFloat const buttonContainerDefaultHeight = 80.f;
@@ -37,7 +38,7 @@ static CGFloat const buttonContainerDefaultHeight = 80.f;
 #pragma mark - Interface Methods
 - (void)configureWithModel:(PRSMainCarouselPageModel *)model {
     self.titleLabel.text = model.title;
-    self.subtitleLabel.text = model.subtitle;
+    [self.subtitleLabel setText:model.subtitle withLineSpacing:@(4.f) letterSpacing:nil];
     self.iconImageView.image = model.image;
     [self.actionButton setTitle:model.actionButtonTitle forState:UIControlStateNormal];
     

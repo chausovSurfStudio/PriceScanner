@@ -9,6 +9,8 @@
 #import "PRSHistoryTableViewCell.h"
 #import "PRSHistoryTableCellModel.h"
 
+#import "UILabel+Additions.h"
+
 
 static CGFloat const mainContainerCornerRadius = 4.f;
 static CGFloat const shadowRadius = 4.f;
@@ -45,7 +47,7 @@ static CGFloat const shadowOpacity = 0.15f;
 #pragma mark - Interface Methods
 - (void)configureWithModel:(PRSHistoryTableCellModel *)model {
     self.photoImageView.image = model.photo;
-    self.nameLabel.text = model.name;
+    [self.nameLabel setText:model.name withLineSpacing:@(2.f) letterSpacing:nil];
     self.priceLabel.attributedText = [self buildPriceStringWithPrice:model.price];
 }
 
