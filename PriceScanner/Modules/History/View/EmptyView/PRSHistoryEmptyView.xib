@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PRSHistoryEmptyView">
+            <connections>
+                <outlet property="actionButton" destination="off-bj-gDS" id="pKQ-HU-B2g"/>
+                <outlet property="descriptionLabel" destination="WYR-ni-T4q" id="H8T-vG-X6P"/>
+                <outlet property="emptyIconImageView" destination="e04-2p-VYf" id="ml5-I4-ohr"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRh-BC-B6J">
+                    <rect key="frame" x="30" y="167.5" width="260" height="233.5"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icCatInBox" translatesAutoresizingMaskIntoConstraints="NO" id="e04-2p-VYf">
+                            <rect key="frame" x="43" y="0.0" width="175" height="133"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="175" id="Bz1-4S-4RM"/>
+                                <constraint firstAttribute="height" constant="133" id="hdx-XZ-xHz"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYR-ni-T4q">
+                            <rect key="frame" x="0.0" y="153" width="260" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="off-bj-gDS">
+                            <rect key="frame" x="50" y="193.5" width="160" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="NUV-yG-E89"/>
+                                <constraint firstAttribute="width" constant="160" id="uKH-M1-rVo"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="tapOnActionButton:" destination="-1" eventType="touchUpInside" id="1Xq-av-Cwe"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="WYR-ni-T4q" firstAttribute="top" secondItem="e04-2p-VYf" secondAttribute="bottom" constant="20" id="ECG-IG-eNs"/>
+                        <constraint firstAttribute="trailing" secondItem="WYR-ni-T4q" secondAttribute="trailing" id="Qel-i5-7c3"/>
+                        <constraint firstItem="e04-2p-VYf" firstAttribute="top" secondItem="FRh-BC-B6J" secondAttribute="top" id="TgW-YI-pmy"/>
+                        <constraint firstItem="e04-2p-VYf" firstAttribute="centerX" secondItem="FRh-BC-B6J" secondAttribute="centerX" id="Ue8-ys-I4H"/>
+                        <constraint firstItem="WYR-ni-T4q" firstAttribute="leading" secondItem="FRh-BC-B6J" secondAttribute="leading" id="YzX-9P-Ssh"/>
+                        <constraint firstItem="off-bj-gDS" firstAttribute="centerX" secondItem="FRh-BC-B6J" secondAttribute="centerX" id="hMp-8A-TAN"/>
+                        <constraint firstAttribute="bottom" secondItem="off-bj-gDS" secondAttribute="bottom" id="uN3-mL-nQq"/>
+                        <constraint firstItem="off-bj-gDS" firstAttribute="top" secondItem="WYR-ni-T4q" secondAttribute="bottom" constant="20" id="v3H-lp-6Ob"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="FRh-BC-B6J" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="g7O-3j-Ght"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="FRh-BC-B6J" secondAttribute="trailing" constant="30" id="oF3-4t-ns1"/>
+                <constraint firstItem="FRh-BC-B6J" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="tA4-ec-QLJ"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icCatInBox" width="175" height="133"/>
+    </resources>
+</document>

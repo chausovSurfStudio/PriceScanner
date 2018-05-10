@@ -50,6 +50,10 @@
     }
 }
 
+- (void)openCameraModule {
+    NSLog(@"openCameraModule");
+}
+
 #pragma mark - Private Methods
 /** Метод ищет и возвращает сущность результата сканирования по id, в случае неудачи - вернется nil */
 - (PRSScanResultEntity *)findScanResultById:(NSNumber *)modelId {
