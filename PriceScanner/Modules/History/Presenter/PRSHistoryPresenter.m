@@ -40,7 +40,12 @@
     for (PRSScanResultEntity *entity in self.scanResults) {
         [models addObject:[[PRSHistoryTableCellModel alloc] initWithScanResultEntity:entity]];
     }
-    [self.view updateWithModels:[models copy]];
+    
+    if (models.count > 0) {
+        [self.view updateWithModels:[models copy]];
+    } else {
+        [self.view setupEmptyState];
+    }
 }
 
 - (void)openScanResultModuleForModelId:(NSNumber *)modelId {

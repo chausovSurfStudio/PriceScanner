@@ -42,7 +42,14 @@
 }
 
 - (void)updateWithModels:(NSArray<PRSHistoryTableCellModel *> *)models {
+    self.tableView.hidden = NO;
+    self.emptyView.hidden = YES;
     [self.adapter configureWithModels:models];
+}
+
+- (void)setupEmptyState {
+    self.tableView.hidden = YES;
+    self.emptyView.hidden = NO;
 }
 
 #pragma mark - Configure
