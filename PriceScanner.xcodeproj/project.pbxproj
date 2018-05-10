@@ -63,6 +63,8 @@
 		8455578520A0F7F100B01D91 /* PRSHistoryTableCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455578420A0F7F100B01D91 /* PRSHistoryTableCellModel.m */; };
 		8455578920A3147200B01D91 /* PRSScanResultViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455578820A3147200B01D91 /* PRSScanResultViewModel.m */; };
 		8455578D20A32DE700B01D91 /* UILabel+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455578C20A32DE700B01D91 /* UILabel+Additions.m */; };
+		8455579120A4E30600B01D91 /* PRSHistoryEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455579020A4E30600B01D91 /* PRSHistoryEmptyView.m */; };
+		8455579320A4E32E00B01D91 /* PRSHistoryEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8455579220A4E32E00B01D91 /* PRSHistoryEmptyView.xib */; };
 		84665556209BADD500810A16 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84665554209BADD500810A16 /* Localizable.strings */; };
 		8466555C209BB0D900810A16 /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8466555B209BB0D900810A16 /* NSString+Additions.m */; };
 		846C2158207E97D100FFB499 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 846C2156207E97D100FFB499 /* UIImage+Resize.m */; };
@@ -186,6 +188,9 @@
 		8455578820A3147200B01D91 /* PRSScanResultViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSScanResultViewModel.m; sourceTree = "<group>"; };
 		8455578B20A32DE700B01D91 /* UILabel+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+Additions.h"; sourceTree = "<group>"; };
 		8455578C20A32DE700B01D91 /* UILabel+Additions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Additions.m"; sourceTree = "<group>"; };
+		8455578F20A4E30600B01D91 /* PRSHistoryEmptyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSHistoryEmptyView.h; sourceTree = "<group>"; };
+		8455579020A4E30600B01D91 /* PRSHistoryEmptyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSHistoryEmptyView.m; sourceTree = "<group>"; };
+		8455579220A4E32E00B01D91 /* PRSHistoryEmptyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PRSHistoryEmptyView.xib; sourceTree = "<group>"; };
 		84665550209BAD2B00810A16 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		84665551209BAD2B00810A16 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		84665555209BADD500810A16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -688,6 +693,16 @@
 			path = UILabel;
 			sourceTree = "<group>";
 		};
+		8455578E20A4E2B900B01D91 /* EmptyView */ = {
+			isa = PBXGroup;
+			children = (
+				8455578F20A4E30600B01D91 /* PRSHistoryEmptyView.h */,
+				8455579020A4E30600B01D91 /* PRSHistoryEmptyView.m */,
+				8455579220A4E32E00B01D91 /* PRSHistoryEmptyView.xib */,
+			);
+			path = EmptyView;
+			sourceTree = "<group>";
+		};
 		84665559209BB0B000810A16 /* NSString */ = {
 			isa = PBXGroup;
 			children = (
@@ -746,6 +761,7 @@
 			isa = PBXGroup;
 			children = (
 				8455577820A0F5A900B01D91 /* Adapter */,
+				8455578E20A4E2B900B01D91 /* EmptyView */,
 				D796EE7DD38506112C146C29 /* PRSHistoryViewController.h */,
 				ACDFEC9652506136E10FD935 /* PRSHistoryViewController.m */,
 				841F4647209CED9A00535A4A /* PRSHistoryViewController.xib */,
@@ -984,6 +1000,7 @@
 				185816712042AE82003C2FA9 /* Assets.xcassets in Resources */,
 				841F4648209CED9A00535A4A /* PRSHistoryViewController.xib in Resources */,
 				84665556209BADD500810A16 /* Localizable.strings in Resources */,
+				8455579320A4E32E00B01D91 /* PRSHistoryEmptyView.xib in Resources */,
 				1858166C2042AE82003C2FA9 /* Main.storyboard in Resources */,
 				18A40784206B8C6000DB9D11 /* PRSCameraViewController.xib in Resources */,
 			);
@@ -1109,6 +1126,7 @@
 				A93D05499F023DAD571C1CE3 /* PRSCameraViewController.m in Sources */,
 				25326E0D0A2DDF2B032B5081 /* PRSMainConfigurator.m in Sources */,
 				5499D3D2FA460A205FB60491 /* PRSMainPresenter.m in Sources */,
+				8455579120A4E30600B01D91 /* PRSHistoryEmptyView.m in Sources */,
 				A93BD095355CF798DCAAB54C /* PRSMainViewController.m in Sources */,
 				8455578D20A32DE700B01D91 /* UILabel+Additions.m in Sources */,
 				0830ECE53B12B3AC6219215B /* PRSHistoryConfigurator.m in Sources */,

@@ -10,11 +10,13 @@
 #import "PRSHistoryViewOutput.h"
 
 #import "PRSHistoryTableAdapter.h"
+#import "PRSHistoryEmptyView.h"
 
 
-@interface PRSHistoryViewController () <PRSHistoryTableAdapterDelegate>
+@interface PRSHistoryViewController () <PRSHistoryTableAdapterDelegate, PRSHistoryEmptyViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) IBOutlet PRSHistoryEmptyView *emptyView;
 @property (nonatomic, strong) PRSHistoryTableAdapter *adapter;
 
 @end
@@ -36,10 +38,18 @@
 - (void)setupInitialState {
     [self configureNavigationBar];
     [self configureAdapter];
+    [self configureEmptyView];
 }
 
 - (void)updateWithModels:(NSArray<PRSHistoryTableCellModel *> *)models {
+    self.tableView.hidden = NO;
+    self.emptyView.hidden = YES;
     [self.adapter configureWithModels:models];
+}
+
+- (void)setupEmptyState {
+    self.tableView.hidden = YES;
+    self.emptyView.hidden = NO;
 }
 
 #pragma mark - Configure
@@ -52,9 +62,18 @@
     self.adapter = [[PRSHistoryTableAdapter alloc] initWithTableView:self.tableView delegate:self];
 }
 
+- (void)configureEmptyView {
+    self.emptyView.delegate = self;
+}
+
 #pragma mark - PRSHistoryTableAdapterDelegate
 - (void)tapOnModelWithId:(NSNumber *)modelId {
     [self.output openScanResultModuleForModelId:modelId];
+}
+
+#pragma mark - PRSHistoryEmptyViewDelegate
+- (void)emptyViewActionButtonDidTap {
+    [self.output openCameraModule];
 }
 
 @end

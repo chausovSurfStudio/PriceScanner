@@ -19,4 +19,7 @@
 /** Метод для обновления экрана истории переданным массивом моделей */
 - (void)updateWithModels:(NSArray<PRSHistoryTableCellModel *> *)models;
 
+/** Метод сообщает view о том, что необходимо отрисовать empty state экрана */
+- (void)setupEmptyState;
+
 @end

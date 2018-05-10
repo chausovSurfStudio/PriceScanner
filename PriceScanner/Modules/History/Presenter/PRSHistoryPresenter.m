@@ -17,6 +17,7 @@
 @interface PRSHistoryPresenter()
 
 @property (nonatomic, copy) void (^openResultAction)(PRSScanResultEntity *scanResultEntity);
+@property (nonatomic, copy) void (^openCameraModuleAction)(void);
 @property (nonatomic, strong) NSArray<PRSScanResultEntity *> *scanResults;
 
 @end
@@ -25,8 +26,10 @@
 @implementation PRSHistoryPresenter
 
 #pragma mark - PRSHistoryModuleInput
-- (void)configureWithOpenResultAction:(void(^)(PRSScanResultEntity *scanResultEntity))openResultAction {
+- (void)configureWithOpenResultAction:(void(^)(PRSScanResultEntity *scanResultEntity))openResultAction
+               openCameraModuleAction:(void(^)(void))openCameraModuleAction {
     self.openResultAction = openResultAction;
+    self.openCameraModuleAction = openCameraModuleAction;
 }
 
 #pragma mark - PRSHistoryViewOutput
@@ -40,13 +43,24 @@
     for (PRSScanResultEntity *entity in self.scanResults) {
         [models addObject:[[PRSHistoryTableCellModel alloc] initWithScanResultEntity:entity]];
     }
-    [self.view updateWithModels:[models copy]];
+    
+    if (models.count > 0) {
+        [self.view updateWithModels:[models copy]];
+    } else {
+        [self.view setupEmptyState];
+    }
 }
 
 - (void)openScanResultModuleForModelId:(NSNumber *)modelId {
     PRSScanResultEntity *selectedEntity = [self findScanResultById:modelId];
     if (selectedEntity && self.openResultAction) {
         self.openResultAction(selectedEntity);
+    }
+}
+
+- (void)openCameraModule {
+    if (self.openCameraModuleAction) {
+        self.openCameraModuleAction();
     }
 }
 

@@ -14,6 +14,7 @@
 #import "PRSScanResultModuleInput.h"
 
 #import "PRSNavigationController.h"
+#import "PRSTabbarIndex.h"
 
 
 @interface PRSHistoryFlowCoordinator()
@@ -28,9 +29,15 @@
 - (UINavigationController *)initialView {
     @weakify(self);
     UIViewController *historyView = [PRSHistoryConfigurator configureModule:^(id<PRSHistoryModuleInput> presenter, UIViewController *view) {
+        @weakify(view);
         [presenter configureWithOpenResultAction:^(PRSScanResultEntity *scanResultEntity) {
             @strongify(self);
             [self openResultModuleWithEntity:scanResultEntity];
+        } openCameraModuleAction:^{
+            @strongify(view);
+            if (view.tabBarController) {
+                view.tabBarController.selectedIndex = PRSTabbarIndexCamera;
+            }
         }];
     }];
     self.navigationController = [[PRSNavigationController alloc] initWithRootViewController:historyView];

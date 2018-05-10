@@ -59,7 +59,7 @@ static CGFloat const buttonContainerDefaultHeight = 80.f;
     self.titleLabel.font = [UIFont systemFontOfSize:20.f weight:UIFontWeightBlack];
     self.titleLabel.textColor = [UIColor prsMainThemeColor];
     
-    self.subtitleLabel.font = [UIFont systemFontOfSize:13 weight:UIFontWeightLight];
+    self.subtitleLabel.font = [UIFont systemFontOfSize:13 weight:UIFontWeightRegular];
     self.subtitleLabel.textColor = [UIColor prsDarkBlueTextColor];
     
     [self.actionButton setMainPinkStyle];
