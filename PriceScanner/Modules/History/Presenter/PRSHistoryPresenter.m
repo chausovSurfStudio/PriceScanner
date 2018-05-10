@@ -17,6 +17,7 @@
 @interface PRSHistoryPresenter()
 
 @property (nonatomic, copy) void (^openResultAction)(PRSScanResultEntity *scanResultEntity);
+@property (nonatomic, copy) void (^openCameraModuleAction)(void);
 @property (nonatomic, strong) NSArray<PRSScanResultEntity *> *scanResults;
 
 @end
@@ -25,8 +26,10 @@
 @implementation PRSHistoryPresenter
 
 #pragma mark - PRSHistoryModuleInput
-- (void)configureWithOpenResultAction:(void(^)(PRSScanResultEntity *scanResultEntity))openResultAction {
+- (void)configureWithOpenResultAction:(void(^)(PRSScanResultEntity *scanResultEntity))openResultAction
+               openCameraModuleAction:(void(^)(void))openCameraModuleAction {
     self.openResultAction = openResultAction;
+    self.openCameraModuleAction = openCameraModuleAction;
 }
 
 #pragma mark - PRSHistoryViewOutput
@@ -56,7 +59,9 @@
 }
 
 - (void)openCameraModule {
-    NSLog(@"openCameraModule");
+    if (self.openCameraModuleAction) {
+        self.openCameraModuleAction();
+    }
 }
 
 #pragma mark - Private Methods

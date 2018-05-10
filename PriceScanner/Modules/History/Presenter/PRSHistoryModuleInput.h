@@ -13,7 +13,13 @@
 
 @protocol PRSHistoryModuleInput <NSObject>
 
-/** Метод позволяет сконфигурировать модуль и указать блок перехода к модулю с результатами сканирования */
-- (void)configureWithOpenResultAction:(void(^)(PRSScanResultEntity *scanResultEntity))openResultAction;
+/** Метод позволяет сконфигурировать модуль, определив логику перехода на соседние экраны.
+ *
+ * @param openResultAction Блок кода, будет вызываться при необходимости перейти на экран результата сканирования
+ * @param openCameraModuleAction Блок кода, будет вызываться при необходимости перейти на экран сканирования
+ *
+ */
+- (void)configureWithOpenResultAction:(void(^)(PRSScanResultEntity *scanResultEntity))openResultAction
+               openCameraModuleAction:(void(^)(void))openCameraModuleAction;
 
 @end
