@@ -11,12 +11,17 @@
 
 #import "PRSHistoryTableAdapter.h"
 #import "PRSHistoryEmptyView.h"
+#import "PRSLoaderView.h"
+
+
+static CGFloat const loaderHidingAnimationDuration = 0.3f;
 
 
 @interface PRSHistoryViewController () <PRSHistoryTableAdapterDelegate, PRSHistoryEmptyViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) IBOutlet PRSHistoryEmptyView *emptyView;
+@property (nonatomic, strong) IBOutlet PRSLoaderView *loaderView;
 @property (nonatomic, strong) PRSHistoryTableAdapter *adapter;
 
 @end
@@ -31,7 +36,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.output viewReadyToAppear];
+    [self.output refreshData];
 }
 
 #pragma mark - PRSHistoryViewInput
@@ -50,6 +55,22 @@
 - (void)setupEmptyState {
     self.tableView.hidden = YES;
     self.emptyView.hidden = NO;
+}
+
+- (void)showLoader {
+    self.loaderView.alpha = 1.f;
+    self.loaderView.hidden = NO;
+    [self.loaderView startAnimating];
+}
+
+- (void)hideLoader {
+    [UIView animateWithDuration:loaderHidingAnimationDuration
+                     animations:^{
+                         self.loaderView.alpha = 0.f;
+                     } completion:^(BOOL finished) {
+                         self.loaderView.hidden = YES;
+                         [self.loaderView stopAnimating];
+                     }];
 }
 
 #pragma mark - Configure
