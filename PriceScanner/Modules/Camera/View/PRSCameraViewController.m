@@ -14,6 +14,7 @@
 
 #import "PRSCameraOverlay.h"
 #import "UIImage+Resize.h"
+#import "UIButton+Style.h"
 
 
 /** Состояние снимка */
@@ -30,6 +31,10 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
 @property (nonatomic, strong) IBOutlet UIImageView *testImageView;
 @property (nonatomic, strong) IBOutlet UIButton *snapshotButton;
 @property (nonatomic, strong) IBOutlet PRSCameraOverlay *overlay;
+
+@property (nonatomic, strong) IBOutlet UIView *scanInProgressView;
+@property (nonatomic, strong) IBOutlet UIImageView *scanIconImageView;
+@property (nonatomic, strong) IBOutlet UILabel *scanInProgressLabel;
 
 @property (nonatomic, strong) AVCaptureSession *session;
 @property (nonatomic, strong) NSArray<VNRequest *> *requests;
@@ -54,6 +59,9 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     
     self.makeSnapshot = SnapshotStatusNone;
+    
+    //TODO: тоже тестовый код
+    [self showSnapshotButton];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -69,17 +77,29 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
 #pragma mark - Configure
 - (void)configureStyle {
     [self configureSnapshotButton];
+    [self configureScanInProgressView];
+    self.scanInProgressView.hidden = YES;
 }
 
 - (void)configureSnapshotButton {
-    [self.snapshotButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.snapshotButton setTitle:@"Сделать снимок" forState:UIControlStateNormal];
+    [self.snapshotButton setRectanglePinkStyle];
+    [self.snapshotButton setTitle:@"Начать сканирование".localized forState:UIControlStateNormal];
+}
+
+- (void)configureScanInProgressView {
+    self.scanInProgressView.backgroundColor = [UIColor clearColor];
+    self.scanIconImageView.image = [UIImage imageNamed:@"icScan"];
+    
+    self.scanInProgressLabel.font = [UIFont systemFontOfSize:11.f weight:UIFontWeightRegular];
+    self.scanInProgressLabel.textColor = [UIColor whiteColor];
+    self.scanInProgressLabel.text = @"Идет сканирование".localized;
 }
 
 #pragma mark - Actions
 - (IBAction)tapOnSnapshotButton:(UIButton *)sender {
     // TODO: тестовый код, поправить позднее
-    [self.output openScanResultModule];
+    [self showScanInProgressView];
+//    [self.output openScanResultModule];
 //    self.makeSnapshot = SnapshotStatusMake;
 //
 //    [self pauseLiveVideo];
@@ -312,6 +332,27 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
     UIImageWriteToSavedPhotosAlbum(resultImage, nil, nil, nil);
 
     return resultImage;
+}
+
+- (void)showScanInProgressView {
+    [UIView animateWithDuration:0.15
+                     animations:^{
+                         self.snapshotButton.alpha = 0.f;
+                     } completion:^(BOOL finished) {
+                         self.snapshotButton.hidden = YES;
+                         self.scanInProgressView.alpha = 0.f;
+                         self.scanInProgressView.hidden = NO;
+                         [UIView animateWithDuration:0.15
+                                          animations:^{
+                                              self.scanInProgressView.alpha = 1.f;
+                                          }];
+                     }];
+}
+
+- (void)showSnapshotButton {
+    self.snapshotButton.alpha = 1.f;
+    self.snapshotButton.hidden = NO;
+    self.scanInProgressView.hidden = YES;
 }
 
 @end
