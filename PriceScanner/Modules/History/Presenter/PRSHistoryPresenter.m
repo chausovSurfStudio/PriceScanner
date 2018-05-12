@@ -37,8 +37,12 @@
     [self.view setupInitialState];
 }
 
-- (void)viewReadyToAppear {
-    [self.view setupLoaderVisibility:YES];
+- (void)refreshData {
+    if (!self.scanResults || self.scanResults.count == 0) {
+        // лоадер показываем только в первую загрузку или если результатов пока нет
+        [self.view showLoader];
+    }
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         self.scanResults = [PRSStorageService getAllScanResults];
         NSMutableArray<PRSHistoryTableCellModel *> *models = [@[] mutableCopy];
@@ -52,7 +56,7 @@
             } else {
                 [self.view setupEmptyState];
             }
-            [self.view setupLoaderVisibility:NO];
+            [self.view hideLoader];
         });
     });
 }
