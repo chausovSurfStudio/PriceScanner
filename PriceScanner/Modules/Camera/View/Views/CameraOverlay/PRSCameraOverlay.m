@@ -34,7 +34,7 @@ static CGFloat const overlayBottomOffset = 62.f;
 - (void)awakeFromNib {
     [super awakeFromNib];
     _state = PRSCameraOverlayStateWaiting;
-    _scanPercent = 0.f;
+    _progress = 0.f;
     
     [self configureBorders];
     [self configureCornerLines];
@@ -46,18 +46,15 @@ static CGFloat const overlayBottomOffset = 62.f;
     [self changeCornerLinesColor:color animated:YES];
 }
 
-- (void)setScanPercent:(CGFloat)scanPercent {
-    if (scanPercent < 0) {
-        scanPercent = 0.f;
-    } else if (scanPercent > 1) {
-        scanPercent = 1.f;
+- (void)setProgress:(CGFloat)progress {
+    if (progress < 0) {
+        progress = 0.f;
+    } else if (progress > 1) {
+        progress = 1.f;
     }
-    _scanPercent = scanPercent;
+    _progress = progress;
     [self updateCornerLinesSize];
 }
-
-#pragma mark - Interface Methods
-
 
 #pragma mark - Configure
 - (void)configureBorders {
@@ -72,10 +69,12 @@ static CGFloat const overlayBottomOffset = 62.f;
 }
 
 #pragma mark - Private Methods
+/** Возвращает цвет для "уголков", подходящий для текущего состояния */
 - (UIColor *)cornerColorForCurrentState {
     return self.state == PRSCameraOverlayStateWaiting ? [UIColor whiteColor] : [UIColor prsMainThemeColor];
 }
 
+/** Метод позволяет анимированно (или нет) поменять цвет для всех "уголков" */
 - (void)changeCornerLinesColor:(UIColor *)color animated:(BOOL)animated {
     NSMutableArray<UIView *> *lines = [@[] mutableCopy];
     [lines addObjectsFromArray:self.verticalCornerLines];
@@ -94,9 +93,10 @@ static CGFloat const overlayBottomOffset = 62.f;
     }
 }
 
+/** Метод позволяет анимированно поменять размер всех "уголков", в зависимости от текущего значения переменной progress */
 - (void)updateCornerLinesSize {
-    CGFloat lineWidth = [self freeHorizontalSpace] * self.scanPercent + cornerLineDefaultSize;
-    CGFloat lineHeight = [self freeVerticalSpace] * self.scanPercent + cornerLineDefaultSize;
+    CGFloat lineWidth = [self freeHorizontalSpace] * self.progress + cornerLineDefaultSize;
+    CGFloat lineHeight = [self freeVerticalSpace] * self.progress + cornerLineDefaultSize;
     for (NSLayoutConstraint *widthConstraint in self.horizontalCornerLineWidths) {
         widthConstraint.constant = lineWidth;
     }
@@ -109,10 +109,12 @@ static CGFloat const overlayBottomOffset = 62.f;
                      }];
 }
 
+/** Возвращает величину пустого пространства между двумя свернутыми "уголками" по горизонтали */
 - (CGFloat)freeHorizontalSpace {
     return (self.bounds.size.width - overlayHorizontalOffset * 2 - cornerLineDefaultSize * 2) / 2;
 }
 
+/** Возвращает величину пустого пространства между двумя свернутыми "уголками" по вертикали */
 - (CGFloat)freeVerticalSpace {
     return (self.bounds.size.height - overlayTopOffset - overlayBottomOffset - cornerLineDefaultSize * 2) / 2;
 }

@@ -20,7 +20,9 @@ typedef NS_OPTIONS(NSUInteger, PRSCameraOverlayState) {
 
 @interface PRSCameraOverlay : PRSDesignableView
 
+/** Текущее состояния оверлея, при изменении - "уголки" будут анимированно менять цвет */
 @property (nonatomic, assign) PRSCameraOverlayState state;
-@property (nonatomic, assign) CGFloat scanPercent;
+/** Значение от 0 до 1, характеризует текущий прогресс некоего действия. При установке чего-то вне границ [0,1] - будет выставлено ближайшее граничное значение*/
+@property (nonatomic, assign) CGFloat progress;
 
 @end
