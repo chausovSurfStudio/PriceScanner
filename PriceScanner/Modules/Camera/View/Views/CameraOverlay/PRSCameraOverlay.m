@@ -9,13 +9,22 @@
 #import "PRSCameraOverlay.h"
 
 
-static CGFloat const animationDuration = 0.3f;
+static CGFloat const cornerColorAnimationDuration = 0.3f;
+static CGFloat const cornerSizeAnimationDuration = 0.15f;
+static CGFloat const cornerLineDefaultSize = 34.f;
+static CGFloat const overlayHorizontalOffset = 16.f;
+static CGFloat const overlayTopOffset = 22.f;
+static CGFloat const overlayBottomOffset = 62.f;
+
 
 @interface PRSCameraOverlay()
 
 @property (nonatomic, strong) IBOutletCollection(UIView) NSArray *overlayBorderViews;
 @property (nonatomic, strong) IBOutletCollection(UIView) NSArray *verticalCornerLines;
 @property (nonatomic, strong) IBOutletCollection(UIView) NSArray *horizontalCornerLines;
+
+@property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *verticalCornerLineHeights;
+@property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *horizontalCornerLineWidths;
 
 @end
 
@@ -25,6 +34,7 @@ static CGFloat const animationDuration = 0.3f;
 - (void)awakeFromNib {
     [super awakeFromNib];
     _state = PRSCameraOverlayStateWaiting;
+    _scanPercent = 0.f;
     
     [self configureBorders];
     [self configureCornerLines];
@@ -34,6 +44,16 @@ static CGFloat const animationDuration = 0.3f;
     _state = state;
     UIColor *color = [self cornerColorForCurrentState];
     [self changeCornerLinesColor:color animated:YES];
+}
+
+- (void)setScanPercent:(CGFloat)scanPercent {
+    if (scanPercent < 0) {
+        scanPercent = 0.f;
+    } else if (scanPercent > 1) {
+        scanPercent = 1.f;
+    }
+    _scanPercent = scanPercent;
+    [self updateCornerLinesSize];
 }
 
 #pragma mark - Interface Methods
@@ -61,7 +81,7 @@ static CGFloat const animationDuration = 0.3f;
     [lines addObjectsFromArray:self.verticalCornerLines];
     [lines addObjectsFromArray:self.horizontalCornerLines];
     if (animated) {
-        [UIView animateWithDuration:animationDuration
+        [UIView animateWithDuration:cornerColorAnimationDuration
                          animations:^{
                              for (UIView *line in lines) {
                                  line.backgroundColor = color;
@@ -72,6 +92,29 @@ static CGFloat const animationDuration = 0.3f;
             line.backgroundColor = color;
         }
     }
+}
+
+- (void)updateCornerLinesSize {
+    CGFloat lineWidth = [self freeHorizontalSpace] * self.scanPercent + cornerLineDefaultSize;
+    CGFloat lineHeight = [self freeVerticalSpace] * self.scanPercent + cornerLineDefaultSize;
+    for (NSLayoutConstraint *widthConstraint in self.horizontalCornerLineWidths) {
+        widthConstraint.constant = lineWidth;
+    }
+    for (NSLayoutConstraint *heightConstraint in self.verticalCornerLineHeights) {
+        heightConstraint.constant = lineHeight;
+    }
+    [UIView animateWithDuration:cornerSizeAnimationDuration
+                     animations:^{
+                         [self layoutIfNeeded];
+                     }];
+}
+
+- (CGFloat)freeHorizontalSpace {
+    return (self.bounds.size.width - overlayHorizontalOffset * 2 - cornerLineDefaultSize * 2) / 2;
+}
+
+- (CGFloat)freeVerticalSpace {
+    return (self.bounds.size.height - overlayTopOffset - overlayBottomOffset - cornerLineDefaultSize * 2) / 2;
 }
 
 @end

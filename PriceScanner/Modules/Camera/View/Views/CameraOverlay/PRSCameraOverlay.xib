@@ -23,6 +23,14 @@
                 <outletCollection property="horizontalCornerLines" destination="ZHF-FG-GdL" id="2uR-Hy-8Vz"/>
                 <outletCollection property="horizontalCornerLines" destination="lGo-C4-YqM" id="7oH-kL-jvk"/>
                 <outletCollection property="verticalCornerLines" destination="ok0-lC-hbK" id="MI9-WB-cgP"/>
+                <outletCollection property="verticalCornerLineHeights" destination="75t-gZ-heJ" id="y7K-GF-1Zb"/>
+                <outletCollection property="verticalCornerLineHeights" destination="r39-38-wfn" id="HYz-tw-WSq"/>
+                <outletCollection property="verticalCornerLineHeights" destination="8Ot-vQ-KVa" id="9NZ-nS-DSX"/>
+                <outletCollection property="verticalCornerLineHeights" destination="9dG-ch-9Ka" id="8ho-QM-TNs"/>
+                <outletCollection property="horizontalCornerLineWidths" destination="o9U-Xg-pq1" id="fW2-Ma-e9c"/>
+                <outletCollection property="horizontalCornerLineWidths" destination="vq4-jp-8ky" id="LSb-Jf-7Dq"/>
+                <outletCollection property="horizontalCornerLineWidths" destination="QtK-MJ-QB8" id="4Yq-DN-dTI"/>
+                <outletCollection property="horizontalCornerLineWidths" destination="F8T-RQ-vkf" id="Auc-PF-e2y"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

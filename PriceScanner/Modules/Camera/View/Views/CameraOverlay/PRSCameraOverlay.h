@@ -21,5 +21,6 @@ typedef NS_OPTIONS(NSUInteger, PRSCameraOverlayState) {
 @interface PRSCameraOverlay : PRSDesignableView
 
 @property (nonatomic, assign) PRSCameraOverlayState state;
+@property (nonatomic, assign) CGFloat scanPercent;
 
 @end
