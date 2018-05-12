@@ -12,6 +12,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <Vision/Vision.h>
 
+#import "PRSCameraOverlay.h"
 #import "UIImage+Resize.h"
 
 
@@ -28,6 +29,7 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
 @property (nonatomic, strong) IBOutlet UIImageView *scene;
 @property (nonatomic, strong) IBOutlet UIImageView *testImageView;
 @property (nonatomic, strong) IBOutlet UIButton *snapshotButton;
+@property (nonatomic, strong) IBOutlet PRSCameraOverlay *overlay;
 
 @property (nonatomic, strong) AVCaptureSession *session;
 @property (nonatomic, strong) NSArray<VNRequest *> *requests;
@@ -58,6 +60,10 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
     [super viewDidDisappear:animated];
     [self stopLiveVideo];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - Configure

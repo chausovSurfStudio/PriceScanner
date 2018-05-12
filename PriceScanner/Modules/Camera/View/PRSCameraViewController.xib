@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PRSCameraViewController">
             <connections>
+                <outlet property="overlay" destination="SZv-TJ-728" id="KCw-co-wFO"/>
                 <outlet property="scene" destination="YJx-l5-vLP" id="CAt-rQ-VUe"/>
                 <outlet property="snapshotButton" destination="Fmk-c6-e9V" id="FoO-qo-Gui"/>
                 <outlet property="testImageView" destination="Vsv-x9-oKW" id="wGz-nd-Srp"/>
@@ -43,16 +44,24 @@
                         <constraint firstAttribute="width" constant="124" id="tCb-t3-f2b"/>
                     </constraints>
                 </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SZv-TJ-728" customClass="PRSCameraOverlay">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="YJx-l5-vLP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0VN-Mz-IYt"/>
                 <constraint firstItem="Fmk-c6-e9V" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="8FB-qD-cYJ"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Fmk-c6-e9V" secondAttribute="bottom" constant="20" id="G2H-jU-mtL"/>
+                <constraint firstItem="SZv-TJ-728" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="GiF-4U-dzW"/>
                 <constraint firstItem="YJx-l5-vLP" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="Nul-7C-5aU"/>
                 <constraint firstItem="Vsv-x9-oKW" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="Qpf-HK-ZZu"/>
+                <constraint firstItem="SZv-TJ-728" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="RcD-TF-EiL"/>
                 <constraint firstItem="YJx-l5-vLP" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="RwM-dW-3In"/>
+                <constraint firstItem="SZv-TJ-728" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="V3X-al-8jM"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Vsv-x9-oKW" secondAttribute="trailing" constant="10" id="dA5-mb-RFu"/>
+                <constraint firstItem="SZv-TJ-728" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="hCA-lw-xd4"/>
                 <constraint firstItem="YJx-l5-vLP" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="hvF-oj-qnh"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

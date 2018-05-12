@@ -9,6 +9,26 @@
 #import "PRSCameraOverlay.h"
 
 
+@interface PRSCameraOverlay()
+
+@property (strong, nonatomic) IBOutletCollection(UIView) NSArray *overlayBorderViews;
+
+
+@end
+
+
 @implementation PRSCameraOverlay
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    [self configureBorders];
+}
+
+#pragma mark - Configure
+- (void)configureBorders {
+    for (UIView *borderView in self.overlayBorderViews) {
+        borderView.backgroundColor = [[UIColor prsBlackTextColor] colorWithAlphaComponent:0.6f];
+    }
+}
 
 @end

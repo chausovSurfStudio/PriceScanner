@@ -9,6 +9,6 @@
 #import "PRSDesignableView.h"
 
 
-@interface PRSCameraOverlay : UIView
+@interface PRSCameraOverlay : PRSDesignableView
 
 @end
