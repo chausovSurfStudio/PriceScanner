@@ -41,8 +41,6 @@
     [self configureNavigationBar];
     [self configureAdapter];
     [self configureEmptyView];
-    
-    [self.loaderView startAnimating];
 }
 
 - (void)updateWithModels:(NSArray<PRSHistoryTableCellModel *> *)models {
@@ -54,6 +52,15 @@
 - (void)setupEmptyState {
     self.tableView.hidden = YES;
     self.emptyView.hidden = NO;
+}
+
+- (void)setupLoaderVisibility:(BOOL)isVisible {
+    self.loaderView.hidden = !isVisible;
+    if (isVisible) {
+        [self.loaderView startAnimating];
+    } else {
+        [self.loaderView stopAnimating];
+    }
 }
 
 #pragma mark - Configure

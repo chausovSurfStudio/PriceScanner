@@ -38,17 +38,23 @@
 }
 
 - (void)viewReadyToAppear {
-    self.scanResults = [PRSStorageService getAllScanResults];
-    NSMutableArray<PRSHistoryTableCellModel *> *models = [@[] mutableCopy];
-    for (PRSScanResultEntity *entity in self.scanResults) {
-        [models addObject:[[PRSHistoryTableCellModel alloc] initWithScanResultEntity:entity]];
-    }
-    
-    if (models.count > 0) {
-        [self.view updateWithModels:[models copy]];
-    } else {
-        [self.view setupEmptyState];
-    }
+    [self.view setupLoaderVisibility:YES];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        self.scanResults = [PRSStorageService getAllScanResults];
+        NSMutableArray<PRSHistoryTableCellModel *> *models = [@[] mutableCopy];
+        for (PRSScanResultEntity *entity in self.scanResults) {
+            [models addObject:[[PRSHistoryTableCellModel alloc] initWithScanResultEntity:entity]];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (models.count > 0) {
+                [self.view updateWithModels:[models copy]];
+            } else {
+                [self.view setupEmptyState];
+            }
+            [self.view setupLoaderVisibility:NO];
+        });
+    });
 }
 
 - (void)openScanResultModuleForModelId:(NSNumber *)modelId {

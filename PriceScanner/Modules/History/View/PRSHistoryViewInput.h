@@ -22,4 +22,7 @@
 /** Метод сообщает view о том, что необходимо отрисовать empty state экрана */
 - (void)setupEmptyState;
 
+/** Метод позволяет показать или скрыть лоадер поверх контента на экране */
+- (void)setupLoaderVisibility:(BOOL)isVisible;
+
 @end
