@@ -30,6 +30,7 @@ iOS Приложение для распознавания названия и �
 ### Также, существует отдельный target с OCLint (статический анализатор кода)
 Для его установки необходимо:
 > brew tap oclint/formulae
+
 > brew install oclint
 
 [Более подробная документация](http://oclint-docs.readthedocs.io/en/stable/intro/homebrew.html)
@@ -39,10 +40,12 @@ iOS Приложение для распознавания названия и �
 ### Если в процессе установки OCLint возникают ошибки
 К примеру, может возникнуть такой кейс:
 > xcodebuild -list
+
 > xcode-select: error: tool 'xcodebuild' requires Xcode, but active developer directory '/Library/Developer/CommandLineTools' is a command line tools instance
 
 В этом случае необходимо:
 > xcode-select --install
+
 > sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 
 [Более подробно вопрос освещен здесь](https://github.com/nodejs/node-gyp/issues/569)
