@@ -6,12 +6,11 @@ iOS Приложение для распознавания названия и �
 
 ## Что необходимо, чтобы запустить проект
 
----
-
 
 ### В проекте используются cocoapods версии 1.4.0 и выше
 Для просмотра текущей версии:
 > pod --version
+
 Для обновления:
 > sudo gem install cocoapods
 
@@ -32,6 +31,7 @@ iOS Приложение для распознавания названия и �
 Для его установки необходимо:
 > brew tap oclint/formulae
 > brew install oclint
+
 [Более подробная документация](http://oclint-docs.readthedocs.io/en/stable/intro/homebrew.html)
 
 ---
@@ -40,7 +40,9 @@ iOS Приложение для распознавания названия и �
 К примеру, может возникнуть такой кейс:
 > xcodebuild -list
 > xcode-select: error: tool 'xcodebuild' requires Xcode, but active developer directory '/Library/Developer/CommandLineTools' is a command line tools instance
+
 В этом случае необходимо:
 > xcode-select --install
 > sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+
 [Более подробно вопрос освещен здесь](https://github.com/nodejs/node-gyp/issues/569)
