@@ -13,6 +13,7 @@ target 'PriceScanner' do
   pod 'SDWebImage', '4.0.0'
   pod 'libextobjc', '0.4.1'
   pod 'Realm'
+  pod 'DGActivityIndicatorView'
 
   target 'PriceScannerTests' do
     inherit! :search_paths

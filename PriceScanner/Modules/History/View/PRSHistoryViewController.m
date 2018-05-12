@@ -11,12 +11,14 @@
 
 #import "PRSHistoryTableAdapter.h"
 #import "PRSHistoryEmptyView.h"
+#import "PRSLoaderView.h"
 
 
 @interface PRSHistoryViewController () <PRSHistoryTableAdapterDelegate, PRSHistoryEmptyViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) IBOutlet PRSHistoryEmptyView *emptyView;
+@property (nonatomic, strong) IBOutlet PRSLoaderView *loaderView;
 @property (nonatomic, strong) PRSHistoryTableAdapter *adapter;
 
 @end
@@ -39,6 +41,8 @@
     [self configureNavigationBar];
     [self configureAdapter];
     [self configureEmptyView];
+    
+    [self.loaderView startAnimating];
 }
 
 - (void)updateWithModels:(NSArray<PRSHistoryTableCellModel *> *)models {

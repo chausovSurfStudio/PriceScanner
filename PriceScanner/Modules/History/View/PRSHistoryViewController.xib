@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PRSHistoryViewController">
             <connections>
                 <outlet property="emptyView" destination="lRe-tB-nHg" id="C0p-bg-GU1"/>
+                <outlet property="loaderView" destination="JgG-3r-39N" id="stA-WQ-kPJ"/>
                 <outlet property="tableView" destination="aMd-LO-R19" id="R7N-6G-nL2"/>
                 <outlet property="view" destination="iN0-l3-epB" id="cPv-dT-JzY"/>
             </connections>
@@ -26,16 +27,24 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lRe-tB-nHg" customClass="PRSHistoryEmptyView">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JgG-3r-39N" customClass="PRSLoaderView">
+                    <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="lRe-tB-nHg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="6SZ-KS-0hv"/>
+                <constraint firstItem="JgG-3r-39N" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="14N-jN-0yy"/>
+                <constraint firstItem="lRe-tB-nHg" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="6SZ-KS-0hv"/>
+                <constraint firstItem="JgG-3r-39N" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="F8U-n8-sdU"/>
                 <constraint firstItem="lRe-tB-nHg" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="Jct-vn-IZF"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="JgG-3r-39N" secondAttribute="trailing" id="KnT-LZ-Gvg"/>
                 <constraint firstItem="aMd-LO-R19" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="UGp-zN-ba5"/>
                 <constraint firstItem="lRe-tB-nHg" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="ZSL-4x-fNu"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="JgG-3r-39N" secondAttribute="bottom" id="cbK-hM-EBa"/>
                 <constraint firstItem="lRe-tB-nHg" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="dI9-zD-SE3"/>
                 <constraint firstItem="aMd-LO-R19" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="fJ4-9S-nEL"/>
                 <constraint firstItem="aMd-LO-R19" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="heo-Ko-j2s"/>

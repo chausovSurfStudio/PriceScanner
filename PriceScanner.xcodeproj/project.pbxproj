@@ -68,6 +68,8 @@
 		84665556209BADD500810A16 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84665554209BADD500810A16 /* Localizable.strings */; };
 		8466555C209BB0D900810A16 /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8466555B209BB0D900810A16 /* NSString+Additions.m */; };
 		846C2158207E97D100FFB499 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 846C2156207E97D100FFB499 /* UIImage+Resize.m */; };
+		84DF4D1420A70D1F00E0504B /* PRSLoaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DF4D1320A70D1F00E0504B /* PRSLoaderView.m */; };
+		84DF4D1620A70D2B00E0504B /* PRSLoaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DF4D1520A70D2B00E0504B /* PRSLoaderView.xib */; };
 		84E22044206D85B4001B22AD /* PRSDesignableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E22043206D85B4001B22AD /* PRSDesignableView.m */; };
 		84E22048206D87F6001B22AD /* PRSCameraOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E22047206D87F6001B22AD /* PRSCameraOverlay.m */; };
 		A29758DC600AACC660EB8D51 /* PRSScanResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC760ED7516DE8B8CD03AA05 /* PRSScanResultViewController.m */; };
@@ -199,6 +201,9 @@
 		8466555B209BB0D900810A16 /* NSString+Additions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Additions.m"; sourceTree = "<group>"; };
 		846C2156207E97D100FFB499 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		846C2157207E97D100FFB499 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		84DF4D1220A70D1F00E0504B /* PRSLoaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSLoaderView.h; sourceTree = "<group>"; };
+		84DF4D1320A70D1F00E0504B /* PRSLoaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSLoaderView.m; sourceTree = "<group>"; };
+		84DF4D1520A70D2B00E0504B /* PRSLoaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PRSLoaderView.xib; sourceTree = "<group>"; };
 		84E22042206D85B4001B22AD /* PRSDesignableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSDesignableView.h; sourceTree = "<group>"; };
 		84E22043206D85B4001B22AD /* PRSDesignableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSDesignableView.m; sourceTree = "<group>"; };
 		84E22046206D87F6001B22AD /* PRSCameraOverlay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSCameraOverlay.h; sourceTree = "<group>"; };
@@ -541,6 +546,7 @@
 			isa = PBXGroup;
 			children = (
 				84E22041206D858E001B22AD /* DesignableView */,
+				84DF4D1120A70D0600E0504B /* LoaderView */,
 			);
 			path = Reuse;
 			sourceTree = "<group>";
@@ -719,6 +725,16 @@
 				846C2156207E97D100FFB499 /* UIImage+Resize.m */,
 			);
 			path = UIImage;
+			sourceTree = "<group>";
+		};
+		84DF4D1120A70D0600E0504B /* LoaderView */ = {
+			isa = PBXGroup;
+			children = (
+				84DF4D1220A70D1F00E0504B /* PRSLoaderView.h */,
+				84DF4D1320A70D1F00E0504B /* PRSLoaderView.m */,
+				84DF4D1520A70D2B00E0504B /* PRSLoaderView.xib */,
+			);
+			path = LoaderView;
 			sourceTree = "<group>";
 		};
 		84E22041206D858E001B22AD /* DesignableView */ = {
@@ -993,6 +1009,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				841F464C209CEDF600535A4A /* PRSScanResultViewController.xib in Resources */,
+				84DF4D1620A70D2B00E0504B /* PRSLoaderView.xib in Resources */,
 				841F464A209CEDD200535A4A /* PRSMainViewController.xib in Resources */,
 				185816742042AE82003C2FA9 /* LaunchScreen.storyboard in Resources */,
 				8455575E209F41BD00B01D91 /* PRSMainCarouselCell.xib in Resources */,
@@ -1114,6 +1131,7 @@
 				846C2158207E97D100FFB499 /* UIImage+Resize.m in Sources */,
 				84555761209F421600B01D91 /* PRSMainCarouselPageModel.m in Sources */,
 				84E22048206D87F6001B22AD /* PRSCameraOverlay.m in Sources */,
+				84DF4D1420A70D1F00E0504B /* PRSLoaderView.m in Sources */,
 				8455576E209F9F5800B01D91 /* PRSStorageService.m in Sources */,
 				841F4643209CEBD300535A4A /* PRSHistoryFlowCoordinator.m in Sources */,
 				8435729A2066D41D00AC6E74 /* PRSCameraFlowCoordinator.m in Sources */,
