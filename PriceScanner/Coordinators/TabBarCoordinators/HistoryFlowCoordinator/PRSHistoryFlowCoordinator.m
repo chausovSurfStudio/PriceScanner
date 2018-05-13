@@ -9,9 +9,11 @@
 #import "PRSHistoryFlowCoordinator.h"
 #import "PRSHistoryConfigurator.h"
 #import "PRSScanResultConfigurator.h"
+#import "PRSAlertConfigurator.h"
 
 #import "PRSHistoryModuleInput.h"
 #import "PRSScanResultModuleInput.h"
+#import "PRSAlertModuleInput.h"
 
 #import "PRSNavigationController.h"
 #import "PRSTabbarIndex.h"
@@ -38,6 +40,9 @@
             if (view.tabBarController) {
                 view.tabBarController.selectedIndex = PRSTabbarIndexCamera;
             }
+        } openAlertAction:^(NSString *message, AlertCompletionBlock confirmHandler) {
+            @strongify(self);
+            [self openAlertModuleWithMessage:message confirmHandler:confirmHandler];
         }];
     }];
     self.navigationController = [[PRSNavigationController alloc] initWithRootViewController:historyView];
@@ -49,6 +54,24 @@
         [presenter configureWithScanResult:entity];
     }];
     [self.navigationController pushViewController:resultView animated:YES];
+}
+
+- (void)openAlertModuleWithMessage:(NSString *)message confirmHandler:(AlertCompletionBlock)confirmHandler {
+    UIViewController *alertView = [PRSAlertConfigurator configureModule:^(id<PRSAlertModuleInput> presenter, UIViewController *view) {
+        @weakify(view);
+        [presenter configureWithMessage:message
+                            agreeAction:^{
+                                @strongify(view);
+                                confirmHandler();
+                                [view dismissViewControllerAnimated:YES completion:nil];
+                            } cancelAction:^{
+                                @strongify(view);
+                                [view dismissViewControllerAnimated:YES completion:nil];
+                            }];
+    }];
+    alertView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    alertView.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    [self.navigationController.topViewController presentViewController:alertView animated:YES completion:nil];
 }
 
 @end

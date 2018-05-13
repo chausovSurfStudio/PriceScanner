@@ -23,6 +23,7 @@ static CGFloat const loaderHidingAnimationDuration = 0.3f;
 @property (nonatomic, strong) IBOutlet PRSHistoryEmptyView *emptyView;
 @property (nonatomic, strong) IBOutlet PRSLoaderView *loaderView;
 @property (nonatomic, strong) PRSHistoryTableAdapter *adapter;
+@property (nonatomic, strong) UIBarButtonItem *clearButton;
 
 @end
 
@@ -49,12 +50,14 @@ static CGFloat const loaderHidingAnimationDuration = 0.3f;
 - (void)updateWithModels:(NSArray<PRSHistoryTableCellModel *> *)models {
     self.tableView.hidden = NO;
     self.emptyView.hidden = YES;
+    self.clearButton.enabled = YES;
     [self.adapter configureWithModels:models];
 }
 
 - (void)setupEmptyState {
     self.tableView.hidden = YES;
     self.emptyView.hidden = NO;
+    self.clearButton.enabled = NO;
 }
 
 - (void)showLoader {
@@ -77,6 +80,11 @@ static CGFloat const loaderHidingAnimationDuration = 0.3f;
 - (void)configureNavigationBar {
     self.title = @"История".localized;
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    UIBarButtonItem *clearButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(tapOnClearHistory)];
+    clearButton.enabled = NO;
+    self.navigationItem.rightBarButtonItem = clearButton;
+    self.clearButton = clearButton;
 }
 
 - (void)configureAdapter {
@@ -85,6 +93,11 @@ static CGFloat const loaderHidingAnimationDuration = 0.3f;
 
 - (void)configureEmptyView {
     self.emptyView.delegate = self;
+}
+
+#pragma mark - Actions
+- (void)tapOnClearHistory {
+    [self.output tapOnClearHistoryButton];
 }
 
 #pragma mark - PRSHistoryTableAdapterDelegate

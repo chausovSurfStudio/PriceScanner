@@ -37,6 +37,7 @@
 		356B1226450061451026127C /* PRSScanResultConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 128F0037A4EB5181B24BFED1 /* PRSScanResultConfigurator.m */; };
 		4D8F92E7E93420611E4E5184 /* PRSCameraPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D034414F967F52CFEA19C94 /* PRSCameraPresenter.m */; };
 		5499D3D2FA460A205FB60491 /* PRSMainPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F497962A6B97299094B00A1 /* PRSMainPresenter.m */; };
+		56D605F58EBE15161B26329F /* PRSAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D83FF6F2017EF4B1FFB6EA /* PRSAlertViewController.m */; };
 		5BA7F8FC2B2358AE6D9829EB /* PRSScanResultPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = DA60A244BD704285E5B11298 /* PRSScanResultPresenter.m */; };
 		79BB5F88CB71A20A71D9F32D /* libPods-PriceScanner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 875B6E9D6EA7B1D0438759ED /* libPods-PriceScanner.a */; };
 		841F4643209CEBD300535A4A /* PRSHistoryFlowCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 841F4642209CEBD300535A4A /* PRSHistoryFlowCoordinator.m */; };
@@ -68,6 +69,7 @@
 		84665556209BADD500810A16 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84665554209BADD500810A16 /* Localizable.strings */; };
 		8466555C209BB0D900810A16 /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8466555B209BB0D900810A16 /* NSString+Additions.m */; };
 		846C2158207E97D100FFB499 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 846C2156207E97D100FFB499 /* UIImage+Resize.m */; };
+		84B91BBC20A87AC500C4B23F /* PRSAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B91BBB20A87AC500C4B23F /* PRSAlertViewController.xib */; };
 		84DF4D1420A70D1F00E0504B /* PRSLoaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DF4D1320A70D1F00E0504B /* PRSLoaderView.m */; };
 		84DF4D1620A70D2B00E0504B /* PRSLoaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DF4D1520A70D2B00E0504B /* PRSLoaderView.xib */; };
 		84E22044206D85B4001B22AD /* PRSDesignableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E22043206D85B4001B22AD /* PRSDesignableView.m */; };
@@ -76,8 +78,10 @@
 		A415026E82ADDA03161A2748 /* PRSCameraConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9464E3667058E6B6970D15 /* PRSCameraConfigurator.m */; };
 		A93BD095355CF798DCAAB54C /* PRSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A61D5454D44588EE9554191 /* PRSMainViewController.m */; };
 		A93D05499F023DAD571C1CE3 /* PRSCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4975190842ACF9E013840D4 /* PRSCameraViewController.m */; };
+		B8A9BCC235238956A9A4E437 /* PRSAlertPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = DC712BFF0C8999D5688BE0E4 /* PRSAlertPresenter.m */; };
 		E800211210310427880E30F8 /* PRSHistoryPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DC1490BE799462A6227872 /* PRSHistoryPresenter.m */; };
 		E93E5C7850D4D88F31C3B7A6 /* libPods-PriceScannerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51B00C513929A27C7BD16E12 /* libPods-PriceScannerTests.a */; };
+		EC4F8793060A3260456A4C9F /* PRSAlertConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = B2765189609F5E952EBB6A15 /* PRSAlertConfigurator.m */; };
 		FA0407BE2816CAB3809DAAE3 /* PRSHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDFEC9652506136E10FD935 /* PRSHistoryViewController.m */; };
 		FF08CFFD7765DAF4B995D246 /* libPods-PriceScannerUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9CD1054C9E7529C14BC8E9 /* libPods-PriceScannerUITests.a */; };
 /* End PBXBuildFile section */
@@ -132,10 +136,12 @@
 		1A61D5454D44588EE9554191 /* PRSMainViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PRSMainViewController.m; sourceTree = "<group>"; };
 		1C4D2071A7D58CF4459ABF63 /* PRSMainViewInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSMainViewInput.h; sourceTree = "<group>"; };
 		2536271139138DA8F075C7E5 /* Pods-PriceScannerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceScannerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PriceScannerUITests/Pods-PriceScannerUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		37641336A289DECF2EEA9B8B /* PRSAlertModuleInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSAlertModuleInput.h; sourceTree = "<group>"; };
 		3F24D0C7F9F1A8F29DF3AC09 /* PRSMainConfigurator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PRSMainConfigurator.m; sourceTree = "<group>"; };
 		4036BF649E77FA7C40CF9549 /* PRSCameraModuleInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSCameraModuleInput.h; sourceTree = "<group>"; };
 		4434A98012A64CE893BFAB3F /* Pods-PriceScannerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceScannerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PriceScannerTests/Pods-PriceScannerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4731D28E8F1F2C0B26F73552 /* PRSCameraViewInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSCameraViewInput.h; sourceTree = "<group>"; };
+		4C202026B5DD391DA966CCB0 /* PRSAlertViewOutput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSAlertViewOutput.h; sourceTree = "<group>"; };
 		4F07596435B93BB37371AC76 /* PRSMainModuleInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSMainModuleInput.h; sourceTree = "<group>"; };
 		4F497962A6B97299094B00A1 /* PRSMainPresenter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PRSMainPresenter.m; sourceTree = "<group>"; };
 		51B00C513929A27C7BD16E12 /* libPods-PriceScannerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PriceScannerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,6 +207,7 @@
 		8466555B209BB0D900810A16 /* NSString+Additions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Additions.m"; sourceTree = "<group>"; };
 		846C2156207E97D100FFB499 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		846C2157207E97D100FFB499 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		84B91BBB20A87AC500C4B23F /* PRSAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PRSAlertViewController.xib; sourceTree = "<group>"; };
 		84DF4D1220A70D1F00E0504B /* PRSLoaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSLoaderView.h; sourceTree = "<group>"; };
 		84DF4D1320A70D1F00E0504B /* PRSLoaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSLoaderView.m; sourceTree = "<group>"; };
 		84DF4D1520A70D2B00E0504B /* PRSLoaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PRSLoaderView.xib; sourceTree = "<group>"; };
@@ -208,6 +215,7 @@
 		84E22043206D85B4001B22AD /* PRSDesignableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSDesignableView.m; sourceTree = "<group>"; };
 		84E22046206D87F6001B22AD /* PRSCameraOverlay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSCameraOverlay.h; sourceTree = "<group>"; };
 		84E22047206D87F6001B22AD /* PRSCameraOverlay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSCameraOverlay.m; sourceTree = "<group>"; };
+		86D75D0AB5417166A11D3C27 /* PRSAlertViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSAlertViewController.h; sourceTree = "<group>"; };
 		875B6E9D6EA7B1D0438759ED /* libPods-PriceScanner.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PriceScanner.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		899BB5AB6E0196356C110809 /* PRSMainViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSMainViewController.h; sourceTree = "<group>"; };
 		8E28806266FFFD6F01B70CDD /* Pods-PriceScanner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceScanner.release.xcconfig"; path = "Pods/Target Support Files/Pods-PriceScanner/Pods-PriceScanner.release.xcconfig"; sourceTree = "<group>"; };
@@ -215,14 +223,20 @@
 		AC760ED7516DE8B8CD03AA05 /* PRSScanResultViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PRSScanResultViewController.m; sourceTree = "<group>"; };
 		ACDFEC9652506136E10FD935 /* PRSHistoryViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PRSHistoryViewController.m; sourceTree = "<group>"; };
 		B0DC1490BE799462A6227872 /* PRSHistoryPresenter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PRSHistoryPresenter.m; sourceTree = "<group>"; };
+		B2765189609F5E952EBB6A15 /* PRSAlertConfigurator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PRSAlertConfigurator.m; sourceTree = "<group>"; };
+		C1476838ADC7FCBCE97F4E7F /* PRSAlertPresenter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSAlertPresenter.h; sourceTree = "<group>"; };
 		CA89653624D78B7FAEDDF681 /* PRSCameraViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSCameraViewController.h; sourceTree = "<group>"; };
 		CDCEF44D30DE738E94816CF6 /* PRSHistoryConfigurator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PRSHistoryConfigurator.m; sourceTree = "<group>"; };
 		D0E7A1C0FA63B4D4C18D1DC5 /* PRSScanResultViewInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSScanResultViewInput.h; sourceTree = "<group>"; };
 		D796EE7DD38506112C146C29 /* PRSHistoryViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSHistoryViewController.h; sourceTree = "<group>"; };
 		DA60A244BD704285E5B11298 /* PRSScanResultPresenter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PRSScanResultPresenter.m; sourceTree = "<group>"; };
+		DC712BFF0C8999D5688BE0E4 /* PRSAlertPresenter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PRSAlertPresenter.m; sourceTree = "<group>"; };
+		E2D83FF6F2017EF4B1FFB6EA /* PRSAlertViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PRSAlertViewController.m; sourceTree = "<group>"; };
 		E398CD4E3A06DE6F78D91A4B /* Pods-PriceScannerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceScannerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PriceScannerTests/Pods-PriceScannerTests.release.xcconfig"; sourceTree = "<group>"; };
 		E8E5D8474A0A485C140DC0AE /* Pods-PriceScannerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceScannerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PriceScannerUITests/Pods-PriceScannerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EDCCA0DB578F2AFA99BBBB33 /* PRSScanResultConfigurator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSScanResultConfigurator.h; sourceTree = "<group>"; };
+		F0872D3F60E2C8FF107A981F /* PRSAlertConfigurator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSAlertConfigurator.h; sourceTree = "<group>"; };
+		F1167DFEC2BF2460931EFC88 /* PRSAlertViewInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSAlertViewInput.h; sourceTree = "<group>"; };
 		F2BA39339E3E75ADF5ABB15E /* PRSHistoryViewInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSHistoryViewInput.h; sourceTree = "<group>"; };
 		F4975190842ACF9E013840D4 /* PRSCameraViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PRSCameraViewController.m; sourceTree = "<group>"; };
 		FAB6039A848900D51203D66A /* PRSScanResultPresenter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSScanResultPresenter.h; sourceTree = "<group>"; };
@@ -343,6 +357,7 @@
 		1858169A2042AF43003C2FA9 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				DF75BD5CAF63053CDB49BF69 /* Alert */,
 				DF8963636A269702EF41BE36 /* Camera */,
 				DAD48F70A9404FA017A7DDF6 /* History */,
 				89C50554273C6221B8ADF2A5 /* Main */,
@@ -429,6 +444,16 @@
 				18DC5465206BFD4D009E1D2A /* PRSTabBarCoordinator.m */,
 			);
 			path = TabBarCoordinator;
+			sourceTree = "<group>";
+		};
+		273DAC09520236348C2760DF /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				C1476838ADC7FCBCE97F4E7F /* PRSAlertPresenter.h */,
+				DC712BFF0C8999D5688BE0E4 /* PRSAlertPresenter.m */,
+				37641336A289DECF2EEA9B8B /* PRSAlertModuleInput.h */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		2CB3FEEA6A0E2F3D0A54ABDB /* ScanResult */ = {
@@ -800,6 +825,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		AC7FA627BF15E31F82797D0D /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				F0872D3F60E2C8FF107A981F /* PRSAlertConfigurator.h */,
+				B2765189609F5E952EBB6A15 /* PRSAlertConfigurator.m */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
 		B00A01257D76A6E8245F3F8B /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -809,6 +843,18 @@
 				841F4649209CEDD200535A4A /* PRSMainViewController.xib */,
 				1C4D2071A7D58CF4459ABF63 /* PRSMainViewInput.h */,
 				52B856BE3037A76CDFAAC75A /* PRSMainViewOutput.h */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B10ACDCEF61CA192F275C492 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				86D75D0AB5417166A11D3C27 /* PRSAlertViewController.h */,
+				E2D83FF6F2017EF4B1FFB6EA /* PRSAlertViewController.m */,
+				84B91BBB20A87AC500C4B23F /* PRSAlertViewController.xib */,
+				F1167DFEC2BF2460931EFC88 /* PRSAlertViewInput.h */,
+				4C202026B5DD391DA966CCB0 /* PRSAlertViewOutput.h */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -849,6 +895,16 @@
 				A1FD372874CBB01E298BEE28 /* View */,
 			);
 			path = History;
+			sourceTree = "<group>";
+		};
+		DF75BD5CAF63053CDB49BF69 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				AC7FA627BF15E31F82797D0D /* Configurator */,
+				273DAC09520236348C2760DF /* Presenter */,
+				B10ACDCEF61CA192F275C492 /* View */,
+			);
+			path = Alert;
 			sourceTree = "<group>";
 		};
 		DF8963636A269702EF41BE36 /* Camera */ = {
@@ -1013,6 +1069,7 @@
 				841F464A209CEDD200535A4A /* PRSMainViewController.xib in Resources */,
 				185816742042AE82003C2FA9 /* LaunchScreen.storyboard in Resources */,
 				8455575E209F41BD00B01D91 /* PRSMainCarouselCell.xib in Resources */,
+				84B91BBC20A87AC500C4B23F /* PRSAlertViewController.xib in Resources */,
 				8455577E20A0F5CD00B01D91 /* PRSHistoryTableViewCell.xib in Resources */,
 				185816712042AE82003C2FA9 /* Assets.xcassets in Resources */,
 				841F4648209CED9A00535A4A /* PRSHistoryViewController.xib in Resources */,
@@ -1156,6 +1213,9 @@
 				356B1226450061451026127C /* PRSScanResultConfigurator.m in Sources */,
 				5BA7F8FC2B2358AE6D9829EB /* PRSScanResultPresenter.m in Sources */,
 				A29758DC600AACC660EB8D51 /* PRSScanResultViewController.m in Sources */,
+				EC4F8793060A3260456A4C9F /* PRSAlertConfigurator.m in Sources */,
+				B8A9BCC235238956A9A4E437 /* PRSAlertPresenter.m in Sources */,
+				56D605F58EBE15161B26329F /* PRSAlertViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

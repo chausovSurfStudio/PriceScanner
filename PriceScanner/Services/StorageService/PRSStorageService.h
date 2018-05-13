@@ -18,5 +18,7 @@
 + (void)addNewScanResult:(PRSScanResultEntity *)entity;
 /** Метод возвращает массив со всеми результатами прошлых сканирований, сохраненных в базе данных */
 + (NSArray<PRSScanResultEntity *> *)getAllScanResults;
+/** Метод удаляет все сохраненные результаты сканирования из базы данных */
++ (void)removeAllScanResults;
 
 @end
