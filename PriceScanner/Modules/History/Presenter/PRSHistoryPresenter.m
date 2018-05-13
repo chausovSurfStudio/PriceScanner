@@ -18,6 +18,7 @@
 
 @property (nonatomic, copy) void (^openResultAction)(PRSScanResultEntity *scanResultEntity);
 @property (nonatomic, copy) void (^openCameraModuleAction)(void);
+@property (nonatomic, copy) void (^openAlertAction)(NSString *message);
 @property (nonatomic, strong) NSArray<PRSScanResultEntity *> *scanResults;
 
 @end
@@ -27,9 +28,11 @@
 
 #pragma mark - PRSHistoryModuleInput
 - (void)configureWithOpenResultAction:(void(^)(PRSScanResultEntity *scanResultEntity))openResultAction
-               openCameraModuleAction:(void(^)(void))openCameraModuleAction {
+               openCameraModuleAction:(void(^)(void))openCameraModuleAction
+                      openAlertAction:(void(^)(NSString *message))openAlertAction {
     self.openResultAction = openResultAction;
     self.openCameraModuleAction = openCameraModuleAction;
+    self.openAlertAction = openAlertAction;
 }
 
 #pragma mark - PRSHistoryViewOutput
@@ -71,6 +74,12 @@
 - (void)openCameraModule {
     if (self.openCameraModuleAction) {
         self.openCameraModuleAction();
+    }
+}
+
+- (void)tapOnClearHistoryButton {
+    if (self.openAlertAction) {
+        self.openAlertAction(@"Вы уверены, что хотите очистить историю?".localized);
     }
 }
 

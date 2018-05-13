@@ -77,6 +77,9 @@ static CGFloat const loaderHidingAnimationDuration = 0.3f;
 - (void)configureNavigationBar {
     self.title = @"История".localized;
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    UIBarButtonItem *clearButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(tapOnClearHistory)];
+    self.navigationItem.rightBarButtonItem = clearButton;
 }
 
 - (void)configureAdapter {
@@ -85,6 +88,11 @@ static CGFloat const loaderHidingAnimationDuration = 0.3f;
 
 - (void)configureEmptyView {
     self.emptyView.delegate = self;
+}
+
+#pragma mark - Actions
+- (void)tapOnClearHistory {
+    [self.output tapOnClearHistoryButton];
 }
 
 #pragma mark - PRSHistoryTableAdapterDelegate
