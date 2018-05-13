@@ -40,9 +40,9 @@
             if (view.tabBarController) {
                 view.tabBarController.selectedIndex = PRSTabbarIndexCamera;
             }
-        } openAlertAction:^(NSString *message) {
+        } openAlertAction:^(NSString *message, AlertCompletionBlock confirmHandler) {
             @strongify(self);
-            [self openAlertModuleWithMessage:message];
+            [self openAlertModuleWithMessage:message confirmHandler:confirmHandler];
         }];
     }];
     self.navigationController = [[PRSNavigationController alloc] initWithRootViewController:historyView];
@@ -56,13 +56,13 @@
     [self.navigationController pushViewController:resultView animated:YES];
 }
 
-- (void)openAlertModuleWithMessage:(NSString *)message {
+- (void)openAlertModuleWithMessage:(NSString *)message confirmHandler:(AlertCompletionBlock)confirmHandler {
     UIViewController *alertView = [PRSAlertConfigurator configureModule:^(id<PRSAlertModuleInput> presenter, UIViewController *view) {
         @weakify(view);
         [presenter configureWithMessage:message
                             agreeAction:^{
                                 @strongify(view);
-                                // TODO: дописать
+                                confirmHandler();
                                 [view dismissViewControllerAnimated:YES completion:nil];
                             } cancelAction:^{
                                 @strongify(view);

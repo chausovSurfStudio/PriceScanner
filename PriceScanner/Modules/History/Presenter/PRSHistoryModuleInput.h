@@ -10,6 +10,8 @@
 
 @class PRSScanResultEntity;
 
+typedef void(^AlertCompletionBlock)(void);
+
 
 @protocol PRSHistoryModuleInput <NSObject>
 
@@ -22,6 +24,6 @@
  */
 - (void)configureWithOpenResultAction:(void(^)(PRSScanResultEntity *scanResultEntity))openResultAction
                openCameraModuleAction:(void(^)(void))openCameraModuleAction
-                      openAlertAction:(void(^)(NSString *message))openAlertAction;
+                      openAlertAction:(void(^)(NSString *message, AlertCompletionBlock confirmHandler))openAlertAction;
 
 @end
