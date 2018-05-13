@@ -79,8 +79,13 @@
 
 - (void)tapOnClearHistoryButton {
     if (self.openAlertAction) {
+        @weakify(self);
         self.openAlertAction(@"Вы уверены, что хотите очистить историю?".localized, ^{
-            NSLog(@"стереть историю");
+            @strongify(self);
+            [self.view showLoader];
+            [PRSStorageService removeAllScanResults];
+            [self.view setupEmptyState];
+            [self.view hideLoader];
         });
     }
 }

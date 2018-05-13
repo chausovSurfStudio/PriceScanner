@@ -37,6 +37,14 @@
     return [results copy];
 }
 
++ (void)removeAllScanResults {
+    RLMResults<PRSScanResultEntry *> *scanResults = [PRSScanResultEntry allObjects];
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    [realm deleteObjects:scanResults];
+    [realm commitWriteTransaction];
+}
+
 #pragma mark - Private Methods
 /** Метод возвращает следующий id объекта БД для сущности результата сканирования (возвращаемый id на один больше текущего максимального, либо равен единице) */
 + (NSInteger)getNextScanResultId {
