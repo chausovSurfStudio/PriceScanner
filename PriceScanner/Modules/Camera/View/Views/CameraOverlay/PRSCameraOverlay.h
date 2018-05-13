@@ -9,6 +9,20 @@
 #import "PRSDesignableView.h"
 
 
-@interface PRSCameraOverlay : UIView
+/** В данном перечислении объявлены состояния оверлея для экрана камеры */
+typedef NS_OPTIONS(NSUInteger, PRSCameraOverlayState) {
+    /** Состояние нективного оверлея, в котором он находится по-умолчанию */
+    PRSCameraOverlayStateWaiting = 0,
+    /** Состояние активного оверлея, "уголки" в нем обычно имеют другой цвет */
+    PRSCameraOverlayStateActive
+};
+
+
+@interface PRSCameraOverlay : PRSDesignableView
+
+/** Текущее состояния оверлея, при изменении - "уголки" будут анимированно менять цвет */
+@property (nonatomic, assign) PRSCameraOverlayState state;
+/** Значение от 0 до 1, характеризует текущий прогресс некоего действия. При установке чего-то вне границ [0,1] - будет выставлено ближайшее граничное значение*/
+@property (nonatomic, assign) CGFloat progress;
 
 @end

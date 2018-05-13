@@ -11,6 +11,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PRSCameraViewController">
             <connections>
+                <outlet property="overlay" destination="SZv-TJ-728" id="KCw-co-wFO"/>
+                <outlet property="scanIconImageView" destination="yAp-ZF-Fp0" id="WEg-q8-tUP"/>
+                <outlet property="scanInProgressLabel" destination="FDI-CP-Pj1" id="zrV-Tn-0CO"/>
+                <outlet property="scanInProgressView" destination="Qmq-Cd-T4T" id="wZv-32-2kU"/>
                 <outlet property="scene" destination="YJx-l5-vLP" id="CAt-rQ-VUe"/>
                 <outlet property="snapshotButton" destination="Fmk-c6-e9V" id="FoO-qo-Gui"/>
                 <outlet property="testImageView" destination="Vsv-x9-oKW" id="wGz-nd-Srp"/>
@@ -25,17 +29,6 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YJx-l5-vLP">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fmk-c6-e9V">
-                    <rect key="frame" x="101.5" y="504" width="117" height="44"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="44" id="maZ-oZ-puO"/>
-                    </constraints>
-                    <state key="normal" title="Сделать снимок"/>
-                    <connections>
-                        <action selector="tapOnSnapshotButton:" destination="-1" eventType="touchUpInside" id="t57-Ac-im7"/>
-                    </connections>
-                </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vsv-x9-oKW">
                     <rect key="frame" x="186" y="30" width="124" height="168"/>
                     <constraints>
@@ -43,20 +36,73 @@
                         <constraint firstAttribute="width" constant="124" id="tCb-t3-f2b"/>
                     </constraints>
                 </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SZv-TJ-728" customClass="PRSCameraOverlay">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fmk-c6-e9V">
+                    <rect key="frame" x="79.5" y="522" width="160" height="30"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="160" id="MLX-pa-BtA"/>
+                        <constraint firstAttribute="height" constant="30" id="maZ-oZ-puO"/>
+                    </constraints>
+                    <state key="normal" title="Сделать снимок"/>
+                    <connections>
+                        <action selector="tapOnSnapshotButton:" destination="-1" eventType="touchUpInside" id="t57-Ac-im7"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qmq-Cd-T4T">
+                    <rect key="frame" x="125" y="526" width="70" height="22"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icScan" translatesAutoresizingMaskIntoConstraints="NO" id="yAp-ZF-Fp0">
+                            <rect key="frame" x="0.0" y="0.0" width="20" height="22"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="20" id="9iw-PB-Wy5"/>
+                                <constraint firstAttribute="height" constant="22" id="c5y-bT-UCM"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FDI-CP-Pj1">
+                            <rect key="frame" x="28" y="0.0" width="42" height="22"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="FDI-CP-Pj1" firstAttribute="top" secondItem="Qmq-Cd-T4T" secondAttribute="top" id="0AZ-ao-4Ye"/>
+                        <constraint firstItem="FDI-CP-Pj1" firstAttribute="leading" secondItem="yAp-ZF-Fp0" secondAttribute="trailing" constant="8" id="0r5-LH-dl8"/>
+                        <constraint firstItem="yAp-ZF-Fp0" firstAttribute="top" secondItem="Qmq-Cd-T4T" secondAttribute="top" id="FWx-Ov-VPO"/>
+                        <constraint firstAttribute="trailing" secondItem="FDI-CP-Pj1" secondAttribute="trailing" id="Pnb-Kd-BhJ"/>
+                        <constraint firstAttribute="bottom" secondItem="FDI-CP-Pj1" secondAttribute="bottom" id="Z5W-zk-wuH"/>
+                        <constraint firstAttribute="bottom" secondItem="yAp-ZF-Fp0" secondAttribute="bottom" id="a5n-pW-lQz"/>
+                        <constraint firstItem="yAp-ZF-Fp0" firstAttribute="leading" secondItem="Qmq-Cd-T4T" secondAttribute="leading" id="sxM-YI-7ba"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="YJx-l5-vLP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0VN-Mz-IYt"/>
                 <constraint firstItem="Fmk-c6-e9V" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="8FB-qD-cYJ"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Fmk-c6-e9V" secondAttribute="bottom" constant="20" id="G2H-jU-mtL"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Fmk-c6-e9V" secondAttribute="bottom" constant="16" id="G2H-jU-mtL"/>
+                <constraint firstItem="SZv-TJ-728" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="GiF-4U-dzW"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Qmq-Cd-T4T" secondAttribute="bottom" constant="20" id="KMi-Iu-lIV"/>
+                <constraint firstItem="Qmq-Cd-T4T" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Nb0-q5-Jka"/>
                 <constraint firstItem="YJx-l5-vLP" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="Nul-7C-5aU"/>
                 <constraint firstItem="Vsv-x9-oKW" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="Qpf-HK-ZZu"/>
+                <constraint firstItem="SZv-TJ-728" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="RcD-TF-EiL"/>
                 <constraint firstItem="YJx-l5-vLP" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="RwM-dW-3In"/>
+                <constraint firstItem="SZv-TJ-728" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="V3X-al-8jM"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Vsv-x9-oKW" secondAttribute="trailing" constant="10" id="dA5-mb-RFu"/>
+                <constraint firstItem="SZv-TJ-728" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="hCA-lw-xd4"/>
                 <constraint firstItem="YJx-l5-vLP" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="hvF-oj-qnh"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="25" y="52"/>
         </view>
     </objects>
+    <resources>
+        <image name="icScan" width="20" height="22"/>
+    </resources>
 </document>

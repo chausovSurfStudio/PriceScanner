@@ -20,6 +20,15 @@
     self.clipsToBounds = YES;
 }
 
+- (void)setRectanglePinkStyle {
+    [self setBackgroundColor:[UIColor prsMainThemeColor]];
+    [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.titleLabel setFont:[UIFont systemFontOfSize:12 weight:UIFontWeightLight]];
+    
+    self.layer.cornerRadius = 4.f;
+    self.clipsToBounds = YES;
+}
+
 - (void)setLightPinkStyle {
     [self setTitleColor:[UIColor prsMainThemeColor] forState:UIControlStateNormal];
     [self.titleLabel setFont:[UIFont systemFontOfSize:14 weight:UIFontWeightLight]];

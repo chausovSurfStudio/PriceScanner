@@ -72,6 +72,7 @@
 		84B91BBC20A87AC500C4B23F /* PRSAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B91BBB20A87AC500C4B23F /* PRSAlertViewController.xib */; };
 		84DF4D1420A70D1F00E0504B /* PRSLoaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DF4D1320A70D1F00E0504B /* PRSLoaderView.m */; };
 		84DF4D1620A70D2B00E0504B /* PRSLoaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DF4D1520A70D2B00E0504B /* PRSLoaderView.xib */; };
+		84DF4D1820A72D1400E0504B /* PRSCameraOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DF4D1720A72D1400E0504B /* PRSCameraOverlay.xib */; };
 		84E22044206D85B4001B22AD /* PRSDesignableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E22043206D85B4001B22AD /* PRSDesignableView.m */; };
 		84E22048206D87F6001B22AD /* PRSCameraOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E22047206D87F6001B22AD /* PRSCameraOverlay.m */; };
 		A29758DC600AACC660EB8D51 /* PRSScanResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC760ED7516DE8B8CD03AA05 /* PRSScanResultViewController.m */; };
@@ -211,6 +212,7 @@
 		84DF4D1220A70D1F00E0504B /* PRSLoaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSLoaderView.h; sourceTree = "<group>"; };
 		84DF4D1320A70D1F00E0504B /* PRSLoaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSLoaderView.m; sourceTree = "<group>"; };
 		84DF4D1520A70D2B00E0504B /* PRSLoaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PRSLoaderView.xib; sourceTree = "<group>"; };
+		84DF4D1720A72D1400E0504B /* PRSCameraOverlay.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PRSCameraOverlay.xib; sourceTree = "<group>"; };
 		84E22042206D85B4001B22AD /* PRSDesignableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSDesignableView.h; sourceTree = "<group>"; };
 		84E22043206D85B4001B22AD /* PRSDesignableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSDesignableView.m; sourceTree = "<group>"; };
 		84E22046206D87F6001B22AD /* PRSCameraOverlay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSCameraOverlay.h; sourceTree = "<group>"; };
@@ -784,6 +786,7 @@
 			children = (
 				84E22046206D87F6001B22AD /* PRSCameraOverlay.h */,
 				84E22047206D87F6001B22AD /* PRSCameraOverlay.m */,
+				84DF4D1720A72D1400E0504B /* PRSCameraOverlay.xib */,
 			);
 			path = CameraOverlay;
 			sourceTree = "<group>";
@@ -1067,6 +1070,7 @@
 				841F464C209CEDF600535A4A /* PRSScanResultViewController.xib in Resources */,
 				84DF4D1620A70D2B00E0504B /* PRSLoaderView.xib in Resources */,
 				841F464A209CEDD200535A4A /* PRSMainViewController.xib in Resources */,
+				84DF4D1820A72D1400E0504B /* PRSCameraOverlay.xib in Resources */,
 				185816742042AE82003C2FA9 /* LaunchScreen.storyboard in Resources */,
 				8455575E209F41BD00B01D91 /* PRSMainCarouselCell.xib in Resources */,
 				84B91BBC20A87AC500C4B23F /* PRSAlertViewController.xib in Resources */,
