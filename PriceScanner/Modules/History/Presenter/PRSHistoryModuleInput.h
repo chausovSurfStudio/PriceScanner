@@ -10,6 +10,8 @@
 
 @class PRSScanResultEntity;
 
+typedef void(^AlertCompletionBlock)(void);
+
 
 @protocol PRSHistoryModuleInput <NSObject>
 
@@ -17,9 +19,11 @@
  *
  * @param openResultAction Блок кода, будет вызываться при необходимости перейти на экран результата сканирования
  * @param openCameraModuleAction Блок кода, будет вызываться при необходимости перейти на экран сканирования
+ * @param openAlertAction Блок кода, будет вызываться при необходимости открыть модуль с кастомным алертом
  *
  */
 - (void)configureWithOpenResultAction:(void(^)(PRSScanResultEntity *scanResultEntity))openResultAction
-               openCameraModuleAction:(void(^)(void))openCameraModuleAction;
+               openCameraModuleAction:(void(^)(void))openCameraModuleAction
+                      openAlertAction:(void(^)(NSString *message, AlertCompletionBlock confirmHandler))openAlertAction;
 
 @end

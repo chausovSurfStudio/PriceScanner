@@ -29,4 +29,9 @@
     self.clipsToBounds = YES;
 }
 
+- (void)setLightPinkStyle {
+    [self setTitleColor:[UIColor prsMainThemeColor] forState:UIControlStateNormal];
+    [self.titleLabel setFont:[UIFont systemFontOfSize:14 weight:UIFontWeightLight]];
+}
+
 @end

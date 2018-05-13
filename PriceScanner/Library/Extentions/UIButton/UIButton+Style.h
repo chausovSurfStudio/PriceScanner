@@ -17,4 +17,7 @@
 /** Стиль для розовой прямоугольной кнопки с белым текстом */
 - (void)setRectanglePinkStyle;
 
+/** Стиль для кнопки с розовым текстом */
+- (void)setLightPinkStyle;
+
 @end
