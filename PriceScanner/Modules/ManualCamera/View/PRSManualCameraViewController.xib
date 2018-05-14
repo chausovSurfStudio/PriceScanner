@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PRSManualCameraViewController">
+            <connections>
+                <outlet property="overlay" destination="SHt-em-Oza" id="1LH-AF-IuH"/>
+                <outlet property="scanIconImageView" destination="cdz-A0-Y2t" id="KaS-qR-CXS"/>
+                <outlet property="scanInProgressLabel" destination="JoA-d7-tmV" id="F1E-0t-kde"/>
+                <outlet property="scanInProgressView" destination="aRh-IE-FEf" id="I6E-vp-9Os"/>
+                <outlet property="scene" destination="rOw-Q1-Id3" id="ywd-bg-S28"/>
+                <outlet property="startScanButton" destination="fBn-Q9-deS" id="FkW-ux-Xrr"/>
+                <outlet property="view" destination="iN0-l3-epB" id="S8E-th-rLa"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rOw-Q1-Id3">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SHt-em-Oza" customClass="PRSCameraOverlay">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fBn-Q9-deS">
+                    <rect key="frame" x="80" y="522" width="160" height="30"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="160" id="PRe-KS-B3B"/>
+                        <constraint firstAttribute="height" constant="30" id="iDz-IF-bqT"/>
+                    </constraints>
+                    <state key="normal" title="Начать сканирование"/>
+                    <connections>
+                        <action selector="tapOnStartScanButton:" destination="-1" eventType="touchUpInside" id="QYv-ld-Tjc"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aRh-IE-FEf">
+                    <rect key="frame" x="125" y="526" width="70" height="22"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icScan" translatesAutoresizingMaskIntoConstraints="NO" id="cdz-A0-Y2t">
+                            <rect key="frame" x="0.0" y="0.0" width="20" height="22"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="22" id="RMY-da-RaP"/>
+                                <constraint firstAttribute="width" constant="20" id="VCn-Pf-IRS"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JoA-d7-tmV">
+                            <rect key="frame" x="28" y="0.0" width="42" height="22"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="cdz-A0-Y2t" firstAttribute="leading" secondItem="aRh-IE-FEf" secondAttribute="leading" id="4iR-oN-BmR"/>
+                        <constraint firstAttribute="trailing" secondItem="JoA-d7-tmV" secondAttribute="trailing" id="HWy-fH-lRD"/>
+                        <constraint firstAttribute="bottom" secondItem="JoA-d7-tmV" secondAttribute="bottom" id="Khd-XW-pne"/>
+                        <constraint firstItem="JoA-d7-tmV" firstAttribute="leading" secondItem="cdz-A0-Y2t" secondAttribute="trailing" constant="8" id="eVm-fI-pdN"/>
+                        <constraint firstItem="cdz-A0-Y2t" firstAttribute="top" secondItem="aRh-IE-FEf" secondAttribute="top" id="inG-h4-0J6"/>
+                        <constraint firstAttribute="bottom" secondItem="cdz-A0-Y2t" secondAttribute="bottom" id="oZ9-Zr-sUQ"/>
+                        <constraint firstItem="JoA-d7-tmV" firstAttribute="top" secondItem="aRh-IE-FEf" secondAttribute="top" id="xFH-zM-bbZ"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="aRh-IE-FEf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="GYv-RY-AAd"/>
+                <constraint firstItem="rOw-Q1-Id3" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="HKV-7q-NxJ"/>
+                <constraint firstItem="fBn-Q9-deS" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="NFm-Hw-g50"/>
+                <constraint firstItem="rOw-Q1-Id3" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="P2U-Lu-tjl"/>
+                <constraint firstItem="SHt-em-Oza" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Tbc-O0-EeX"/>
+                <constraint firstItem="rOw-Q1-Id3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="U3J-vE-Tbm"/>
+                <constraint firstItem="SHt-em-Oza" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Y9E-aM-32k"/>
+                <constraint firstItem="rOw-Q1-Id3" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="naQ-tf-sD2"/>
+                <constraint firstItem="SHt-em-Oza" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="tzT-DD-8b7"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="aRh-IE-FEf" secondAttribute="bottom" constant="20" id="vZ9-Yt-oDd"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="fBn-Q9-deS" secondAttribute="bottom" constant="16" id="zcC-Fw-lWw"/>
+                <constraint firstItem="SHt-em-Oza" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="zeI-lY-BDb"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icScan" width="20" height="22"/>
+    </resources>
+</document>
