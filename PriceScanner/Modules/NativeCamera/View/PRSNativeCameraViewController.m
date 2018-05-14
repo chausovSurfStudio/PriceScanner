@@ -13,6 +13,9 @@
 #import <Vision/Vision.h>
 
 #import "PRSCameraOverlay.h"
+#import "PRSScanTimer.h"
+#import "TextModel.h"
+
 #import "UIButton+Style.h"
 #import "UIImage+Resize.h"
 #import "UIImage+ScanUtils.h"
@@ -30,7 +33,14 @@
 @property (nonatomic, strong) IBOutlet UILabel *scanInProgressLabel;
 
 @property (nonatomic, strong) AVCaptureSession *session;
-@property (nonatomic, strong) NSArray<VNRequest *> *requests;
+@property (nonatomic, strong) NSArray<VNRequest *> *textDetectRequests;
+@property (nonatomic, strong) NSArray<VNCoreMLRequest *> *classificationRequests;
+
+@property (nonatomic, strong) TextModel *model;
+@property (nonatomic, strong) NSArray<NSString *> *modelOutputs;
+
+@property (nonatomic, strong) UIImage *snapshot;
+@property (nonatomic, strong) PRSScanTimer *scanTimer;
 
 @end
 
@@ -51,13 +61,38 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [self stopLiveVideo];
+    [self showStartScanButton];
+    self.scanTimer.state = PRSScanTimerStateDisable;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
 
+#pragma mark - PRSNativeCameraViewInput
+- (void)setupInitialState {
+    [self initVideoSession];
+    [self setupModelOutputs];
+    [self configureModel];
+    [self configureStyle];
+    [self configureTextDetectRequest];
+    [self configureClassificationRequest];
+    [self configureScanTimer];
+}
+
 #pragma mark - Configure
+- (void)setupModelOutputs {
+    self.modelOutputs = @[@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9",
+                          @"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M",
+                          @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z",
+                          @"Б", @"Г", @"Д", @"Ж", @"И", @"Й", @"Л", @"П", @"Ф", @"Ц", @"Ч", @"Ш", @"Щ", @"Ъ", @"Ы", @"Ь", @"Э", @"Ю", @"Я"];
+}
+
+- (void)configureModel {
+    NSURL *modelUrl = [[NSBundle mainBundle] URLForResource:@"TextModel" withExtension:@"mlmodelc"];
+    self.model = [[TextModel alloc] initWithContentsOfURL:modelUrl error:nil];
+}
+
 - (void)configureStyle {
     [self configureStartScanButton];
     [self configureScanInProgressView];
@@ -78,17 +113,81 @@
     self.scanInProgressLabel.text = @"Идет сканирование".localized;
 }
 
-#pragma mark - Actions
-- (IBAction)tapOnStartScanButton:(UIButton *)sender {
-    // TODO: тестовый код, поправить позднее
-    [self.output openScanResultModule];
+- (void)configureTextDetectRequest {
+    @weakify(self);
+    VNDetectTextRectanglesRequest *textRequest = [[VNDetectTextRectanglesRequest alloc] initWithCompletionHandler:^(VNRequest * _Nonnull request, NSError * _Nullable error) {
+        @strongify(self);
+        [self handleTextDetectRequest:request];
+    }];
+    textRequest.reportCharacterBoxes = YES;
+    self.textDetectRequests = @[textRequest];
 }
 
-#pragma mark - PRSNativeCameraViewInput
-- (void)setupInitialState {
-    [self initVideoSession];
-    [self configureStyle];
-    [self createTextDetectRequest];
+- (void)configureClassificationRequest {
+    VNCoreMLModel *mlModel = [VNCoreMLModel modelForMLModel:self.model.model error:nil];
+    @weakify(self);
+    VNCoreMLRequest *request = [[VNCoreMLRequest alloc] initWithModel:mlModel completionHandler:^(VNRequest * _Nonnull request, NSError * _Nullable error) {
+        @strongify(self);
+        [self handleClassificationRequest:request];
+    }];
+    request.imageCropAndScaleOption = VNImageCropAndScaleOptionScaleFill;
+    self.classificationRequests = @[request];
+}
+
+- (void)configureScanTimer {
+    self.scanTimer = [PRSScanTimer new];
+}
+
+#pragma mark - VNRequest Handlers
+- (void)handleTextDetectRequest:(VNRequest *)request {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self clearSceneSublayers];
+        for (VNTextObservation *word in request.results) {
+            [self highlightWord:word inScene:self.scene];
+            for (VNRectangleObservation *characterBox in word.characterBoxes) {
+                [self highlightLetter:characterBox inScene:self.scene];
+            }
+        }
+    });
+    
+    if (self.scanTimer.state == PRSScanTimerStateSnapshot) {
+        self.scanTimer.state = PRSScanTimerStateScanning;
+        for (VNTextObservation *word in request.results) {
+            for (VNRectangleObservation *characterBox in word.characterBoxes) {
+                UIImage *someLetter = [self cropLetter:characterBox fromImage:self.snapshot];
+                VNImageRequestHandler *letterHandler = [[VNImageRequestHandler alloc] initWithCGImage:someLetter.CGImage options:@{}];
+                [letterHandler performRequests:self.classificationRequests error:nil];
+            }
+        }
+        self.scanTimer.state = PRSScanTimerStateSleep;
+    }
+}
+
+- (void)handleClassificationRequest:(VNRequest *)request {
+    NSArray *results = [request.results copy];
+    VNCoreMLFeatureValueObservation *mlObservation = (VNCoreMLFeatureValueObservation *)results.firstObject;
+    
+    NSNumber *confidence = [NSNumber numberWithFloat:0];
+    NSNumber *currentConfidence = [NSNumber numberWithFloat:0];
+    NSInteger outputIndex = NSNotFound;
+    
+    for (int i = 0; i < [mlObservation.featureValue multiArrayValue].count; i++) {
+        currentConfidence = [[mlObservation.featureValue multiArrayValue] objectAtIndexedSubscript:i];
+        if ([currentConfidence floatValue] > [confidence floatValue]){
+            confidence = currentConfidence;
+            outputIndex = i;
+        }
+    }
+    
+    if (outputIndex < self.modelOutputs.count) {
+        NSLog(@"RESULT: this is %@ with confidence %f", self.modelOutputs[outputIndex], confidence.floatValue);
+    }
+}
+
+#pragma mark - Actions
+- (IBAction)tapOnStartScanButton:(UIButton *)sender {
+    self.scanTimer.state = PRSScanTimerStateActive;
+    [self showScanInProgressView];
 }
 
 #pragma mark - AVCaptureSession
@@ -139,6 +238,12 @@
 
 #pragma mark - AVCaptureVideoDataOutputSampleBufferDelegate
 - (void)captureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
+    if (self.scanTimer.state == PRSScanTimerStateActive) {
+        UIImage *rawSnapshot = [UIImage imageFromSampleBuffer:sampleBuffer];
+        self.snapshot = [rawSnapshot resizedImage:rawSnapshot.size interpolationQuality:kCGInterpolationHigh];
+        self.scanTimer.state = PRSScanTimerStateSnapshot;
+    }
+    
     CVImageBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     CFTypeRef camData = CMGetAttachment(sampleBuffer, kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix, nil);
     NSDictionary *requestOptions;
@@ -146,27 +251,10 @@
         requestOptions = @{VNImageOptionCameraIntrinsics:(__bridge id)camData};
     }
     VNImageRequestHandler *handler = [[VNImageRequestHandler alloc] initWithCVPixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationRight options:requestOptions];
-    [handler performRequests:self.requests error:nil];
+    [handler performRequests:self.textDetectRequests error:nil];
 }
 
 #pragma mark - Private logic
-/** Метод для создания и сохранения запроса (VNDetectTextRectanglesRequest) на распознавание символов  */
-- (void)createTextDetectRequest {
-    VNDetectTextRectanglesRequest *textRequest = [[VNDetectTextRectanglesRequest alloc] initWithCompletionHandler:^(VNRequest * _Nonnull request, NSError * _Nullable error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self clearSceneSublayers];
-            for (VNTextObservation *word in request.results) {
-                [self highlightWord:word inScene:self.scene];
-                for (VNRectangleObservation *characterBox in word.characterBoxes) {
-                    [self highlightLetter:characterBox inScene:self.scene];
-                }
-            }
-        });
-    }];
-    textRequest.reportCharacterBoxes = YES;
-    self.requests = @[textRequest];
-}
-
 /** Метод удаляет все sublayers на scene, кроме первого, в котором расположен видеопоток */
 - (void)clearSceneSublayers {
     CALayer *videoLayer = self.scene.layer.sublayers.firstObject;
