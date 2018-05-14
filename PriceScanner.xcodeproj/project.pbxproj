@@ -70,6 +70,8 @@
 		8466555C209BB0D900810A16 /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8466555B209BB0D900810A16 /* NSString+Additions.m */; };
 		846C2158207E97D100FFB499 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 846C2156207E97D100FFB499 /* UIImage+Resize.m */; };
 		84B91BBC20A87AC500C4B23F /* PRSAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B91BBB20A87AC500C4B23F /* PRSAlertViewController.xib */; };
+		84B91BC120A979E300C4B23F /* UIImage+ScanUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B91BC020A979E300C4B23F /* UIImage+ScanUtils.m */; };
+		84B91BC520A97AA400C4B23F /* UIViewController+ScanUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B91BC420A97AA400C4B23F /* UIViewController+ScanUtils.m */; };
 		84DF4D1420A70D1F00E0504B /* PRSLoaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DF4D1320A70D1F00E0504B /* PRSLoaderView.m */; };
 		84DF4D1620A70D2B00E0504B /* PRSLoaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DF4D1520A70D2B00E0504B /* PRSLoaderView.xib */; };
 		84DF4D1820A72D1400E0504B /* PRSCameraOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DF4D1720A72D1400E0504B /* PRSCameraOverlay.xib */; };
@@ -209,6 +211,10 @@
 		846C2156207E97D100FFB499 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		846C2157207E97D100FFB499 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
 		84B91BBB20A87AC500C4B23F /* PRSAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PRSAlertViewController.xib; sourceTree = "<group>"; };
+		84B91BBF20A979E300C4B23F /* UIImage+ScanUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+ScanUtils.h"; sourceTree = "<group>"; };
+		84B91BC020A979E300C4B23F /* UIImage+ScanUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ScanUtils.m"; sourceTree = "<group>"; };
+		84B91BC320A97AA400C4B23F /* UIViewController+ScanUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ScanUtils.h"; sourceTree = "<group>"; };
+		84B91BC420A97AA400C4B23F /* UIViewController+ScanUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ScanUtils.m"; sourceTree = "<group>"; };
 		84DF4D1220A70D1F00E0504B /* PRSLoaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSLoaderView.h; sourceTree = "<group>"; };
 		84DF4D1320A70D1F00E0504B /* PRSLoaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSLoaderView.m; sourceTree = "<group>"; };
 		84DF4D1520A70D2B00E0504B /* PRSLoaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PRSLoaderView.xib; sourceTree = "<group>"; };
@@ -567,6 +573,7 @@
 				84555763209F56CF00B01D91 /* UIButton */,
 				846C2155207E97BF00FFB499 /* UIImage */,
 				8455578A20A32DB900B01D91 /* UILabel */,
+				84B91BC220A97A8200C4B23F /* UIViewController */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -752,6 +759,8 @@
 			children = (
 				846C2157207E97D100FFB499 /* UIImage+Resize.h */,
 				846C2156207E97D100FFB499 /* UIImage+Resize.m */,
+				84B91BBF20A979E300C4B23F /* UIImage+ScanUtils.h */,
+				84B91BC020A979E300C4B23F /* UIImage+ScanUtils.m */,
 			);
 			path = UIImage;
 			sourceTree = "<group>";
@@ -768,6 +777,15 @@
 			children = (
 			);
 			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		84B91BC220A97A8200C4B23F /* UIViewController */ = {
+			isa = PBXGroup;
+			children = (
+				84B91BC320A97AA400C4B23F /* UIViewController+ScanUtils.h */,
+				84B91BC420A97AA400C4B23F /* UIViewController+ScanUtils.m */,
+			);
+			path = UIViewController;
 			sourceTree = "<group>";
 		};
 		84DF4D1120A70D0600E0504B /* LoaderView */ = {
@@ -1204,6 +1222,7 @@
 				8455575D209F41BD00B01D91 /* PRSMainCarouselCell.m in Sources */,
 				841F4654209D0BC700535A4A /* PRSNavigationController.m in Sources */,
 				84E22044206D85B4001B22AD /* PRSDesignableView.m in Sources */,
+				84B91BC520A97AA400C4B23F /* UIViewController+ScanUtils.m in Sources */,
 				841F4646209CEBE700535A4A /* PRSMainFlowCoordinator.m in Sources */,
 				846C2158207E97D100FFB499 /* UIImage+Resize.m in Sources */,
 				84555761209F421600B01D91 /* PRSMainCarouselPageModel.m in Sources */,
@@ -1233,6 +1252,7 @@
 				356B1226450061451026127C /* PRSScanResultConfigurator.m in Sources */,
 				5BA7F8FC2B2358AE6D9829EB /* PRSScanResultPresenter.m in Sources */,
 				A29758DC600AACC660EB8D51 /* PRSScanResultViewController.m in Sources */,
+				84B91BC120A979E300C4B23F /* UIImage+ScanUtils.m in Sources */,
 				EC4F8793060A3260456A4C9F /* PRSAlertConfigurator.m in Sources */,
 				B8A9BCC235238956A9A4E437 /* PRSAlertPresenter.m in Sources */,
 				56D605F58EBE15161B26329F /* PRSAlertViewController.m in Sources */,
