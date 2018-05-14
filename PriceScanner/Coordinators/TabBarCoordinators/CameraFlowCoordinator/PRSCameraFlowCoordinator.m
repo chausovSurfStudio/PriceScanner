@@ -29,21 +29,30 @@
 @implementation PRSCameraFlowCoordinator
 
 - (UINavigationController *)initialView {
+    @weakify(self);
     UIViewController *scanMethodView = [PRSScanMethodConfigurator configureModule:^(id<PRSScanMethodModuleInput> presenter, UIViewController *view) {
-        
+        [presenter configureWithOpenIosCameraModuleAction:^{
+            @strongify(self);
+            [self openIosCameraModule];
+        } openMachineLearningCameraModuleAction:^{
+            // TODO: доделать
+        } openManualCameraModuleAction:^{
+            // TODO: доделать
+        }];
     }];
     self.navigationController = [[PRSNavigationController alloc] initWithRootViewController:scanMethodView];
     return self.navigationController;
-    
-//    @weakify(self);
-//    UIViewController *cameraView = [PRSCameraConfigurator configureModule:^(id<PRSCameraModuleInput> presenter, UIViewController *view) {
-//        [presenter configureWithOpenResultAction:^(PRSScanResultEntity *scanResultEntity) {
-//            @strongify(self);
-//            [self openResultModuleWithEntity:scanResultEntity];
-//        }];
-//    }];
-//    self.navigationController = [[PRSNavigationController alloc] initWithRootViewController:cameraView];
-//    return self.navigationController;
+}
+
+- (void)openIosCameraModule {
+    @weakify(self);
+    UIViewController *cameraView = [PRSCameraConfigurator configureModule:^(id<PRSCameraModuleInput> presenter, UIViewController *view) {
+        [presenter configureWithOpenResultAction:^(PRSScanResultEntity *scanResultEntity) {
+            @strongify(self);
+            [self openResultModuleWithEntity:scanResultEntity];
+        }];
+    }];
+    [self.navigationController pushViewController:cameraView animated:YES];
 }
 
 - (void)openResultModuleWithEntity:(PRSScanResultEntity *)entity {

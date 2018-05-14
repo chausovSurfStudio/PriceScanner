@@ -79,4 +79,17 @@
     [self.manualMethodButton setTitle:@"Ручное определение границы".localized forState:UIControlStateNormal];
 }
 
+#pragma mark - Actions
+- (IBAction)tapOnIosMethodButton:(UIButton *)sender {
+    [self.output tapOnScanWithIosMethod];
+}
+
+- (IBAction)tapOnMachineLearningMethodButton:(UIButton *)sender {
+    [self.output tapOnScanWithMachineLearningMethod];
+}
+
+- (IBAction)tapOnManualMethodButton:(UIButton *)sender {
+    [self.output tapOnScanWithManualMethod];
+}
+
 @end
