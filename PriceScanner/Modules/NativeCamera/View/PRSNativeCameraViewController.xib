@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PRSNativeCameraViewController">
+            <connections>
+                <outlet property="overlay" destination="fZ6-jS-Wen" id="bX5-yf-Ybj"/>
+                <outlet property="scanIconImageView" destination="EYL-cW-otY" id="zul-Cx-KAw"/>
+                <outlet property="scanInProgressLabel" destination="IEX-3u-9I3" id="CLC-69-Ia6"/>
+                <outlet property="scanInProgressView" destination="JDj-SJ-ELM" id="BZ7-KG-h5L"/>
+                <outlet property="scene" destination="aP1-05-d3z" id="Uqp-M2-Kzf"/>
+                <outlet property="startScanButton" destination="7eb-LP-p6J" id="35g-gz-ph2"/>
+                <outlet property="view" destination="iN0-l3-epB" id="vbE-c6-OxD"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aP1-05-d3z">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fZ6-jS-Wen" customClass="PRSCameraOverlay">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7eb-LP-p6J">
+                    <rect key="frame" x="80" y="522" width="160" height="30"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="160" id="9eb-5z-MzN"/>
+                        <constraint firstAttribute="height" constant="30" id="tzo-gP-ozW"/>
+                    </constraints>
+                    <state key="normal" title="Начать сканирование"/>
+                    <connections>
+                        <action selector="tapOnStartScanButton:" destination="-1" eventType="touchUpInside" id="QJp-Vd-gUe"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JDj-SJ-ELM">
+                    <rect key="frame" x="125" y="526" width="70" height="22"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icScan" translatesAutoresizingMaskIntoConstraints="NO" id="EYL-cW-otY">
+                            <rect key="frame" x="0.0" y="0.0" width="20" height="22"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="20" id="Cn7-eZ-j8T"/>
+                                <constraint firstAttribute="height" constant="22" id="Y8Y-67-jsG"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IEX-3u-9I3">
+                            <rect key="frame" x="28" y="0.0" width="42" height="22"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="EYL-cW-otY" firstAttribute="leading" secondItem="JDj-SJ-ELM" secondAttribute="leading" id="0L7-Ra-6fY"/>
+                        <constraint firstItem="IEX-3u-9I3" firstAttribute="leading" secondItem="EYL-cW-otY" secondAttribute="trailing" constant="8" id="AKk-6u-dal"/>
+                        <constraint firstAttribute="trailing" secondItem="IEX-3u-9I3" secondAttribute="trailing" id="CzW-L7-bOA"/>
+                        <constraint firstItem="EYL-cW-otY" firstAttribute="top" secondItem="JDj-SJ-ELM" secondAttribute="top" id="ONO-Bc-OON"/>
+                        <constraint firstAttribute="bottom" secondItem="IEX-3u-9I3" secondAttribute="bottom" id="Rae-G0-4cI"/>
+                        <constraint firstItem="IEX-3u-9I3" firstAttribute="top" secondItem="JDj-SJ-ELM" secondAttribute="top" id="huU-mv-Yq7"/>
+                        <constraint firstAttribute="bottom" secondItem="EYL-cW-otY" secondAttribute="bottom" id="l8a-DJ-ndQ"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fZ6-jS-Wen" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="0YU-sB-Ze6"/>
+                <constraint firstItem="7eb-LP-p6J" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="8rZ-X3-5Vg"/>
+                <constraint firstItem="fZ6-jS-Wen" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BAa-IX-L0k"/>
+                <constraint firstItem="aP1-05-d3z" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="CpT-QX-ikq"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="JDj-SJ-ELM" secondAttribute="bottom" constant="20" id="LGZ-vQ-7Wz"/>
+                <constraint firstItem="JDj-SJ-ELM" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Q3W-DS-dbq"/>
+                <constraint firstItem="aP1-05-d3z" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="UOR-PK-AoN"/>
+                <constraint firstItem="aP1-05-d3z" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="Umv-El-Rqc"/>
+                <constraint firstItem="fZ6-jS-Wen" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="fdt-1J-bjl"/>
+                <constraint firstItem="fZ6-jS-Wen" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="jLq-AY-E4o"/>
+                <constraint firstItem="aP1-05-d3z" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="ljR-xJ-QBx"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="7eb-LP-p6J" secondAttribute="bottom" constant="16" id="oeG-EK-flT"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icScan" width="20" height="22"/>
+    </resources>
+</document>

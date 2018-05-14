@@ -1,8 +1,8 @@
 //
-//  PRSCameraModuleInput.h
+//  PRSNativeCameraModuleInput.h
 //  PriceScanner
 //
-//  Created by Alexander Chausov on 28/03/2018.
+//  Created by Chausov Alexander on 14/05/2018.
 //  Copyright © 2018 ChausovCompany. All rights reserved.
 //
 
@@ -11,7 +11,7 @@
 @class PRSScanResultEntity;
 
 
-@protocol PRSCameraModuleInput <NSObject>
+@protocol PRSNativeCameraModuleInput <NSObject>
 
 /** Метод позволяет сконфигурировать модуль и указать блок перехода к модулю с результатами сканирования */
 - (void)configureWithOpenResultAction:(void(^)(PRSScanResultEntity *scanResultEntity))openResultAction;
