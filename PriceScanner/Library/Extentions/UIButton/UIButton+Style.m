@@ -34,4 +34,12 @@
     [self.titleLabel setFont:[UIFont systemFontOfSize:14 weight:UIFontWeightLight]];
 }
 
+- (void)setPlainLeftAlignmentStyle {
+    [self setTitleColor:[UIColor prsBlackTextColor] forState:UIControlStateNormal];
+    [self.titleLabel setFont:[UIFont systemFontOfSize:14 weight:UIFontWeightRegular]];
+    
+    self.titleLabel.textAlignment = NSTextAlignmentLeft;
+    [self setTitleEdgeInsets:UIEdgeInsetsMake(0.f, 16.f, 0.f, 0.f)];
+}
+
 @end

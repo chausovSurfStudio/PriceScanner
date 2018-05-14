@@ -397,8 +397,8 @@
 				DAD48F70A9404FA017A7DDF6 /* History */,
 				89C50554273C6221B8ADF2A5 /* Main */,
 				84555767209F8A9500B01D91 /* MainTabBar */,
-				2CB3FEEA6A0E2F3D0A54ABDB /* ScanResult */,
 				D2462ED175842CE9CF3AA939 /* ScanMethod */,
+				2CB3FEEA6A0E2F3D0A54ABDB /* ScanResult */,
 			);
 			path = Modules;
 			sourceTree = "<group>";

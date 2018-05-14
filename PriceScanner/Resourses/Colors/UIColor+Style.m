@@ -35,4 +35,8 @@
     return [UIColor colorWithRed: 50 / 255.0 green: 50 / 255.0 blue: 50 / 255.0 alpha: 1.0];
 }
 
++ (UIColor *)prsSeparatorColor {
+    return [UIColor colorWithRed: 216 / 255.0 green: 216 / 255.0 blue: 216 / 255.0 alpha: 1.0];
+}
+
 @end

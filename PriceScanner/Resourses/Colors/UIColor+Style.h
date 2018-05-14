@@ -29,4 +29,7 @@
 /** Черный цвет текста */
 + (UIColor *)prsBlackTextColor;
 
+/** Цвет всех сепараторов в приложении */
++ (UIColor *)prsSeparatorColor;
+
 @end
