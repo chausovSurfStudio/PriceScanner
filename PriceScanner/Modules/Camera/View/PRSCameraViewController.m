@@ -13,23 +13,16 @@
 #import <Vision/Vision.h>
 
 #import "PRSCameraOverlay.h"
-#import "UIImage+Resize.h"
 #import "UIButton+Style.h"
-
-
-/** Состояние снимка */
-typedef NS_ENUM(NSUInteger, SnapshotStatus) {
-    SnapshotStatusNone,
-    SnapshotStatusMake,
-    SnapshotStatusProcessing
-};
+#import "UIImage+Resize.h"
+#import "UIImage+ScanUtils.h"
+#import "UIViewController+ScanUtils.h"
 
 
 @interface PRSCameraViewController () <AVCaptureVideoDataOutputSampleBufferDelegate>
 
 @property (nonatomic, strong) IBOutlet UIImageView *scene;
-@property (nonatomic, strong) IBOutlet UIImageView *testImageView;
-@property (nonatomic, strong) IBOutlet UIButton *snapshotButton;
+@property (nonatomic, strong) IBOutlet UIButton *startScanButton;
 @property (nonatomic, strong) IBOutlet PRSCameraOverlay *overlay;
 
 @property (nonatomic, strong) IBOutlet UIView *scanInProgressView;
@@ -39,9 +32,6 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
 @property (nonatomic, strong) AVCaptureSession *session;
 @property (nonatomic, strong) NSArray<VNRequest *> *requests;
 
-@property (nonatomic, assign) SnapshotStatus makeSnapshot;
-@property (nonatomic, strong) UIImage *snapshot;
-
 @end
 
 
@@ -50,18 +40,12 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.output viewLoaded];
-    [self createTextDetectRequest];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self startLiveVideo];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
-    
-    self.makeSnapshot = SnapshotStatusNone;
-    
-    //TODO: тоже тестовый код
-    [self showSnapshotButton];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -76,14 +60,14 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
 
 #pragma mark - Configure
 - (void)configureStyle {
-    [self configureSnapshotButton];
+    [self configureStartScanButton];
     [self configureScanInProgressView];
     self.scanInProgressView.hidden = YES;
 }
 
-- (void)configureSnapshotButton {
-    [self.snapshotButton setRectanglePinkStyle];
-    [self.snapshotButton setTitle:@"Начать сканирование".localized forState:UIControlStateNormal];
+- (void)configureStartScanButton {
+    [self.startScanButton setRectanglePinkStyle];
+    [self.startScanButton setTitle:@"Начать сканирование".localized forState:UIControlStateNormal];
 }
 
 - (void)configureScanInProgressView {
@@ -96,24 +80,16 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
 }
 
 #pragma mark - Actions
-- (IBAction)tapOnSnapshotButton:(UIButton *)sender {
+- (IBAction)tapOnStartScanButton:(UIButton *)sender {
     // TODO: тестовый код, поправить позднее
-    [self showScanInProgressView];
-//    [self.output openScanResultModule];
-//    self.makeSnapshot = SnapshotStatusMake;
-//
-//    [self pauseLiveVideo];
-//    @weakify(self);
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        @strongify(self);
-//        [self startLiveVideo];
-//    });
+    [self.output openScanResultModule];
 }
 
 #pragma mark - PRSCameraViewInput
 - (void)setupInitialState {
     [self initVideoSession];
     [self configureStyle];
+    [self createTextDetectRequest];
 }
 
 #pragma mark - AVCaptureSession
@@ -164,15 +140,6 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
 
 #pragma mark - AVCaptureVideoDataOutputSampleBufferDelegate
 - (void)captureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
-    if (self.makeSnapshot == SnapshotStatusMake) {
-        UIImage *rawSnapshot = [self imageFromSampleBuffer:sampleBuffer];
-        self.snapshot = [rawSnapshot resizedImage:rawSnapshot.size interpolationQuality:kCGInterpolationHigh];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.testImageView.image = self.snapshot;
-        });
-        self.makeSnapshot = SnapshotStatusProcessing;
-    }
-    
     CVImageBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     CFTypeRef camData = CMGetAttachment(sampleBuffer, kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix, nil);
     NSDictionary *requestOptions;
@@ -183,136 +150,22 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
     [handler performRequests:self.requests error:nil];
 }
 
-#pragma mark - Image Builder
-- (UIImage *)imageFromSampleBuffer:(CMSampleBufferRef) sampleBuffer {
-    // Get a CMSampleBuffer's Core Video image buffer for the media data
-    CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
-    // Lock the base address of the pixel buffer
-    CVPixelBufferLockBaseAddress(imageBuffer, 0);
-    
-    // Get the number of bytes per row for the pixel buffer
-    void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
-    
-    // Get the number of bytes per row for the pixel buffer
-    size_t bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer);
-    // Get the pixel buffer width and height
-    size_t width = CVPixelBufferGetWidth(imageBuffer);
-    size_t height = CVPixelBufferGetHeight(imageBuffer);
-    
-    // Create a device-dependent RGB color space
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    
-    // Create a bitmap graphics context with the sample buffer data
-    CGContextRef context = CGBitmapContextCreate(baseAddress, width, height, 8,
-                                                 bytesPerRow, colorSpace, kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst);
-    // Create a Quartz image from the pixel data in the bitmap graphics context
-    CGImageRef quartzImage = CGBitmapContextCreateImage(context);
-    // Unlock the pixel buffer
-    CVPixelBufferUnlockBaseAddress(imageBuffer,0);
-    
-    // Free up the context and color space
-    CGContextRelease(context);
-    CGColorSpaceRelease(colorSpace);
-    
-    // Create an image object from the Quartz image
-    UIImage *image = [UIImage imageWithCGImage:quartzImage scale:1.0 orientation:UIImageOrientationRight];
-    
-    // Release the Quartz image
-    CGImageRelease(quartzImage);
-    
-    return (image);
-}
-
 #pragma mark - Private logic
+/** Метод для создания и сохранения запроса (VNDetectTextRectanglesRequest) на распознавание символов  */
 - (void)createTextDetectRequest {
     VNDetectTextRectanglesRequest *textRequest = [[VNDetectTextRectanglesRequest alloc] initWithCompletionHandler:^(VNRequest * _Nonnull request, NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self clearSceneSublayers];
             for (VNTextObservation *word in request.results) {
-                [self highlightWord:word];
+                [self highlightWord:word inScene:self.scene];
                 for (VNRectangleObservation *characterBox in word.characterBoxes) {
-                    [self highlightLetter:characterBox];
+                    [self highlightLetter:characterBox inScene:self.scene];
                 }
-            }
-            
-            if (self.makeSnapshot == SnapshotStatusProcessing) {
-                for (VNTextObservation *word in request.results) {
-                    for (VNRectangleObservation *characterBox in word.characterBoxes) {
-                        [self cropAndSaveLetter:characterBox];
-                    }
-                }
-                self.makeSnapshot = SnapshotStatusNone;
             }
         });
     }];
     textRequest.reportCharacterBoxes = YES;
     self.requests = @[textRequest];
-}
-
-/** Метод выделяет в текущем видеопотоке границу распознанного слова */
-- (void)highlightWord:(VNTextObservation *)word {
-    CALayer *border = [[CALayer alloc] init];
-    border.frame = [self frameForWord:word];
-    border.borderWidth = 2.f;
-    border.borderColor = [UIColor redColor].CGColor;
-    
-    [self.scene.layer addSublayer:border];
-}
-
-/** Метод выделяет в текущем видеопотоке границу распознанного символа */
-- (void)highlightLetter:(VNRectangleObservation *)letter {
-    CALayer *border = [[CALayer alloc] init];
-    border.frame = [self frameForLetter:letter parentSize:self.scene.frame.size];
-    border.borderWidth = 1.f;
-    border.borderColor = [UIColor blueColor].CGColor;
-    
-    [self.scene.layer addSublayer:border];
-}
-
-- (CGRect)frameForWord:(VNTextObservation *)word {
-    NSArray<VNRectangleObservation *> *boxes = word.characterBoxes;
-    
-    CGFloat minX = 9999.f;
-    CGFloat maxX = 0.f;
-    CGFloat minY = 9999.f;
-    CGFloat maxY = 0.f;
-    
-    for (VNRectangleObservation *charBox in boxes) {
-        if (charBox.bottomLeft.x < minX) {
-            minX = charBox.bottomLeft.x;
-        }
-        if (charBox.bottomRight.x > maxX) {
-            maxX = charBox.bottomRight.x;
-        }
-        if (charBox.bottomRight.y < minY) {
-            minY = charBox.bottomRight.y;
-        }
-        if (charBox.topRight.y > maxY) {
-            maxY = charBox.topRight.y;
-        }
-    }
-    
-    CGFloat originX = minX * self.scene.frame.size.width;
-    CGFloat originY = (1 - maxY) * self.scene.frame.size.height;
-    CGFloat width = (maxX - minX) * self.scene.frame.size.width;
-    CGFloat height = (maxY - minY) * self.scene.frame.size.height;
-    
-    return CGRectMake(originX, originY, width, height);
-}
-
-- (CGRect)frameForLetter:(VNRectangleObservation *)letter parentSize:(CGSize)parentSize {
-    CGFloat originX = letter.topLeft.x * parentSize.width;
-    CGFloat originY = (1 - letter.topLeft.y) * parentSize.height;
-    CGFloat width = (letter.topRight.x - letter.bottomLeft.x) * parentSize.width;
-    CGFloat height = (letter.topLeft.y - letter.bottomLeft.y) * parentSize.height;
-    
-    return CGRectMake(originX, originY, width, height);
-}
-
-- (void)cropAndSaveLetter:(VNRectangleObservation *)letter {
-    CGRect letterFrame = [self frameForLetter:letter parentSize:self.snapshot.size];
-    UIImage *letterImage = [self cutRect:letterFrame fromImage:self.snapshot];
-    NSLog(@"image = %@", letterImage);
 }
 
 /** Метод удаляет все sublayers на scene, кроме первого, в котором расположен видеопоток */
@@ -325,21 +178,13 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
     }
 }
 
-- (UIImage *)cutRect:(CGRect)rect fromImage:(UIImage *)image {
-    CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage, rect);
-    UIImage *resultImage = [UIImage imageWithCGImage:imageRef scale:1.0 orientation:image.imageOrientation];
-    CGImageRelease(imageRef);
-    UIImageWriteToSavedPhotosAlbum(resultImage, nil, nil, nil);
-
-    return resultImage;
-}
-
+/** Метод анимированно убирает кнопку начала сканирования и показывает view с текстом о том, что сканирование началось */
 - (void)showScanInProgressView {
     [UIView animateWithDuration:0.15
                      animations:^{
-                         self.snapshotButton.alpha = 0.f;
+                         self.startScanButton.alpha = 0.f;
                      } completion:^(BOOL finished) {
-                         self.snapshotButton.hidden = YES;
+                         self.startScanButton.hidden = YES;
                          self.scanInProgressView.alpha = 0.f;
                          self.scanInProgressView.hidden = NO;
                          [UIView animateWithDuration:0.15
@@ -349,9 +194,10 @@ typedef NS_ENUM(NSUInteger, SnapshotStatus) {
                      }];
 }
 
-- (void)showSnapshotButton {
-    self.snapshotButton.alpha = 1.f;
-    self.snapshotButton.hidden = NO;
+/** Метод показывает кнопку начала сканирования, убирая при этом view с текстом о том, что сканирование началось */
+- (void)showStartScanButton {
+    self.startScanButton.alpha = 1.f;
+    self.startScanButton.hidden = NO;
     self.scanInProgressView.hidden = YES;
 }
 
