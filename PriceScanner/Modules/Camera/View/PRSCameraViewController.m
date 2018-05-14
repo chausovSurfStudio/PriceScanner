@@ -45,13 +45,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self startLiveVideo];
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [self stopLiveVideo];
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

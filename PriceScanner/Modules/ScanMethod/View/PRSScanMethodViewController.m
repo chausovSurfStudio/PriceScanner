@@ -36,6 +36,15 @@
     [self.output viewLoaded];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 #pragma mark - PRSScanMethodViewInput
 - (void)setupInitialState {
     [self configureNavigationBar];
