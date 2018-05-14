@@ -18,6 +18,8 @@
 #import "UIImage+ScanUtils.h"
 #import "UIViewController+ScanUtils.h"
 
+#import "TextModel.h"
+
 
 @interface PRSNativeCameraViewController () <AVCaptureVideoDataOutputSampleBufferDelegate>
 
@@ -31,6 +33,11 @@
 
 @property (nonatomic, strong) AVCaptureSession *session;
 @property (nonatomic, strong) NSArray<VNRequest *> *requests;
+
+@property (nonatomic, strong) TextModel *model;
+@property (nonatomic, strong) VNCoreMLRequest *classificationRequest;
+@property (nonatomic, strong) UIImage *snapshot;
+@property (nonatomic, assign) BOOL someFlag;
 
 @end
 
@@ -58,6 +65,15 @@
 }
 
 #pragma mark - Configure
+- (void)configureModel {
+    NSURL *modelUrl = [[NSBundle mainBundle] URLForResource:@"TextModel" withExtension:@"mlmodelc"];
+    NSError *error;
+    self.model = [[TextModel alloc] initWithContentsOfURL:modelUrl error:&error];
+    if (error) {
+        NSLog(@"scanner error: model not configure");
+    }
+}
+
 - (void)configureStyle {
     [self configureStartScanButton];
     [self configureScanInProgressView];
@@ -78,6 +94,65 @@
     self.scanInProgressLabel.text = @"Идет сканирование".localized;
 }
 
+- (void)configureTextDetectRequest {
+    VNDetectTextRectanglesRequest *textRequest = [[VNDetectTextRectanglesRequest alloc] initWithCompletionHandler:^(VNRequest * _Nonnull request, NSError * _Nullable error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self clearSceneSublayers];
+            for (VNTextObservation *word in request.results) {
+                [self highlightWord:word inScene:self.scene];
+                for (VNRectangleObservation *characterBox in word.characterBoxes) {
+                    [self highlightLetter:characterBox inScene:self.scene];
+                    
+//                    UIImage *someLetter = [self cropLetter:characterBox fromImage:self.snapshot];
+//                    NSError *error;
+//                    VNImageRequestHandler *letterHandler = [[VNImageRequestHandler alloc] initWithCGImage:someLetter.CGImage options:@{}];
+//                    [letterHandler performRequests:@[self.classificationRequest] error:&error];
+//                    if (error) {
+//                        NSLog(@"ошибка в самом распознавании");
+//                    }
+                }
+            }
+        });
+        
+        if (!self.someFlag) {
+            self.someFlag = YES;
+            for (VNTextObservation *word in request.results) {
+                for (VNRectangleObservation *characterBox in word.characterBoxes) {
+                    UIImage *someLetter = [self cropLetter:characterBox fromImage:self.snapshot];
+                    NSError *error;
+                    VNImageRequestHandler *letterHandler = [[VNImageRequestHandler alloc] initWithCGImage:someLetter.CGImage options:@{}];
+                    [letterHandler performRequests:@[self.classificationRequest] error:&error];
+                    if (error) {
+                        NSLog(@"ошибка в самом распознавании");
+                    }
+                }
+            }
+            self.someFlag = NO;
+        }
+    }];
+    textRequest.reportCharacterBoxes = YES;
+    self.requests = @[textRequest];
+}
+
+- (void)configureClassificationRequest {
+    NSError *error;
+    VNCoreMLModel *mlModel = [VNCoreMLModel modelForMLModel:self.model.model error:&error];
+    if (error) {
+        NSLog(@"проблемы с созданием VNCoreMLModel");
+    }
+    VNCoreMLRequest *request = [[VNCoreMLRequest alloc] initWithModel:mlModel completionHandler:^(VNRequest * _Nonnull request, NSError * _Nullable error) {
+        for (id observation in request.results) {
+//            VNClassificationObservation *topResult = ((VNClassificationObservation *)observation);
+//            NSLog(@"%f: %@", topResult.confidence, topResult.identifier);
+            if ([observation isKindOfClass:[VNCoreMLFeatureValueObservation class]]) {
+                VNCoreMLFeatureValueObservation *response = (VNCoreMLFeatureValueObservation *)observation;
+                NSLog(@"value = %@, confidence = %f", response.featureValue.stringValue, response.confidence);
+            }
+        }
+    }];
+    self.classificationRequest = request;
+}
+
 #pragma mark - Actions
 - (IBAction)tapOnStartScanButton:(UIButton *)sender {
     // TODO: тестовый код, поправить позднее
@@ -87,8 +162,10 @@
 #pragma mark - PRSNativeCameraViewInput
 - (void)setupInitialState {
     [self initVideoSession];
+    [self configureModel];
     [self configureStyle];
-    [self createTextDetectRequest];
+    [self configureTextDetectRequest];
+    [self configureClassificationRequest];
 }
 
 #pragma mark - AVCaptureSession
@@ -139,6 +216,8 @@
 
 #pragma mark - AVCaptureVideoDataOutputSampleBufferDelegate
 - (void)captureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
+    self.snapshot = [UIImage imageFromSampleBuffer:sampleBuffer];
+    
     CVImageBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     CFTypeRef camData = CMGetAttachment(sampleBuffer, kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix, nil);
     NSDictionary *requestOptions;
@@ -150,23 +229,6 @@
 }
 
 #pragma mark - Private logic
-/** Метод для создания и сохранения запроса (VNDetectTextRectanglesRequest) на распознавание символов  */
-- (void)createTextDetectRequest {
-    VNDetectTextRectanglesRequest *textRequest = [[VNDetectTextRectanglesRequest alloc] initWithCompletionHandler:^(VNRequest * _Nonnull request, NSError * _Nullable error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self clearSceneSublayers];
-            for (VNTextObservation *word in request.results) {
-                [self highlightWord:word inScene:self.scene];
-                for (VNRectangleObservation *characterBox in word.characterBoxes) {
-                    [self highlightLetter:characterBox inScene:self.scene];
-                }
-            }
-        });
-    }];
-    textRequest.reportCharacterBoxes = YES;
-    self.requests = @[textRequest];
-}
-
 /** Метод удаляет все sublayers на scene, кроме первого, в котором расположен видеопоток */
 - (void)clearSceneSublayers {
     CALayer *videoLayer = self.scene.layer.sublayers.firstObject;
