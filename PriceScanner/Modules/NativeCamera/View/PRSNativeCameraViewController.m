@@ -13,12 +13,13 @@
 #import <Vision/Vision.h>
 
 #import "PRSCameraOverlay.h"
+#import "PRSScanTimer.h"
+#import "TextModel.h"
+
 #import "UIButton+Style.h"
 #import "UIImage+Resize.h"
 #import "UIImage+ScanUtils.h"
 #import "UIViewController+ScanUtils.h"
-
-#import "TextModel.h"
 
 
 @interface PRSNativeCameraViewController () <AVCaptureVideoDataOutputSampleBufferDelegate>
@@ -39,7 +40,7 @@
 @property (nonatomic, strong) NSArray<NSString *> *modelOutputs;
 
 @property (nonatomic, strong) UIImage *snapshot;
-@property (nonatomic, assign) BOOL someFlag;
+@property (nonatomic, strong) PRSScanTimer *scanTimer;
 
 @end
 
@@ -60,6 +61,8 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [self stopLiveVideo];
+    [self showStartScanButton];
+    self.scanTimer.state = PRSScanTimerStateDisable;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -74,6 +77,7 @@
     [self configureStyle];
     [self configureTextDetectRequest];
     [self configureClassificationRequest];
+    [self configureScanTimer];
 }
 
 #pragma mark - Configure
@@ -130,6 +134,10 @@
     self.classificationRequests = @[request];
 }
 
+- (void)configureScanTimer {
+    self.scanTimer = [PRSScanTimer new];
+}
+
 #pragma mark - VNRequest Handlers
 - (void)handleTextDetectRequest:(VNRequest *)request {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -142,8 +150,8 @@
         }
     });
     
-    if (!self.someFlag) {
-        self.someFlag = YES;
+    if (self.scanTimer.state == PRSScanTimerStateSnapshot) {
+        self.scanTimer.state = PRSScanTimerStateScanning;
         for (VNTextObservation *word in request.results) {
             for (VNRectangleObservation *characterBox in word.characterBoxes) {
                 UIImage *someLetter = [self cropLetter:characterBox fromImage:self.snapshot];
@@ -151,7 +159,7 @@
                 [letterHandler performRequests:self.classificationRequests error:nil];
             }
         }
-        self.someFlag = NO;
+        self.scanTimer.state = PRSScanTimerStateSleep;
     }
 }
 
@@ -178,8 +186,8 @@
 
 #pragma mark - Actions
 - (IBAction)tapOnStartScanButton:(UIButton *)sender {
-    // TODO: тестовый код, поправить позднее
-    [self.output openScanResultModule];
+    self.scanTimer.state = PRSScanTimerStateActive;
+    [self showScanInProgressView];
 }
 
 #pragma mark - AVCaptureSession
@@ -230,8 +238,11 @@
 
 #pragma mark - AVCaptureVideoDataOutputSampleBufferDelegate
 - (void)captureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
-    UIImage *rawSnapshot = [UIImage imageFromSampleBuffer:sampleBuffer];
-    self.snapshot = [rawSnapshot resizedImage:rawSnapshot.size interpolationQuality:kCGInterpolationHigh];
+    if (self.scanTimer.state == PRSScanTimerStateActive) {
+        UIImage *rawSnapshot = [UIImage imageFromSampleBuffer:sampleBuffer];
+        self.snapshot = [rawSnapshot resizedImage:rawSnapshot.size interpolationQuality:kCGInterpolationHigh];
+        self.scanTimer.state = PRSScanTimerStateSnapshot;
+    }
     
     CVImageBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     CFTypeRef camData = CMGetAttachment(sampleBuffer, kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix, nil);

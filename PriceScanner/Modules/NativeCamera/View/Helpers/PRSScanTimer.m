@@ -21,26 +21,40 @@ static NSTimeInterval const timerInterval = 1.1;
 
 @implementation PRSScanTimer
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.state = PRSScanTimerStateDisable;
+    }
+    return self;
+}
+
 - (void)setState:(PRSScanTimerState)state {
     _state = state;
     if (state == PRSScanTimerStateSleep) {
-        [self scheduleTimer];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self scheduleTimer];
+        });
     } else {
         [self invalidateTimer];
     }
 }
 
 - (void)scheduleTimer {
-    @weakify(self);
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:timerInterval repeats:NO block:^(NSTimer * _Nonnull timer) {
-        @strongify(self);
-        self.state = PRSScanTimerStateActive;
-    }];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:timerInterval
+                                                  target:self
+                                                selector:@selector(timerAction)
+                                                userInfo:nil
+                                                 repeats:YES];
 }
 
 - (void)invalidateTimer {
     [self.timer invalidate];
     self.timer = nil;
+}
+
+- (void)timerAction {
+    self.state = PRSScanTimerStateActive;
 }
 
 @end
