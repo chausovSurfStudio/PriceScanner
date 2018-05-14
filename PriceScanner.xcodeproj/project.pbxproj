@@ -294,10 +294,10 @@
 		18267C382066848200616282 /* TabBarCoordinators */ = {
 			isa = PBXGroup;
 			children = (
-				18DC5463206BFD2C009E1D2A /* TabBarCoordinator */,
 				18267C362066840400616282 /* CameraFlowCoordinator */,
 				841F4640209CEB7600535A4A /* HistoryFlowCoordinator */,
 				841F463F209CEB3700535A4A /* MainFlowCoordinator */,
+				18DC5463206BFD2C009E1D2A /* TabBarCoordinator */,
 			);
 			path = TabBarCoordinators;
 			sourceTree = "<group>";
@@ -327,13 +327,14 @@
 		185816632042AE82003C2FA9 /* PriceScanner */ = {
 			isa = PBXGroup;
 			children = (
-				185816A62042B032003C2FA9 /* Base */,
-				1858169B2042AF92003C2FA9 /* Library */,
-				1858169A2042AF43003C2FA9 /* Modules */,
+				185816A62042B032003C2FA9 /* Application */,
 				18267C35206683C400616282 /* Coordinators */,
+				1858169B2042AF92003C2FA9 /* Library */,
 				185816A52042B020003C2FA9 /* Models */,
-				84555769209F9ECD00B01D91 /* Services */,
+				1858169A2042AF43003C2FA9 /* Modules */,
 				185816A42042B002003C2FA9 /* Resourses */,
+				84555769209F9ECD00B01D91 /* Services */,
+				84B91BBE20A9625500C4B23F /* ThirdParty */,
 			);
 			path = PriceScanner;
 			sourceTree = "<group>";
@@ -372,20 +373,21 @@
 		1858169B2042AF92003C2FA9 /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				1858169D2042AFA3003C2FA9 /* BaseClass */,
+				1858169D2042AFA3003C2FA9 /* BaseClasses */,
 				843572932066D26D00AC6E74 /* Extentions */,
 				843572942066D27B00AC6E74 /* Reuse */,
+				84B91BBD20A961B300C4B23F /* Utils */,
 			);
 			path = Library;
 			sourceTree = "<group>";
 		};
-		1858169D2042AFA3003C2FA9 /* BaseClass */ = {
+		1858169D2042AFA3003C2FA9 /* BaseClasses */ = {
 			isa = PBXGroup;
 			children = (
-				841F4651209D0BA200535A4A /* NavigationControllers */,
 				185816B92042B3AF003C2FA9 /* ModuleStructure */,
+				841F4651209D0BA200535A4A /* NavigationControllers */,
 			);
-			path = BaseClass;
+			path = BaseClasses;
 			sourceTree = "<group>";
 		};
 		185816A42042B002003C2FA9 /* Resourses */ = {
@@ -393,7 +395,6 @@
 			children = (
 				841F464D209D07E500535A4A /* Colors */,
 				185816702042AE82003C2FA9 /* Assets.xcassets */,
-				185816752042AE82003C2FA9 /* Info.plist */,
 				84665554209BADD500810A16 /* Localizable.strings */,
 			);
 			path = Resourses;
@@ -409,7 +410,7 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		185816A62042B032003C2FA9 /* Base */ = {
+		185816A62042B032003C2FA9 /* Application */ = {
 			isa = PBXGroup;
 			children = (
 				185816642042AE82003C2FA9 /* AppDelegate.h */,
@@ -418,8 +419,9 @@
 				185816722042AE82003C2FA9 /* LaunchScreen.storyboard */,
 				185816762042AE82003C2FA9 /* main.m */,
 				18DC5468206C0401009E1D2A /* PriceScanner-Prefix.pch */,
+				185816752042AE82003C2FA9 /* Info.plist */,
 			);
-			path = Base;
+			path = Application;
 			sourceTree = "<group>";
 		};
 		185816B52042B370003C2FA9 /* BasePresenter */ = {
@@ -550,10 +552,10 @@
 		841F4651209D0BA200535A4A /* NavigationControllers */ = {
 			isa = PBXGroup;
 			children = (
-				841F4652209D0BC700535A4A /* PRSNavigationController.h */,
-				841F4653209D0BC700535A4A /* PRSNavigationController.m */,
 				84555752209F265A00B01D91 /* PRSModalNavigationController.h */,
 				84555753209F265A00B01D91 /* PRSModalNavigationController.m */,
+				841F4652209D0BC700535A4A /* PRSNavigationController.h */,
+				841F4653209D0BC700535A4A /* PRSNavigationController.m */,
 			);
 			path = NavigationControllers;
 			sourceTree = "<group>";
@@ -752,6 +754,20 @@
 				846C2156207E97D100FFB499 /* UIImage+Resize.m */,
 			);
 			path = UIImage;
+			sourceTree = "<group>";
+		};
+		84B91BBD20A961B300C4B23F /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		84B91BBE20A9625500C4B23F /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ThirdParty;
 			sourceTree = "<group>";
 		};
 		84DF4D1120A70D0600E0504B /* LoaderView */ = {
