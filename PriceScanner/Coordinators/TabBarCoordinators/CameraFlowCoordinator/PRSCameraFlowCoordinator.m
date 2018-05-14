@@ -8,9 +8,11 @@
 
 #import "PRSCameraFlowCoordinator.h"
 #import "PRSCameraConfigurator.h"
+#import "PRSScanMethodConfigurator.h"
 #import "PRSScanResultConfigurator.h"
 
 #import "PRSCameraModuleInput.h"
+#import "PRSScanMethodModuleInput.h"
 #import "PRSScanResultModuleInput.h"
 
 #import "PRSNavigationController.h"
@@ -27,15 +29,21 @@
 @implementation PRSCameraFlowCoordinator
 
 - (UINavigationController *)initialView {
-    @weakify(self);
-    UIViewController *cameraView = [PRSCameraConfigurator configureModule:^(id<PRSCameraModuleInput> presenter, UIViewController *view) {
-        [presenter configureWithOpenResultAction:^(PRSScanResultEntity *scanResultEntity) {
-            @strongify(self);
-            [self openResultModuleWithEntity:scanResultEntity];
-        }];
+    UIViewController *scanMethodView = [PRSScanMethodConfigurator configureModule:^(id<PRSScanMethodModuleInput> presenter, UIViewController *view) {
+        
     }];
-    self.navigationController = [[PRSNavigationController alloc] initWithRootViewController:cameraView];
+    self.navigationController = [[PRSNavigationController alloc] initWithRootViewController:scanMethodView];
     return self.navigationController;
+    
+//    @weakify(self);
+//    UIViewController *cameraView = [PRSCameraConfigurator configureModule:^(id<PRSCameraModuleInput> presenter, UIViewController *view) {
+//        [presenter configureWithOpenResultAction:^(PRSScanResultEntity *scanResultEntity) {
+//            @strongify(self);
+//            [self openResultModuleWithEntity:scanResultEntity];
+//        }];
+//    }];
+//    self.navigationController = [[PRSNavigationController alloc] initWithRootViewController:cameraView];
+//    return self.navigationController;
 }
 
 - (void)openResultModuleWithEntity:(PRSScanResultEntity *)entity {
