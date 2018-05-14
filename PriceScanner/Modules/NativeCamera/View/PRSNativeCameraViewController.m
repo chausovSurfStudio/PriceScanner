@@ -178,6 +178,7 @@
 //            }
 //        }
     }];
+    request.imageCropAndScaleOption = VNImageCropAndScaleOptionScaleFill;
     self.classificationRequest = request;
 }
 
