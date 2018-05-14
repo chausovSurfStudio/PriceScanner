@@ -32,13 +32,14 @@
 @property (nonatomic, strong) IBOutlet UILabel *scanInProgressLabel;
 
 @property (nonatomic, strong) AVCaptureSession *session;
-@property (nonatomic, strong) NSArray<VNRequest *> *requests;
+@property (nonatomic, strong) NSArray<VNRequest *> *textDetectRequests;
+@property (nonatomic, strong) NSArray<VNCoreMLRequest *> *classificationRequests;
 
 @property (nonatomic, strong) TextModel *model;
-@property (nonatomic, strong) VNCoreMLRequest *classificationRequest;
+@property (nonatomic, strong) NSArray<NSString *> *modelOutputs;
+
 @property (nonatomic, strong) UIImage *snapshot;
 @property (nonatomic, assign) BOOL someFlag;
-@property (nonatomic, strong) NSArray<NSString *> *resultLabels;
 
 @end
 
@@ -48,11 +49,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.output viewLoaded];
-    
-    self.resultLabels = @[@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9",
-                          @"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M",
-                          @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z",
-                          @"Б", @"Г", @"Д", @"Ж", @"И", @"Й", @"Л", @"П", @"Ф", @"Ц", @"Ч", @"Ш", @"Щ", @"Ъ", @"Ы", @"Ь", @"Э", @"Ю", @"Я"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -70,14 +66,27 @@
     return UIStatusBarStyleLightContent;
 }
 
+#pragma mark - PRSNativeCameraViewInput
+- (void)setupInitialState {
+    [self initVideoSession];
+    [self setupModelOutputs];
+    [self configureModel];
+    [self configureStyle];
+    [self configureTextDetectRequest];
+    [self configureClassificationRequest];
+}
+
 #pragma mark - Configure
+- (void)setupModelOutputs {
+    self.modelOutputs = @[@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9",
+                          @"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M",
+                          @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z",
+                          @"Б", @"Г", @"Д", @"Ж", @"И", @"Й", @"Л", @"П", @"Ф", @"Ц", @"Ч", @"Ш", @"Щ", @"Ъ", @"Ы", @"Ь", @"Э", @"Ю", @"Я"];
+}
+
 - (void)configureModel {
     NSURL *modelUrl = [[NSBundle mainBundle] URLForResource:@"TextModel" withExtension:@"mlmodelc"];
-    NSError *error;
-    self.model = [[TextModel alloc] initWithContentsOfURL:modelUrl error:&error];
-    if (error) {
-        NSLog(@"scanner error: model not configure");
-    }
+    self.model = [[TextModel alloc] initWithContentsOfURL:modelUrl error:nil];
 }
 
 - (void)configureStyle {
@@ -101,100 +110,76 @@
 }
 
 - (void)configureTextDetectRequest {
+    @weakify(self);
     VNDetectTextRectanglesRequest *textRequest = [[VNDetectTextRectanglesRequest alloc] initWithCompletionHandler:^(VNRequest * _Nonnull request, NSError * _Nullable error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self clearSceneSublayers];
-            for (VNTextObservation *word in request.results) {
-                [self highlightWord:word inScene:self.scene];
-                for (VNRectangleObservation *characterBox in word.characterBoxes) {
-                    [self highlightLetter:characterBox inScene:self.scene];
-                    
-//                    UIImage *someLetter = [self cropLetter:characterBox fromImage:self.snapshot];
-//                    NSError *error;
-//                    VNImageRequestHandler *letterHandler = [[VNImageRequestHandler alloc] initWithCGImage:someLetter.CGImage options:@{}];
-//                    [letterHandler performRequests:@[self.classificationRequest] error:&error];
-//                    if (error) {
-//                        NSLog(@"ошибка в самом распознавании");
-//                    }
-                }
-            }
-        });
-        
-        if (!self.someFlag) {
-            self.someFlag = YES;
-            for (VNTextObservation *word in request.results) {
-                for (VNRectangleObservation *characterBox in word.characterBoxes) {
-                    UIImage *someLetter = [self cropLetter:characterBox fromImage:self.snapshot];
-                    NSError *error;
-                    VNImageRequestHandler *letterHandler = [[VNImageRequestHandler alloc] initWithCGImage:someLetter.CGImage options:@{}];
-                    [letterHandler performRequests:@[self.classificationRequest] error:&error];
-                    if (error) {
-                        NSLog(@"ошибка в самом распознавании");
-                    }
-                }
-            }
-            self.someFlag = NO;
-        }
+        @strongify(self);
+        [self handleTextDetectRequest:request];
     }];
     textRequest.reportCharacterBoxes = YES;
-    self.requests = @[textRequest];
+    self.textDetectRequests = @[textRequest];
 }
 
 - (void)configureClassificationRequest {
-    NSError *error;
-    VNCoreMLModel *mlModel = [VNCoreMLModel modelForMLModel:self.model.model error:&error];
-    if (error) {
-        NSLog(@"проблемы с созданием VNCoreMLModel");
-    }
+    VNCoreMLModel *mlModel = [VNCoreMLModel modelForMLModel:self.model.model error:nil];
+    @weakify(self);
     VNCoreMLRequest *request = [[VNCoreMLRequest alloc] initWithModel:mlModel completionHandler:^(VNRequest * _Nonnull request, NSError * _Nullable error) {
-        NSArray *results = [request.results copy];
-        VNCoreMLFeatureValueObservation *res = ((VNCoreMLFeatureValueObservation *)(results[0]));
-        
-        NSNumber *prediction = [NSNumber numberWithFloat:0];
-        NSNumber *compare = [NSNumber numberWithFloat:0];
-        int atIndex = -1;
-        
-        for (int i = 0; i < [res.featureValue multiArrayValue].count; i++) {
-            
-            compare = [[res.featureValue multiArrayValue] objectAtIndexedSubscript:i];
-            if ([compare floatValue] > [prediction floatValue]){
-                prediction = compare;
-                atIndex = i;
-            }
-        }
-        
-        NSString *resultLabel = @"who knows?";
-        if (atIndex < self.resultLabels.count) {
-            resultLabel = self.resultLabels[atIndex];
-        }
-        NSString *resultString = [NSString stringWithFormat:@"Symbol may be: %@ with confidence: %f", resultLabel, prediction.floatValue];
-        NSLog(@"RESULT: %@", resultString);
-//        for (id observation in request.results) {
-//            VNClassificationObservation *topResult = ((VNClassificationObservation *)observation);
-//            NSLog(@"%f: %@", topResult.confidence, topResult.identifier);
-//            if ([observation isKindOfClass:[VNCoreMLFeatureValueObservation class]]) {
-//                VNCoreMLFeatureValueObservation *response = (VNCoreMLFeatureValueObservation *)observation;
-//                NSLog(@"value = %@, confidence = %f", response.featureValue.stringValue, response.confidence);
-//            }
-//        }
+        @strongify(self);
+        [self handleClassificationRequest:request];
     }];
     request.imageCropAndScaleOption = VNImageCropAndScaleOptionScaleFill;
-    self.classificationRequest = request;
+    self.classificationRequests = @[request];
+}
+
+#pragma mark - VNRequest Handlers
+- (void)handleTextDetectRequest:(VNRequest *)request {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self clearSceneSublayers];
+        for (VNTextObservation *word in request.results) {
+            [self highlightWord:word inScene:self.scene];
+            for (VNRectangleObservation *characterBox in word.characterBoxes) {
+                [self highlightLetter:characterBox inScene:self.scene];
+            }
+        }
+    });
+    
+    if (!self.someFlag) {
+        self.someFlag = YES;
+        for (VNTextObservation *word in request.results) {
+            for (VNRectangleObservation *characterBox in word.characterBoxes) {
+                UIImage *someLetter = [self cropLetter:characterBox fromImage:self.snapshot];
+                VNImageRequestHandler *letterHandler = [[VNImageRequestHandler alloc] initWithCGImage:someLetter.CGImage options:@{}];
+                [letterHandler performRequests:self.classificationRequests error:nil];
+            }
+        }
+        self.someFlag = NO;
+    }
+}
+
+- (void)handleClassificationRequest:(VNRequest *)request {
+    NSArray *results = [request.results copy];
+    VNCoreMLFeatureValueObservation *mlObservation = (VNCoreMLFeatureValueObservation *)results.firstObject;
+    
+    NSNumber *confidence = [NSNumber numberWithFloat:0];
+    NSNumber *currentConfidence = [NSNumber numberWithFloat:0];
+    NSInteger outputIndex = NSNotFound;
+    
+    for (int i = 0; i < [mlObservation.featureValue multiArrayValue].count; i++) {
+        currentConfidence = [[mlObservation.featureValue multiArrayValue] objectAtIndexedSubscript:i];
+        if ([currentConfidence floatValue] > [confidence floatValue]){
+            confidence = currentConfidence;
+            outputIndex = i;
+        }
+    }
+    
+    if (outputIndex < self.modelOutputs.count) {
+        NSLog(@"RESULT: this is %@ with confidence %f", self.modelOutputs[outputIndex], confidence.floatValue);
+    }
 }
 
 #pragma mark - Actions
 - (IBAction)tapOnStartScanButton:(UIButton *)sender {
     // TODO: тестовый код, поправить позднее
     [self.output openScanResultModule];
-}
-
-#pragma mark - PRSNativeCameraViewInput
-- (void)setupInitialState {
-    [self initVideoSession];
-    [self configureModel];
-    [self configureStyle];
-    [self configureTextDetectRequest];
-    [self configureClassificationRequest];
 }
 
 #pragma mark - AVCaptureSession
@@ -255,7 +240,7 @@
         requestOptions = @{VNImageOptionCameraIntrinsics:(__bridge id)camData};
     }
     VNImageRequestHandler *handler = [[VNImageRequestHandler alloc] initWithCVPixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationRight options:requestOptions];
-    [handler performRequests:self.requests error:nil];
+    [handler performRequests:self.textDetectRequests error:nil];
 }
 
 #pragma mark - Private logic
