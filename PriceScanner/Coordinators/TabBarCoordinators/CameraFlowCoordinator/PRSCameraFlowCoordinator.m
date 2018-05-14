@@ -7,10 +7,15 @@
 //
 
 #import "PRSCameraFlowCoordinator.h"
+
+#import "PRSMachineLearningCameraConfigurator.h"
+#import "PRSManualCameraConfigurator.h"
 #import "PRSNativeCameraConfigurator.h"
 #import "PRSScanMethodConfigurator.h"
 #import "PRSScanResultConfigurator.h"
 
+#import "PRSMachineLearningCameraModuleInput.h"
+#import "PRSManualCameraModuleInput.h"
 #import "PRSNativeCameraModuleInput.h"
 #import "PRSScanMethodModuleInput.h"
 #import "PRSScanResultModuleInput.h"
@@ -35,11 +40,11 @@
             @strongify(self);
             [self openNativeCameraModule];
         } openMLCameraModuleAction:^{
-            // TODO: доделать
-            NSLog(@"openMLCameraModuleAction");
+            @strongify(self);
+            [self openMLCameraModule];
         } openManualCameraModuleAction:^{
-            // TODO: доделать
-            NSLog(@"openManualCameraModuleAction");
+            @strongify(self);
+            [self openManualCameraModule];
         }];
     }];
     self.navigationController = [[PRSNavigationController alloc] initWithRootViewController:scanMethodView];
@@ -49,6 +54,28 @@
 - (void)openNativeCameraModule {
     @weakify(self);
     UIViewController *cameraView = [PRSNativeCameraConfigurator configureModule:^(id<PRSNativeCameraModuleInput> presenter, UIViewController *view) {
+        [presenter configureWithOpenResultAction:^(PRSScanResultEntity *scanResultEntity) {
+            @strongify(self);
+            [self openResultModuleWithEntity:scanResultEntity];
+        }];
+    }];
+    [self.navigationController pushViewController:cameraView animated:YES];
+}
+
+- (void)openMLCameraModule {
+    @weakify(self);
+    UIViewController *cameraView = [PRSMachineLearningCameraConfigurator configureModule:^(id<PRSMachineLearningCameraModuleInput> presenter, UIViewController *view) {
+        [presenter configureWithOpenResultAction:^(PRSScanResultEntity *scanResultEntity) {
+            @strongify(self);
+            [self openResultModuleWithEntity:scanResultEntity];
+        }];
+    }];
+    [self.navigationController pushViewController:cameraView animated:YES];
+}
+
+- (void)openManualCameraModule {
+    @weakify(self);
+    UIViewController *cameraView = [PRSManualCameraConfigurator configureModule:^(id<PRSManualCameraModuleInput> presenter, UIViewController *view) {
         [presenter configureWithOpenResultAction:^(PRSScanResultEntity *scanResultEntity) {
             @strongify(self);
             [self openResultModuleWithEntity:scanResultEntity];
