@@ -23,4 +23,13 @@
 /** Более темный цвет градиента в навбаре/таббаре */
 + (UIColor *)prsBarsGradientDarkColor;
 
+/** Темно-синий цвет текста */
++ (UIColor *)prsDarkBlueTextColor;
+
+/** Черный цвет текста */
++ (UIColor *)prsBlackTextColor;
+
+/** Цвет всех сепараторов в приложении */
++ (UIColor *)prsSeparatorColor;
+
 @end

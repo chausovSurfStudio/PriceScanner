@@ -14,13 +14,13 @@
 
 @implementation PRSMainConfigurator
 
-+ (UIViewController *)configureModule:(void(^)(id<PRSMainModuleInput> presenter))completion {
++ (UIViewController *)configureModule:(void(^)(id<PRSMainModuleInput> presenter, UIViewController *view))completion {
     PRSMainPresenter *presenter = [PRSMainPresenter new];
     PRSMainViewController *view = [PRSMainViewController new];
     view.output = presenter;
     presenter.view = view;
     if (completion) {
-        completion(presenter);
+        completion(presenter, view);
     }
     return view;
 }

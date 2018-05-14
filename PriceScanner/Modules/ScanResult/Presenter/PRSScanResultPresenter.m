@@ -9,9 +9,13 @@
 #import "PRSScanResultPresenter.h"
 #import "PRSScanResultViewInput.h"
 
+#import "PRSScanResultEntity.h"
+#import "PRSScanResultViewModel.h"
+
 
 @interface PRSScanResultPresenter()
 
+@property (nonatomic, strong) PRSScanResultEntity *scanResult;
 @property (nonatomic, assign) BOOL showAsModal;
 @property (nonatomic, copy) void (^closeAction)(void);
 
@@ -20,7 +24,11 @@
 
 @implementation PRSScanResultPresenter
 
-#pragma mark - PRSScanResultViewInput
+#pragma mark - PRSScanResultModuleInput
+- (void)configureWithScanResult:(PRSScanResultEntity *)scanResultEntity {
+    self.scanResult = scanResultEntity;
+}
+
 - (void)configureAsModalWithCloseAction:(void(^)(void))closeAction {
     self.showAsModal = YES;
     self.closeAction = closeAction;
@@ -28,7 +36,7 @@
 
 #pragma mark - PRSScanResultViewOutput
 - (void)viewLoaded {
-    [self.view setupInitialState:self.showAsModal];
+    [self.view setupInitialState:self.showAsModal scanResult:[[PRSScanResultViewModel alloc] initWithEntity:self.scanResult]];
 }
 
 - (void)closeModule {

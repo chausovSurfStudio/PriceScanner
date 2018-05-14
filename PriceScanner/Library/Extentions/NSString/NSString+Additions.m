@@ -8,10 +8,15 @@
 
 #import "NSString+Additions.h"
 
+
 @implementation NSString (Additions)
 
 - (NSString *)localized {
     return NSLocalizedString(self, nil);
+}
+
++ (BOOL)notEmpty:(NSString *)string {
+    return string && string.length > 0;
 }
 
 @end

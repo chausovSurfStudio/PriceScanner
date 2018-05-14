@@ -14,6 +14,6 @@
 
 @interface PRSHistoryConfigurator : NSObject
 
-+ (UIViewController *)configureModule:(void(^)(id<PRSHistoryModuleInput> presenter))completion;
++ (UIViewController *)configureModule:(void(^)(id<PRSHistoryModuleInput> presenter, UIViewController *view))completion;
 
 @end
