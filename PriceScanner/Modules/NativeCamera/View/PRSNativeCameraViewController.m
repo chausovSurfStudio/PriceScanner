@@ -38,6 +38,7 @@
 @property (nonatomic, strong) VNCoreMLRequest *classificationRequest;
 @property (nonatomic, strong) UIImage *snapshot;
 @property (nonatomic, assign) BOOL someFlag;
+@property (nonatomic, strong) NSArray<NSString *> *resultLabels;
 
 @end
 
@@ -47,6 +48,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.output viewLoaded];
+    
+    self.resultLabels = @[@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9",
+                          @"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M",
+                          @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z",
+                          @"Б", @"Г", @"Д", @"Ж", @"И", @"Й", @"Л", @"П", @"Ф", @"Ц", @"Ч", @"Ш", @"Щ", @"Ъ", @"Ы", @"Ь", @"Э", @"Ю", @"Я"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -141,14 +147,36 @@
         NSLog(@"проблемы с созданием VNCoreMLModel");
     }
     VNCoreMLRequest *request = [[VNCoreMLRequest alloc] initWithModel:mlModel completionHandler:^(VNRequest * _Nonnull request, NSError * _Nullable error) {
-        for (id observation in request.results) {
-//            VNClassificationObservation *topResult = ((VNClassificationObservation *)observation);
-//            NSLog(@"%f: %@", topResult.confidence, topResult.identifier);
-            if ([observation isKindOfClass:[VNCoreMLFeatureValueObservation class]]) {
-                VNCoreMLFeatureValueObservation *response = (VNCoreMLFeatureValueObservation *)observation;
-                NSLog(@"value = %@, confidence = %f", response.featureValue.stringValue, response.confidence);
+        NSArray *results = [request.results copy];
+        VNCoreMLFeatureValueObservation *res = ((VNCoreMLFeatureValueObservation *)(results[0]));
+        
+        NSNumber *prediction = [NSNumber numberWithFloat:0];
+        NSNumber *compare = [NSNumber numberWithFloat:0];
+        int atIndex = -1;
+        
+        for (int i = 0; i < [res.featureValue multiArrayValue].count; i++) {
+            
+            compare = [[res.featureValue multiArrayValue] objectAtIndexedSubscript:i];
+            if ([compare floatValue] > [prediction floatValue]){
+                prediction = compare;
+                atIndex = i;
             }
         }
+        
+        NSString *resultLabel = @"who knows?";
+        if (atIndex < self.resultLabels.count) {
+            resultLabel = self.resultLabels[atIndex];
+        }
+        NSString *resultString = [NSString stringWithFormat:@"Symbol may be: %@ with confidence: %f", resultLabel, prediction.floatValue];
+        NSLog(@"RESULT: %@", resultString);
+//        for (id observation in request.results) {
+//            VNClassificationObservation *topResult = ((VNClassificationObservation *)observation);
+//            NSLog(@"%f: %@", topResult.confidence, topResult.identifier);
+//            if ([observation isKindOfClass:[VNCoreMLFeatureValueObservation class]]) {
+//                VNCoreMLFeatureValueObservation *response = (VNCoreMLFeatureValueObservation *)observation;
+//                NSLog(@"value = %@, confidence = %f", response.featureValue.stringValue, response.confidence);
+//            }
+//        }
     }];
     self.classificationRequest = request;
 }
@@ -216,7 +244,8 @@
 
 #pragma mark - AVCaptureVideoDataOutputSampleBufferDelegate
 - (void)captureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
-    self.snapshot = [UIImage imageFromSampleBuffer:sampleBuffer];
+    UIImage *rawSnapshot = [UIImage imageFromSampleBuffer:sampleBuffer];
+    self.snapshot = [rawSnapshot resizedImage:rawSnapshot.size interpolationQuality:kCGInterpolationHigh];
     
     CVImageBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     CFTypeRef camData = CMGetAttachment(sampleBuffer, kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix, nil);
