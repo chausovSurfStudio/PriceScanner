@@ -12,6 +12,6 @@
 
 @interface UIImage (ScanUtils)
 
-- (UIImage *)imageFromSampleBuffer:(CMSampleBufferRef)sampleBuffer;
++ (UIImage *)imageFromSampleBuffer:(CMSampleBufferRef)sampleBuffer;
 
 @end
