@@ -1,30 +1,30 @@
 //
-//  PRSCameraPresenter.m
+//  PRSNativeCameraPresenter.m
 //  PriceScanner
 //
-//  Created by Alexander Chausov on 28/03/2018.
+//  Created by Chausov Alexander on 14/05/2018.
 //  Copyright © 2018 ChausovCompany. All rights reserved.
 //
 
-#import "PRSCameraPresenter.h"
-#import "PRSCameraViewInput.h"
+#import "PRSNativeCameraPresenter.h"
+#import "PRSNativeCameraViewInput.h"
 
 
-@interface PRSCameraPresenter()
+@interface PRSNativeCameraPresenter()
 
 @property (nonatomic, copy) void (^openResultAction)(PRSScanResultEntity *scanResultEntity);
 
 @end
 
 
-@implementation PRSCameraPresenter
+@implementation PRSNativeCameraPresenter
 
-#pragma mark - PRSCameraModuleInput
+#pragma mark - PRSNativeCameraModuleInput
 - (void)configureWithOpenResultAction:(void(^)(PRSScanResultEntity *scanResultEntity))openResultAction {
     self.openResultAction = openResultAction;
 }
 
-#pragma mark - PRSCameraViewOutput
+#pragma mark - PRSNativeCameraViewOutput
 - (void)viewLoaded {
     [self.view setupInitialState];
 }

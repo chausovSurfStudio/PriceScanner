@@ -7,11 +7,11 @@
 //
 
 #import "PRSCameraFlowCoordinator.h"
-#import "PRSCameraConfigurator.h"
+#import "PRSNativeCameraConfigurator.h"
 #import "PRSScanMethodConfigurator.h"
 #import "PRSScanResultConfigurator.h"
 
-#import "PRSCameraModuleInput.h"
+#import "PRSNativeCameraModuleInput.h"
 #import "PRSScanMethodModuleInput.h"
 #import "PRSScanResultModuleInput.h"
 
@@ -48,7 +48,7 @@
 
 - (void)openNativeCameraModule {
     @weakify(self);
-    UIViewController *cameraView = [PRSCameraConfigurator configureModule:^(id<PRSCameraModuleInput> presenter, UIViewController *view) {
+    UIViewController *cameraView = [PRSNativeCameraConfigurator configureModule:^(id<PRSNativeCameraModuleInput> presenter, UIViewController *view) {
         [presenter configureWithOpenResultAction:^(PRSScanResultEntity *scanResultEntity) {
             @strongify(self);
             [self openResultModuleWithEntity:scanResultEntity];

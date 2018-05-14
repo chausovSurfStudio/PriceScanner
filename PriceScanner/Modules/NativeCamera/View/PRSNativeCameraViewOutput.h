@@ -1,15 +1,15 @@
 //
-//  PRSCameraViewOutput.h
+//  PRSNativeCameraViewOutput.h
 //  PriceScanner
 //
-//  Created by Alexander Chausov on 28/03/2018.
+//  Created by Chausov Alexander on 14/05/2018.
 //  Copyright © 2018 ChausovCompany. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 
-@protocol PRSCameraViewOutput <NSObject>
+@protocol PRSNativeCameraViewOutput <NSObject>
 
 /** Метод информирует презентера о том, что view загрузилась и готова к работе */
 - (void)viewLoaded;

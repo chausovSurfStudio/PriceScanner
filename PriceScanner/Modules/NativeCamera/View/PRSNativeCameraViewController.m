@@ -1,13 +1,13 @@
 //
-//  PRSCameraViewController.m
+//  PRSNativeCameraViewController.m
 //  PriceScanner
 //
-//  Created by Alexander Chausov on 28/03/2018.
+//  Created by Chausov Alexander on 14/05/2018.
 //  Copyright © 2018 ChausovCompany. All rights reserved.
 //
 
-#import "PRSCameraViewController.h"
-#import "PRSCameraViewOutput.h"
+#import "PRSNativeCameraViewController.h"
+#import "PRSNativeCameraViewOutput.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <Vision/Vision.h>
@@ -19,7 +19,7 @@
 #import "UIViewController+ScanUtils.h"
 
 
-@interface PRSCameraViewController () <AVCaptureVideoDataOutputSampleBufferDelegate>
+@interface PRSNativeCameraViewController () <AVCaptureVideoDataOutputSampleBufferDelegate>
 
 @property (nonatomic, strong) IBOutlet UIImageView *scene;
 @property (nonatomic, strong) IBOutlet UIButton *startScanButton;
@@ -35,7 +35,7 @@
 @end
 
 
-@implementation PRSCameraViewController
+@implementation PRSNativeCameraViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -84,7 +84,7 @@
     [self.output openScanResultModule];
 }
 
-#pragma mark - PRSCameraViewInput
+#pragma mark - PRSNativeCameraViewInput
 - (void)setupInitialState {
     [self initVideoSession];
     [self configureStyle];
