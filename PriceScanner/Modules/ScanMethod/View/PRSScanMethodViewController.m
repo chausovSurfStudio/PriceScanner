@@ -19,8 +19,8 @@
 @property (nonatomic, strong) IBOutlet UIImageView *targetImageView;
 @property (nonatomic, strong) IBOutlet UILabel *bottomDescriptionLabel;
 
-@property (nonatomic, strong) IBOutlet UIButton *iosMethodButton;
-@property (nonatomic, strong) IBOutlet UIButton *machineLearningMethodButton;
+@property (nonatomic, strong) IBOutlet UIButton *nativeMethodButton;
+@property (nonatomic, strong) IBOutlet UIButton *mlMethodButton;
 @property (nonatomic, strong) IBOutlet UIButton *manualMethodButton;
 
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *arrows;
@@ -66,7 +66,7 @@
     
     self.targetImageView.image = [UIImage imageNamed:@"icTarget"];
     
-    for (UIButton *button in @[self.iosMethodButton, self.machineLearningMethodButton, self.manualMethodButton]) {
+    for (UIButton *button in @[self.nativeMethodButton, self.mlMethodButton, self.manualMethodButton]) {
         [button setPlainLeftAlignmentStyle];
     }
     
@@ -83,18 +83,18 @@
     [self.topDescriptionLabel setText:@"Способы сканирования_описание".localized withLineSpacing:@(4.f) letterSpacing:nil];
     [self.bottomDescriptionLabel setText:@"Способы сканирования_предупреждение".localized withLineSpacing:@(3.f) letterSpacing:nil];
     
-    [self.iosMethodButton setTitle:@"Средствами iOS".localized forState:UIControlStateNormal];
-    [self.machineLearningMethodButton setTitle:@"С помощью машинного обучения".localized forState:UIControlStateNormal];
+    [self.nativeMethodButton setTitle:@"Средствами iOS".localized forState:UIControlStateNormal];
+    [self.mlMethodButton setTitle:@"С помощью машинного обучения".localized forState:UIControlStateNormal];
     [self.manualMethodButton setTitle:@"Ручное определение границы".localized forState:UIControlStateNormal];
 }
 
 #pragma mark - Actions
-- (IBAction)tapOnIosMethodButton:(UIButton *)sender {
-    [self.output tapOnScanWithIosMethod];
+- (IBAction)tapOnNativeMethodButton:(UIButton *)sender {
+    [self.output tapOnScanWithNativeMethod];
 }
 
-- (IBAction)tapOnMachineLearningMethodButton:(UIButton *)sender {
-    [self.output tapOnScanWithMachineLearningMethod];
+- (IBAction)tapOnMLMethodButton:(UIButton *)sender {
+    [self.output tapOnScanWithMLMethod];
 }
 
 - (IBAction)tapOnManualMethodButton:(UIButton *)sender {

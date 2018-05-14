@@ -15,10 +15,10 @@
 - (void)viewLoaded;
 
 /** Метод информирует презентера о том, что пользователь решил сканировать ценник и определять границы средствами iOS */
-- (void)tapOnScanWithIosMethod;
+- (void)tapOnScanWithNativeMethod;
 
 /** Метод информирует презентера о том, что пользователь решил сканировать ценник и определять границы средствами ML */
-- (void)tapOnScanWithMachineLearningMethod;
+- (void)tapOnScanWithMLMethod;
 
 /** Метод информирует презентера о том, что пользователь решил сканировать ценник и вручную определять его границы */
 - (void)tapOnScanWithManualMethod;

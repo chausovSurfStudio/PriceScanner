@@ -13,13 +13,13 @@
 
 /** Метод позволяет сконфигурировать модуль и указать блоки перехода к другим экранам
  *
- * @param openIosCameraModuleAction Блок кода, будет вызываться при необходимости перейти на экран камеры с определением границ ценника средствами ios
- * @param openMachineLearningCameraModuleAction Блок кода, будет вызываться при необходимости перейти на экран камеры с определением границ ценника средствами ML
+ * @param openNativeCameraModuleAction Блок кода, будет вызываться при необходимости перейти на экран камеры с определением границ ценника средствами ios
+ * @param openMLCameraModuleAction Блок кода, будет вызываться при необходимости перейти на экран камеры с определением границ ценника средствами ML
  * @param openManualCameraModuleAction Блок кода, будет вызываться при необходимости перейти на экран камеры с определением границ ценника вручную
  *
  */
-- (void)configureWithOpenIosCameraModuleAction:(void(^)(void))openIosCameraModuleAction
-         openMachineLearningCameraModuleAction:(void(^)(void))openMachineLearningCameraModuleAction
-                  openManualCameraModuleAction:(void(^)(void))openManualCameraModuleAction;
+- (void)configureWithOpenNativeCameraModuleAction:(void(^)(void))openNativeCameraModuleAction
+                         openMLCameraModuleAction:(void(^)(void))openMLCameraModuleAction
+                     openManualCameraModuleAction:(void(^)(void))openManualCameraModuleAction;
 
 @end

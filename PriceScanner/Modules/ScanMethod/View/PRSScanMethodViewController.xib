@@ -12,9 +12,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PRSScanMethodViewController">
             <connections>
                 <outlet property="bottomDescriptionLabel" destination="TCN-Kt-0o2" id="ovF-aA-WgN"/>
-                <outlet property="iosMethodButton" destination="hRQ-gh-dQi" id="uNP-59-jET"/>
-                <outlet property="machineLearningMethodButton" destination="62x-xv-KVC" id="YAz-78-nnJ"/>
-                <outlet property="manualMethodButton" destination="HFB-7i-d49" id="c08-Dp-PcV"/>
+                <outlet property="manualMethodButton" destination="HFB-7i-d49" id="4Ba-O2-acn"/>
+                <outlet property="mlMethodButton" destination="62x-xv-KVC" id="c64-GI-Awv"/>
+                <outlet property="nativeMethodButton" destination="hRQ-gh-dQi" id="QoJ-07-lff"/>
                 <outlet property="targetImageView" destination="EMN-3m-wbK" id="vkb-Gm-LmL"/>
                 <outlet property="topDescriptionLabel" destination="4qY-HH-r6U" id="gBb-br-eNu"/>
                 <outlet property="view" destination="iN0-l3-epB" id="emy-Zp-Bh3"/>
@@ -88,7 +88,7 @@
                                     <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="Средствами iOS"/>
                                     <connections>
-                                        <action selector="tapOnIosMethodButton:" destination="-1" eventType="touchUpInside" id="LGC-or-3Jh"/>
+                                        <action selector="tapOnNativeMethodButton:" destination="-1" eventType="touchUpInside" id="BtB-RN-ppS"/>
                                     </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qeH-uq-lE0">
@@ -106,7 +106,7 @@
                                     <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="С помощью машинного обучения"/>
                                     <connections>
-                                        <action selector="tapOnMachineLearningMethodButton:" destination="-1" eventType="touchUpInside" id="JjY-fD-3QX"/>
+                                        <action selector="tapOnMLMethodButton:" destination="-1" eventType="touchUpInside" id="0Kp-CP-Dw4"/>
                                     </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lyW-jJ-pgb">
@@ -124,7 +124,7 @@
                                     <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="Ручное определение границы"/>
                                     <connections>
-                                        <action selector="tapOnManualMethodButton:" destination="-1" eventType="touchUpInside" id="Dka-e7-cEq"/>
+                                        <action selector="tapOnManualMethodButton:" destination="-1" eventType="touchUpInside" id="hs1-Nk-ifz"/>
                                     </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eiq-3g-Z4k">

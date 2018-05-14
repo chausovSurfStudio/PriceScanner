@@ -31,20 +31,22 @@
 - (UINavigationController *)initialView {
     @weakify(self);
     UIViewController *scanMethodView = [PRSScanMethodConfigurator configureModule:^(id<PRSScanMethodModuleInput> presenter, UIViewController *view) {
-        [presenter configureWithOpenIosCameraModuleAction:^{
+        [presenter configureWithOpenNativeCameraModuleAction:^{
             @strongify(self);
-            [self openIosCameraModule];
-        } openMachineLearningCameraModuleAction:^{
+            [self openNativeCameraModule];
+        } openMLCameraModuleAction:^{
             // TODO: доделать
+            NSLog(@"openMLCameraModuleAction");
         } openManualCameraModuleAction:^{
             // TODO: доделать
+            NSLog(@"openManualCameraModuleAction");
         }];
     }];
     self.navigationController = [[PRSNavigationController alloc] initWithRootViewController:scanMethodView];
     return self.navigationController;
 }
 
-- (void)openIosCameraModule {
+- (void)openNativeCameraModule {
     @weakify(self);
     UIViewController *cameraView = [PRSCameraConfigurator configureModule:^(id<PRSCameraModuleInput> presenter, UIViewController *view) {
         [presenter configureWithOpenResultAction:^(PRSScanResultEntity *scanResultEntity) {
