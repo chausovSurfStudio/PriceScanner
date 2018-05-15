@@ -45,6 +45,35 @@
     return letterImage;
 }
 
+- (CGRect)regionOfInterestFromRectObservation:(VNRectangleObservation *)rectObservation {
+    NSArray<NSValue *> *points = @[
+                                   [NSValue valueWithCGPoint:rectObservation.topLeft],
+                                   [NSValue valueWithCGPoint:rectObservation.topRight],
+                                   [NSValue valueWithCGPoint:rectObservation.bottomLeft],
+                                   [NSValue valueWithCGPoint:rectObservation.bottomRight]
+                                   ];
+    CGFloat minX = 1.f;
+    CGFloat maxX = 0.f;
+    CGFloat minY = 1.f;
+    CGFloat maxY = 0.f;
+    for (NSValue *pointValue in points) {
+        CGPoint point = [pointValue CGPointValue];
+        minX = point.x < minX ? point.x : minX;
+        maxX = point.x > maxX ? point.x : maxX;
+        minY = point.y < minY ? point.y : minY;
+        maxY = point.y > maxY ? point.y : maxY;
+    }
+    CGRect region = CGRectMake(minX, minY, maxX - minX, maxY - minY);
+    if ([self isValidRegionOfInterest:region]) {
+        return region;
+    } else {
+        // вернем значение, которое используется в качестве параметра regionOfInterest по умолчанию
+        return CGRectMake(0, 0, 1, 1);
+    }
+}
+
+#pragma mark - Support Methods
+/** Метод возращает фрейм слова относительно изображения, на котором оно расположено, и его размера */
 - (CGRect)frameForWord:(VNTextObservation *)word sceneSize:(CGSize)sceneSize {
     NSArray<VNRectangleObservation *> *boxes = word.characterBoxes;
     
@@ -76,6 +105,7 @@
     return CGRectMake(originX, originY, width, height);
 }
 
+/** Метод возращает фрейм для некоего распознанного прямоугольника (символа или границы ценника) относительно изображения, на котором он расположен, и его размера */
 - (CGRect)frameForRectObservation:(VNRectangleObservation *)rectObservation sceneSize:(CGSize)sceneSize {
     CGFloat originX = rectObservation.topLeft.x * sceneSize.width;
     CGFloat originY = (1 - rectObservation.topLeft.y) * sceneSize.height;
@@ -85,13 +115,18 @@
     return CGRectMake(originX, originY, width, height);
 }
 
-#pragma mark - Support Methods
+/** Метод позволяет вырезать изображение по его фрейму (rect) из исходного изображения */
 - (UIImage *)cutRect:(CGRect)rect fromImage:(UIImage *)image {
     CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage, rect);
     UIImage *resultImage = [UIImage imageWithCGImage:imageRef scale:1.0 orientation:image.imageOrientation];
     CGImageRelease(imageRef);
     
     return resultImage;
+}
+
+/** Возвращает YES в случае, если переданный прямоугольник подходит для установки в качестве параметра regionOfInterest к запросу VNRequest */
+- (BOOL)isValidRegionOfInterest:(CGRect)region {
+    return region.origin.x > 0 && region.origin.y > 0 && (region.origin.x + region.size.width) <= 1 && (region.origin.y + region.size.height) <= 1;
 }
 
 @end

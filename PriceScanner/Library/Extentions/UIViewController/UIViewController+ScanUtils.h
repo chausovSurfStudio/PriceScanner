@@ -26,10 +26,7 @@
 /** Метод возвращает изображение конкретного символа, вырезанного из видеопотока */
 - (UIImage *)cropLetter:(VNRectangleObservation *)letter fromImage:(UIImage *)image;
 
-/** Метод возращает фрейм слова относительно изображения, на котором оно расположено, и его размера */
-- (CGRect)frameForWord:(VNTextObservation *)word sceneSize:(CGSize)sceneSize;
-
-/** Метод возращает фрейм для некоего распознанного прямоугольника (символа или границы ценника) относительно изображения, на котором он расположен, и его размера */
-- (CGRect)frameForRectObservation:(VNRectangleObservation *)rectObservation sceneSize:(CGSize)sceneSize;
+/** Возвращает прямоугольник, характеризующий положение rectObservation относительно текущего видеопотока (фактически - regionOfInterest для request'а на распознавание символов) */
+- (CGRect)regionOfInterestFromRectObservation:(VNRectangleObservation *)rectObservation;
 
 @end
