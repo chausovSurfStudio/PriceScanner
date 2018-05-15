@@ -34,7 +34,8 @@
 @property (nonatomic, strong) IBOutlet UILabel *scanInProgressLabel;
 
 @property (nonatomic, strong) AVCaptureSession *session;
-@property (nonatomic, strong) NSArray<VNRequest *> *textDetectRequests;
+@property (nonatomic, strong) VNRequest *textDetectRequest;
+@property (nonatomic, strong) VNDetectRectanglesRequest *rectangleRequest;
 @property (nonatomic, strong) NSArray<VNCoreMLRequest *> *classificationRequests;
 
 @property (nonatomic, strong) TextModel *model;
@@ -81,6 +82,7 @@
     [self configureStyle];
     [self configureTextDetectRequest];
     [self configureClassificationRequest];
+    [self configureRectangleRequest];
     [self configureScanTimer];
     [self configureScanner];
 }
@@ -125,7 +127,7 @@
         [self handleTextDetectRequest:request];
     }];
     textRequest.reportCharacterBoxes = YES;
-    self.textDetectRequests = @[textRequest];
+    self.textDetectRequest = textRequest;
 }
 
 - (void)configureClassificationRequest {
@@ -137,6 +139,18 @@
     }];
     request.imageCropAndScaleOption = VNImageCropAndScaleOptionScaleFill;
     self.classificationRequests = @[request];
+}
+
+- (void)configureRectangleRequest {
+    VNDetectRectanglesRequest *rectangleRequest = [[VNDetectRectanglesRequest alloc] initWithCompletionHandler:^(VNRequest * _Nonnull request, NSError * _Nullable error) {
+        NSArray<VNRectangleObservation *> *results = request.results;
+        VNRectangleObservation *rectangle = results.firstObject;
+        if (rectangle) {
+            NSLog(@"%f %f", rectangle.topLeft.x, rectangle.topLeft.y);
+        }
+    }];
+    rectangleRequest.minimumSize = 0.3;
+    self.rectangleRequest = rectangleRequest;
 }
 
 - (void)configureScanTimer {
@@ -263,7 +277,7 @@
         requestOptions = @{VNImageOptionCameraIntrinsics:(__bridge id)camData};
     }
     VNImageRequestHandler *handler = [[VNImageRequestHandler alloc] initWithCVPixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationRight options:requestOptions];
-    [handler performRequests:self.textDetectRequests error:nil];
+    [handler performRequests:@[self.textDetectRequest, self.rectangleRequest] error:nil];
 }
 
 #pragma mark - Private logic
