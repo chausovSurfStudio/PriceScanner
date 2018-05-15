@@ -11,9 +11,12 @@
 @class PRSCharDetectResult;
 
 
+/** Объект инкапсулирует в себе логику по хранению и обработке результатов распознавания символов в рамках одной сессии */
 @interface PRSSingleScanSession : NSObject
 
+/** Метод для сохранения информации о распознанном символе */
 - (void)detectResult:(PRSCharDetectResult *)result;
+/** Метод возвращает строку, которая получилась в результате распознавания в рамках данной сессии */
 - (NSString *)getPrediction;
 
 @end

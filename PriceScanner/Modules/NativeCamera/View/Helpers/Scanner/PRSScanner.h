@@ -21,11 +21,22 @@ typedef NS_OPTIONS(NSUInteger, PRSScannerState) {
 };
 
 
+/** Объект, инкапсулирующий в себе логику по обработке распознанных в видеопотоке символов */
 @interface PRSScanner : NSObject
 
+/**
+ * Сканер следует переводить в отключенное состояние при уходе с экрана (в этом состоянии вся сохраненная инфомрация стирается)
+ * При переводе в активное состояние - создается новая сессия, результаты распознавания будут сохраняться в нее
+ */
 @property (nonatomic, assign) PRSScannerState state;
 
+/** Данный метод следует вызывать непосредственно перед вызывом VNRequest'а, который будет обращаться к нейросети за предсказанием */
 - (void)prepareForCharBoxScan:(VNRectangleObservation *)charBox;
+
+/**
+ * Метод для сохранения результата работы нейросети.
+ * Предсказание и точность будут связаны с изображением, информация о котором была передана в предыдущем мтеоде (prepareForCharBoxScan:)
+ */
 - (void)completeCharBoxScanWithPrediction:(NSString *)prediction confidence:(CGFloat)confidence;
 
 @end

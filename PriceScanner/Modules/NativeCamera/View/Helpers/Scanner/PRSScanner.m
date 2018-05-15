@@ -7,14 +7,14 @@
 //
 
 #import "PRSScanner.h"
-#import "PRSScanSessions.h"
+#import "PRSScanSessionManager.h"
 #import "PRSCharDetectResult.h"
 
 
 @interface PRSScanner()
 
 @property (nonatomic, strong) PRSCharDetectResult *scanResultBuffer;
-@property (nonatomic, strong) PRSScanSessions *sessionManager;
+@property (nonatomic, strong) PRSScanSessionManager *sessionManager;
 
 @end
 
@@ -24,7 +24,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.sessionManager = [PRSScanSessions new];
+        self.sessionManager = [PRSScanSessionManager new];
         self.state = PRSScannerStateDisable;
     }
     return self;

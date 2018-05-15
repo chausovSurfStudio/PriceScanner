@@ -1,24 +1,24 @@
 //
-//  PRSScanSessions.m
+//  PRSScanSessionManager.m
 //  PriceScanner
 //
 //  Created by Александр Чаусов on 15.05.2018.
 //  Copyright © 2018 Surf. All rights reserved.
 //
 
-#import "PRSScanSessions.h"
+#import "PRSScanSessionManager.h"
 #import "PRSSingleScanSession.h"
 #import "PRSCharDetectResult.h"
 
 
-@interface PRSScanSessions()
+@interface PRSScanSessionManager()
 
 @property (nonatomic, strong) NSArray<PRSSingleScanSession *> *sessions;
 
 @end
 
 
-@implementation PRSScanSessions
+@implementation PRSScanSessionManager
 
 - (instancetype)init {
     self = [super init];
