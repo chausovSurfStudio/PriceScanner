@@ -55,6 +55,10 @@
 		844BCCBC20A9C3BA00563FED /* PRSManualCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 844BCCBB20A9C3BA00563FED /* PRSManualCameraViewController.xib */; };
 		844BCCBE20A9E65400563FED /* TextModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCBD20A9E65400563FED /* TextModel.mlmodel */; };
 		844BCCC220AA2BDE00563FED /* PRSScanTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCC120AA2BDE00563FED /* PRSScanTimer.m */; };
+		844BCCC520AADFFE00563FED /* PRSScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCC420AADFFE00563FED /* PRSScanner.m */; };
+		844BCCCA20AAE16100563FED /* PRSCharDetectResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCC920AAE16100563FED /* PRSCharDetectResult.m */; };
+		844BCCD020AAE93A00563FED /* PRSSingleScanSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCCF20AAE93A00563FED /* PRSSingleScanSession.m */; };
+		844BCCD320AAF3F100563FED /* PRSScanSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCD120AAF3F000563FED /* PRSScanSessionManager.m */; };
 		84555754209F265A00B01D91 /* PRSModalNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555753209F265A00B01D91 /* PRSModalNavigationController.m */; };
 		84555759209F3C6A00B01D91 /* PRSMainCarouselAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555758209F3C6A00B01D91 /* PRSMainCarouselAdapter.m */; };
 		8455575D209F41BD00B01D91 /* PRSMainCarouselCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455575B209F41BD00B01D91 /* PRSMainCarouselCell.m */; };
@@ -203,6 +207,14 @@
 		844BCCBD20A9E65400563FED /* TextModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextModel.mlmodel; path = ../../../../../Downloads/PricesForSanya/TextModel.mlmodel; sourceTree = "<group>"; };
 		844BCCC020AA2BDE00563FED /* PRSScanTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSScanTimer.h; sourceTree = "<group>"; };
 		844BCCC120AA2BDE00563FED /* PRSScanTimer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSScanTimer.m; sourceTree = "<group>"; };
+		844BCCC320AADFFE00563FED /* PRSScanner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSScanner.h; sourceTree = "<group>"; };
+		844BCCC420AADFFE00563FED /* PRSScanner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSScanner.m; sourceTree = "<group>"; };
+		844BCCC820AAE16100563FED /* PRSCharDetectResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSCharDetectResult.h; sourceTree = "<group>"; };
+		844BCCC920AAE16100563FED /* PRSCharDetectResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSCharDetectResult.m; sourceTree = "<group>"; };
+		844BCCCE20AAE93A00563FED /* PRSSingleScanSession.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSSingleScanSession.h; sourceTree = "<group>"; };
+		844BCCCF20AAE93A00563FED /* PRSSingleScanSession.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSSingleScanSession.m; sourceTree = "<group>"; };
+		844BCCD120AAF3F000563FED /* PRSScanSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRSScanSessionManager.m; sourceTree = "<group>"; };
+		844BCCD220AAF3F000563FED /* PRSScanSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRSScanSessionManager.h; sourceTree = "<group>"; };
 		84555752209F265A00B01D91 /* PRSModalNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSModalNavigationController.h; sourceTree = "<group>"; };
 		84555753209F265A00B01D91 /* PRSModalNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSModalNavigationController.m; sourceTree = "<group>"; };
 		84555757209F3C6A00B01D91 /* PRSMainCarouselAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSMainCarouselAdapter.h; sourceTree = "<group>"; };
@@ -708,10 +720,34 @@
 		844BCCBF20AA2BC100563FED /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				844BCCC620AAE14000563FED /* Scanner */,
+				844BCCC720AAE14500563FED /* Timer */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		844BCCC620AAE14000563FED /* Scanner */ = {
+			isa = PBXGroup;
+			children = (
+				844BCCC320AADFFE00563FED /* PRSScanner.h */,
+				844BCCC420AADFFE00563FED /* PRSScanner.m */,
+				844BCCD220AAF3F000563FED /* PRSScanSessionManager.h */,
+				844BCCD120AAF3F000563FED /* PRSScanSessionManager.m */,
+				844BCCCE20AAE93A00563FED /* PRSSingleScanSession.h */,
+				844BCCCF20AAE93A00563FED /* PRSSingleScanSession.m */,
+				844BCCC820AAE16100563FED /* PRSCharDetectResult.h */,
+				844BCCC920AAE16100563FED /* PRSCharDetectResult.m */,
+			);
+			path = Scanner;
+			sourceTree = "<group>";
+		};
+		844BCCC720AAE14500563FED /* Timer */ = {
+			isa = PBXGroup;
+			children = (
 				844BCCC020AA2BDE00563FED /* PRSScanTimer.h */,
 				844BCCC120AA2BDE00563FED /* PRSScanTimer.m */,
 			);
-			path = Helpers;
+			path = Timer;
 			sourceTree = "<group>";
 		};
 		84555755209F3B8F00B01D91 /* CarouselAdapter */ = {
@@ -1397,6 +1433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				185816662042AE82003C2FA9 /* AppDelegate.m in Sources */,
+				844BCCD320AAF3F100563FED /* PRSScanSessionManager.m in Sources */,
 				84555766209F56EF00B01D91 /* UIButton+Style.m in Sources */,
 				841F4650209D080D00535A4A /* UIColor+Style.m in Sources */,
 				185816B82042B3A2003C2FA9 /* PRSBasePresenter.m in Sources */,
@@ -1419,6 +1456,7 @@
 				8435729A2066D41D00AC6E74 /* PRSCameraFlowCoordinator.m in Sources */,
 				8455577D20A0F5CD00B01D91 /* PRSHistoryTableViewCell.m in Sources */,
 				8466555C209BB0D900810A16 /* NSString+Additions.m in Sources */,
+				844BCCCA20AAE16100563FED /* PRSCharDetectResult.m in Sources */,
 				8455578920A3147200B01D91 /* PRSScanResultViewModel.m in Sources */,
 				843572972066D3C700AC6E74 /* PRSMainTabBarController.m in Sources */,
 				25326E0D0A2DDF2B032B5081 /* PRSMainConfigurator.m in Sources */,
@@ -1433,6 +1471,7 @@
 				E800211210310427880E30F8 /* PRSHistoryPresenter.m in Sources */,
 				84555754209F265A00B01D91 /* PRSModalNavigationController.m in Sources */,
 				FA0407BE2816CAB3809DAAE3 /* PRSHistoryViewController.m in Sources */,
+				844BCCC520AADFFE00563FED /* PRSScanner.m in Sources */,
 				356B1226450061451026127C /* PRSScanResultConfigurator.m in Sources */,
 				844BCCC220AA2BDE00563FED /* PRSScanTimer.m in Sources */,
 				5BA7F8FC2B2358AE6D9829EB /* PRSScanResultPresenter.m in Sources */,
@@ -1449,6 +1488,7 @@
 				D35A25B6C7AD2248B5899D56 /* PRSNativeCameraPresenter.m in Sources */,
 				94A38A3A4713E07047AFB1ED /* PRSNativeCameraViewController.m in Sources */,
 				DAF3274B595A13F8694ADDB5 /* PRSMachineLearningCameraConfigurator.m in Sources */,
+				844BCCD020AAE93A00563FED /* PRSSingleScanSession.m in Sources */,
 				741156F71A850DCD4F8BA370 /* PRSMachineLearningCameraPresenter.m in Sources */,
 				7BF09B2111F0AE8066443814 /* PRSMachineLearningCameraViewController.m in Sources */,
 				A3A5EF04E3C0305EE4F38418 /* PRSManualCameraConfigurator.m in Sources */,

@@ -14,6 +14,7 @@
 
 #import "PRSCameraOverlay.h"
 #import "PRSScanTimer.h"
+#import "PRSScanner.h"
 #import "TextModel.h"
 
 #import "UIButton+Style.h"
@@ -41,6 +42,7 @@
 
 @property (nonatomic, strong) UIImage *snapshot;
 @property (nonatomic, strong) PRSScanTimer *scanTimer;
+@property (nonatomic, strong) PRSScanner *scanner;
 
 @end
 
@@ -62,7 +64,9 @@
     [super viewDidDisappear:animated];
     [self stopLiveVideo];
     [self showStartScanButton];
+    
     self.scanTimer.state = PRSScanTimerStateDisable;
+    self.scanner.state = PRSScannerStateDisable;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -78,6 +82,7 @@
     [self configureTextDetectRequest];
     [self configureClassificationRequest];
     [self configureScanTimer];
+    [self configureScanner];
 }
 
 #pragma mark - Configure
@@ -138,6 +143,10 @@
     self.scanTimer = [PRSScanTimer new];
 }
 
+- (void)configureScanner {
+    self.scanner = [PRSScanner new];
+}
+
 #pragma mark - VNRequest Handlers
 - (void)handleTextDetectRequest:(VNRequest *)request {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -152,14 +161,17 @@
     
     if (self.scanTimer.state == PRSScanTimerStateSnapshot) {
         self.scanTimer.state = PRSScanTimerStateScanning;
+        self.scanner.state = PRSScannerStateActive;
         for (VNTextObservation *word in request.results) {
             for (VNRectangleObservation *characterBox in word.characterBoxes) {
+                [self.scanner prepareForCharBoxScan:characterBox];
                 UIImage *someLetter = [self cropLetter:characterBox fromImage:self.snapshot];
                 VNImageRequestHandler *letterHandler = [[VNImageRequestHandler alloc] initWithCGImage:someLetter.CGImage options:@{}];
                 [letterHandler performRequests:self.classificationRequests error:nil];
             }
         }
         self.scanTimer.state = PRSScanTimerStateSleep;
+        self.scanner.state = PRSScannerStateAwait;
     }
 }
 
@@ -180,7 +192,7 @@
     }
     
     if (outputIndex < self.modelOutputs.count) {
-        NSLog(@"RESULT: this is %@ with confidence %f", self.modelOutputs[outputIndex], confidence.floatValue);
+        [self.scanner completeCharBoxScanWithPrediction:self.modelOutputs[outputIndex] confidence:confidence.floatValue];
     }
 }
 
