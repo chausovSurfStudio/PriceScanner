@@ -34,7 +34,8 @@
 @property (nonatomic, strong) IBOutlet UILabel *scanInProgressLabel;
 
 @property (nonatomic, strong) AVCaptureSession *session;
-@property (nonatomic, strong) NSArray<VNRequest *> *textDetectRequests;
+@property (nonatomic, strong) VNDetectTextRectanglesRequest *textDetectRequest;
+@property (nonatomic, strong) VNDetectRectanglesRequest *rectangleRequest;
 @property (nonatomic, strong) NSArray<VNCoreMLRequest *> *classificationRequests;
 
 @property (nonatomic, strong) TextModel *model;
@@ -81,6 +82,7 @@
     [self configureStyle];
     [self configureTextDetectRequest];
     [self configureClassificationRequest];
+    [self configureRectangleRequest];
     [self configureScanTimer];
     [self configureScanner];
 }
@@ -125,7 +127,7 @@
         [self handleTextDetectRequest:request];
     }];
     textRequest.reportCharacterBoxes = YES;
-    self.textDetectRequests = @[textRequest];
+    self.textDetectRequest = textRequest;
 }
 
 - (void)configureClassificationRequest {
@@ -137,6 +139,16 @@
     }];
     request.imageCropAndScaleOption = VNImageCropAndScaleOptionScaleFill;
     self.classificationRequests = @[request];
+}
+
+- (void)configureRectangleRequest {
+    @weakify(self);
+    VNDetectRectanglesRequest *rectangleRequest = [[VNDetectRectanglesRequest alloc] initWithCompletionHandler:^(VNRequest * _Nonnull request, NSError * _Nullable error) {
+        @strongify(self);
+        [self handleRectangleRequest:request];
+    }];
+    rectangleRequest.minimumSize = 0.3;
+    self.rectangleRequest = rectangleRequest;
 }
 
 - (void)configureScanTimer {
@@ -194,6 +206,19 @@
     if (outputIndex < self.modelOutputs.count) {
         [self.scanner completeCharBoxScanWithPrediction:self.modelOutputs[outputIndex] confidence:confidence.floatValue];
     }
+}
+
+- (void)handleRectangleRequest:(VNRequest *)request {
+    NSArray<VNRectangleObservation *> *results = request.results;
+    VNRectangleObservation *rectangle = results.firstObject;
+    if (!rectangle) {
+        self.textDetectRequest.regionOfInterest = CGRectMake(0, 0, 1, 1);
+        return;
+    }
+    self.textDetectRequest.regionOfInterest = [self regionOfInterestFromRectObservation:rectangle];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self highlightRect:rectangle inScene:self.scene];
+    });
 }
 
 #pragma mark - Actions
@@ -263,7 +288,7 @@
         requestOptions = @{VNImageOptionCameraIntrinsics:(__bridge id)camData};
     }
     VNImageRequestHandler *handler = [[VNImageRequestHandler alloc] initWithCVPixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationRight options:requestOptions];
-    [handler performRequests:self.textDetectRequests error:nil];
+    [handler performRequests:@[self.rectangleRequest, self.textDetectRequest] error:nil];
 }
 
 #pragma mark - Private logic
