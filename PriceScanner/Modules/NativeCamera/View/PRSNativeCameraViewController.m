@@ -34,7 +34,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *scanInProgressLabel;
 
 @property (nonatomic, strong) AVCaptureSession *session;
-@property (nonatomic, strong) VNRequest *textDetectRequest;
+@property (nonatomic, strong) VNDetectTextRectanglesRequest *textDetectRequest;
 @property (nonatomic, strong) VNDetectRectanglesRequest *rectangleRequest;
 @property (nonatomic, strong) NSArray<VNCoreMLRequest *> *classificationRequests;
 
@@ -211,11 +211,39 @@
 - (void)handleRectangleRequest:(VNRequest *)request {
     NSArray<VNRectangleObservation *> *results = request.results;
     VNRectangleObservation *rectangle = results.firstObject;
-    if (rectangle) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self highlightRect:rectangle inScene:self.scene];
-        });
+    if (!rectangle) {
+        return;
     }
+    
+    NSArray<NSValue *> *points = @[
+                                   [NSValue valueWithCGPoint:rectangle.topLeft],
+                                   [NSValue valueWithCGPoint:rectangle.topRight],
+                                   [NSValue valueWithCGPoint:rectangle.bottomLeft],
+                                   [NSValue valueWithCGPoint:rectangle.bottomRight]
+                                   ];
+    CGFloat minX = 1.f;
+    CGFloat maxX = 0.f;
+    CGFloat minY = 1.f;
+    CGFloat maxY = 0.f;
+    for (NSValue *pointValue in points) {
+        CGPoint point = [pointValue CGPointValue];
+        minX = point.x < minX ? point.x : minX;
+        maxX = point.x > maxX ? point.x : maxX;
+        minY = point.y < minY ? point.y : minY;
+        maxY = point.y > maxY ? point.y : maxY;
+    }
+    CGRect region = CGRectMake(minX, minY, maxX - minX, maxY - minY);
+    if (region.origin.x > 0 && region.origin.y > 0 && (region.origin.x + region.size.width) <= 1 && (region.origin.y + region.size.height) <= 1) {
+        self.textDetectRequest.regionOfInterest = region;
+        NSLog(@"Region of Interest: %f %f %f %F", region.origin.x, region.origin.y, region.size.width, region.size.height);
+    } else {
+        self.textDetectRequest.regionOfInterest = CGRectMake(0, 0, 1, 1);
+        NSLog(@"Region of Interest: used default value");
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self highlightRect:rectangle inScene:self.scene];
+    });
 }
 
 #pragma mark - Actions
@@ -285,7 +313,7 @@
         requestOptions = @{VNImageOptionCameraIntrinsics:(__bridge id)camData};
     }
     VNImageRequestHandler *handler = [[VNImageRequestHandler alloc] initWithCVPixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationRight options:requestOptions];
-    [handler performRequests:@[self.textDetectRequest, self.rectangleRequest] error:nil];
+    [handler performRequests:@[self.rectangleRequest, self.textDetectRequest] error:nil];
 }
 
 #pragma mark - Private logic

@@ -40,7 +40,7 @@
             break;
         case PRSScannerStateAwait:
             self.scanResultBuffer = nil;
-//            NSLog(@"Last session prediction = %@", [self.sessionManager getLastPrediction]);
+            NSLog(@"Last session prediction = %@", [self.sessionManager getLastPrediction]);
             break;
         case PRSScannerStateActive:
             self.scanResultBuffer = nil;
