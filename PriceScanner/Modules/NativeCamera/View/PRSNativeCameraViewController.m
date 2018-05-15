@@ -142,12 +142,10 @@
 }
 
 - (void)configureRectangleRequest {
+    @weakify(self);
     VNDetectRectanglesRequest *rectangleRequest = [[VNDetectRectanglesRequest alloc] initWithCompletionHandler:^(VNRequest * _Nonnull request, NSError * _Nullable error) {
-        NSArray<VNRectangleObservation *> *results = request.results;
-        VNRectangleObservation *rectangle = results.firstObject;
-        if (rectangle) {
-            NSLog(@"%f %f", rectangle.topLeft.x, rectangle.topLeft.y);
-        }
+        @strongify(self);
+        [self handleRectangleRequest:request];
     }];
     rectangleRequest.minimumSize = 0.3;
     self.rectangleRequest = rectangleRequest;
@@ -207,6 +205,16 @@
     
     if (outputIndex < self.modelOutputs.count) {
         [self.scanner completeCharBoxScanWithPrediction:self.modelOutputs[outputIndex] confidence:confidence.floatValue];
+    }
+}
+
+- (void)handleRectangleRequest:(VNRequest *)request {
+    NSArray<VNRectangleObservation *> *results = request.results;
+    VNRectangleObservation *rectangle = results.firstObject;
+    if (rectangle) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self highlightRect:rectangle inScene:self.scene];
+        });
     }
 }
 

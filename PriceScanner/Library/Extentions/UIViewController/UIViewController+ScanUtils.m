@@ -23,15 +23,24 @@
 
 - (void)highlightLetter:(VNRectangleObservation *)letter inScene:(UIImageView *)scene {
     CALayer *border = [[CALayer alloc] init];
-    border.frame = [self frameForLetter:letter sceneSize:scene.bounds.size];
+    border.frame = [self frameForRectObservation:letter sceneSize:scene.bounds.size];
     border.borderWidth = 1.f;
     border.borderColor = [UIColor blueColor].CGColor;
     
     [scene.layer addSublayer:border];
 }
 
+- (void)highlightRect:(VNRectangleObservation *)rect inScene:(UIImageView *)scene {
+    CALayer *border = [[CALayer alloc] init];
+    border.frame = [self frameForRectObservation:rect sceneSize:scene.bounds.size];
+    border.borderWidth = 2.f;
+    border.borderColor = [UIColor greenColor].CGColor;
+    
+    [scene.layer addSublayer:border];
+}
+
 - (UIImage *)cropLetter:(VNRectangleObservation *)letter fromImage:(UIImage *)image {
-    CGRect letterFrame = [self frameForLetter:letter sceneSize:image.size];
+    CGRect letterFrame = [self frameForRectObservation:letter sceneSize:image.size];
     UIImage *letterImage = [self cutRect:letterFrame fromImage:image];
     return letterImage;
 }
@@ -67,11 +76,11 @@
     return CGRectMake(originX, originY, width, height);
 }
 
-- (CGRect)frameForLetter:(VNRectangleObservation *)letter sceneSize:(CGSize)sceneSize {
-    CGFloat originX = letter.topLeft.x * sceneSize.width;
-    CGFloat originY = (1 - letter.topLeft.y) * sceneSize.height;
-    CGFloat width = (letter.topRight.x - letter.bottomLeft.x) * sceneSize.width;
-    CGFloat height = (letter.topLeft.y - letter.bottomLeft.y) * sceneSize.height;
+- (CGRect)frameForRectObservation:(VNRectangleObservation *)rectObservation sceneSize:(CGSize)sceneSize {
+    CGFloat originX = rectObservation.topLeft.x * sceneSize.width;
+    CGFloat originY = (1 - rectObservation.topLeft.y) * sceneSize.height;
+    CGFloat width = (rectObservation.topRight.x - rectObservation.bottomLeft.x) * sceneSize.width;
+    CGFloat height = (rectObservation.topLeft.y - rectObservation.bottomLeft.y) * sceneSize.height;
     
     return CGRectMake(originX, originY, width, height);
 }
