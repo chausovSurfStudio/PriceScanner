@@ -186,7 +186,7 @@
         CGFloat confidence = [self.scanner scanProgress];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.overlay.progress = confidence;
-            if (confidence == 1.f) {
+            if (confidence >= 0.99f) {
                 [self.output openScanResultModule];
             }
         });

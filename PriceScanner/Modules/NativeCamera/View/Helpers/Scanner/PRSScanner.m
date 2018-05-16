@@ -29,6 +29,8 @@ typedef NS_OPTIONS(NSUInteger, PRSScannerState) {
 @property (nonatomic, strong) PRSCharDetectResult *scanResultBuffer;
 @property (nonatomic, strong) PRSScanSessionManager *sessionManager;
 
+@property (nonatomic, strong) NSString *lastPrediction;
+
 @end
 
 
@@ -41,6 +43,7 @@ typedef NS_OPTIONS(NSUInteger, PRSScannerState) {
         self.state = PRSScannerStateDisable;
         self.scanResultBuffer = nil;
         [self.sessionManager clear];
+        self.lastPrediction = nil;
     }
     return self;
 }
@@ -50,6 +53,7 @@ typedef NS_OPTIONS(NSUInteger, PRSScannerState) {
     self.state = PRSScannerStateDisable;
     self.scanResultBuffer = nil;
     [self.sessionManager clear];
+    self.lastPrediction = nil;
 }
 
 - (void)setupAwaitState {
@@ -86,8 +90,41 @@ typedef NS_OPTIONS(NSUInteger, PRSScannerState) {
 - (CGFloat)predictResult {
     NSArray<PRSSingleScanSession *> *rawSessions = [self.sessionManager getSessionsForPrediction];
     NSArray<PRSSingleScanSession *> *inSimilarRegionSessions = [self excludeSessionsByRegion:rawSessions];
-    NSArray<PRSSingleScanSession *> *sessions = [self excludeEmptySessions:inSimilarRegionSessions];
-    return sessions.count <= 6 ? 0.f : (sessions.count - 6) * 0.1f;
+    NSArray<PRSSingleScanSession *> *sessions = [self getSessionsWithEqualsLength:inSimilarRegionSessions];
+    
+    NSUInteger lettersCount = sessions.firstObject.sessionResults.count;
+    NSMutableString *prediction = [@"" mutableCopy];
+    CGFloat tempConfidence = 0.f;
+    CGFloat maxSingleLetterConfidence = 0.7f / lettersCount;
+    for (int i = 0; i < lettersCount; i++) {
+        NSCountedSet *availableLetters = [NSCountedSet new];
+        for (PRSSingleScanSession *session in sessions) {
+            [availableLetters addObject:session.sessionResults[i]];
+        }
+        
+        NSString *mostRepeatedString = @"";
+        NSUInteger maxCount = 0;
+        
+        for (PRSCharDetectResult *letter in availableLetters) {
+            NSUInteger count = [availableLetters countForObject:letter];
+            if (count > maxCount) {
+                maxCount = count;
+                mostRepeatedString = letter.prediction;
+            }
+        }
+        [prediction appendString:mostRepeatedString];
+        tempConfidence += maxSingleLetterConfidence * (sessions.count / maxCount);
+    }
+    self.lastPrediction = [prediction copy];
+    NSLog(@"PREDICTION = %@", self.lastPrediction);
+    
+    if (sessions.count <= 3) {
+        return sessions.count * 0.1f;
+    } else if (tempConfidence >= 0.69f && sessions.count <= 5) {
+        return 0.3f + 0.35f * (sessions.count - 3);
+    } else {
+        return tempConfidence + 0.3f;
+    }
 }
 
 - (NSArray<PRSSingleScanSession *> *)excludeSessionsByRegion:(NSArray<PRSSingleScanSession *> *)sessions {
@@ -126,14 +163,32 @@ typedef NS_OPTIONS(NSUInteger, PRSScannerState) {
     return [(NSMutableArray *)values[idxOfMax] copy];
 }
 
-- (NSArray<PRSSingleScanSession *> *)excludeEmptySessions:(NSArray<PRSSingleScanSession *> *)sessions {
-    NSMutableArray<PRSSingleScanSession *> *tempSessions = [@[] mutableCopy];
+- (NSArray<PRSSingleScanSession *> *)getSessionsWithEqualsLength:(NSArray<PRSSingleScanSession *> *)sessions {
+    NSMutableDictionary *tempDict = [@{} mutableCopy];
     [sessions enumerateObjectsUsingBlock:^(PRSSingleScanSession * _Nonnull session, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (session.sessionResults.count > 0) {
-            [tempSessions addObject:session];
+        NSNumber *resultsCount = @(session.sessionResults.count);
+        if (resultsCount.integerValue != 0) {
+            if ([[tempDict allKeys] containsObject:resultsCount]) {
+                NSMutableArray *values = tempDict[resultsCount];
+                [values addObject:session];
+                tempDict[resultsCount] = values;
+            } else {
+                tempDict[resultsCount] = [@[session] mutableCopy];
+            }
         }
     }];
-    return [tempSessions copy];
+    
+    NSArray *values = [tempDict allValues];
+    __block NSUInteger idxOfMax = 0;
+    __block NSUInteger maxInArray = 0;
+    [values enumerateObjectsUsingBlock:^(NSArray *sessions, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (maxInArray < sessions.count) {
+            maxInArray = sessions.count;
+            idxOfMax = idx;
+        }
+    }];
+    
+    return [(NSMutableArray *)values[idxOfMax] copy];
 }
 
 - (BOOL)rect:(CGRect)firstRect isLooksLikeAnother:(CGRect)secondRect {
