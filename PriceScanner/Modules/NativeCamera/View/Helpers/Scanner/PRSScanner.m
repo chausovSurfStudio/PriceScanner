@@ -84,8 +84,72 @@ typedef NS_OPTIONS(NSUInteger, PRSScannerState) {
 
 #pragma mark - Private Methods
 - (CGFloat)predictResult {
-    NSArray<PRSSingleScanSession *> *sessions = [self.sessionManager getSessionsForPrediction];
+    NSArray<PRSSingleScanSession *> *rawSessions = [self.sessionManager getSessionsForPrediction];
+    NSArray<PRSSingleScanSession *> *inSimilarRegionSessions = [self excludeSessionsByRegion:rawSessions];
+    NSArray<PRSSingleScanSession *> *sessions = [self excludeEmptySessions:inSimilarRegionSessions];
     return sessions.count <= 6 ? 0.f : (sessions.count - 6) * 0.1f;
+}
+
+- (NSArray<PRSSingleScanSession *> *)excludeSessionsByRegion:(NSArray<PRSSingleScanSession *> *)sessions {
+    NSMutableDictionary *tempDict = [@{} mutableCopy];
+    for (PRSSingleScanSession *session in sessions) {
+        if (tempDict.count == 0) {
+            tempDict[[NSValue valueWithCGRect:session.region]] = [@[session] mutableCopy];
+        } else {
+            __block BOOL rectAlreadySaved = NO;
+            NSArray *keys = [tempDict allKeys];
+            [keys enumerateObjectsUsingBlock:^(NSValue *savedRegion, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([self rect:[savedRegion CGRectValue] isLooksLikeAnother:session.region]) {
+                    NSMutableArray *values = tempDict[keys[idx]];
+                    [values addObject:session];
+                    tempDict[keys[idx]] = values;
+                    *stop = YES;
+                    rectAlreadySaved = YES;
+                }
+            }];
+            if (!rectAlreadySaved) {
+                tempDict[[NSValue valueWithCGRect:session.region]] = [@[session] mutableCopy];
+            }
+        }
+    }
+    
+    NSArray *values = [tempDict allValues];
+    __block NSUInteger idxOfMax = 0;
+    __block NSUInteger maxInArray = 0;
+    [values enumerateObjectsUsingBlock:^(NSArray *sessions, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (maxInArray < sessions.count) {
+            maxInArray = sessions.count;
+            idxOfMax = idx;
+        }
+    }];
+    
+    return [(NSMutableArray *)values[idxOfMax] copy];
+}
+
+- (NSArray<PRSSingleScanSession *> *)excludeEmptySessions:(NSArray<PRSSingleScanSession *> *)sessions {
+    NSMutableArray<PRSSingleScanSession *> *tempSessions = [@[] mutableCopy];
+    [sessions enumerateObjectsUsingBlock:^(PRSSingleScanSession * _Nonnull session, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (session.sessionResults.count > 0) {
+            [tempSessions addObject:session];
+        }
+    }];
+    return [tempSessions copy];
+}
+
+- (BOOL)rect:(CGRect)firstRect isLooksLikeAnother:(CGRect)secondRect {
+    if (ABS(firstRect.origin.x - secondRect.origin.x) > 0.15) {
+        return NO;
+    }
+    if (ABS(firstRect.origin.y - secondRect.origin.y) > 0.1) {
+        return NO;
+    }
+    if (ABS(firstRect.size.width - secondRect.size.width) > 0.15) {
+        return NO;
+    }
+    if (ABS(firstRect.size.height - secondRect.size.height) > 0.1) {
+        return NO;
+    }
+    return YES;
 }
 
 @end
