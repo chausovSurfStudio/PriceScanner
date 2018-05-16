@@ -67,7 +67,7 @@
     [self showStartScanButton];
     
     self.scanTimer.state = PRSScanTimerStateDisable;
-    self.scanner.state = PRSScannerStateDisable;
+    [self.scanner disableScanner];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -173,7 +173,7 @@
     
     if (self.scanTimer.state == PRSScanTimerStateSnapshot) {
         self.scanTimer.state = PRSScanTimerStateScanning;
-        self.scanner.state = PRSScannerStateActive;
+        [self.scanner enableScannerWithRegion:self.textDetectRequest.regionOfInterest];
         for (VNTextObservation *word in request.results) {
             for (VNRectangleObservation *characterBox in word.characterBoxes) {
                 [self.scanner prepareForCharBoxScan:characterBox];
@@ -183,7 +183,7 @@
             }
         }
         self.scanTimer.state = PRSScanTimerStateSleep;
-        self.scanner.state = PRSScannerStateAwait;
+        [self.scanner setupAwaitState];
     }
 }
 

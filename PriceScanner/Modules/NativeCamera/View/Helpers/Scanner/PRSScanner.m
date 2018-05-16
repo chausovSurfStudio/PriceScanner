@@ -11,8 +11,20 @@
 #import "PRSCharDetectResult.h"
 
 
+/** В данном перечислении объявлены возможные состояния сканера */
+typedef NS_OPTIONS(NSUInteger, PRSScannerState) {
+    /** Состояние выключенного сканера */
+    PRSScannerStateDisable = 0,
+    /** Состояние сканера в процессе ожидания входных данных */
+    PRSScannerStateAwait,
+    /** Состояние активного сканера */
+    PRSScannerStateActive
+};
+
+
 @interface PRSScanner()
 
+@property (nonatomic, assign) PRSScannerState state;
 @property (nonatomic, strong) PRSCharDetectResult *scanResultBuffer;
 @property (nonatomic, strong) PRSScanSessionManager *sessionManager;
 
@@ -26,30 +38,31 @@
     if (self) {
         self.sessionManager = [PRSScanSessionManager new];
         self.state = PRSScannerStateDisable;
+        self.scanResultBuffer = nil;
+        [self.sessionManager clear];
     }
     return self;
 }
 
-#pragma mark - Custom Setters
-- (void)setState:(PRSScannerState)state {
-    _state = state;
-    switch (state) {
-        case PRSScannerStateDisable:
-            self.scanResultBuffer = nil;
-            [self.sessionManager clear];
-            break;
-        case PRSScannerStateAwait:
-            self.scanResultBuffer = nil;
-            NSLog(@"Last session prediction = %@", [self.sessionManager getLastPrediction]);
-            break;
-        case PRSScannerStateActive:
-            self.scanResultBuffer = nil;
-            [self.sessionManager startNewSession];
-            break;
-    }
+#pragma mark - Interface Methods
+- (void)disableScanner {
+    self.state = PRSScannerStateDisable;
+    self.scanResultBuffer = nil;
+    [self.sessionManager clear];
 }
 
-#pragma mark - Interface Methods
+- (void)setupAwaitState {
+    self.state = PRSScannerStateAwait;
+    self.scanResultBuffer = nil;
+    NSLog(@"Last session prediction = %@", [self.sessionManager getLastPrediction]);
+}
+
+- (void)enableScannerWithRegion:(CGRect)region {
+    self.state = PRSScannerStateActive;
+    self.scanResultBuffer = nil;
+    [self.sessionManager startNewSessionInRegion:region];
+}
+
 - (void)prepareForCharBoxScan:(VNRectangleObservation *)charBox {
     self.scanResultBuffer = [PRSCharDetectResult new];
     self.scanResultBuffer.charBox = charBox;
@@ -63,5 +76,11 @@
     }
     self.scanResultBuffer = nil;
 }
+
+- (CGFloat)scanProgress {
+    return 0.f;
+}
+
+#pragma mark - Private Methods
 
 @end

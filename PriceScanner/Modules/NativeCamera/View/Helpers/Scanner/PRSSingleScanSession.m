@@ -12,6 +12,7 @@
 
 @interface PRSSingleScanSession()
 
+@property (nonatomic, assign) CGRect region;
 @property (nonatomic, strong) NSMutableArray<PRSCharDetectResult *> *sessionResults;
 
 @end
@@ -19,9 +20,10 @@
 
 @implementation PRSSingleScanSession
 
-- (instancetype)init {
+- (instancetype)initWithRegion:(CGRect)region {
     self = [super init];
     if (self) {
+        self.region = region;
         self.sessionResults = [@[] mutableCopy];
     }
     return self;
