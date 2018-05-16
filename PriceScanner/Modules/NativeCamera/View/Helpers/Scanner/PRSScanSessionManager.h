@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class PRSCharDetectResult;
+@class PRSCharDetectResult, PRSSingleScanSession;
 
 
 /** Объект инкапсулирует в себе логику по хранению и управлению результатами распознавания, полученными в различных сессиях */
@@ -20,7 +20,8 @@
 - (void)startNewSessionInRegion:(CGRect)region;
 /** Метод для сохранения информации о распознанном символе */
 - (void)detectResult:(PRSCharDetectResult *)result;
-/** Метод возвращает строку, которая получилась в результате распознавания в рамках последней сессии */
-- (NSString *)getLastPrediction;
+
+/** Метод возвращает массив всех сохраненных сессий сканирования */
+- (NSArray<PRSSingleScanSession *> *)getSessionsForPrediction;
 
 @end

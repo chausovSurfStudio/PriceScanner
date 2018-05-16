@@ -8,6 +8,7 @@
 
 #import "PRSScanner.h"
 #import "PRSScanSessionManager.h"
+#import "PRSSingleScanSession.h"
 #import "PRSCharDetectResult.h"
 
 
@@ -54,7 +55,6 @@ typedef NS_OPTIONS(NSUInteger, PRSScannerState) {
 - (void)setupAwaitState {
     self.state = PRSScannerStateAwait;
     self.scanResultBuffer = nil;
-    NSLog(@"Last session prediction = %@", [self.sessionManager getLastPrediction]);
 }
 
 - (void)enableScannerWithRegion:(CGRect)region {
@@ -78,9 +78,14 @@ typedef NS_OPTIONS(NSUInteger, PRSScannerState) {
 }
 
 - (CGFloat)scanProgress {
-    return 0.f;
+    CGFloat confidence = [self predictResult];
+    return confidence;
 }
 
 #pragma mark - Private Methods
+- (CGFloat)predictResult {
+    NSArray<PRSSingleScanSession *> *sessions = [self.sessionManager getSessionsForPrediction];
+    return sessions.count <= 6 ? 0.f : (sessions.count - 6) * 0.1f;
+}
 
 @end

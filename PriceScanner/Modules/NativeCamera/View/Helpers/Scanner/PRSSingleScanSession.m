@@ -34,12 +34,4 @@
     [self.sessionResults addObject:result];
 }
 
-- (NSString *)getPrediction {
-    NSMutableArray<NSString *> *predictions = [@[] mutableCopy];
-    for (PRSCharDetectResult *result in [self.sessionResults copy]) {
-        [predictions addObject:result.prediction];
-    }
-    return [[predictions copy] componentsJoinedByString:@""];
-}
-
 @end

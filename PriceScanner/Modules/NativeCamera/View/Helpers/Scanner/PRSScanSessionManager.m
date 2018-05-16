@@ -43,8 +43,8 @@
     [self.sessions.lastObject detectResult:result];
 }
 
-- (NSString *)getLastPrediction {
-    return [self.sessions.lastObject getPrediction];
+- (NSArray<PRSSingleScanSession *> *)getSessionsForPrediction {
+    return [self.sessions copy];
 }
 
 @end

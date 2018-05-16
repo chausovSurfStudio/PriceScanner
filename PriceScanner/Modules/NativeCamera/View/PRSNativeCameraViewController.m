@@ -67,6 +67,7 @@
     [self showStartScanButton];
     
     self.scanTimer.state = PRSScanTimerStateDisable;
+    self.overlay.state = PRSCameraOverlayStateWaiting;
     [self.scanner disableScanner];
 }
 
@@ -182,6 +183,13 @@
                 [letterHandler performRequests:self.classificationRequests error:nil];
             }
         }
+        CGFloat confidence = [self.scanner scanProgress];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.overlay.progress = confidence;
+            if (confidence == 1.f) {
+                [self.output openScanResultModule];
+            }
+        });
         self.scanTimer.state = PRSScanTimerStateSleep;
         [self.scanner setupAwaitState];
     }
@@ -224,6 +232,7 @@
 #pragma mark - Actions
 - (IBAction)tapOnStartScanButton:(UIButton *)sender {
     self.scanTimer.state = PRSScanTimerStateActive;
+    self.overlay.state = PRSCameraOverlayStateActive;
     [self showScanInProgressView];
 }
 
