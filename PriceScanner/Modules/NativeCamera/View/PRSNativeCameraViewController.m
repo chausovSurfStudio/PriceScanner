@@ -188,10 +188,17 @@
             self.overlay.progress = confidence;
             if (confidence >= 0.99f) {
                 [self.output openScanPreviewModule];
+                [self showStartScanButton];
+                self.overlay.state = PRSCameraOverlayStateWaiting;
             }
         });
-        self.scanTimer.state = PRSScanTimerStateSleep;
-        [self.scanner setupAwaitState];
+        if (confidence >= 0.99f) {
+            self.scanTimer.state = PRSScanTimerStateDisable;
+            [self.scanner disableScanner];
+        } else {
+            self.scanTimer.state = PRSScanTimerStateSleep;
+            [self.scanner setupAwaitState];
+        }
     }
 }
 
