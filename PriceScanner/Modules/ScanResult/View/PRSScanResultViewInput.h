@@ -15,10 +15,9 @@
 
 /** Установка начального состояния view
  *
- * @param isModalState Передается YES, если модуль отображается в качестве модального экрана, NO в противном случае.
  * @param scanResult Сущность результата сканирования, которую необходимо отобразить на экране.
  *
  */
-- (void)setupInitialState:(BOOL)isModalState scanResult:(PRSScanResultViewModel *)scanResult;
+- (void)setupInitialStateWithScanResult:(PRSScanResultViewModel *)scanResult;
 
 @end

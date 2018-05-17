@@ -1,8 +1,8 @@
 //
-//  PRSScanResultModuleInput.h
+//  PRSScanPreviewModuleInput.h
 //  PriceScanner
 //
-//  Created by Chausov Alexander on 04/05/2018.
+//  Created by Chausov Alexander on 17/05/2018.
 //  Copyright © 2018 ChausovCompany. All rights reserved.
 //
 
@@ -11,9 +11,9 @@
 @class PRSScanResultEntity;
 
 
-@protocol PRSScanResultModuleInput <NSObject>
+@protocol PRSScanPreviewModuleInput <NSObject>
 
 /** Метод позволяет передать в модуль сущность результата сканирования, которую необходимо отобразить на экране */
-- (void)configureWithScanResult:(PRSScanResultEntity *)scanResultEntity;
+- (void)configureWithScanResult:(PRSScanResultEntity *)scanResultEntity closeAction:(void(^)(void))closeAction;
 
 @end

@@ -13,7 +13,7 @@
 
 @protocol PRSManualCameraModuleInput <NSObject>
 
-/** Метод позволяет сконфигурировать модуль и указать блок перехода к модулю с результатами сканирования */
-- (void)configureWithOpenResultAction:(void(^)(PRSScanResultEntity *scanResultEntity))openResultAction;
+/** Метод позволяет сконфигурировать модуль и указать блок перехода к модулю с предпросмотром результатов сканирования */
+- (void)configureWithOpenPreviewAction:(void(^)(PRSScanResultEntity *scanResultEntity))openPreviewAction;
 
 @end
