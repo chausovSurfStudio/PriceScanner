@@ -31,6 +31,9 @@ typedef NS_OPTIONS(NSUInteger, PRSScannerState) {
 
 @property (nonatomic, strong) NSString *lastPrediction;
 
+@property (nonatomic, strong) NSString *lastPredictedName;
+@property (nonatomic, strong) NSString *lastPredictedPrice;
+
 @end
 
 
@@ -89,91 +92,29 @@ typedef NS_OPTIONS(NSUInteger, PRSScannerState) {
 #pragma mark - Private Methods
 - (CGFloat)predictResult {
     NSArray<PRSSingleScanSession *> *rawSessions = [self.sessionManager getSessionsForPrediction];
-    NSArray<PRSSingleScanSession *> *inSimilarRegionSessions = [self excludeSessionsByRegion:rawSessions];
-    NSArray<PRSSingleScanSession *> *sessions = [self getSessionsWithEqualsLength:inSimilarRegionSessions];
+    NSArray<PRSSingleScanSession *> *sessionsForName = [self getSessionsWithEqualWordsInName:rawSessions];
+    NSArray<PRSSingleScanSession *> *sessionsForPrice = [self getSessionsWithEqualWordsInPrice:rawSessions];
     
-    NSUInteger lettersCount = sessions.firstObject.sessionResults.count;
-    NSMutableString *prediction = [@"" mutableCopy];
-    CGFloat tempConfidence = 0.f;
-    CGFloat maxSingleLetterConfidence = 0.7f / lettersCount;
-    for (int i = 0; i < lettersCount; i++) {
-        NSCountedSet *availableLetters = [NSCountedSet new];
-        for (PRSSingleScanSession *session in sessions) {
-            [availableLetters addObject:session.sessionResults[i]];
-        }
-        
-        NSString *mostRepeatedString = @"";
-        NSUInteger maxCount = 0;
-        
-        for (PRSCharDetectResult *letter in availableLetters) {
-            NSUInteger count = [availableLetters countForObject:letter];
-            if (count > maxCount) {
-                maxCount = count;
-                mostRepeatedString = letter.prediction;
-            }
-        }
-        [prediction appendString:mostRepeatedString];
-        tempConfidence += maxSingleLetterConfidence * (sessions.count / maxCount);
-    }
-    self.lastPrediction = [prediction copy];
-//    NSLog(@"PREDICTION = %@", self.lastPrediction);
-    return 0.5f;
-    if (sessions.count <= 3) {
-        return sessions.count * 0.1f;
-    } else if (tempConfidence >= 0.69f && sessions.count <= 5) {
-        return 0.3f + 0.35f * (sessions.count - 3);
-    } else {
-        return tempConfidence + 0.3f;
-    }
+    CGFloat nameConfidence = [self buildNameWithSessions:sessionsForName];
+    CGFloat priceConfidence = [self buildPriceWithSessions:sessionsForPrice];
+
+    NSLog(@"NAME PREDICTION = %@", self.lastPredictedName);
+    NSLog(@"PRICE PREDICTION = %@", self.lastPredictedPrice);
+    
+    return 0.5 * nameConfidence + 0.5 * priceConfidence;
 }
 
-- (NSArray<PRSSingleScanSession *> *)excludeSessionsByRegion:(NSArray<PRSSingleScanSession *> *)sessions {
-    NSMutableDictionary *tempDict = [@{} mutableCopy];
-    for (PRSSingleScanSession *session in sessions) {
-        if (tempDict.count == 0) {
-            tempDict[[NSValue valueWithCGRect:session.region]] = [@[session] mutableCopy];
-        } else {
-            __block BOOL rectAlreadySaved = NO;
-            NSArray *keys = [tempDict allKeys];
-            [keys enumerateObjectsUsingBlock:^(NSValue *savedRegion, NSUInteger idx, BOOL * _Nonnull stop) {
-                if ([self rect:[savedRegion CGRectValue] isLooksLikeAnother:session.region]) {
-                    NSMutableArray *values = tempDict[keys[idx]];
-                    [values addObject:session];
-                    tempDict[keys[idx]] = values;
-                    *stop = YES;
-                    rectAlreadySaved = YES;
-                }
-            }];
-            if (!rectAlreadySaved) {
-                tempDict[[NSValue valueWithCGRect:session.region]] = [@[session] mutableCopy];
-            }
-        }
-    }
-    
-    NSArray *values = [tempDict allValues];
-    __block NSUInteger idxOfMax = 0;
-    __block NSUInteger maxInArray = 0;
-    [values enumerateObjectsUsingBlock:^(NSArray *sessions, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (maxInArray < sessions.count) {
-            maxInArray = sessions.count;
-            idxOfMax = idx;
-        }
-    }];
-    
-    return [(NSMutableArray *)values[idxOfMax] copy];
-}
-
-- (NSArray<PRSSingleScanSession *> *)getSessionsWithEqualsLength:(NSArray<PRSSingleScanSession *> *)sessions {
+- (NSArray<PRSSingleScanSession *> *)getSessionsWithEqualWordsInName:(NSArray<PRSSingleScanSession *> *)sessions {
     NSMutableDictionary *tempDict = [@{} mutableCopy];
     [sessions enumerateObjectsUsingBlock:^(PRSSingleScanSession * _Nonnull session, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSNumber *resultsCount = @(session.sessionResults.count);
-        if (resultsCount.integerValue != 0) {
-            if ([[tempDict allKeys] containsObject:resultsCount]) {
-                NSMutableArray *values = tempDict[resultsCount];
+        NSNumber *wordsCount = @(session.nameChars.count);
+        if (wordsCount.integerValue != 0) {
+            if ([[tempDict allKeys] containsObject:wordsCount]) {
+                NSMutableArray *values = tempDict[wordsCount];
                 [values addObject:session];
-                tempDict[resultsCount] = values;
+                tempDict[wordsCount] = values;
             } else {
-                tempDict[resultsCount] = [@[session] mutableCopy];
+                tempDict[wordsCount] = [@[session] mutableCopy];
             }
         }
     }];
@@ -189,6 +130,130 @@ typedef NS_OPTIONS(NSUInteger, PRSScannerState) {
     }];
     
     return [(NSMutableArray *)values[idxOfMax] copy];
+}
+
+- (NSArray<PRSSingleScanSession *> *)getSessionsWithEqualWordsInPrice:(NSArray<PRSSingleScanSession *> *)sessions {
+    NSMutableDictionary *tempDict = [@{} mutableCopy];
+    [sessions enumerateObjectsUsingBlock:^(PRSSingleScanSession * _Nonnull session, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSNumber *wordsCount = @(session.priceChars.count);
+        if (wordsCount.integerValue != 0) {
+            if ([[tempDict allKeys] containsObject:wordsCount]) {
+                NSMutableArray *values = tempDict[wordsCount];
+                [values addObject:session];
+                tempDict[wordsCount] = values;
+            } else {
+                tempDict[wordsCount] = [@[session] mutableCopy];
+            }
+        }
+    }];
+    
+    NSArray *values = [tempDict allValues];
+    __block NSUInteger idxOfMax = 0;
+    __block NSUInteger maxInArray = 0;
+    [values enumerateObjectsUsingBlock:^(NSArray *sessions, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (maxInArray < sessions.count) {
+            maxInArray = sessions.count;
+            idxOfMax = idx;
+        }
+    }];
+    
+    return [(NSMutableArray *)values[idxOfMax] copy];
+}
+
+- (CGFloat)buildNameWithSessions:(NSArray<PRSSingleScanSession *> *)sessions {
+    NSMutableArray<NSString *> *nameWords = [@[] mutableCopy];
+    CGFloat confidence = 0.f;
+    CGFloat maxWordConfidence = 1.f / sessions.firstObject.nameChars.count;
+    
+    for (int i = 0; i < sessions.firstObject.nameChars.count; i++) {
+        NSMutableArray<NSArray<PRSCharDetectResult *> *> *words = [@[] mutableCopy];
+        __block NSUInteger maxWordLength = 0;
+        [sessions enumerateObjectsUsingBlock:^(PRSSingleScanSession * _Nonnull session, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSArray<PRSCharDetectResult *> *word = session.nameChars[i];
+            [words addObject:word];
+            if (maxWordLength < word.count) {
+                maxWordLength = word.count;
+            }
+        }];
+        
+        CGFloat maxLetterConfidence = maxWordConfidence / maxWordLength;
+        
+        NSMutableString *wordPrediction = [@"" mutableCopy];
+        for (int j = 0; j < maxWordLength; j++) {
+            NSCountedSet *availableLetters = [NSCountedSet new];
+            for (NSArray<PRSCharDetectResult *> *word in words) {
+                if (j < word.count) {
+                    [availableLetters addObject:word[j].prediction];
+                }
+            }
+            
+            NSString *mostRepeatedString = @"";
+            NSUInteger maxCount = 0;
+            
+            for (NSString *letter in availableLetters) {
+                NSUInteger count = [availableLetters countForObject:letter];
+                if (count > maxCount) {
+                    maxCount = count;
+                    mostRepeatedString = letter;
+                }
+            }
+            [wordPrediction appendString:mostRepeatedString];
+            CGFloat delta = maxLetterConfidence / 5 * MIN(5, maxCount);
+            confidence += delta;
+        }
+        [nameWords addObject:[wordPrediction copy]];
+    }
+    
+    self.lastPredictedName = [nameWords componentsJoinedByString:@" "];
+    return confidence;
+}
+
+- (CGFloat)buildPriceWithSessions:(NSArray<PRSSingleScanSession *> *)sessions {
+    NSMutableArray<NSString *> *priceWords = [@[] mutableCopy];
+    CGFloat confidence = 0.f;
+    CGFloat maxWordConfidence = 1.f / sessions.firstObject.priceChars.count;
+    
+    for (int i = 0; i < sessions.firstObject.priceChars.count; i++) {
+        NSMutableArray<NSArray<PRSCharDetectResult *> *> *words = [@[] mutableCopy];
+        __block NSUInteger maxWordLength = 0;
+        [sessions enumerateObjectsUsingBlock:^(PRSSingleScanSession * _Nonnull session, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSArray<PRSCharDetectResult *> *word = session.priceChars[i];
+            [words addObject:word];
+            if (maxWordLength < word.count) {
+                maxWordLength = word.count;
+            }
+        }];
+        
+        CGFloat maxLetterConfidence = maxWordConfidence / maxWordLength;
+        
+        NSMutableString *wordPrediction = [@"" mutableCopy];
+        for (int j = 0; j < maxWordLength; j++) {
+            NSCountedSet *availableLetters = [NSCountedSet new];
+            for (NSArray<PRSCharDetectResult *> *word in words) {
+                if (j < word.count) {
+                    [availableLetters addObject:word[j].prediction];
+                }
+            }
+            
+            NSString *mostRepeatedString = @"";
+            NSUInteger maxCount = 0;
+            
+            for (NSString *letter in availableLetters) {
+                NSUInteger count = [availableLetters countForObject:letter];
+                if (count > maxCount) {
+                    maxCount = count;
+                    mostRepeatedString = letter;
+                }
+            }
+            [wordPrediction appendString:mostRepeatedString];
+            CGFloat delta = maxLetterConfidence / 5 * MIN(5, maxCount);
+            confidence += delta;
+        }
+        [priceWords addObject:[wordPrediction copy]];
+    }
+    
+    self.lastPredictedPrice = [priceWords componentsJoinedByString:@" "];
+    return confidence;
 }
 
 - (BOOL)rect:(CGRect)firstRect isLooksLikeAnother:(CGRect)secondRect {

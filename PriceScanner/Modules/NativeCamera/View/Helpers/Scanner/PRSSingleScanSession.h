@@ -15,7 +15,9 @@
 @interface PRSSingleScanSession : NSObject
 
 @property (nonatomic, assign, readonly) CGRect region;
-@property (nonatomic, strong, readonly) NSMutableArray<PRSCharDetectResult *> *sessionResults;
+
+@property (nonatomic, strong, readonly) NSMutableArray<NSMutableArray<PRSCharDetectResult *> *> *nameChars;
+@property (nonatomic, strong, readonly) NSMutableArray<NSMutableArray<PRSCharDetectResult *> *> *priceChars;
 
 /** Конструктор позволяет указать прямоугольник, в рамках которого производится распознавание текста */
 - (instancetype)initWithRegion:(CGRect)region;

@@ -13,7 +13,6 @@
 @interface PRSSingleScanSession()
 
 @property (nonatomic, assign) CGRect region;
-@property (nonatomic, strong) NSMutableArray<PRSCharDetectResult *> *sessionResults;
 
 @property (nonatomic, strong) NSMutableArray<NSMutableArray<PRSCharDetectResult *> *> *nameChars;
 @property (nonatomic, strong) NSMutableArray<NSMutableArray<PRSCharDetectResult *> *> *priceChars;
@@ -27,7 +26,6 @@
     self = [super init];
     if (self) {
         self.region = region;
-        self.sessionResults = [@[] mutableCopy];
         
         NSMutableArray<PRSCharDetectResult *> *nameFirstWord = [@[] mutableCopy];
         NSMutableArray<PRSCharDetectResult *> *priceFirstWord = [@[] mutableCopy];
@@ -39,8 +37,6 @@
 
 #pragma mark - Interface Methods
 - (void)detectResult:(PRSCharDetectResult *)result {
-    [self.sessionResults addObject:result];
-    
     if ([self isNameChar:result]) {
         if ([self newResult:result tooFarFromLastResult:self.nameChars.lastObject.lastObject]) {
             [self.nameChars addObject:[@[result] mutableCopy]];
@@ -57,37 +53,39 @@
 }
 
 - (void)printResults {
-    NSLog(@"\nCOOL PREDICTION!!\nNAME:");
+    NSLog(@"COOL PREDICTION!!\nNAME:");
     for (NSMutableArray<PRSCharDetectResult *> *word in self.nameChars) {
         NSMutableArray<NSString *> *wordsLetters = [@[] mutableCopy];
         for (PRSCharDetectResult *result in word) {
             [wordsLetters addObject:result.prediction];
         }
-        NSLog(@"%@", [wordsLetters componentsJoinedByString:@""]);
+//        NSLog(@"%@", [wordsLetters componentsJoinedByString:@""]);
+        NSLog(@"name word letters count = %ld", word.count);
     }
-    NSLog(@"\nPRICE:");
+    NSLog(@"PRICE:");
     for (NSMutableArray<PRSCharDetectResult *> *word in self.priceChars) {
         NSMutableArray<NSString *> *wordsLetters = [@[] mutableCopy];
         for (PRSCharDetectResult *result in word) {
             [wordsLetters addObject:result.prediction];
         }
-        NSLog(@"%@", [wordsLetters componentsJoinedByString:@""]);
+//        NSLog(@"%@", [wordsLetters componentsJoinedByString:@""]);
+        NSLog(@"price word letters count = %ld", word.count);
     }
 }
 
 #pragma mark - Private Methods
 - (BOOL)isNameChar:(PRSCharDetectResult *)result {
     CGFloat relativeTopLeftY = ((1 - result.charBox.topLeft.y) - self.region.origin.y) / self.region.size.height;
-    BOOL isName = relativeTopLeftY >= 0.13 && relativeTopLeftY <= 0.31;
-    NSLog(@"Name = %@ topLeft = %f isName = %@", result.prediction, relativeTopLeftY, isName ? @"+++" : @"---");
+    BOOL isName = relativeTopLeftY < 0.35;
+//    NSLog(@"Name = %@ topLeft = %f isName = %@", result.prediction, relativeTopLeftY, isName ? @"+++" : @"---");
     return isName;
 }
 
 - (BOOL)isPriceChar:(PRSCharDetectResult *)result {
     CGFloat relativeTopLeftY = ((1 - result.charBox.topLeft.y) - self.region.origin.y) / self.region.size.height;
     CGFloat relativeTopLeftX = (result.charBox.topLeft.x - self.region.origin.x) / self.region.size.width;
-    BOOL isPrice = relativeTopLeftY >= 0.56 && relativeTopLeftY <= 0.71 && relativeTopLeftX > 0.5;
-    NSLog(@"Price = %@ topLeftY = %f topLeftX = %f isPrice = %@", result.prediction, relativeTopLeftY, relativeTopLeftX, isPrice ? @"+++" : @"---");
+    BOOL isPrice = relativeTopLeftY > 0.5 && relativeTopLeftX > 0.5;
+//    NSLog(@"Price = %@ topLeftY = %f topLeftX = %f isPrice = %@", result.prediction, relativeTopLeftY, relativeTopLeftX, isPrice ? @"+++" : @"---");
     return isPrice;
 }
 
