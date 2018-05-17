@@ -44,6 +44,9 @@ static CGFloat const overlayBottomOffset = 62.f;
     _state = state;
     UIColor *color = [self cornerColorForCurrentState];
     [self changeCornerLinesColor:color animated:YES];
+    if (state == PRSCameraOverlayStateWaiting) {
+        self.progress = 0.f;
+    }
 }
 
 - (void)setProgress:(CGFloat)progress {

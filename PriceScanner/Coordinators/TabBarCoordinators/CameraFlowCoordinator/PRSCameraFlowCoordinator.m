@@ -12,16 +12,15 @@
 #import "PRSManualCameraConfigurator.h"
 #import "PRSNativeCameraConfigurator.h"
 #import "PRSScanMethodConfigurator.h"
-#import "PRSScanResultConfigurator.h"
+#import "PRSScanPreviewConfigurator.h"
 
 #import "PRSMachineLearningCameraModuleInput.h"
 #import "PRSManualCameraModuleInput.h"
 #import "PRSNativeCameraModuleInput.h"
 #import "PRSScanMethodModuleInput.h"
-#import "PRSScanResultModuleInput.h"
+#import "PRSScanPreviewModuleInput.h"
 
 #import "PRSNavigationController.h"
-#import "PRSModalNavigationController.h"
 
 
 @interface PRSCameraFlowCoordinator()
@@ -54,9 +53,9 @@
 - (void)openNativeCameraModule {
     @weakify(self);
     UIViewController *cameraView = [PRSNativeCameraConfigurator configureModule:^(id<PRSNativeCameraModuleInput> presenter, UIViewController *view) {
-        [presenter configureWithOpenResultAction:^(PRSScanResultEntity *scanResultEntity) {
+        [presenter configureWithOpenPreviewAction:^(PRSScanResultEntity *scanResultEntity) {
             @strongify(self);
-            [self openResultModuleWithEntity:scanResultEntity];
+            [self openScanPreviewModuleWithEntity:scanResultEntity];
         }];
     }];
     [self.navigationController pushViewController:cameraView animated:YES];
@@ -65,9 +64,9 @@
 - (void)openMLCameraModule {
     @weakify(self);
     UIViewController *cameraView = [PRSMachineLearningCameraConfigurator configureModule:^(id<PRSMachineLearningCameraModuleInput> presenter, UIViewController *view) {
-        [presenter configureWithOpenResultAction:^(PRSScanResultEntity *scanResultEntity) {
+        [presenter configureWithOpenPreviewAction:^(PRSScanResultEntity *scanResultEntity) {
             @strongify(self);
-            [self openResultModuleWithEntity:scanResultEntity];
+            [self openScanPreviewModuleWithEntity:scanResultEntity];
         }];
     }];
     [self.navigationController pushViewController:cameraView animated:YES];
@@ -76,25 +75,25 @@
 - (void)openManualCameraModule {
     @weakify(self);
     UIViewController *cameraView = [PRSManualCameraConfigurator configureModule:^(id<PRSManualCameraModuleInput> presenter, UIViewController *view) {
-        [presenter configureWithOpenResultAction:^(PRSScanResultEntity *scanResultEntity) {
+        [presenter configureWithOpenPreviewAction:^(PRSScanResultEntity *scanResultEntity) {
             @strongify(self);
-            [self openResultModuleWithEntity:scanResultEntity];
+            [self openScanPreviewModuleWithEntity:scanResultEntity];
         }];
     }];
     [self.navigationController pushViewController:cameraView animated:YES];
 }
 
-- (void)openResultModuleWithEntity:(PRSScanResultEntity *)entity {
-    UIViewController *resultView = [PRSScanResultConfigurator configureModule:^(id<PRSScanResultModuleInput> presenter, UIViewController *view) {
+- (void)openScanPreviewModuleWithEntity:(PRSScanResultEntity *)entity {
+    UIViewController *scanPreviewView = [PRSScanPreviewConfigurator configureModule:^(id<PRSScanPreviewModuleInput> presenter, UIViewController *view) {
         @weakify(view);
-        [presenter configureWithScanResult:entity];
-        [presenter configureAsModalWithCloseAction:^{
+        [presenter configureWithScanResult:entity closeAction:^{
             @strongify(view);
             [view dismissViewControllerAnimated:YES completion:nil];
         }];
     }];
-    UINavigationController *navigationController = [[PRSModalNavigationController alloc] initWithRootViewController:resultView];
-    [self.navigationController.topViewController presentViewController:navigationController animated:YES completion:nil];
+    scanPreviewView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    scanPreviewView.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    [self.navigationController.topViewController presentViewController:scanPreviewView animated:YES completion:nil];
 }
 
 @end

@@ -41,11 +41,8 @@ static CGFloat const photoShadowOpacity = 0.5f;
 }
 
 #pragma mark - PRSScanResultViewInput
-- (void)setupInitialState:(BOOL)isModalState scanResult:(PRSScanResultViewModel *)scanResult {
+- (void)setupInitialStateWithScanResult:(PRSScanResultViewModel *)scanResult {
     [self configureNavigationBar];
-    if (isModalState) {
-        [self configureCloseModuleButton];
-    }
     [self configurePhotoImageView];
     [self configureStyle];
     [self configureLocalizedTexts];
@@ -56,17 +53,6 @@ static CGFloat const photoShadowOpacity = 0.5f;
 - (void)configureNavigationBar {
     self.title = @"Результаты сканирования".localized;
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
-}
-
-- (void)configureCloseModuleButton {
-    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    closeButton.tintColor = [UIColor prsMainThemeColor];
-    closeButton.frame = CGRectMake(0, 0, 44, 44);
-    [closeButton setImage:[UIImage imageNamed:@"icClose"] forState:UIControlStateNormal];
-    [closeButton addTarget:self action:@selector(tapOnCloseButton) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *closeItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
-    self.navigationItem.rightBarButtonItem = closeItem;
 }
 
 - (void)configurePhotoImageView {
@@ -103,11 +89,6 @@ static CGFloat const photoShadowOpacity = 0.5f;
     [self.nameValueLabel setText:scanResult.name withLineSpacing:@(3.f) letterSpacing:nil];
     self.priceValueLabel.text = scanResult.price;
     self.photoImageView.image = scanResult.photo;
-}
-
-#pragma mark - Actions
-- (void)tapOnCloseButton {
-    [self.output closeModule];
 }
 
 @end

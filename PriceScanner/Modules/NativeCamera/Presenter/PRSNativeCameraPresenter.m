@@ -9,10 +9,12 @@
 #import "PRSNativeCameraPresenter.h"
 #import "PRSNativeCameraViewInput.h"
 
+#import "PRSScanResultEntity.h"
+
 
 @interface PRSNativeCameraPresenter()
 
-@property (nonatomic, copy) void (^openResultAction)(PRSScanResultEntity *scanResultEntity);
+@property (nonatomic, copy) void (^openPreviewAction)(PRSScanResultEntity *scanResultEntity);
 
 @end
 
@@ -20,8 +22,8 @@
 @implementation PRSNativeCameraPresenter
 
 #pragma mark - PRSNativeCameraModuleInput
-- (void)configureWithOpenResultAction:(void(^)(PRSScanResultEntity *scanResultEntity))openResultAction {
-    self.openResultAction = openResultAction;
+- (void)configureWithOpenPreviewAction:(void(^)(PRSScanResultEntity *scanResultEntity))openPreviewAction {
+    self.openPreviewAction = openPreviewAction;
 }
 
 #pragma mark - PRSNativeCameraViewOutput
@@ -29,9 +31,9 @@
     [self.view setupInitialState];
 }
 
-- (void)openScanResultModule {
-    if (self.openResultAction) {
-        self.openResultAction(nil);
+- (void)openScanPreviewModuleWithName:(NSString *)name price:(NSString *)price photo:(UIImage *)photo {
+    if (self.openPreviewAction) {
+        self.openPreviewAction([[PRSScanResultEntity alloc] initWithName:name price:price photoData:UIImagePNGRepresentation(photo)]);
     }
 }
 
