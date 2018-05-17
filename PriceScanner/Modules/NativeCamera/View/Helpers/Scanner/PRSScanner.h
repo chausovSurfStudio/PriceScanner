@@ -13,6 +13,9 @@
 /** Объект, инкапсулирующий в себе логику по обработке распознанных в видеопотоке символов */
 @interface PRSScanner : NSObject
 
+@property (nonatomic, strong, readonly) NSString *lastPredictedName;
+@property (nonatomic, strong, readonly) NSString *lastPredictedPrice;
+
 /** Метод отключение сканера. Вся сохраненная информация стирается */
 - (void)disableScanner;
 /** Метод для перевода сканера в состояние ожидания */

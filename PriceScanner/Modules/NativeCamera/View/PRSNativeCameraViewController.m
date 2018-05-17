@@ -195,7 +195,9 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             self.overlay.progress = confidence;
             if (confidence >= 0.99f) {
-                [self.output openScanPreviewModule];
+                [self.output openScanPreviewModuleWithName:self.scanner.lastPredictedName
+                                                     price:self.scanner.lastPredictedPrice
+                                                     photo:self.snapshot];
                 [self showStartScanButton];
                 self.overlay.state = PRSCameraOverlayStateWaiting;
             }
