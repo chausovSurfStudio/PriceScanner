@@ -9,6 +9,8 @@
 #import "PRSManualCameraPresenter.h"
 #import "PRSManualCameraViewInput.h"
 
+#import "PRSScanResultEntity.h"
+
 
 @interface PRSManualCameraPresenter()
 
@@ -31,7 +33,10 @@
 
 - (void)openScanPreviewModule {
     if (self.openPreviewAction) {
-        self.openPreviewAction(nil);
+        // TODO: тестовый код, удалить позднее
+        UIImage *photo = [UIImage imageNamed:@"launchScreenBackground"];
+        PRSScanResultEntity *result = [[PRSScanResultEntity alloc] initWithName:@"Шоколадка Аленка" price:@"87 ₽" photoData:UIImagePNGRepresentation(photo)];
+        self.openPreviewAction(result);
     }
 }
 

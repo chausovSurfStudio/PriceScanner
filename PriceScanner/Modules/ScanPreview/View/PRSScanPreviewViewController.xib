@@ -25,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D8m-DX-v4S">
-                    <rect key="frame" x="36" y="253.5" width="248" height="61"/>
+                    <rect key="frame" x="36" y="248.5" width="248" height="71"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6L-j7-1kL">
                             <rect key="frame" x="16" y="16" width="216" height="0.0"/>
@@ -40,9 +40,9 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dun-4h-Dp1">
-                            <rect key="frame" x="0.0" y="31" width="124" height="30"/>
+                            <rect key="frame" x="0.0" y="31" width="124" height="40"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="30" id="Jfc-LZ-Ivr"/>
+                                <constraint firstAttribute="height" constant="40" id="Jfc-LZ-Ivr"/>
                             </constraints>
                             <state key="normal" title="Сохранить"/>
                             <connections>
@@ -50,9 +50,9 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vig-k8-cF7">
-                            <rect key="frame" x="124" y="31" width="124" height="30"/>
+                            <rect key="frame" x="124" y="31" width="124" height="40"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="30" id="Wjh-90-Wn5"/>
+                                <constraint firstAttribute="height" constant="40" id="Wjh-90-Wn5"/>
                             </constraints>
                             <state key="normal" title="Закрыть"/>
                             <connections>
