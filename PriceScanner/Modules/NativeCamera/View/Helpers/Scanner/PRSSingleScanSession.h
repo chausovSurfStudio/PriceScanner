@@ -23,4 +23,6 @@
 /** Метод для сохранения информации о распознанном символе */
 - (void)detectResult:(PRSCharDetectResult *)result;
 
+- (void)printResults;
+
 @end

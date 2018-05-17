@@ -116,8 +116,8 @@ typedef NS_OPTIONS(NSUInteger, PRSScannerState) {
         tempConfidence += maxSingleLetterConfidence * (sessions.count / maxCount);
     }
     self.lastPrediction = [prediction copy];
-    NSLog(@"PREDICTION = %@", self.lastPrediction);
-    
+//    NSLog(@"PREDICTION = %@", self.lastPrediction);
+    return 0.5f;
     if (sessions.count <= 3) {
         return sessions.count * 0.1f;
     } else if (tempConfidence >= 0.69f && sessions.count <= 5) {

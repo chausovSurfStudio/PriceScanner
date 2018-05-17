@@ -34,6 +34,9 @@
 }
 
 - (void)startNewSessionInRegion:(CGRect)region {
+    PRSSingleScanSession *lastSession = [self.sessions lastObject];
+    [lastSession printResults];
+    
     NSMutableArray<PRSSingleScanSession *> *currentSessions = [self.sessions mutableCopy];
     [currentSessions addObject:[[PRSSingleScanSession alloc] initWithRegion:region]];
     self.sessions = [currentSessions copy];

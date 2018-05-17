@@ -173,6 +173,14 @@
     });
     
     if (self.scanTimer.state == PRSScanTimerStateSnapshot) {
+        
+        if (CGRectEqualToRect(self.textDetectRequest.regionOfInterest, CGRectMake(0, 0, 1, 1))) {
+            // прямоугольник не определился, смысла что-то делать дальше нет
+            self.scanTimer.state = PRSScanTimerStateSleep;
+            [self.scanner setupAwaitState];
+            return;
+        }
+        
         self.scanTimer.state = PRSScanTimerStateScanning;
         [self.scanner enableScannerWithRegion:self.textDetectRequest.regionOfInterest];
         for (VNTextObservation *word in request.results) {
