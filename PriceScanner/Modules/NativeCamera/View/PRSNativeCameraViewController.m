@@ -237,7 +237,6 @@
     NSArray<VNRectangleObservation *> *results = request.results;
     VNRectangleObservation *rectangle = results.firstObject;
     if (!rectangle) {
-//        self.textDetectRequest.regionOfInterest = CGRectMake(0, 0, 1, 1);
         return;
     }
     CGRect region = [self regionOfInterestFromRectObservation:rectangle];

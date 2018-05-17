@@ -14,8 +14,8 @@
 
 @property (nonatomic, assign) CGRect region;
 
-@property (nonatomic, strong) NSMutableArray<NSMutableArray<PRSCharDetectResult *> *> *nameChars;
-@property (nonatomic, strong) NSMutableArray<NSMutableArray<PRSCharDetectResult *> *> *priceChars;
+@property (nonatomic, strong) NSMutableArray<NSMutableArray<PRSCharDetectResult *> *> *nameWords;
+@property (nonatomic, strong) NSMutableArray<NSMutableArray<PRSCharDetectResult *> *> *priceWords;
 
 @end
 
@@ -29,47 +29,25 @@
         
         NSMutableArray<PRSCharDetectResult *> *nameFirstWord = [@[] mutableCopy];
         NSMutableArray<PRSCharDetectResult *> *priceFirstWord = [@[] mutableCopy];
-        self.nameChars = [@[nameFirstWord] mutableCopy];
-        self.priceChars = [@[priceFirstWord] mutableCopy];
+        self.nameWords = [@[nameFirstWord] mutableCopy];
+        self.priceWords = [@[priceFirstWord] mutableCopy];
     }
     return self;
 }
 
 #pragma mark - Interface Methods
 - (void)detectResult:(PRSCharDetectResult *)result {
+    NSMutableArray<NSMutableArray<PRSCharDetectResult *> *> *wordsArray = nil;
     if ([self isNameChar:result]) {
-        if ([self newResult:result tooFarFromLastResult:self.nameChars.lastObject.lastObject]) {
-            [self.nameChars addObject:[@[result] mutableCopy]];
-        } else {
-            [self.nameChars.lastObject addObject:result];
-        }
+        wordsArray = self.nameWords;
     } else if ([self isPriceChar:result]) {
-        if ([self newResult:result tooFarFromLastResult:self.priceChars.lastObject.lastObject]) {
-            [self.priceChars addObject:[@[result] mutableCopy]];
-        } else {
-            [self.priceChars.lastObject addObject:result];
-        }
+        wordsArray = self.priceWords;
     }
-}
-
-- (void)printResults {
-    NSLog(@"COOL PREDICTION!!\nNAME:");
-    for (NSMutableArray<PRSCharDetectResult *> *word in self.nameChars) {
-        NSMutableArray<NSString *> *wordsLetters = [@[] mutableCopy];
-        for (PRSCharDetectResult *result in word) {
-            [wordsLetters addObject:result.prediction];
-        }
-//        NSLog(@"%@", [wordsLetters componentsJoinedByString:@""]);
-        NSLog(@"name word letters count = %ld", word.count);
-    }
-    NSLog(@"PRICE:");
-    for (NSMutableArray<PRSCharDetectResult *> *word in self.priceChars) {
-        NSMutableArray<NSString *> *wordsLetters = [@[] mutableCopy];
-        for (PRSCharDetectResult *result in word) {
-            [wordsLetters addObject:result.prediction];
-        }
-//        NSLog(@"%@", [wordsLetters componentsJoinedByString:@""]);
-        NSLog(@"price word letters count = %ld", word.count);
+    
+    if ([self newResult:result tooFarFromLastResult:wordsArray.lastObject.lastObject]) {
+        [wordsArray addObject:[@[result] mutableCopy]];
+    } else {
+        [wordsArray.lastObject addObject:result];
     }
 }
 
@@ -77,7 +55,6 @@
 - (BOOL)isNameChar:(PRSCharDetectResult *)result {
     CGFloat relativeTopLeftY = ((1 - result.charBox.topLeft.y) - self.region.origin.y) / self.region.size.height;
     BOOL isName = relativeTopLeftY < 0.35;
-//    NSLog(@"Name = %@ topLeft = %f isName = %@", result.prediction, relativeTopLeftY, isName ? @"+++" : @"---");
     return isName;
 }
 
@@ -85,7 +62,6 @@
     CGFloat relativeTopLeftY = ((1 - result.charBox.topLeft.y) - self.region.origin.y) / self.region.size.height;
     CGFloat relativeTopLeftX = (result.charBox.topLeft.x - self.region.origin.x) / self.region.size.width;
     BOOL isPrice = relativeTopLeftY > 0.5 && relativeTopLeftX > 0.5;
-//    NSLog(@"Price = %@ topLeftY = %f topLeftX = %f isPrice = %@", result.prediction, relativeTopLeftY, relativeTopLeftX, isPrice ? @"+++" : @"---");
     return isPrice;
 }
 
