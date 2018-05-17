@@ -12,7 +12,7 @@
 
 @interface PRSMachineLearningCameraPresenter()
 
-@property (nonatomic, copy) void (^openResultAction)(PRSScanResultEntity *scanResultEntity);
+@property (nonatomic, copy) void (^openPreviewAction)(PRSScanResultEntity *scanResultEntity);
 
 @end
 
@@ -20,8 +20,8 @@
 @implementation PRSMachineLearningCameraPresenter
 
 #pragma mark - PRSMachineLearningCameraModuleInput
-- (void)configureWithOpenResultAction:(void(^)(PRSScanResultEntity *scanResultEntity))openResultAction {
-    self.openResultAction = openResultAction;
+- (void)configureWithOpenPreviewAction:(void(^)(PRSScanResultEntity *scanResultEntity))openPreviewAction {
+    self.openPreviewAction = openPreviewAction;
 }
 
 #pragma mark - PRSMachineLearningCameraViewOutput
@@ -29,9 +29,9 @@
     [self.view setupInitialState];
 }
 
-- (void)openScanResultModule {
-    if (self.openResultAction) {
-        self.openResultAction(nil);
+- (void)openScanPreviewModule {
+    if (self.openPreviewAction) {
+        self.openPreviewAction(nil);
     }
 }
 

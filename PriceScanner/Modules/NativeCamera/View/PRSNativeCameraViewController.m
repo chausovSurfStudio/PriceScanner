@@ -187,7 +187,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             self.overlay.progress = confidence;
             if (confidence >= 0.99f) {
-                [self.output openScanResultModule];
+                [self.output openScanPreviewModule];
             }
         });
         self.scanTimer.state = PRSScanTimerStateSleep;

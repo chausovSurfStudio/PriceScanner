@@ -16,8 +16,6 @@
 @interface PRSScanResultPresenter()
 
 @property (nonatomic, strong) PRSScanResultEntity *scanResult;
-@property (nonatomic, assign) BOOL showAsModal;
-@property (nonatomic, copy) void (^closeAction)(void);
 
 @end
 
@@ -29,20 +27,9 @@
     self.scanResult = scanResultEntity;
 }
 
-- (void)configureAsModalWithCloseAction:(void(^)(void))closeAction {
-    self.showAsModal = YES;
-    self.closeAction = closeAction;
-}
-
 #pragma mark - PRSScanResultViewOutput
 - (void)viewLoaded {
-    [self.view setupInitialState:self.showAsModal scanResult:[[PRSScanResultViewModel alloc] initWithEntity:self.scanResult]];
-}
-
-- (void)closeModule {
-    if (self.closeAction) {
-        self.closeAction();
-    }
+    [self.view setupInitialStateWithScanResult:[[PRSScanResultViewModel alloc] initWithEntity:self.scanResult]];
 }
 
 @end
