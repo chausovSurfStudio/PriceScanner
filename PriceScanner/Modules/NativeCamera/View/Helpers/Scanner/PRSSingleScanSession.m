@@ -78,13 +78,17 @@
 #pragma mark - Private Methods
 - (BOOL)isNameChar:(PRSCharDetectResult *)result {
     CGFloat relativeTopLeftY = ((1 - result.charBox.topLeft.y) - self.region.origin.y) / self.region.size.height;
-    return relativeTopLeftY >= 0.17 && relativeTopLeftY <= 0.31;
+    BOOL isName = relativeTopLeftY >= 0.13 && relativeTopLeftY <= 0.31;
+    NSLog(@"Name = %@ topLeft = %f isName = %@", result.prediction, relativeTopLeftY, isName ? @"+++" : @"---");
+    return isName;
 }
 
 - (BOOL)isPriceChar:(PRSCharDetectResult *)result {
     CGFloat relativeTopLeftY = ((1 - result.charBox.topLeft.y) - self.region.origin.y) / self.region.size.height;
     CGFloat relativeTopLeftX = (result.charBox.topLeft.x - self.region.origin.x) / self.region.size.width;
-    return relativeTopLeftY >= 0.57 && relativeTopLeftY <= 0.71 && relativeTopLeftX > 0.5;
+    BOOL isPrice = relativeTopLeftY >= 0.56 && relativeTopLeftY <= 0.71 && relativeTopLeftX > 0.5;
+    NSLog(@"Price = %@ topLeftY = %f topLeftX = %f isPrice = %@", result.prediction, relativeTopLeftY, relativeTopLeftX, isPrice ? @"+++" : @"---");
+    return isPrice;
 }
 
 - (BOOL)newResult:(PRSCharDetectResult *)result tooFarFromLastResult:(PRSCharDetectResult *)lastResult {

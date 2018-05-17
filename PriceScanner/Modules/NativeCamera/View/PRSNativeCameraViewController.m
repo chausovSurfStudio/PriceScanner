@@ -235,10 +235,14 @@
     NSArray<VNRectangleObservation *> *results = request.results;
     VNRectangleObservation *rectangle = results.firstObject;
     if (!rectangle) {
-        self.textDetectRequest.regionOfInterest = CGRectMake(0, 0, 1, 1);
+//        self.textDetectRequest.regionOfInterest = CGRectMake(0, 0, 1, 1);
         return;
     }
-    self.textDetectRequest.regionOfInterest = [self regionOfInterestFromRectObservation:rectangle];
+    CGRect region = [self regionOfInterestFromRectObservation:rectangle];
+    if (CGRectEqualToRect(region, CGRectMake(0, 0, 1, 1))) {
+        return;
+    }
+    self.textDetectRequest.regionOfInterest = region;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self highlightRect:rectangle inScene:self.scene];
     });

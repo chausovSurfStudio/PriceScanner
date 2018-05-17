@@ -9,7 +9,7 @@
 #import "PRSScanTimer.h"
 
 
-static NSTimeInterval const timerInterval = 0.2;
+static NSTimeInterval const timerInterval = 1.2;
 
 
 @interface PRSScanTimer()
