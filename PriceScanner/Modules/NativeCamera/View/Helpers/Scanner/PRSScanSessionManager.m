@@ -33,9 +33,9 @@
     self.sessions = @[];
 }
 
-- (void)startNewSession {
+- (void)startNewSessionInRegion:(CGRect)region {
     NSMutableArray<PRSSingleScanSession *> *currentSessions = [self.sessions mutableCopy];
-    [currentSessions addObject:[PRSSingleScanSession new]];
+    [currentSessions addObject:[[PRSSingleScanSession alloc] initWithRegion:region]];
     self.sessions = [currentSessions copy];
 }
 
@@ -43,8 +43,8 @@
     [self.sessions.lastObject detectResult:result];
 }
 
-- (NSString *)getLastPrediction {
-    return [self.sessions.lastObject getPrediction];
+- (NSArray<PRSSingleScanSession *> *)getSessionsForPrediction {
+    return [self.sessions copy];
 }
 
 @end

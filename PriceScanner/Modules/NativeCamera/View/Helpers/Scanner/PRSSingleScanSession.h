@@ -14,9 +14,13 @@
 /** Объект инкапсулирует в себе логику по хранению и обработке результатов распознавания символов в рамках одной сессии */
 @interface PRSSingleScanSession : NSObject
 
+@property (nonatomic, strong, readonly) NSMutableArray<NSMutableArray<PRSCharDetectResult *> *> *nameWords;
+@property (nonatomic, strong, readonly) NSMutableArray<NSMutableArray<PRSCharDetectResult *> *> *priceWords;
+
+/** Конструктор позволяет указать прямоугольник, в рамках которого производится распознавание текста */
+- (instancetype)initWithRegion:(CGRect)region;
+
 /** Метод для сохранения информации о распознанном символе */
 - (void)detectResult:(PRSCharDetectResult *)result;
-/** Метод возвращает строку, которая получилась в результате распознавания в рамках данной сессии */
-- (NSString *)getPrediction;
 
 @end
