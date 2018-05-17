@@ -11,6 +11,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PRSScanPreviewViewController">
             <connections>
+                <outlet property="closeButton" destination="Vig-k8-cF7" id="kwb-mm-fHW"/>
+                <outlet property="containerView" destination="D8m-DX-v4S" id="ohN-6D-0dT"/>
+                <outlet property="nameLabel" destination="H6L-j7-1kL" id="GOc-l6-70o"/>
+                <outlet property="priceLabel" destination="hZF-g1-oXM" id="jYC-ru-5XS"/>
+                <outlet property="saveButton" destination="Dun-4h-Dp1" id="ry5-ri-xSK"/>
                 <outlet property="view" destination="iN0-l3-epB" id="ax8-7Y-PMj"/>
             </connections>
         </placeholder>
@@ -19,17 +24,66 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qet-iA-hqW">
-                    <rect key="frame" x="139" y="274" width="42" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D8m-DX-v4S">
+                    <rect key="frame" x="36" y="253.5" width="248" height="61"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6L-j7-1kL">
+                            <rect key="frame" x="16" y="16" width="216" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZF-g1-oXM">
+                            <rect key="frame" x="16" y="23" width="216" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" weight="black" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dun-4h-Dp1">
+                            <rect key="frame" x="0.0" y="31" width="124" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="Jfc-LZ-Ivr"/>
+                            </constraints>
+                            <state key="normal" title="Сохранить"/>
+                            <connections>
+                                <action selector="tapOnSaveButton:" destination="-1" eventType="touchUpInside" id="pjQ-F9-aUQ"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vig-k8-cF7">
+                            <rect key="frame" x="124" y="31" width="124" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="Wjh-90-Wn5"/>
+                            </constraints>
+                            <state key="normal" title="Закрыть"/>
+                            <connections>
+                                <action selector="tapOnCloseButton:" destination="-1" eventType="touchUpInside" id="Y0H-mX-Rtz"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="H6L-j7-1kL" secondAttribute="trailing" constant="16" id="48r-wI-21X"/>
+                        <constraint firstItem="Vig-k8-cF7" firstAttribute="width" secondItem="Dun-4h-Dp1" secondAttribute="width" id="FiL-Fe-fXr"/>
+                        <constraint firstItem="H6L-j7-1kL" firstAttribute="top" secondItem="D8m-DX-v4S" secondAttribute="top" constant="16" id="FtG-Ny-5u4"/>
+                        <constraint firstItem="Dun-4h-Dp1" firstAttribute="leading" secondItem="D8m-DX-v4S" secondAttribute="leading" id="NTQ-dT-EEG"/>
+                        <constraint firstItem="hZF-g1-oXM" firstAttribute="top" secondItem="H6L-j7-1kL" secondAttribute="bottom" constant="7" id="R2c-fp-LHI"/>
+                        <constraint firstItem="hZF-g1-oXM" firstAttribute="leading" secondItem="D8m-DX-v4S" secondAttribute="leading" constant="16" id="RoC-Qe-KhI"/>
+                        <constraint firstAttribute="trailing" secondItem="Vig-k8-cF7" secondAttribute="trailing" id="UIz-TN-nVL"/>
+                        <constraint firstItem="H6L-j7-1kL" firstAttribute="leading" secondItem="D8m-DX-v4S" secondAttribute="leading" constant="16" id="Wzd-Lx-b7J"/>
+                        <constraint firstAttribute="bottom" secondItem="Dun-4h-Dp1" secondAttribute="bottom" id="b2G-uA-x9z"/>
+                        <constraint firstItem="Vig-k8-cF7" firstAttribute="top" secondItem="hZF-g1-oXM" secondAttribute="bottom" constant="8" id="d4Y-FY-76e"/>
+                        <constraint firstAttribute="trailing" secondItem="hZF-g1-oXM" secondAttribute="trailing" constant="16" id="dyg-kf-nPg"/>
+                        <constraint firstItem="Vig-k8-cF7" firstAttribute="leading" secondItem="Dun-4h-Dp1" secondAttribute="trailing" id="jE9-NW-tnN"/>
+                        <constraint firstItem="Dun-4h-Dp1" firstAttribute="top" secondItem="hZF-g1-oXM" secondAttribute="bottom" constant="8" id="ooH-2B-53o"/>
+                        <constraint firstAttribute="bottom" secondItem="Vig-k8-cF7" secondAttribute="bottom" id="w9z-4W-OV0"/>
+                    </constraints>
+                </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="Qet-iA-hqW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="4qx-hJ-ajL"/>
-                <constraint firstItem="Qet-iA-hqW" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="HIg-qt-SIe"/>
+                <constraint firstItem="D8m-DX-v4S" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ACP-yC-ytP"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="D8m-DX-v4S" secondAttribute="trailing" constant="36" id="B1b-Hu-wRd"/>
+                <constraint firstItem="D8m-DX-v4S" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="36" id="w2U-Na-aty"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
         </view>

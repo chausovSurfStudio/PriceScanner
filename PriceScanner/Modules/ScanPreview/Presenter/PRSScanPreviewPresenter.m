@@ -10,6 +10,8 @@
 #import "PRSScanPreviewViewInput.h"
 
 #import "PRSScanResultEntity.h"
+#import "PRSScanPreviewModel.h"
+#import "PRSStorageService.h"
 
 
 @interface PRSScanPreviewPresenter()
@@ -30,7 +32,20 @@
 
 #pragma mark - PRSScanPreviewViewOutput
 - (void)viewLoaded {
-    [self.view setupInitialState];
+    [self.view setupInitialStateWithModel:[[PRSScanPreviewModel alloc] initWithEntity:self.scanPreview]];
+}
+
+- (void)saveScanResult {
+    [PRSStorageService addNewScanResult:self.scanPreview];
+    if (self.closeAction) {
+        self.closeAction();
+    }
+}
+
+- (void)closeModule {
+    if (self.closeAction) {
+        self.closeAction();
+    }
 }
 
 @end

@@ -8,10 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+@class PRSScanPreviewModel;
+
 
 @protocol PRSScanPreviewViewInput <NSObject>
 
-/** Установка начального состояния view */
-- (void)setupInitialState;
+/** Установка начального состояния view
+ *
+ * @param model Сущность результата сканирования, которую необходимо отобразить на экране.
+ *
+ */
+- (void)setupInitialStateWithModel:(PRSScanPreviewModel *)model;
 
 @end

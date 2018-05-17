@@ -62,6 +62,7 @@
 		844BCCD020AAE93A00563FED /* PRSSingleScanSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCCF20AAE93A00563FED /* PRSSingleScanSession.m */; };
 		844BCCD320AAF3F100563FED /* PRSScanSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCD120AAF3F000563FED /* PRSScanSessionManager.m */; };
 		844BCCD520AD6C9D00563FED /* PRSScanPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 844BCCD420AD6C9D00563FED /* PRSScanPreviewViewController.xib */; };
+		844BCCD920AD6EFA00563FED /* PRSScanPreviewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCD820AD6EFA00563FED /* PRSScanPreviewModel.m */; };
 		84555754209F265A00B01D91 /* PRSModalNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555753209F265A00B01D91 /* PRSModalNavigationController.m */; };
 		84555759209F3C6A00B01D91 /* PRSMainCarouselAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555758209F3C6A00B01D91 /* PRSMainCarouselAdapter.m */; };
 		8455575D209F41BD00B01D91 /* PRSMainCarouselCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455575B209F41BD00B01D91 /* PRSMainCarouselCell.m */; };
@@ -226,6 +227,8 @@
 		844BCCD120AAF3F000563FED /* PRSScanSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRSScanSessionManager.m; sourceTree = "<group>"; };
 		844BCCD220AAF3F000563FED /* PRSScanSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRSScanSessionManager.h; sourceTree = "<group>"; };
 		844BCCD420AD6C9D00563FED /* PRSScanPreviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PRSScanPreviewViewController.xib; sourceTree = "<group>"; };
+		844BCCD720AD6EFA00563FED /* PRSScanPreviewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSScanPreviewModel.h; sourceTree = "<group>"; };
+		844BCCD820AD6EFA00563FED /* PRSScanPreviewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSScanPreviewModel.m; sourceTree = "<group>"; };
 		84555752209F265A00B01D91 /* PRSModalNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSModalNavigationController.h; sourceTree = "<group>"; };
 		84555753209F265A00B01D91 /* PRSModalNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSModalNavigationController.m; sourceTree = "<group>"; };
 		84555757209F3C6A00B01D91 /* PRSMainCarouselAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSMainCarouselAdapter.h; sourceTree = "<group>"; };
@@ -774,6 +777,15 @@
 			path = Timer;
 			sourceTree = "<group>";
 		};
+		844BCCD620AD6EDE00563FED /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				844BCCD720AD6EFA00563FED /* PRSScanPreviewModel.h */,
+				844BCCD820AD6EFA00563FED /* PRSScanPreviewModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		84555755209F3B8F00B01D91 /* CarouselAdapter */ = {
 			isa = PBXGroup;
 			children = (
@@ -1221,6 +1233,7 @@
 		F68B072C35032363C5BE905D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				844BCCD620AD6EDE00563FED /* Model */,
 				1D54FE5399001E4101443A8C /* PRSScanPreviewViewController.h */,
 				568F57260D01FDA7D8B31554 /* PRSScanPreviewViewController.m */,
 				844BCCD420AD6C9D00563FED /* PRSScanPreviewViewController.xib */,
@@ -1552,6 +1565,7 @@
 				E67FB7A9E5488267E8D9466A /* PRSManualCameraPresenter.m in Sources */,
 				309C87F16A72169909891DEA /* PRSManualCameraViewController.m in Sources */,
 				7862F52859C940394613AF91 /* PRSScanPreviewConfigurator.m in Sources */,
+				844BCCD920AD6EFA00563FED /* PRSScanPreviewModel.m in Sources */,
 				15BF07E20AC1E197093F6E45 /* PRSScanPreviewPresenter.m in Sources */,
 				99F165F001E0919EC737D622 /* PRSScanPreviewViewController.m in Sources */,
 			);
