@@ -81,7 +81,7 @@
 #pragma mark - Actions
 - (IBAction)tapOnStartScanButton:(UIButton *)sender {
     // TODO: тестовый код, поправить позднее
-    [self.output openScanResultModule];
+    [self.output openScanPreviewModule];
 }
 
 #pragma mark - PRSManualCameraViewInput
