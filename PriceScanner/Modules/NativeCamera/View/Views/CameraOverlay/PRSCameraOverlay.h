@@ -18,11 +18,24 @@ typedef NS_OPTIONS(NSUInteger, PRSCameraOverlayState) {
 };
 
 
+@protocol PRSCameraOverlayDelegate <NSObject>
+
+/** Метод вызывается при изменении границ на оверлее вручную */
+- (void)borderDidChange:(CGRect)borderRect;
+
+@end
+
+
 @interface PRSCameraOverlay : PRSDesignableView
+
+@property (nonatomic, weak) id<PRSCameraOverlayDelegate> delegate;
 
 /** Текущее состояния оверлея, при изменении - "уголки" будут анимированно менять цвет */
 @property (nonatomic, assign) PRSCameraOverlayState state;
 /** Значение от 0 до 1, характеризует текущий прогресс некоего действия. При установке чего-то вне границ [0,1] - будет выставлено ближайшее граничное значение*/
 @property (nonatomic, assign) CGFloat progress;
+
+/** Метод позволяет включить или выключить ручной режим изменений границы оверлея */
+- (void)enableManualMode:(BOOL)enable;
 
 @end

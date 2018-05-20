@@ -65,6 +65,7 @@
 		844BCCD920AD6EFA00563FED /* PRSScanPreviewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCD820AD6EFA00563FED /* PRSScanPreviewModel.m */; };
 		844BCCDC20ADF21E00563FED /* PRSScanner+Support.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCDB20ADF21E00563FED /* PRSScanner+Support.m */; };
 		844BCCDF20ADF64300563FED /* PRSScannerPrediction.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCDE20ADF64300563FED /* PRSScannerPrediction.m */; };
+		844BCCE220B1D67500563FED /* UIImage+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCE120B1D67500563FED /* UIImage+Additions.m */; };
 		84555754209F265A00B01D91 /* PRSModalNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555753209F265A00B01D91 /* PRSModalNavigationController.m */; };
 		84555759209F3C6A00B01D91 /* PRSMainCarouselAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555758209F3C6A00B01D91 /* PRSMainCarouselAdapter.m */; };
 		8455575D209F41BD00B01D91 /* PRSMainCarouselCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455575B209F41BD00B01D91 /* PRSMainCarouselCell.m */; };
@@ -235,6 +236,8 @@
 		844BCCDB20ADF21E00563FED /* PRSScanner+Support.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PRSScanner+Support.m"; sourceTree = "<group>"; };
 		844BCCDD20ADF64300563FED /* PRSScannerPrediction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSScannerPrediction.h; sourceTree = "<group>"; };
 		844BCCDE20ADF64300563FED /* PRSScannerPrediction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSScannerPrediction.m; sourceTree = "<group>"; };
+		844BCCE020B1D67500563FED /* UIImage+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Additions.h"; sourceTree = "<group>"; };
+		844BCCE120B1D67500563FED /* UIImage+Additions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Additions.m"; sourceTree = "<group>"; };
 		84555752209F265A00B01D91 /* PRSModalNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSModalNavigationController.h; sourceTree = "<group>"; };
 		84555753209F265A00B01D91 /* PRSModalNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSModalNavigationController.m; sourceTree = "<group>"; };
 		84555757209F3C6A00B01D91 /* PRSMainCarouselAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSMainCarouselAdapter.h; sourceTree = "<group>"; };
@@ -970,6 +973,8 @@
 				846C2156207E97D100FFB499 /* UIImage+Resize.m */,
 				84B91BBF20A979E300C4B23F /* UIImage+ScanUtils.h */,
 				84B91BC020A979E300C4B23F /* UIImage+ScanUtils.m */,
+				844BCCE020B1D67500563FED /* UIImage+Additions.h */,
+				844BCCE120B1D67500563FED /* UIImage+Additions.m */,
 			);
 			path = UIImage;
 			sourceTree = "<group>";
@@ -1513,6 +1518,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				185816662042AE82003C2FA9 /* AppDelegate.m in Sources */,
+				844BCCE220B1D67500563FED /* UIImage+Additions.m in Sources */,
 				844BCCD320AAF3F100563FED /* PRSScanSessionManager.m in Sources */,
 				84555766209F56EF00B01D91 /* UIButton+Style.m in Sources */,
 				841F4650209D080D00535A4A /* UIColor+Style.m in Sources */,

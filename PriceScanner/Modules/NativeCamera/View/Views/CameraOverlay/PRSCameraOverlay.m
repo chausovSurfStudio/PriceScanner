@@ -7,6 +7,7 @@
 //
 
 #import "PRSCameraOverlay.h"
+#import "UIButton+Style.h"
 
 
 static CGFloat const cornerColorAnimationDuration = 0.3f;
@@ -15,16 +16,29 @@ static CGFloat const cornerLineDefaultSize = 34.f;
 static CGFloat const overlayHorizontalOffset = 16.f;
 static CGFloat const overlayTopOffset = 22.f;
 static CGFloat const overlayBottomOffset = 62.f;
+static CGFloat const borderMinSize = 70.f;
 
 
 @interface PRSCameraOverlay()
 
-@property (nonatomic, strong) IBOutletCollection(UIView) NSArray *overlayBorderViews;
+@property (nonatomic, strong) IBOutlet UIView *leftBorderView;
+@property (nonatomic, strong) IBOutlet UIView *topBorderView;
+@property (nonatomic, strong) IBOutlet UIView *rightBorderView;
+@property (nonatomic, strong) IBOutlet UIView *bottomBorderView;
+
 @property (nonatomic, strong) IBOutletCollection(UIView) NSArray *verticalCornerLines;
 @property (nonatomic, strong) IBOutletCollection(UIView) NSArray *horizontalCornerLines;
 
-@property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *verticalCornerLineHeights;
-@property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *horizontalCornerLineWidths;
+@property (nonatomic, strong) IBOutletCollection(NSLayoutConstraint) NSArray *verticalCornerLineHeights;
+@property (nonatomic, strong) IBOutletCollection(NSLayoutConstraint) NSArray *horizontalCornerLineWidths;
+
+@property (nonatomic, strong) IBOutlet UIButton *topCornerButton;
+@property (nonatomic, strong) IBOutlet UIButton *bottomCornerButton;
+
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *topViewHeight;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *bottomViewHeight;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *leftViewWidth;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *rightViewWidth;
 
 @end
 
@@ -38,6 +52,10 @@ static CGFloat const overlayBottomOffset = 62.f;
     
     [self configureBorders];
     [self configureCornerLines];
+    [self configureCornerButtons];
+    [self configureGestureRecognizers];
+    
+    [self enableManualMode:NO];
 }
 
 - (void)setState:(PRSCameraOverlayState)state {
@@ -59,9 +77,14 @@ static CGFloat const overlayBottomOffset = 62.f;
     [self updateCornerLinesSize];
 }
 
+- (void)enableManualMode:(BOOL)enable {
+    self.topCornerButton.hidden = !enable;
+    self.bottomCornerButton.hidden = !enable;
+}
+
 #pragma mark - Configure
 - (void)configureBorders {
-    for (UIView *borderView in self.overlayBorderViews) {
+    for (UIView *borderView in @[self.leftBorderView, self.topBorderView, self.rightBorderView, self.bottomBorderView]) {
         borderView.backgroundColor = [[UIColor prsBlackTextColor] colorWithAlphaComponent:0.6f];
     }
 }
@@ -69,6 +92,57 @@ static CGFloat const overlayBottomOffset = 62.f;
 - (void)configureCornerLines {
     UIColor *color = [self cornerColorForCurrentState];
     [self changeCornerLinesColor:color animated:NO];
+}
+
+- (void)configureCornerButtons {
+    for (UIButton *button in @[self.topCornerButton, self.bottomCornerButton]) {
+        [button setPinkRoundedStyle];
+    }
+}
+
+- (void)configureGestureRecognizers {
+    UIPanGestureRecognizer *panGestureForTopButton = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panTopLeftButton:)];
+    [self.topCornerButton addGestureRecognizer:panGestureForTopButton];
+    
+    UIPanGestureRecognizer *panGestureForBottomButton = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panBottomRightButton:)];
+    [self.bottomCornerButton addGestureRecognizer:panGestureForBottomButton];
+}
+
+#pragma mark - Actions
+- (void)panTopLeftButton:(UIPanGestureRecognizer *)recognizer {
+    if (recognizer.state == UIGestureRecognizerStateChanged || recognizer.state == UIGestureRecognizerStateEnded) {
+        CGPoint translation = [recognizer translationInView:self];
+        
+        if (self.leftViewWidth.constant + translation.x + self.rightViewWidth.constant < self.bounds.size.width - borderMinSize) {
+            self.leftViewWidth.constant += translation.x;
+        }
+        if (self.topViewHeight.constant + translation.y + self.bottomViewHeight.constant < self.bounds.size.height - borderMinSize) {
+            self.topViewHeight.constant += translation.y;
+        }
+        
+        [recognizer setTranslation:CGPointZero inView:self];
+        if ([self.delegate respondsToSelector:@selector(borderDidChange:)]) {
+            [self.delegate borderDidChange:[self borderFrame]];
+        }
+    }
+}
+
+- (void)panBottomRightButton:(UIPanGestureRecognizer *)recognizer {
+    if (recognizer.state == UIGestureRecognizerStateChanged || recognizer.state == UIGestureRecognizerStateEnded) {
+        CGPoint translation = [recognizer translationInView:self];
+        
+        if (self.leftViewWidth.constant - translation.x + self.rightViewWidth.constant < self.bounds.size.width - borderMinSize) {
+            self.rightViewWidth.constant -= translation.x;
+        }
+        if (self.topViewHeight.constant - translation.y + self.bottomViewHeight.constant < self.bounds.size.height - borderMinSize) {
+            self.bottomViewHeight.constant -= translation.y;
+        }
+        
+        [recognizer setTranslation:CGPointZero inView:self];
+        if ([self.delegate respondsToSelector:@selector(borderDidChange:)]) {
+            [self.delegate borderDidChange:[self borderFrame]];
+        }
+    }
 }
 
 #pragma mark - Private Methods
@@ -114,12 +188,22 @@ static CGFloat const overlayBottomOffset = 62.f;
 
 /** Возвращает величину пустого пространства между двумя свернутыми "уголками" по горизонтали */
 - (CGFloat)freeHorizontalSpace {
-    return (self.bounds.size.width - overlayHorizontalOffset * 2 - cornerLineDefaultSize * 2) / 2;
+    return (self.bounds.size.width - self.leftViewWidth.constant - self.rightViewWidth.constant - cornerLineDefaultSize * 2) / 2;
 }
 
 /** Возвращает величину пустого пространства между двумя свернутыми "уголками" по вертикали */
 - (CGFloat)freeVerticalSpace {
-    return (self.bounds.size.height - overlayTopOffset - overlayBottomOffset - cornerLineDefaultSize * 2) / 2;
+    return (self.bounds.size.height - self.topViewHeight.constant - self.bottomViewHeight.constant - cornerLineDefaultSize * 2) / 2;
+}
+
+/** Возвращает прямоугольник, отражающий текущую границу на оверлее, выделенную уголками */
+- (CGRect)borderFrame {
+    CGFloat topOffset = CGRectGetHeight(self.topBorderView.bounds);
+    CGFloat leftOffset = CGRectGetWidth(self.leftBorderView.bounds);
+    return CGRectMake(leftOffset,
+                      topOffset,
+                      self.rightBorderView.frame.origin.x - leftOffset,
+                      self.bottomBorderView.frame.origin.y - topOffset);
 }
 
 @end
