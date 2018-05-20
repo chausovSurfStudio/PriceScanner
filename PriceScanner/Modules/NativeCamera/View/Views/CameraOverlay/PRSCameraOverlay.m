@@ -16,6 +16,7 @@ static CGFloat const cornerLineDefaultSize = 34.f;
 static CGFloat const overlayHorizontalOffset = 16.f;
 static CGFloat const overlayTopOffset = 22.f;
 static CGFloat const overlayBottomOffset = 62.f;
+static CGFloat const borderMinSize = 70.f;
 
 
 @interface PRSCameraOverlay()
@@ -112,8 +113,12 @@ static CGFloat const overlayBottomOffset = 62.f;
     if (recognizer.state == UIGestureRecognizerStateChanged || recognizer.state == UIGestureRecognizerStateEnded) {
         CGPoint translation = [recognizer translationInView:self];
         
-        self.leftViewWidth.constant += translation.x;
-        self.topViewHeight.constant += translation.y;
+        if (self.leftViewWidth.constant + translation.x + self.rightViewWidth.constant < self.bounds.size.width - borderMinSize) {
+            self.leftViewWidth.constant += translation.x;
+        }
+        if (self.topViewHeight.constant + translation.y + self.bottomViewHeight.constant < self.bounds.size.height - borderMinSize) {
+            self.topViewHeight.constant += translation.y;
+        }
         
         [recognizer setTranslation:CGPointZero inView:self];
         if ([self.delegate respondsToSelector:@selector(borderDidChange:)]) {
@@ -126,8 +131,12 @@ static CGFloat const overlayBottomOffset = 62.f;
     if (recognizer.state == UIGestureRecognizerStateChanged || recognizer.state == UIGestureRecognizerStateEnded) {
         CGPoint translation = [recognizer translationInView:self];
         
-        self.rightViewWidth.constant -= translation.x;
-        self.bottomViewHeight.constant -= translation.y;
+        if (self.leftViewWidth.constant - translation.x + self.rightViewWidth.constant < self.bounds.size.width - borderMinSize) {
+            self.rightViewWidth.constant -= translation.x;
+        }
+        if (self.topViewHeight.constant - translation.y + self.bottomViewHeight.constant < self.bounds.size.height - borderMinSize) {
+            self.bottomViewHeight.constant -= translation.y;
+        }
         
         [recognizer setTranslation:CGPointZero inView:self];
         if ([self.delegate respondsToSelector:@selector(borderDidChange:)]) {
