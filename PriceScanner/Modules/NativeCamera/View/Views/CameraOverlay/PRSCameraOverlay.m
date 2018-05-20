@@ -188,12 +188,12 @@ static CGFloat const borderMinSize = 70.f;
 
 /** Возвращает величину пустого пространства между двумя свернутыми "уголками" по горизонтали */
 - (CGFloat)freeHorizontalSpace {
-    return (self.bounds.size.width - overlayHorizontalOffset * 2 - cornerLineDefaultSize * 2) / 2;
+    return (self.bounds.size.width - self.leftViewWidth.constant - self.rightViewWidth.constant - cornerLineDefaultSize * 2) / 2;
 }
 
 /** Возвращает величину пустого пространства между двумя свернутыми "уголками" по вертикали */
 - (CGFloat)freeVerticalSpace {
-    return (self.bounds.size.height - overlayTopOffset - overlayBottomOffset - cornerLineDefaultSize * 2) / 2;
+    return (self.bounds.size.height - self.topViewHeight.constant - self.bottomViewHeight.constant - cornerLineDefaultSize * 2) / 2;
 }
 
 /** Возвращает прямоугольник, отражающий текущую границу на оверлее, выделенную уголками */
