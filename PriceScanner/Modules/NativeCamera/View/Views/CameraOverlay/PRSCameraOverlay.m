@@ -20,7 +20,11 @@ static CGFloat const overlayBottomOffset = 62.f;
 
 @interface PRSCameraOverlay()
 
-@property (nonatomic, strong) IBOutletCollection(UIView) NSArray *overlayBorderViews;
+@property (nonatomic, strong) IBOutlet UIView *leftBorderView;
+@property (nonatomic, strong) IBOutlet UIView *topBorderView;
+@property (nonatomic, strong) IBOutlet UIView *rightBorderView;
+@property (nonatomic, strong) IBOutlet UIView *bottomBorderView;
+
 @property (nonatomic, strong) IBOutletCollection(UIView) NSArray *verticalCornerLines;
 @property (nonatomic, strong) IBOutletCollection(UIView) NSArray *horizontalCornerLines;
 
@@ -79,7 +83,7 @@ static CGFloat const overlayBottomOffset = 62.f;
 
 #pragma mark - Configure
 - (void)configureBorders {
-    for (UIView *borderView in self.overlayBorderViews) {
+    for (UIView *borderView in @[self.leftBorderView, self.topBorderView, self.rightBorderView, self.bottomBorderView]) {
         borderView.backgroundColor = [[UIColor prsBlackTextColor] colorWithAlphaComponent:0.6f];
     }
 }
@@ -112,6 +116,9 @@ static CGFloat const overlayBottomOffset = 62.f;
         self.topViewHeight.constant += translation.y;
         
         [recognizer setTranslation:CGPointZero inView:self];
+        if ([self.delegate respondsToSelector:@selector(borderDidChange:)]) {
+            [self.delegate borderDidChange:[self borderFrame]];
+        }
     }
 }
 
@@ -123,6 +130,9 @@ static CGFloat const overlayBottomOffset = 62.f;
         self.bottomViewHeight.constant -= translation.y;
         
         [recognizer setTranslation:CGPointZero inView:self];
+        if ([self.delegate respondsToSelector:@selector(borderDidChange:)]) {
+            [self.delegate borderDidChange:[self borderFrame]];
+        }
     }
 }
 
@@ -175,6 +185,16 @@ static CGFloat const overlayBottomOffset = 62.f;
 /** Возвращает величину пустого пространства между двумя свернутыми "уголками" по вертикали */
 - (CGFloat)freeVerticalSpace {
     return (self.bounds.size.height - overlayTopOffset - overlayBottomOffset - cornerLineDefaultSize * 2) / 2;
+}
+
+/** Возвращает прямоугольник, отражающий текущую границу на оверлее, выделенную уголками */
+- (CGRect)borderFrame {
+    CGFloat topOffset = CGRectGetHeight(self.topBorderView.bounds);
+    CGFloat leftOffset = CGRectGetWidth(self.leftBorderView.bounds);
+    return CGRectMake(leftOffset,
+                      topOffset,
+                      self.rightBorderView.frame.origin.x - leftOffset,
+                      self.bottomBorderView.frame.origin.y - topOffset);
 }
 
 @end

@@ -11,16 +11,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PRSCameraOverlay">
             <connections>
+                <outlet property="bottomBorderView" destination="poK-p6-XaH" id="Ktl-7c-xzo"/>
                 <outlet property="bottomCornerButton" destination="5D7-Uc-Dc9" id="8GZ-ie-x1j"/>
                 <outlet property="bottomViewHeight" destination="3hV-yy-oAR" id="xtS-QK-y8j"/>
+                <outlet property="leftBorderView" destination="4F3-of-zTW" id="4EV-iO-gc5"/>
                 <outlet property="leftViewWidth" destination="4EL-Eb-Rhl" id="LsA-Jm-ecC"/>
+                <outlet property="rightBorderView" destination="I4k-pT-IpG" id="Vh1-Pp-M7D"/>
                 <outlet property="rightViewWidth" destination="6gQ-XM-ZmQ" id="QSB-P3-Jdt"/>
+                <outlet property="topBorderView" destination="WYE-XE-mKW" id="Tsr-rV-PNQ"/>
                 <outlet property="topCornerButton" destination="SvD-Mo-7ht" id="JJy-Yj-ZXo"/>
                 <outlet property="topViewHeight" destination="1U6-pg-UId" id="fan-aa-lga"/>
-                <outletCollection property="overlayBorderViews" destination="4F3-of-zTW" id="gCX-7M-FiE"/>
-                <outletCollection property="overlayBorderViews" destination="WYE-XE-mKW" id="IwG-Rs-eGL"/>
-                <outletCollection property="overlayBorderViews" destination="poK-p6-XaH" id="N1H-il-f8L"/>
-                <outletCollection property="overlayBorderViews" destination="I4k-pT-IpG" id="SSd-Jd-olW"/>
                 <outletCollection property="verticalCornerLines" destination="pMv-vr-5Pw" id="KZW-O1-qlc"/>
                 <outletCollection property="horizontalCornerLines" destination="QAM-cs-Ryn" id="kxI-or-Beh"/>
                 <outletCollection property="horizontalCornerLines" destination="pxx-gp-Gqs" id="5ya-Mg-ikA"/>

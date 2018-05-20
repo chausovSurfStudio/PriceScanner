@@ -23,7 +23,7 @@
 #import "UIViewController+ScanUtils.h"
 
 
-@interface PRSManualCameraViewController () <AVCaptureVideoDataOutputSampleBufferDelegate>
+@interface PRSManualCameraViewController () <AVCaptureVideoDataOutputSampleBufferDelegate, PRSCameraOverlayDelegate>
 
 @property (nonatomic, strong) IBOutlet UIImageView *scene;
 @property (nonatomic, strong) IBOutlet UIButton *startScanButton;
@@ -35,7 +35,6 @@
 
 @property (nonatomic, strong) AVCaptureSession *session;
 @property (nonatomic, strong) VNDetectTextRectanglesRequest *textDetectRequest;
-@property (nonatomic, strong) VNDetectRectanglesRequest *rectangleRequest;
 @property (nonatomic, strong) NSArray<VNCoreMLRequest *> *classificationRequests;
 
 @property (nonatomic, strong) TextModel *model;
@@ -84,7 +83,6 @@
     [self configureStyle];
     [self configureTextDetectRequest];
     [self configureClassificationRequest];
-    [self configureRectangleRequest];
     [self configureScanTimer];
     [self configureScanner];
     [self configureOverlay];
@@ -144,16 +142,6 @@
     self.classificationRequests = @[request];
 }
 
-- (void)configureRectangleRequest {
-    @weakify(self);
-    VNDetectRectanglesRequest *rectangleRequest = [[VNDetectRectanglesRequest alloc] initWithCompletionHandler:^(VNRequest * _Nonnull request, NSError * _Nullable error) {
-        @strongify(self);
-        [self handleRectangleRequest:request];
-    }];
-    rectangleRequest.minimumSize = 0.3;
-    self.rectangleRequest = rectangleRequest;
-}
-
 - (void)configureScanTimer {
     self.scanTimer = [PRSScanTimer new];
 }
@@ -164,6 +152,7 @@
 
 - (void)configureOverlay {
     [self.overlay enableManualMode:YES];
+    self.overlay.delegate = self;
 }
 
 #pragma mark - VNRequest Handlers
@@ -248,22 +237,6 @@
     }
 }
 
-- (void)handleRectangleRequest:(VNRequest *)request {
-    NSArray<VNRectangleObservation *> *results = request.results;
-    VNRectangleObservation *rectangle = results.firstObject;
-    if (!rectangle) {
-        return;
-    }
-    CGRect region = [self regionOfInterestFromRectObservation:rectangle];
-    if (CGRectEqualToRect(region, CGRectMake(0, 0, 1, 1))) {
-        return;
-    }
-    self.textDetectRequest.regionOfInterest = region;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self highlightRect:rectangle inScene:self.scene];
-    });
-}
-
 #pragma mark - Actions
 - (IBAction)tapOnStartScanButton:(UIButton *)sender {
     self.scanTimer.state = PRSScanTimerStateActive;
@@ -322,7 +295,7 @@
 - (void)captureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
     if (self.scanTimer.state == PRSScanTimerStateActive) {
         UIImage *rawSnapshot = [UIImage imageFromSampleBuffer:sampleBuffer];
-        self.snapshot = [rawSnapshot resizedImage:rawSnapshot.size interpolationQuality:kCGInterpolationHigh];
+        self.snapshot = [rawSnapshot resizedImage:rawSnapshot.size interpolationQuality:kCGInterpolationHigh];        
         self.scanTimer.state = PRSScanTimerStateSnapshot;
     }
     
@@ -333,7 +306,16 @@
         requestOptions = @{VNImageOptionCameraIntrinsics:(__bridge id)camData};
     }
     VNImageRequestHandler *handler = [[VNImageRequestHandler alloc] initWithCVPixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationRight options:requestOptions];
-    [handler performRequests:@[self.rectangleRequest, self.textDetectRequest] error:nil];
+    [handler performRequests:@[self.textDetectRequest] error:nil];
+}
+
+#pragma mark - PRSCameraOverlayDelegate
+- (void)borderDidChange:(CGRect)borderRect {
+    CGRect regionOfInterest = CGRectMake(borderRect.origin.x / [UIScreen mainScreen].bounds.size.width,
+                                         borderRect.origin.y / [UIScreen mainScreen].bounds.size.height,
+                                         borderRect.size.width / [UIScreen mainScreen].bounds.size.width,
+                                         borderRect.size.height / [UIScreen mainScreen].bounds.size.height);
+    self.textDetectRequest.regionOfInterest = regionOfInterest;
 }
 
 #pragma mark - Private logic

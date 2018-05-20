@@ -18,7 +18,17 @@ typedef NS_OPTIONS(NSUInteger, PRSCameraOverlayState) {
 };
 
 
+@protocol PRSCameraOverlayDelegate <NSObject>
+
+/** Метод вызывается при изменении границ на оверлее вручную */
+- (void)borderDidChange:(CGRect)borderRect;
+
+@end
+
+
 @interface PRSCameraOverlay : PRSDesignableView
+
+@property (nonatomic, weak) id<PRSCameraOverlayDelegate> delegate;
 
 /** Текущее состояния оверлея, при изменении - "уголки" будут анимированно менять цвет */
 @property (nonatomic, assign) PRSCameraOverlayState state;
