@@ -7,6 +7,7 @@
 //
 
 #import "PRSCameraOverlay.h"
+#import "UIButton+Style.h"
 
 
 static CGFloat const cornerColorAnimationDuration = 0.3f;
@@ -23,8 +24,16 @@ static CGFloat const overlayBottomOffset = 62.f;
 @property (nonatomic, strong) IBOutletCollection(UIView) NSArray *verticalCornerLines;
 @property (nonatomic, strong) IBOutletCollection(UIView) NSArray *horizontalCornerLines;
 
-@property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *verticalCornerLineHeights;
-@property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *horizontalCornerLineWidths;
+@property (nonatomic, strong) IBOutletCollection(NSLayoutConstraint) NSArray *verticalCornerLineHeights;
+@property (nonatomic, strong) IBOutletCollection(NSLayoutConstraint) NSArray *horizontalCornerLineWidths;
+
+@property (nonatomic, strong) IBOutlet UIButton *topCornerButton;
+@property (nonatomic, strong) IBOutlet UIButton *bottomCornerButton;
+
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *topViewHeight;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *bottomViewHeight;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *leftViewWidth;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *rightViewWidth;
 
 @end
 
@@ -38,6 +47,8 @@ static CGFloat const overlayBottomOffset = 62.f;
     
     [self configureBorders];
     [self configureCornerLines];
+    [self configureCornerButtons];
+    [self configureGestureRecognizers];
 }
 
 - (void)setState:(PRSCameraOverlayState)state {
@@ -69,6 +80,43 @@ static CGFloat const overlayBottomOffset = 62.f;
 - (void)configureCornerLines {
     UIColor *color = [self cornerColorForCurrentState];
     [self changeCornerLinesColor:color animated:NO];
+}
+
+- (void)configureCornerButtons {
+    for (UIButton *button in @[self.topCornerButton, self.bottomCornerButton]) {
+        [button setPinkRoundedStyle];
+    }
+}
+
+- (void)configureGestureRecognizers {
+    UIPanGestureRecognizer *panGestureForTopButton = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panTopLeftButton:)];
+    [self.topCornerButton addGestureRecognizer:panGestureForTopButton];
+    
+    UIPanGestureRecognizer *panGestureForBottomButton = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panBottomRightButton:)];
+    [self.bottomCornerButton addGestureRecognizer:panGestureForBottomButton];
+}
+
+#pragma mark - Actions
+- (void)panTopLeftButton:(UIPanGestureRecognizer *)recognizer {
+    if (recognizer.state == UIGestureRecognizerStateChanged || recognizer.state == UIGestureRecognizerStateEnded) {
+        CGPoint translation = [recognizer translationInView:self];
+        
+        self.leftViewWidth.constant += translation.x;
+        self.topViewHeight.constant += translation.y;
+        
+        [recognizer setTranslation:CGPointZero inView:self];
+    }
+}
+
+- (void)panBottomRightButton:(UIPanGestureRecognizer *)recognizer {
+    if (recognizer.state == UIGestureRecognizerStateChanged || recognizer.state == UIGestureRecognizerStateEnded) {
+        CGPoint translation = [recognizer translationInView:self];
+        
+        self.rightViewWidth.constant -= translation.x;
+        self.bottomViewHeight.constant -= translation.y;
+        
+        [recognizer setTranslation:CGPointZero inView:self];
+    }
 }
 
 #pragma mark - Private Methods

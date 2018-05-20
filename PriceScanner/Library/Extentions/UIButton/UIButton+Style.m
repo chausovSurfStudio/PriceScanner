@@ -7,6 +7,7 @@
 //
 
 #import "UIButton+Style.h"
+#import "UIImage+Additions.h"
 
 
 @implementation UIButton (Style)
@@ -40,6 +41,16 @@
     
     self.titleLabel.textAlignment = NSTextAlignmentLeft;
     [self setTitleEdgeInsets:UIEdgeInsetsMake(0.f, 16.f, 0.f, 0.f)];
+}
+
+- (void)setPinkRoundedStyle {
+    [self setBackgroundColor:[UIColor clearColor]];
+    [self setBackgroundImage:[UIImage imageWithColor:[UIColor prsMainThemeColor]] forState:UIControlStateNormal];
+    [self setBackgroundImage:[UIImage imageWithColor:[[UIColor prsMainThemeColor] colorWithAlphaComponent:0.85f]] forState:UIControlStateSelected];
+    [self setBackgroundImage:[UIImage imageWithColor:[[UIColor prsMainThemeColor] colorWithAlphaComponent:0.85f]] forState:UIControlStateHighlighted];
+    
+    self.layer.cornerRadius = self.bounds.size.height / 2;
+    self.layer.masksToBounds = YES;
 }
 
 @end
