@@ -49,6 +49,8 @@ static CGFloat const overlayBottomOffset = 62.f;
     [self configureCornerLines];
     [self configureCornerButtons];
     [self configureGestureRecognizers];
+    
+    [self enableManualMode:NO];
 }
 
 - (void)setState:(PRSCameraOverlayState)state {
@@ -68,6 +70,11 @@ static CGFloat const overlayBottomOffset = 62.f;
     }
     _progress = progress;
     [self updateCornerLinesSize];
+}
+
+- (void)enableManualMode:(BOOL)enable {
+    self.topCornerButton.hidden = !enable;
+    self.bottomCornerButton.hidden = !enable;
 }
 
 #pragma mark - Configure

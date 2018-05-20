@@ -25,4 +25,7 @@ typedef NS_OPTIONS(NSUInteger, PRSCameraOverlayState) {
 /** Значение от 0 до 1, характеризует текущий прогресс некоего действия. При установке чего-то вне границ [0,1] - будет выставлено ближайшее граничное значение*/
 @property (nonatomic, assign) CGFloat progress;
 
+/** Метод позволяет включить или выключить ручной режим изменений границы оверлея */
+- (void)enableManualMode:(BOOL)enable;
+
 @end
