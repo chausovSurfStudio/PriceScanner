@@ -66,6 +66,7 @@
 		844BCCDF20ADF64300563FED /* PRSScannerPrediction.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCDE20ADF64300563FED /* PRSScannerPrediction.m */; };
 		844BCCE220B1D67500563FED /* UIImage+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCE120B1D67500563FED /* UIImage+Additions.m */; };
 		844BCCE520B2B64C00563FED /* PRSPredictor.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCE420B2B64C00563FED /* PRSPredictor.m */; };
+		844BCCE920B2BDFA00563FED /* PRSSyntaxAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCE820B2BDFA00563FED /* PRSSyntaxAnalyzer.m */; };
 		84555754209F265A00B01D91 /* PRSModalNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555753209F265A00B01D91 /* PRSModalNavigationController.m */; };
 		84555759209F3C6A00B01D91 /* PRSMainCarouselAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555758209F3C6A00B01D91 /* PRSMainCarouselAdapter.m */; };
 		8455575D209F41BD00B01D91 /* PRSMainCarouselCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455575B209F41BD00B01D91 /* PRSMainCarouselCell.m */; };
@@ -238,6 +239,8 @@
 		844BCCE120B1D67500563FED /* UIImage+Additions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Additions.m"; sourceTree = "<group>"; };
 		844BCCE320B2B64C00563FED /* PRSPredictor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSPredictor.h; sourceTree = "<group>"; };
 		844BCCE420B2B64C00563FED /* PRSPredictor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSPredictor.m; sourceTree = "<group>"; };
+		844BCCE720B2BDFA00563FED /* PRSSyntaxAnalyzer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSSyntaxAnalyzer.h; sourceTree = "<group>"; };
+		844BCCE820B2BDFA00563FED /* PRSSyntaxAnalyzer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSSyntaxAnalyzer.m; sourceTree = "<group>"; };
 		84555752209F265A00B01D91 /* PRSModalNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSModalNavigationController.h; sourceTree = "<group>"; };
 		84555753209F265A00B01D91 /* PRSModalNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSModalNavigationController.m; sourceTree = "<group>"; };
 		84555757209F3C6A00B01D91 /* PRSMainCarouselAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSMainCarouselAdapter.h; sourceTree = "<group>"; };
@@ -757,6 +760,7 @@
 			isa = PBXGroup;
 			children = (
 				844BCCC620AAE14000563FED /* Scanner */,
+				844BCCE620B2BDD800563FED /* SyntaxAnalyzer */,
 				844BCCC720AAE14500563FED /* Timer */,
 			);
 			path = Helpers;
@@ -797,6 +801,15 @@
 				844BCCD820AD6EFA00563FED /* PRSScanPreviewModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		844BCCE620B2BDD800563FED /* SyntaxAnalyzer */ = {
+			isa = PBXGroup;
+			children = (
+				844BCCE720B2BDFA00563FED /* PRSSyntaxAnalyzer.h */,
+				844BCCE820B2BDFA00563FED /* PRSSyntaxAnalyzer.m */,
+			);
+			path = SyntaxAnalyzer;
 			sourceTree = "<group>";
 		};
 		84555755209F3B8F00B01D91 /* CarouselAdapter */ = {
@@ -1553,6 +1566,7 @@
 				84B91BD020A9B2B300C4B23F /* PRSCameraOverlay.m in Sources */,
 				8455578D20A32DE700B01D91 /* UILabel+Additions.m in Sources */,
 				0830ECE53B12B3AC6219215B /* PRSHistoryConfigurator.m in Sources */,
+				844BCCE920B2BDFA00563FED /* PRSSyntaxAnalyzer.m in Sources */,
 				84555771209F9F8000B01D91 /* PRSScanResultEntry.m in Sources */,
 				84555759209F3C6A00B01D91 /* PRSMainCarouselAdapter.m in Sources */,
 				844BCCDF20ADF64300563FED /* PRSScannerPrediction.m in Sources */,

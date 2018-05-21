@@ -15,6 +15,7 @@
 #import "PRSCameraOverlay.h"
 #import "PRSScanTimer.h"
 #import "PRSScanner.h"
+#import "PRSSyntaxAnalyzer.h"
 #import "TextModel.h"
 
 #import "UIButton+Style.h"
@@ -44,6 +45,7 @@
 @property (nonatomic, strong) UIImage *snapshot;
 @property (nonatomic, strong) PRSScanTimer *scanTimer;
 @property (nonatomic, strong) PRSScanner *scanner;
+@property (nonatomic, strong) PRSSyntaxAnalyzer *syntaxAnalyzer;
 
 @end
 
@@ -86,6 +88,7 @@
     [self configureRectangleRequest];
     [self configureScanTimer];
     [self configureScanner];
+    [self configureSyntaxAnalyzer];
 }
 
 #pragma mark - Configure
@@ -160,6 +163,10 @@
     self.scanner = [PRSScanner new];
 }
 
+- (void)configureSyntaxAnalyzer {
+    self.syntaxAnalyzer = [PRSSyntaxAnalyzer new];
+}
+
 #pragma mark - VNRequest Handlers
 - (void)handleTextDetectRequest:(VNRequest *)request {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -204,8 +211,10 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         self.overlay.progress = confidence;
         if (confidence >= 0.99f) {
+            NSString *correctedName = [self.syntaxAnalyzer analyzeProductName:self.scanner.lastPredictedName];
+            NSString *correctedPrice = [self.syntaxAnalyzer analyzeProductPrice:self.scanner.lastPredictedPrice];
             [self.output openScanPreviewModuleWithName:self.scanner.lastPredictedName
-                                                 price:self.scanner.lastPredictedPrice
+                                                 price:correctedPrice
                                                  photo:self.snapshot];
             [self showStartScanButton];
             self.overlay.state = PRSCameraOverlayStateWaiting;
