@@ -11,9 +11,8 @@
 #import "PRSScanSessionManager.h"
 #import "PRSSingleScanSession.h"
 #import "PRSCharDetectResult.h"
+#import "PRSPredictor.h"
 #import "PRSScannerPrediction.h"
-
-#import "PRSScanner+Support.h"
 
 
 /** В данном перечислении объявлены возможные состояния сканера */
@@ -32,6 +31,7 @@ typedef NS_OPTIONS(NSUInteger, PRSScannerState) {
 @property (nonatomic, assign) PRSScannerState state;
 @property (nonatomic, strong) PRSCharDetectResult *scanResultBuffer;
 @property (nonatomic, strong) PRSScanSessionManager *sessionManager;
+@property (nonatomic, strong) PRSPredictor *predictor;
 
 @property (nonatomic, strong) NSString *lastPredictedName;
 @property (nonatomic, strong) NSString *lastPredictedPrice;
@@ -45,6 +45,7 @@ typedef NS_OPTIONS(NSUInteger, PRSScannerState) {
     self = [super init];
     if (self) {
         self.sessionManager = [PRSScanSessionManager new];
+        self.predictor = [PRSPredictor new];
         self.state = PRSScannerStateDisable;
         self.scanResultBuffer = nil;
         self.lastPredictedName = nil;
@@ -94,11 +95,9 @@ typedef NS_OPTIONS(NSUInteger, PRSScannerState) {
 #pragma mark - Private Methods
 - (CGFloat)predictResult {
     NSArray<PRSSingleScanSession *> *rawSessions = [self.sessionManager getSessionsForPrediction];
-    NSArray<PRSSingleScanSession *> *sessionsForName = [self selectSessionsForBuildingName:rawSessions];
-    NSArray<PRSSingleScanSession *> *sessionsForPrice = [self selectSessionsForBuildingPrice:rawSessions];
     
-    PRSScannerPrediction *namePrediction = [self predictNameWithSessions:sessionsForName];
-    PRSScannerPrediction *pricePrediction = [self predictPriceWithSessions:sessionsForPrice];
+    PRSScannerPrediction *namePrediction = [self.predictor predictNameWithSessions:rawSessions];
+    PRSScannerPrediction *pricePrediction = [self.predictor predictPriceWithSessions:rawSessions];
     
     self.lastPredictedName = namePrediction.prediction;
     self.lastPredictedPrice = pricePrediction.prediction;
