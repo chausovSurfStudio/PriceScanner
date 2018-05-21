@@ -208,7 +208,7 @@
         if (confidence >= 0.99f) {
             NSString *correctedName = [self.syntaxAnalyzer analyzeProductName:self.scanner.lastPredictedName];
             NSString *correctedPrice = [self.syntaxAnalyzer analyzeProductPrice:self.scanner.lastPredictedPrice];
-            [self.output openScanPreviewModuleWithName:self.scanner.lastPredictedName
+            [self.output openScanPreviewModuleWithName:correctedName
                                                  price:correctedPrice
                                                  photo:self.snapshot];
             [self showStartScanButton];

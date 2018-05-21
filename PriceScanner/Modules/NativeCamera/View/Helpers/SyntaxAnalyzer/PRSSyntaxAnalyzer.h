@@ -11,10 +11,10 @@
 
 @interface PRSSyntaxAnalyzer : NSObject
 
-/**  */
+/** Метод проводит синтаксический анализ строки, принимая ее как название товара, и возвращает отредактированный вариант */
 - (NSString *)analyzeProductName:(NSString *)productName;
 
-/**  */
+/** Метод проводит синтаксический анализ строки, принимая ее как цену товара, и возвращает отредактированный вариант */
 - (NSString *)analyzeProductPrice:(NSString *)productPrice;
 
 @end

@@ -13,9 +13,6 @@
 static CGFloat const cornerColorAnimationDuration = 0.3f;
 static CGFloat const cornerSizeAnimationDuration = 0.15f;
 static CGFloat const cornerLineDefaultSize = 34.f;
-static CGFloat const overlayHorizontalOffset = 16.f;
-static CGFloat const overlayTopOffset = 22.f;
-static CGFloat const overlayBottomOffset = 62.f;
 static CGFloat const borderMinSize = 70.f;
 
 
