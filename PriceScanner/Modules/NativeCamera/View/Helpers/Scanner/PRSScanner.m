@@ -102,8 +102,8 @@ typedef NS_OPTIONS(NSUInteger, PRSScannerState) {
     self.lastPredictedName = namePrediction.prediction;
     self.lastPredictedPrice = pricePrediction.prediction;
     
-    NSLog(@"NAME PREDICTION = %@", self.lastPredictedName);
-    NSLog(@"PRICE PREDICTION = %@", self.lastPredictedPrice);
+//    NSLog(@"NAME PREDICTION = %@", self.lastPredictedName);
+//    NSLog(@"PRICE PREDICTION = %@", self.lastPredictedPrice);
     
     return 0.5 * namePrediction.confidence + 0.5 * pricePrediction.confidence;
 }

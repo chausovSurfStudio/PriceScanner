@@ -44,6 +44,18 @@
 }
 
 - (NSArray<PRSSingleScanSession *> *)getSessionsForPrediction {
+    PRSSingleScanSession *lastSession = self.sessions.lastObject;
+    if (lastSession) {
+        NSLog(@"--- кол-во слов в названии %ld", lastSession.nameWords.count);
+        NSLog(@"--- кол-во слов в цене %ld", lastSession.priceWords.count);
+        [lastSession.nameWords enumerateObjectsUsingBlock:^(NSMutableArray<PRSCharDetectResult *> * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSLog(@"--- название, в слове %ld букв %ld", idx, obj.count);
+        }];
+        [lastSession.priceWords enumerateObjectsUsingBlock:^(NSMutableArray<PRSCharDetectResult *> * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSLog(@"--- цена в слове %ld букв %ld", idx, obj.count);
+        }];
+    }
+
     return [self.sessions copy];
 }
 

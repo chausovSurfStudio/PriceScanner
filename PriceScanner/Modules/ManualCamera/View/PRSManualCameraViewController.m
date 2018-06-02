@@ -46,6 +46,14 @@
 @property (nonatomic, strong) PRSScanner *scanner;
 @property (nonatomic, strong) PRSSyntaxAnalyzer *syntaxAnalyzer;
 
+@property (nonatomic, strong) NSDate *beginDate;
+@property (nonatomic, strong) NSDate *startDate;
+
+@property (nonatomic, strong) NSMutableArray<NSNumber *> *symboldDetectedTimes;
+@property (nonatomic, strong) NSMutableArray<NSNumber *> *mlProcessingTimes;
+@property (nonatomic, strong) NSMutableArray<NSNumber *> *predictTimes;
+@property (nonatomic, strong) NSMutableArray<NSNumber *> *cycleTimes;
+
 @end
 
 
@@ -54,6 +62,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.output viewLoaded];
+
+    self.symboldDetectedTimes = [@[] mutableCopy];
+    self.mlProcessingTimes = [@[] mutableCopy];
+    self.predictTimes = [@[] mutableCopy];
+    self.cycleTimes = [@[] mutableCopy];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -164,6 +177,13 @@
 
 #pragma mark - VNRequest Handlers
 - (void)handleTextDetectRequest:(VNRequest *)request {
+    if (self.scanTimer.state == PRSScanTimerStateSnapshot) {
+        NSDate *date = [NSDate date];
+        NSTimeInterval interval = [date timeIntervalSinceDate:self.startDate];
+        NSLog(@"-------------------------------------------------------------");
+        NSLog(@"время определения символов = %f", interval);
+        [self.symboldDetectedTimes addObject:@(interval)];
+    }
     dispatch_async(dispatch_get_main_queue(), ^{
         [self clearSceneSublayers];
         for (VNTextObservation *word in request.results) {
@@ -188,7 +208,9 @@
 - (void)scanTextFromRequest:(VNRequest *)request {
     self.scanTimer.state = PRSScanTimerStateScanning;
     [self.scanner enableScannerWithRegion:self.textDetectRequest.regionOfInterest];
-    
+
+    NSDate *someStartDate = [NSDate date];
+
     for (VNTextObservation *word in request.results) {
         for (VNRectangleObservation *characterBox in word.characterBoxes) {
             [self.scanner prepareForCharBoxScan:characterBox];
@@ -197,8 +219,20 @@
             [letterHandler performRequests:self.classificationRequests error:nil];
         }
     }
+
+    NSDate *someEndDate = [NSDate date];
+    NSTimeInterval interval = [someEndDate timeIntervalSinceDate:someStartDate];
+    NSLog(@"время обработки в ML = %f", interval);
+    [self.mlProcessingTimes addObject:@(interval)];
+    someStartDate = [NSDate date];
     
     CGFloat confidence = [self.scanner scanProgress];
+
+    someEndDate = [NSDate date];
+    interval = [someEndDate timeIntervalSinceDate:someStartDate];
+    NSLog(@"время вынесения предсказания = %f", interval);
+    [self.predictTimes addObject:@(interval)];
+
     [self completeTextScanWithResultConfidence:confidence];
 }
 
@@ -206,8 +240,24 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         self.overlay.progress = confidence;
         if (confidence >= 0.99f) {
+            NSDate *someStartDate = [NSDate date];
+
             NSString *correctedName = [self.syntaxAnalyzer analyzeProductName:self.scanner.lastPredictedName];
             NSString *correctedPrice = [self.syntaxAnalyzer analyzeProductPrice:self.scanner.lastPredictedPrice];
+
+            NSDate *someEndDate = [NSDate date];
+            NSTimeInterval interval = [someEndDate timeIntervalSinceDate:someStartDate];
+            NSLog(@"время синтаксического анализа = %f", interval);
+
+            interval = [someEndDate timeIntervalSinceDate:self.beginDate];
+            NSLog(@"РАСПОЗНАНО ЗА = %f", interval);
+            NSLog(@"--------------------------------------------------------------");
+            [self printTimes:self.symboldDetectedTimes withTitle:@"Время распознавания символов"];
+            [self printTimes:self.mlProcessingTimes withTitle:@"Время обработки в ML"];
+            [self printTimes:self.predictTimes withTitle:@"Время вынесения предсказания"];
+            [self printTimes:self.cycleTimes withTitle:@"Время одного цикла"];
+            NSLog(@"--------------------------------------------------------------");
+
             [self.output openScanPreviewModuleWithName:correctedName
                                                  price:correctedPrice
                                                  photo:self.snapshot];
@@ -216,6 +266,12 @@
             [self.overlay enableManualMode:YES];
         }
     });
+
+    NSDate *someEndDate = [NSDate date];
+    NSTimeInterval interval = [someEndDate timeIntervalSinceDate:self.startDate];
+    NSLog(@"время одного цикла = %f", interval);
+    [self.cycleTimes addObject:@(interval)];
+
     if (confidence >= 0.99f) {
         self.scanTimer.state = PRSScanTimerStateDisable;
         [self.scanner disableScanner];
@@ -248,6 +304,7 @@
 
 #pragma mark - Actions
 - (IBAction)tapOnStartScanButton:(UIButton *)sender {
+    self.beginDate = [NSDate date];
     self.scanTimer.state = PRSScanTimerStateActive;
     self.overlay.state = PRSCameraOverlayStateActive;
     [self showScanInProgressView];
@@ -315,6 +372,10 @@
         requestOptions = @{VNImageOptionCameraIntrinsics:(__bridge id)camData};
     }
     VNImageRequestHandler *handler = [[VNImageRequestHandler alloc] initWithCVPixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationRight options:requestOptions];
+
+    if (self.scanTimer.state == PRSScanTimerStateSnapshot) {
+        self.startDate = [NSDate date];
+    }
     [handler performRequests:@[self.textDetectRequest] error:nil];
 }
 
@@ -359,6 +420,13 @@
     self.startScanButton.alpha = 1.f;
     self.startScanButton.hidden = NO;
     self.scanInProgressView.hidden = YES;
+}
+
+- (void)printTimes:(NSArray<NSNumber *> *)times withTitle:(NSString *)title {
+    NSLog(@"***** %@ ******", title);
+    [times enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSLog(@"%@", obj);
+    }];
 }
 
 @end
