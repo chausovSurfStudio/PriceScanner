@@ -449,7 +449,6 @@
 				1858169A2042AF43003C2FA9 /* Modules */,
 				185816A42042B002003C2FA9 /* Resourses */,
 				84555769209F9ECD00B01D91 /* Services */,
-				84B91BBE20A9625500C4B23F /* ThirdParty */,
 			);
 			path = PriceScanner;
 			sourceTree = "<group>";
@@ -997,13 +996,6 @@
 			children = (
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		84B91BBE20A9625500C4B23F /* ThirdParty */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ThirdParty;
 			sourceTree = "<group>";
 		};
 		84B91BC220A97A8200C4B23F /* UIViewController */ = {
