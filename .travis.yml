@@ -1,4 +1,7 @@
 language: objective-c
-os: osx
-osx_image: xcode9.3
-script: xcodebuild -workspace PriceScanner.xcworkspace -scheme PriceScanner CODE_SIGNING_REQUIRED=NO
+osx_image: xcode10
+before_install:
+  - gem install xcpretty -N
+  - pod install
+script:
+  - xctool clean build -workspace PriceScanner.xcworkspace -scheme PriceScanner -sdk iphonesimulator | xcpretty
