@@ -4,4 +4,4 @@ before_install:
   - gem install xcpretty -N
   - pod install
 script:
-  - xctool clean build -workspace PriceScanner.xcworkspace -scheme PriceScanner -sdk iphonesimulator | xcpretty
+  - xctool build -workspace PriceScanner.xcworkspace -scheme PriceScanner -sdk iphonesimulator | xcpretty
