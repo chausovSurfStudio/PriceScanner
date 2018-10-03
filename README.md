@@ -1,3 +1,8 @@
+[![Build Status](https://travis-ci.com/chausovSurfStudio/PriceScanner.svg?branch=master)](https://travis-ci.com/chausovSurfStudio/PriceScanner)
+[![Platform](https://img.shields.io/badge/Platform-iOS-red.svg)](https://developer.apple.com/iphone/)
+[![Objective-C](https://img.shields.io/badge/language-objective--c-orange.svg)](https://developer.apple.com/swift/)
+[![codebeat badge](https://codebeat.co/badges/0c473649-7cea-4319-960a-6075243fe8c9)](https://codebeat.co/projects/github-com-chausovsurfstudio-pricescanner-master)
+
 # PriseScanner
 iOS Приложение для распознавания названия и цены товара на ценнике.
 
