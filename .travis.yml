@@ -4,4 +4,5 @@ before_install:
   - gem install xcpretty -N
   - pod install
 script:
-  - xctool -workspace PriceScanner.xcworkspace -scheme PriceScanner -sdk iphonesimulator | xcpretty
+  - xctool -workspace PriceScanner.xcworkspace -sdk iphonesimulator | xcpretty
+  - xcodebuild test -workspace PriceScanner.xcworkspace -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.4' | xcpretty
