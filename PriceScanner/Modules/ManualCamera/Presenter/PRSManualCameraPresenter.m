@@ -31,12 +31,9 @@
     [self.view setupInitialState];
 }
 
-- (void)openScanPreviewModule {
+- (void)openScanPreviewModuleWithName:(NSString *)name price:(NSString *)price photo:(UIImage *)photo {
     if (self.openPreviewAction) {
-        // TODO: тестовый код, удалить позднее
-        UIImage *photo = [UIImage imageNamed:@"launchScreenBackground"];
-        PRSScanResultEntity *result = [[PRSScanResultEntity alloc] initWithName:@"Шоколадка Аленка" price:@"87 ₽" photoData:UIImagePNGRepresentation(photo)];
-        self.openPreviewAction(result);
+        self.openPreviewAction([[PRSScanResultEntity alloc] initWithName:name price:price photoData:UIImagePNGRepresentation(photo)]);
     }
 }
 

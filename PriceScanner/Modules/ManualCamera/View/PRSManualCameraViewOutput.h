@@ -15,6 +15,6 @@
 - (void)viewLoaded;
 
 /** Метод информирует презентера о том, что необходимо открыть модуль с предпросмотром результатов сканирования */
-- (void)openScanPreviewModule;
+- (void)openScanPreviewModuleWithName:(NSString *)name price:(NSString *)price photo:(UIImage *)photo;
 
 @end

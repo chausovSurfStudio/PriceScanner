@@ -1,0 +1,6 @@
+language: objective-c
+osx_image: xcode10
+before_install:
+  - pod install
+script:
+  - xcodebuild clean build -sdk iphonesimulator -workspace PriceScanner.xcworkspace -scheme PriceScanner CODE_SIGNING_REQUIRED=NO

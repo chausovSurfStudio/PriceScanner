@@ -11,10 +11,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PRSCameraOverlay">
             <connections>
-                <outletCollection property="overlayBorderViews" destination="4F3-of-zTW" id="gCX-7M-FiE"/>
-                <outletCollection property="overlayBorderViews" destination="WYE-XE-mKW" id="IwG-Rs-eGL"/>
-                <outletCollection property="overlayBorderViews" destination="poK-p6-XaH" id="N1H-il-f8L"/>
-                <outletCollection property="overlayBorderViews" destination="I4k-pT-IpG" id="SSd-Jd-olW"/>
+                <outlet property="bottomBorderView" destination="poK-p6-XaH" id="Ktl-7c-xzo"/>
+                <outlet property="bottomCornerButton" destination="5D7-Uc-Dc9" id="8GZ-ie-x1j"/>
+                <outlet property="bottomViewHeight" destination="3hV-yy-oAR" id="xtS-QK-y8j"/>
+                <outlet property="leftBorderView" destination="4F3-of-zTW" id="4EV-iO-gc5"/>
+                <outlet property="leftViewWidth" destination="4EL-Eb-Rhl" id="LsA-Jm-ecC"/>
+                <outlet property="rightBorderView" destination="I4k-pT-IpG" id="Vh1-Pp-M7D"/>
+                <outlet property="rightViewWidth" destination="6gQ-XM-ZmQ" id="QSB-P3-Jdt"/>
+                <outlet property="topBorderView" destination="WYE-XE-mKW" id="Tsr-rV-PNQ"/>
+                <outlet property="topCornerButton" destination="SvD-Mo-7ht" id="JJy-Yj-ZXo"/>
+                <outlet property="topViewHeight" destination="1U6-pg-UId" id="fan-aa-lga"/>
                 <outletCollection property="verticalCornerLines" destination="pMv-vr-5Pw" id="KZW-O1-qlc"/>
                 <outletCollection property="horizontalCornerLines" destination="QAM-cs-Ryn" id="kxI-or-Beh"/>
                 <outletCollection property="horizontalCornerLines" destination="pxx-gp-Gqs" id="5ya-Mg-ikA"/>
@@ -130,6 +136,22 @@
                         <constraint firstAttribute="width" constant="5" id="w4E-Kp-kXh"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SvD-Mo-7ht">
+                    <rect key="frame" x="6" y="12" width="50" height="50"/>
+                    <color key="backgroundColor" red="0.91372549020000005" green="0.15686274510000001" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="3ej-8T-BPW"/>
+                        <constraint firstAttribute="width" constant="50" id="G5h-ct-ylo"/>
+                    </constraints>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5D7-Uc-Dc9">
+                    <rect key="frame" x="264" y="466" width="50" height="50"/>
+                    <color key="backgroundColor" red="0.91372549020000005" green="0.15686274510000001" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="Cai-hD-834"/>
+                        <constraint firstAttribute="height" constant="50" id="u4p-Mz-hIk"/>
+                    </constraints>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
@@ -139,6 +161,7 @@
                 <constraint firstItem="I4k-pT-IpG" firstAttribute="leading" secondItem="ZHF-FG-GdL" secondAttribute="trailing" id="2q2-tV-LRc"/>
                 <constraint firstItem="poK-p6-XaH" firstAttribute="top" secondItem="hjh-52-iAa" secondAttribute="bottom" id="3K2-wL-E46"/>
                 <constraint firstItem="pGZ-Dz-Ixe" firstAttribute="top" secondItem="WYE-XE-mKW" secondAttribute="bottom" id="3ot-IH-TED"/>
+                <constraint firstItem="poK-p6-XaH" firstAttribute="top" secondItem="5D7-Uc-Dc9" secondAttribute="bottom" constant="-10" id="7oE-4q-yUn"/>
                 <constraint firstItem="QAM-cs-Ryn" firstAttribute="top" secondItem="WYE-XE-mKW" secondAttribute="bottom" id="9kJ-bN-yMM"/>
                 <constraint firstItem="I4k-pT-IpG" firstAttribute="top" secondItem="WYE-XE-mKW" secondAttribute="bottom" id="ACt-d8-P4v"/>
                 <constraint firstItem="I4k-pT-IpG" firstAttribute="leading" secondItem="pGZ-Dz-Ixe" secondAttribute="trailing" id="CRk-rp-qbm"/>
@@ -158,8 +181,11 @@
                 <constraint firstItem="I4k-pT-IpG" firstAttribute="leading" secondItem="pxx-gp-Gqs" secondAttribute="trailing" id="pFc-hX-Jzn"/>
                 <constraint firstItem="ok0-lC-hbK" firstAttribute="leading" secondItem="4F3-of-zTW" secondAttribute="trailing" id="pcu-oX-N4n"/>
                 <constraint firstItem="poK-p6-XaH" firstAttribute="top" secondItem="lGo-C4-YqM" secondAttribute="bottom" id="tMY-fV-uD2"/>
+                <constraint firstItem="I4k-pT-IpG" firstAttribute="leading" secondItem="5D7-Uc-Dc9" secondAttribute="trailing" constant="-10" id="u7l-Vh-RKU"/>
                 <constraint firstItem="WYE-XE-mKW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="vMd-du-6dL"/>
+                <constraint firstItem="SvD-Mo-7ht" firstAttribute="top" secondItem="WYE-XE-mKW" secondAttribute="bottom" constant="-10" id="vv9-np-WY1"/>
                 <constraint firstItem="QAM-cs-Ryn" firstAttribute="leading" secondItem="4F3-of-zTW" secondAttribute="trailing" id="xNQ-aC-JQN"/>
+                <constraint firstItem="SvD-Mo-7ht" firstAttribute="leading" secondItem="4F3-of-zTW" secondAttribute="trailing" constant="-10" id="yuk-oO-Fga"/>
                 <constraint firstItem="poK-p6-XaH" firstAttribute="top" secondItem="ZHF-FG-GdL" secondAttribute="bottom" id="zPL-Iw-OcR"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

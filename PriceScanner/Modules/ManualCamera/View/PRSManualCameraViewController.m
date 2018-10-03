@@ -13,13 +13,18 @@
 #import <Vision/Vision.h>
 
 #import "PRSCameraOverlay.h"
+#import "PRSScanTimer.h"
+#import "PRSScanner.h"
+#import "PRSSyntaxAnalyzer.h"
+#import "TextModel.h"
+
 #import "UIButton+Style.h"
 #import "UIImage+Resize.h"
 #import "UIImage+ScanUtils.h"
 #import "UIViewController+ScanUtils.h"
 
 
-@interface PRSManualCameraViewController () <AVCaptureVideoDataOutputSampleBufferDelegate>
+@interface PRSManualCameraViewController () <AVCaptureVideoDataOutputSampleBufferDelegate, PRSCameraOverlayDelegate>
 
 @property (nonatomic, strong) IBOutlet UIImageView *scene;
 @property (nonatomic, strong) IBOutlet UIButton *startScanButton;
@@ -30,7 +35,16 @@
 @property (nonatomic, strong) IBOutlet UILabel *scanInProgressLabel;
 
 @property (nonatomic, strong) AVCaptureSession *session;
-@property (nonatomic, strong) NSArray<VNRequest *> *requests;
+@property (nonatomic, strong) VNDetectTextRectanglesRequest *textDetectRequest;
+@property (nonatomic, strong) NSArray<VNCoreMLRequest *> *classificationRequests;
+
+@property (nonatomic, strong) TextModel *model;
+@property (nonatomic, strong) NSArray<NSString *> *modelOutputs;
+
+@property (nonatomic, strong) UIImage *snapshot;
+@property (nonatomic, strong) PRSScanTimer *scanTimer;
+@property (nonatomic, strong) PRSScanner *scanner;
+@property (nonatomic, strong) PRSSyntaxAnalyzer *syntaxAnalyzer;
 
 @end
 
@@ -51,13 +65,45 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [self stopLiveVideo];
+    [self showStartScanButton];
+    
+    self.scanTimer.state = PRSScanTimerStateDisable;
+    self.overlay.state = PRSCameraOverlayStateWaiting;
+    [self.scanner disableScanner];
+    [self.overlay enableManualMode:YES];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
 
+#pragma mark - PRSNativeCameraViewInput
+- (void)setupInitialState {
+    [self initVideoSession];
+    [self setupModelOutputs];
+    [self configureModel];
+    [self configureStyle];
+    [self configureTextDetectRequest];
+    [self configureClassificationRequest];
+    [self configureScanTimer];
+    [self configureScanner];
+    [self configureOverlay];
+    [self configureSyntaxAnalyzer];
+}
+
 #pragma mark - Configure
+- (void)setupModelOutputs {
+    self.modelOutputs = @[@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9",
+                          @"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M",
+                          @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z",
+                          @"Б", @"Г", @"Д", @"Ж", @"И", @"Й", @"Л", @"П", @"Ф", @"Ц", @"Ч", @"Ш", @"Щ", @"Ъ", @"Ы", @"Ь", @"Э", @"Ю", @"Я"];
+}
+
+- (void)configureModel {
+    NSURL *modelUrl = [[NSBundle mainBundle] URLForResource:@"TextModel" withExtension:@"mlmodelc"];
+    self.model = [[TextModel alloc] initWithContentsOfURL:modelUrl error:nil];
+}
+
 - (void)configureStyle {
     [self configureStartScanButton];
     [self configureScanInProgressView];
@@ -78,17 +124,134 @@
     self.scanInProgressLabel.text = @"Идет сканирование".localized;
 }
 
-#pragma mark - Actions
-- (IBAction)tapOnStartScanButton:(UIButton *)sender {
-    // TODO: тестовый код, поправить позднее
-    [self.output openScanPreviewModule];
+- (void)configureTextDetectRequest {
+    @weakify(self);
+    VNDetectTextRectanglesRequest *textRequest = [[VNDetectTextRectanglesRequest alloc] initWithCompletionHandler:^(VNRequest * _Nonnull request, NSError * _Nullable error) {
+        @strongify(self);
+        [self handleTextDetectRequest:request];
+    }];
+    textRequest.reportCharacterBoxes = YES;
+    self.textDetectRequest = textRequest;
 }
 
-#pragma mark - PRSManualCameraViewInput
-- (void)setupInitialState {
-    [self initVideoSession];
-    [self configureStyle];
-    [self createTextDetectRequest];
+- (void)configureClassificationRequest {
+    VNCoreMLModel *mlModel = [VNCoreMLModel modelForMLModel:self.model.model error:nil];
+    @weakify(self);
+    VNCoreMLRequest *request = [[VNCoreMLRequest alloc] initWithModel:mlModel completionHandler:^(VNRequest * _Nonnull request, NSError * _Nullable error) {
+        @strongify(self);
+        [self handleClassificationRequest:request];
+    }];
+    request.imageCropAndScaleOption = VNImageCropAndScaleOptionScaleFill;
+    self.classificationRequests = @[request];
+}
+
+- (void)configureScanTimer {
+    self.scanTimer = [PRSScanTimer new];
+}
+
+- (void)configureScanner {
+    self.scanner = [PRSScanner new];
+}
+
+- (void)configureOverlay {
+    [self.overlay enableManualMode:YES];
+    self.overlay.delegate = self;
+}
+
+- (void)configureSyntaxAnalyzer {
+    self.syntaxAnalyzer = [PRSSyntaxAnalyzer new];
+}
+
+#pragma mark - VNRequest Handlers
+- (void)handleTextDetectRequest:(VNRequest *)request {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self clearSceneSublayers];
+        for (VNTextObservation *word in request.results) {
+            [self highlightWord:word inScene:self.scene];
+            for (VNRectangleObservation *characterBox in word.characterBoxes) {
+                [self highlightLetter:characterBox inScene:self.scene];
+            }
+        }
+    });
+    
+    if (self.scanTimer.state == PRSScanTimerStateSnapshot) {
+        if (CGRectEqualToRect(self.textDetectRequest.regionOfInterest, CGRectMake(0, 0, 1, 1))) {
+            // прямоугольник не определился, смысла что-то делать дальше нет
+            self.scanTimer.state = PRSScanTimerStateSleep;
+            [self.scanner setupAwaitState];
+            return;
+        }
+        [self scanTextFromRequest:request];
+    }
+}
+
+- (void)scanTextFromRequest:(VNRequest *)request {
+    self.scanTimer.state = PRSScanTimerStateScanning;
+    [self.scanner enableScannerWithRegion:self.textDetectRequest.regionOfInterest];
+    
+    for (VNTextObservation *word in request.results) {
+        for (VNRectangleObservation *characterBox in word.characterBoxes) {
+            [self.scanner prepareForCharBoxScan:characterBox];
+            UIImage *someLetter = [self cropLetter:characterBox fromImage:self.snapshot];
+            VNImageRequestHandler *letterHandler = [[VNImageRequestHandler alloc] initWithCGImage:someLetter.CGImage options:@{}];
+            [letterHandler performRequests:self.classificationRequests error:nil];
+        }
+    }
+    
+    CGFloat confidence = [self.scanner scanProgress];
+    [self completeTextScanWithResultConfidence:confidence];
+}
+
+- (void)completeTextScanWithResultConfidence:(CGFloat)confidence {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.overlay.progress = confidence;
+        if (confidence >= 0.99f) {
+            NSString *correctedName = [self.syntaxAnalyzer analyzeProductName:self.scanner.lastPredictedName];
+            NSString *correctedPrice = [self.syntaxAnalyzer analyzeProductPrice:self.scanner.lastPredictedPrice];
+            [self.output openScanPreviewModuleWithName:correctedName
+                                                 price:correctedPrice
+                                                 photo:self.snapshot];
+            [self showStartScanButton];
+            self.overlay.state = PRSCameraOverlayStateWaiting;
+            [self.overlay enableManualMode:YES];
+        }
+    });
+    if (confidence >= 0.99f) {
+        self.scanTimer.state = PRSScanTimerStateDisable;
+        [self.scanner disableScanner];
+    } else {
+        self.scanTimer.state = PRSScanTimerStateSleep;
+        [self.scanner setupAwaitState];
+    }
+}
+
+- (void)handleClassificationRequest:(VNRequest *)request {
+    NSArray *results = [request.results copy];
+    VNCoreMLFeatureValueObservation *mlObservation = (VNCoreMLFeatureValueObservation *)results.firstObject;
+    
+    NSNumber *confidence = [NSNumber numberWithFloat:0];
+    NSNumber *currentConfidence = [NSNumber numberWithFloat:0];
+    NSInteger outputIndex = NSNotFound;
+    
+    for (int i = 0; i < [mlObservation.featureValue multiArrayValue].count; i++) {
+        currentConfidence = [[mlObservation.featureValue multiArrayValue] objectAtIndexedSubscript:i];
+        if ([currentConfidence floatValue] > [confidence floatValue]){
+            confidence = currentConfidence;
+            outputIndex = i;
+        }
+    }
+    
+    if (outputIndex < self.modelOutputs.count) {
+        [self.scanner completeCharBoxScanWithPrediction:self.modelOutputs[outputIndex] confidence:confidence.floatValue];
+    }
+}
+
+#pragma mark - Actions
+- (IBAction)tapOnStartScanButton:(UIButton *)sender {
+    self.scanTimer.state = PRSScanTimerStateActive;
+    self.overlay.state = PRSCameraOverlayStateActive;
+    [self showScanInProgressView];
+    [self.overlay enableManualMode:NO];
 }
 
 #pragma mark - AVCaptureSession
@@ -139,6 +302,12 @@
 
 #pragma mark - AVCaptureVideoDataOutputSampleBufferDelegate
 - (void)captureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
+    if (self.scanTimer.state == PRSScanTimerStateActive) {
+        UIImage *rawSnapshot = [UIImage imageFromSampleBuffer:sampleBuffer];
+        self.snapshot = [rawSnapshot resizedImage:rawSnapshot.size interpolationQuality:kCGInterpolationHigh];        
+        self.scanTimer.state = PRSScanTimerStateSnapshot;
+    }
+    
     CVImageBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     CFTypeRef camData = CMGetAttachment(sampleBuffer, kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix, nil);
     NSDictionary *requestOptions;
@@ -146,27 +315,19 @@
         requestOptions = @{VNImageOptionCameraIntrinsics:(__bridge id)camData};
     }
     VNImageRequestHandler *handler = [[VNImageRequestHandler alloc] initWithCVPixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationRight options:requestOptions];
-    [handler performRequests:self.requests error:nil];
+    [handler performRequests:@[self.textDetectRequest] error:nil];
+}
+
+#pragma mark - PRSCameraOverlayDelegate
+- (void)borderDidChange:(CGRect)borderRect {
+    CGRect regionOfInterest = CGRectMake(borderRect.origin.x / [UIScreen mainScreen].bounds.size.width,
+                                         borderRect.origin.y / [UIScreen mainScreen].bounds.size.height,
+                                         borderRect.size.width / [UIScreen mainScreen].bounds.size.width,
+                                         borderRect.size.height / [UIScreen mainScreen].bounds.size.height);
+    self.textDetectRequest.regionOfInterest = regionOfInterest;
 }
 
 #pragma mark - Private logic
-/** Метод для создания и сохранения запроса (VNDetectTextRectanglesRequest) на распознавание символов  */
-- (void)createTextDetectRequest {
-    VNDetectTextRectanglesRequest *textRequest = [[VNDetectTextRectanglesRequest alloc] initWithCompletionHandler:^(VNRequest * _Nonnull request, NSError * _Nullable error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self clearSceneSublayers];
-            for (VNTextObservation *word in request.results) {
-                [self highlightWord:word inScene:self.scene];
-                for (VNRectangleObservation *characterBox in word.characterBoxes) {
-                    [self highlightLetter:characterBox inScene:self.scene];
-                }
-            }
-        });
-    }];
-    textRequest.reportCharacterBoxes = YES;
-    self.requests = @[textRequest];
-}
-
 /** Метод удаляет все sublayers на scene, кроме первого, в котором расположен видеопоток */
 - (void)clearSceneSublayers {
     CALayer *videoLayer = self.scene.layer.sublayers.firstObject;

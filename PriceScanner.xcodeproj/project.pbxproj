@@ -55,7 +55,6 @@
 		8435729A2066D41D00AC6E74 /* PRSCameraFlowCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 843572992066D41D00AC6E74 /* PRSCameraFlowCoordinator.m */; };
 		844BCCBA20A9C3A400563FED /* PRSMachineLearningCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 844BCCB920A9C3A400563FED /* PRSMachineLearningCameraViewController.xib */; };
 		844BCCBC20A9C3BA00563FED /* PRSManualCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 844BCCBB20A9C3BA00563FED /* PRSManualCameraViewController.xib */; };
-		844BCCBE20A9E65400563FED /* TextModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCBD20A9E65400563FED /* TextModel.mlmodel */; };
 		844BCCC220AA2BDE00563FED /* PRSScanTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCC120AA2BDE00563FED /* PRSScanTimer.m */; };
 		844BCCC520AADFFE00563FED /* PRSScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCC420AADFFE00563FED /* PRSScanner.m */; };
 		844BCCCA20AAE16100563FED /* PRSCharDetectResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCC920AAE16100563FED /* PRSCharDetectResult.m */; };
@@ -63,8 +62,10 @@
 		844BCCD320AAF3F100563FED /* PRSScanSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCD120AAF3F000563FED /* PRSScanSessionManager.m */; };
 		844BCCD520AD6C9D00563FED /* PRSScanPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 844BCCD420AD6C9D00563FED /* PRSScanPreviewViewController.xib */; };
 		844BCCD920AD6EFA00563FED /* PRSScanPreviewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCD820AD6EFA00563FED /* PRSScanPreviewModel.m */; };
-		844BCCDC20ADF21E00563FED /* PRSScanner+Support.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCDB20ADF21E00563FED /* PRSScanner+Support.m */; };
 		844BCCDF20ADF64300563FED /* PRSScannerPrediction.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCDE20ADF64300563FED /* PRSScannerPrediction.m */; };
+		844BCCE220B1D67500563FED /* UIImage+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCE120B1D67500563FED /* UIImage+Additions.m */; };
+		844BCCE520B2B64C00563FED /* PRSPredictor.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCE420B2B64C00563FED /* PRSPredictor.m */; };
+		844BCCE920B2BDFA00563FED /* PRSSyntaxAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCCE820B2BDFA00563FED /* PRSSyntaxAnalyzer.m */; };
 		84555754209F265A00B01D91 /* PRSModalNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555753209F265A00B01D91 /* PRSModalNavigationController.m */; };
 		84555759209F3C6A00B01D91 /* PRSMainCarouselAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84555758209F3C6A00B01D91 /* PRSMainCarouselAdapter.m */; };
 		8455575D209F41BD00B01D91 /* PRSMainCarouselCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455575B209F41BD00B01D91 /* PRSMainCarouselCell.m */; };
@@ -92,6 +93,7 @@
 		84B91BC920A9B26600C4B23F /* PRSNativeCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B91BC820A9B26600C4B23F /* PRSNativeCameraViewController.xib */; };
 		84B91BCF20A9B2B300C4B23F /* PRSCameraOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B91BCC20A9B2B300C4B23F /* PRSCameraOverlay.xib */; };
 		84B91BD020A9B2B300C4B23F /* PRSCameraOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B91BCD20A9B2B300C4B23F /* PRSCameraOverlay.m */; };
+		84BE707F21655C8B0035B21F /* TextModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 84BE707E21655C8B0035B21F /* TextModel.mlmodel */; };
 		84DF4D1420A70D1F00E0504B /* PRSLoaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DF4D1320A70D1F00E0504B /* PRSLoaderView.m */; };
 		84DF4D1620A70D2B00E0504B /* PRSLoaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DF4D1520A70D2B00E0504B /* PRSLoaderView.xib */; };
 		84E22044206D85B4001B22AD /* PRSDesignableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E22043206D85B4001B22AD /* PRSDesignableView.m */; };
@@ -217,7 +219,6 @@
 		843572992066D41D00AC6E74 /* PRSCameraFlowCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRSCameraFlowCoordinator.m; sourceTree = "<group>"; };
 		844BCCB920A9C3A400563FED /* PRSMachineLearningCameraViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PRSMachineLearningCameraViewController.xib; sourceTree = "<group>"; };
 		844BCCBB20A9C3BA00563FED /* PRSManualCameraViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PRSManualCameraViewController.xib; sourceTree = "<group>"; };
-		844BCCBD20A9E65400563FED /* TextModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextModel.mlmodel; path = ../../../../../Downloads/PricesForSanya/TextModel.mlmodel; sourceTree = "<group>"; };
 		844BCCC020AA2BDE00563FED /* PRSScanTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSScanTimer.h; sourceTree = "<group>"; };
 		844BCCC120AA2BDE00563FED /* PRSScanTimer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSScanTimer.m; sourceTree = "<group>"; };
 		844BCCC320AADFFE00563FED /* PRSScanner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSScanner.h; sourceTree = "<group>"; };
@@ -231,10 +232,14 @@
 		844BCCD420AD6C9D00563FED /* PRSScanPreviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PRSScanPreviewViewController.xib; sourceTree = "<group>"; };
 		844BCCD720AD6EFA00563FED /* PRSScanPreviewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSScanPreviewModel.h; sourceTree = "<group>"; };
 		844BCCD820AD6EFA00563FED /* PRSScanPreviewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSScanPreviewModel.m; sourceTree = "<group>"; };
-		844BCCDA20ADF21E00563FED /* PRSScanner+Support.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PRSScanner+Support.h"; sourceTree = "<group>"; };
-		844BCCDB20ADF21E00563FED /* PRSScanner+Support.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PRSScanner+Support.m"; sourceTree = "<group>"; };
 		844BCCDD20ADF64300563FED /* PRSScannerPrediction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSScannerPrediction.h; sourceTree = "<group>"; };
 		844BCCDE20ADF64300563FED /* PRSScannerPrediction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSScannerPrediction.m; sourceTree = "<group>"; };
+		844BCCE020B1D67500563FED /* UIImage+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Additions.h"; sourceTree = "<group>"; };
+		844BCCE120B1D67500563FED /* UIImage+Additions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Additions.m"; sourceTree = "<group>"; };
+		844BCCE320B2B64C00563FED /* PRSPredictor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSPredictor.h; sourceTree = "<group>"; };
+		844BCCE420B2B64C00563FED /* PRSPredictor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSPredictor.m; sourceTree = "<group>"; };
+		844BCCE720B2BDFA00563FED /* PRSSyntaxAnalyzer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSSyntaxAnalyzer.h; sourceTree = "<group>"; };
+		844BCCE820B2BDFA00563FED /* PRSSyntaxAnalyzer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSSyntaxAnalyzer.m; sourceTree = "<group>"; };
 		84555752209F265A00B01D91 /* PRSModalNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSModalNavigationController.h; sourceTree = "<group>"; };
 		84555753209F265A00B01D91 /* PRSModalNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSModalNavigationController.m; sourceTree = "<group>"; };
 		84555757209F3C6A00B01D91 /* PRSMainCarouselAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSMainCarouselAdapter.h; sourceTree = "<group>"; };
@@ -285,6 +290,7 @@
 		84B91BCC20A9B2B300C4B23F /* PRSCameraOverlay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PRSCameraOverlay.xib; sourceTree = "<group>"; };
 		84B91BCD20A9B2B300C4B23F /* PRSCameraOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRSCameraOverlay.m; sourceTree = "<group>"; };
 		84B91BCE20A9B2B300C4B23F /* PRSCameraOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRSCameraOverlay.h; sourceTree = "<group>"; };
+		84BE707E21655C8B0035B21F /* TextModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextModel.mlmodel; sourceTree = "<group>"; };
 		84D60CB6546FC5120936AF7C /* PRSManualCameraConfigurator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PRSManualCameraConfigurator.h; sourceTree = "<group>"; };
 		84DF4D1220A70D1F00E0504B /* PRSLoaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PRSLoaderView.h; sourceTree = "<group>"; };
 		84DF4D1320A70D1F00E0504B /* PRSLoaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PRSLoaderView.m; sourceTree = "<group>"; };
@@ -509,7 +515,7 @@
 				841F464D209D07E500535A4A /* Colors */,
 				185816702042AE82003C2FA9 /* Assets.xcassets */,
 				84665554209BADD500810A16 /* Localizable.strings */,
-				844BCCBD20A9E65400563FED /* TextModel.mlmodel */,
+				84BE707E21655C8B0035B21F /* TextModel.mlmodel */,
 			);
 			path = Resourses;
 			sourceTree = "<group>";
@@ -754,6 +760,7 @@
 			isa = PBXGroup;
 			children = (
 				844BCCC620AAE14000563FED /* Scanner */,
+				844BCCE620B2BDD800563FED /* SyntaxAnalyzer */,
 				844BCCC720AAE14500563FED /* Timer */,
 			);
 			path = Helpers;
@@ -764,8 +771,8 @@
 			children = (
 				844BCCC320AADFFE00563FED /* PRSScanner.h */,
 				844BCCC420AADFFE00563FED /* PRSScanner.m */,
-				844BCCDA20ADF21E00563FED /* PRSScanner+Support.h */,
-				844BCCDB20ADF21E00563FED /* PRSScanner+Support.m */,
+				844BCCE320B2B64C00563FED /* PRSPredictor.h */,
+				844BCCE420B2B64C00563FED /* PRSPredictor.m */,
 				844BCCD220AAF3F000563FED /* PRSScanSessionManager.h */,
 				844BCCD120AAF3F000563FED /* PRSScanSessionManager.m */,
 				844BCCCE20AAE93A00563FED /* PRSSingleScanSession.h */,
@@ -794,6 +801,15 @@
 				844BCCD820AD6EFA00563FED /* PRSScanPreviewModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		844BCCE620B2BDD800563FED /* SyntaxAnalyzer */ = {
+			isa = PBXGroup;
+			children = (
+				844BCCE720B2BDFA00563FED /* PRSSyntaxAnalyzer.h */,
+				844BCCE820B2BDFA00563FED /* PRSSyntaxAnalyzer.m */,
+			);
+			path = SyntaxAnalyzer;
 			sourceTree = "<group>";
 		};
 		84555755209F3B8F00B01D91 /* CarouselAdapter */ = {
@@ -970,6 +986,8 @@
 				846C2156207E97D100FFB499 /* UIImage+Resize.m */,
 				84B91BBF20A979E300C4B23F /* UIImage+ScanUtils.h */,
 				84B91BC020A979E300C4B23F /* UIImage+ScanUtils.m */,
+				844BCCE020B1D67500563FED /* UIImage+Additions.h */,
+				844BCCE120B1D67500563FED /* UIImage+Additions.m */,
 			);
 			path = UIImage;
 			sourceTree = "<group>";
@@ -1513,17 +1531,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				185816662042AE82003C2FA9 /* AppDelegate.m in Sources */,
+				844BCCE220B1D67500563FED /* UIImage+Additions.m in Sources */,
 				844BCCD320AAF3F100563FED /* PRSScanSessionManager.m in Sources */,
 				84555766209F56EF00B01D91 /* UIButton+Style.m in Sources */,
 				841F4650209D080D00535A4A /* UIColor+Style.m in Sources */,
 				185816B82042B3A2003C2FA9 /* PRSBasePresenter.m in Sources */,
 				8455578120A0F5E400B01D91 /* PRSHistoryTableAdapter.m in Sources */,
 				8455578520A0F7F100B01D91 /* PRSHistoryTableCellModel.m in Sources */,
+				844BCCE520B2B64C00563FED /* PRSPredictor.m in Sources */,
+				84BE707F21655C8B0035B21F /* TextModel.mlmodel in Sources */,
 				185816772042AE82003C2FA9 /* main.m in Sources */,
 				84555777209FA6D700B01D91 /* PRSScanResultEntity.m in Sources */,
 				1858166F2042AE82003C2FA9 /* PriceScanner.xcdatamodeld in Sources */,
 				18DC5466206BFD4D009E1D2A /* PRSTabBarCoordinator.m in Sources */,
-				844BCCDC20ADF21E00563FED /* PRSScanner+Support.m in Sources */,
 				8455575D209F41BD00B01D91 /* PRSMainCarouselCell.m in Sources */,
 				841F4654209D0BC700535A4A /* PRSNavigationController.m in Sources */,
 				84E22044206D85B4001B22AD /* PRSDesignableView.m in Sources */,
@@ -1547,6 +1567,7 @@
 				84B91BD020A9B2B300C4B23F /* PRSCameraOverlay.m in Sources */,
 				8455578D20A32DE700B01D91 /* UILabel+Additions.m in Sources */,
 				0830ECE53B12B3AC6219215B /* PRSHistoryConfigurator.m in Sources */,
+				844BCCE920B2BDFA00563FED /* PRSSyntaxAnalyzer.m in Sources */,
 				84555771209F9F8000B01D91 /* PRSScanResultEntry.m in Sources */,
 				84555759209F3C6A00B01D91 /* PRSMainCarouselAdapter.m in Sources */,
 				844BCCDF20ADF64300563FED /* PRSScannerPrediction.m in Sources */,
@@ -1566,7 +1587,6 @@
 				5AE36C523E09D40809D75EFD /* PRSScanMethodPresenter.m in Sources */,
 				941715216DF368BE69FB3BCD /* PRSScanMethodViewController.m in Sources */,
 				CC73F4F00E76AD90668C703A /* PRSNativeCameraConfigurator.m in Sources */,
-				844BCCBE20A9E65400563FED /* TextModel.mlmodel in Sources */,
 				D35A25B6C7AD2248B5899D56 /* PRSNativeCameraPresenter.m in Sources */,
 				94A38A3A4713E07047AFB1ED /* PRSNativeCameraViewController.m in Sources */,
 				DAF3274B595A13F8694ADDB5 /* PRSMachineLearningCameraConfigurator.m in Sources */,
